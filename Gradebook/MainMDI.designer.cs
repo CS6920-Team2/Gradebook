@@ -1,4 +1,4 @@
-﻿namespace DemoApp
+﻿namespace Gradebook
 {
     partial class MainMDI
     {
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMDI));
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.mainToolStrip = new System.Windows.Forms.ToolStrip();
             this.btnClassView = new System.Windows.Forms.ToolStripButton();
             this.btnAssignmentsView = new System.Windows.Forms.ToolStripButton();
             this.btnGradebookView = new System.Windows.Forms.ToolStripButton();
@@ -44,25 +44,25 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblUserInformation = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.toolStrip1.SuspendLayout();
+            this.mainToolStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // toolStrip1
+            // mainToolStrip
             // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mainToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnClassView,
             this.btnAssignmentsView,
             this.btnGradebookView,
             this.toolStripComboBox1,
             this.btnLogout});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.toolStrip1.Size = new System.Drawing.Size(1240, 38);
-            this.toolStrip1.TabIndex = 1;
-            this.toolStrip1.Text = "toolStrip1";
+            this.mainToolStrip.Location = new System.Drawing.Point(0, 0);
+            this.mainToolStrip.Name = "mainToolStrip";
+            this.mainToolStrip.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.mainToolStrip.Size = new System.Drawing.Size(1240, 38);
+            this.mainToolStrip.TabIndex = 1;
+            this.mainToolStrip.Text = "toolStrip1";
             // 
             // btnClassView
             // 
@@ -73,6 +73,7 @@
             this.btnClassView.Size = new System.Drawing.Size(81, 25);
             this.btnClassView.Text = "Classes";
             this.btnClassView.ToolTipText = "\r\n";
+            this.btnClassView.Click += new System.EventHandler(this.btnClassView_Click);
             // 
             // btnAssignmentsView
             // 
@@ -131,67 +132,67 @@
             // lblIDNumer
             // 
             this.lblIDNumer.AutoSize = true;
-            this.lblIDNumer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIDNumer.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIDNumer.Location = new System.Drawing.Point(86, 144);
             this.lblIDNumer.Name = "lblIDNumer";
-            this.lblIDNumer.Size = new System.Drawing.Size(83, 16);
+            this.lblIDNumer.Size = new System.Drawing.Size(82, 17);
             this.lblIDNumer.TabIndex = 7;
             this.lblIDNumer.Text = "lblIDNumber";
             // 
             // lblRoll
             // 
             this.lblRoll.AutoSize = true;
-            this.lblRoll.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRoll.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRoll.Location = new System.Drawing.Point(86, 115);
             this.lblRoll.Name = "lblRoll";
-            this.lblRoll.Size = new System.Drawing.Size(51, 16);
+            this.lblRoll.Size = new System.Drawing.Size(48, 17);
             this.lblRoll.TabIndex = 6;
             this.lblRoll.Text = "lblRole";
             // 
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblName.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblName.Location = new System.Drawing.Point(86, 86);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(59, 16);
+            this.lblName.Size = new System.Drawing.Size(57, 17);
             this.lblName.TabIndex = 4;
             this.lblName.Text = "lblName";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(7, 144);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 16);
+            this.label3.Size = new System.Drawing.Size(75, 17);
             this.label3.TabIndex = 3;
             this.label3.Text = "ID Number:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(7, 115);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 16);
+            this.label2.Size = new System.Drawing.Size(33, 17);
             this.label2.TabIndex = 2;
             this.label2.Text = "Roll:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(7, 86);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 16);
+            this.label1.Size = new System.Drawing.Size(46, 17);
             this.label1.TabIndex = 1;
             this.label1.Text = "Name:";
             // 
             // lblUserInformation
             // 
             this.lblUserInformation.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblUserInformation.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUserInformation.Font = new System.Drawing.Font("Rockwell", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserInformation.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblUserInformation.Location = new System.Drawing.Point(0, 0);
             this.lblUserInformation.Name = "lblUserInformation";
@@ -220,12 +221,13 @@
             this.ClientSize = new System.Drawing.Size(1240, 671);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.mainToolStrip);
             this.IsMdiContainer = true;
             this.Name = "MainMDI";
             this.Text = "Gradebook++";
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.mainToolStrip.ResumeLayout(false);
+            this.mainToolStrip.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -235,7 +237,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStrip mainToolStrip;
         private System.Windows.Forms.ToolStripButton btnAssignmentsView;
         private System.Windows.Forms.ToolStripButton btnGradebookView;
         private System.Windows.Forms.ToolStripButton btnLogout;
