@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DemoApp;
 
 namespace Gradebook
 {
@@ -23,6 +24,12 @@ namespace Gradebook
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainMDI main = new MainMDI();
+            main.Show();
         }
     }
 }
