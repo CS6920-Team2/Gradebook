@@ -5,9 +5,62 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Gradebook"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <Button Content="Open WinForm" HorizontalAlignment="Left" Margin="391,289,0,0" VerticalAlignment="Top" Width="116" Click="Button_Click"/>
+        Title="Gradebook++" WindowStartupLocation="CenterScreen" Background="{x:Null}" Height="690.991" Width="1056.547">
+    <Grid x:Name="GridMain">
+        <DockPanel x:Name="dockPanelMain" HorizontalAlignment="Left" Height="{Binding ElementName=GridMain, Path=ActualHeight}" 
+                   LastChildFill="True" VerticalAlignment="Top" Width="{Binding ElementName=GridMain, Path=ActualWidth}" Background="Black">
+
+            <Image x:Name="GradeBookLogo" HorizontalAlignment="Left" Height="100" Margin="60,0,0,0" VerticalAlignment="Top" Width="466" Stretch="UniformToFill"
+                       DockPanel.Dock="Top">
+                <Image.Source>
+                    <BitmapImage UriSource="file:///C:/Users/Jacob/OneDrive/Grad School/CS6920-PROJECT II/Gradebook/Gradebook/Gradebook/Images/GradeBookLogo.png"/>
+                </Image.Source>
+            </Image>
+
+            <Menu x:Name="NavMenu" HorizontalAlignment="Stretch" Height="30" VerticalAlignment="Top" DockPanel.Dock="Top">
+                <MenuItem Header="Class View" Click="BtnClassViewClick" Height="30" FontSize="14"/>
+                <MenuItem Header="Assignments" Height="30" FontSize="14"/>
+                <MenuItem Header="Gradebook" Height="30" FontSize="14"/>
+                <MenuItem Header="Reports" Height="30" FontSize="14"/>
+                <MenuItem Header="Logout" Height="30" FontSize="14"/>
+                <MenuItem Header="SEE WINFORM VERSION" Height="30" FontSize="14" FontWeight="Bold" Click="WinFormButtonClick1"/>
+            </Menu>
+
+            <StackPanel x:Name="StackPanelLeft" Height="{Binding ElementName=GridMain, Path=ActualHeight-GradeBookLogo.Height-NavMenu.Height}"  
+                            VerticalAlignment="Stretch" Width="219" DockPanel.Dock="Left" Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}">
+                <Label Content="User Information" FontSize="18" FontWeight="Bold" Background="Black" Foreground="White"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+
+                    </Grid.RowDefinitions>
+
+
+                    <Label Grid.Column="0" Grid.Row="0" Content="Name:" FontSize="14"/>
+                    <Label Grid.Row="0" Content="lblName" FontSize="14" Grid.ColumnSpan="2" Margin="81,0,0,0"/>
+
+                    <Label Grid.Column="0" Grid.Row="1" Content="Role:" FontSize="14"/>
+                    <Label Grid.Row="1" Content="lblRole" FontSize="14" Grid.ColumnSpan="2" Margin="81,0,0,0"/>
+
+                    <Label Grid.Column="0" Grid.Row="2" Content="ID Number:" FontSize="14"/>
+                    <Label Grid.Row="2" Content="lblIDNumber" FontSize="14" Grid.ColumnSpan="2" Margin="81,0,0,0"/>
+                </Grid>
+
+            </StackPanel>
+
+
+            <Frame x:Name="PageFrame" NavigationUIVisibility="Hidden"/>
+        </DockPanel>
+
 
     </Grid>
 </Window>
+

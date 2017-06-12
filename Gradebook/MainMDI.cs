@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 using Gradebook;
 
@@ -14,10 +15,12 @@ namespace Gradebook
     public partial class MainMDI : Form
     {
         private ClassView classView;
+        private Window loginWindow;
 
-        public MainMDI()
+        public MainMDI(Window loginWindow)
         {
             InitializeComponent();
+            this.loginWindow = loginWindow;
         }
 
 
@@ -45,6 +48,10 @@ namespace Gradebook
             form.Dock = DockStyle.Fill;
         }
 
-
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            this.loginWindow.Visibility = Visibility.Visible;
+            this.Close();
+        }
     }
 }

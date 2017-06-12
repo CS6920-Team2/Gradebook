@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,15 +22,32 @@ namespace Gradebook
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Page classPage;
+
+        public MainWindow main;
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        private void WinFormButtonClick1(object sender, RoutedEventArgs e)
         {
-            MainMDI main = new MainMDI();
+            MainMDI main = new MainMDI(this);
             main.Show();
+            this.Visibility = Visibility.Collapsed;
+        }
+
+        private void BtnClassViewClick(object sender, RoutedEventArgs e)
+        {
+            if (classPage == null)
+            {
+                classPage = new ClassPage();
+                PageFrame.Content = classPage;
+            } 
+                else 
+                    classPage.Visibility = Visibility.Visible;
+
         }
     }
 }

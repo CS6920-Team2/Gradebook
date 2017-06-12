@@ -60,7 +60,7 @@
             this.mainToolStrip.Location = new System.Drawing.Point(0, 0);
             this.mainToolStrip.Name = "mainToolStrip";
             this.mainToolStrip.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.mainToolStrip.Size = new System.Drawing.Size(1240, 38);
+            this.mainToolStrip.Size = new System.Drawing.Size(1349, 38);
             this.mainToolStrip.TabIndex = 1;
             this.mainToolStrip.Text = "toolStrip1";
             // 
@@ -113,6 +113,7 @@
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(63, 25);
             this.btnLogout.Text = "Logout";
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // panel1
             // 
@@ -126,7 +127,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 38);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(205, 633);
+            this.panel1.Size = new System.Drawing.Size(205, 718);
             this.panel1.TabIndex = 10;
             // 
             // lblIDNumer
@@ -208,7 +209,7 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(205, 38);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1035, 73);
+            this.pictureBox1.Size = new System.Drawing.Size(1144, 73);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 11;
             this.pictureBox1.TabStop = false;
@@ -218,14 +219,15 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1240, 671);
+            this.ClientSize = new System.Drawing.Size(1349, 756);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.mainToolStrip);
             this.IsMdiContainer = true;
             this.Name = "MainMDI";
+            this.ShowIcon = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "Gradebook++";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.mainToolStrip.ResumeLayout(false);
             this.mainToolStrip.PerformLayout();
             this.panel1.ResumeLayout(false);
