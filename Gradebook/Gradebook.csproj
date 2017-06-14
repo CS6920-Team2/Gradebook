@@ -82,6 +82,9 @@
     <Compile Include="ClassView.Designer.cs">
       <DependentUpon>ClassView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\DAO\Category.cs" />
+    <Compile Include="Data\DAO\Course.cs" />
+    <Compile Include="Data\DAO\Person.cs" />
     <Compile Include="MainMDI.cs">
       <SubType>Form</SubType>
     </Compile>

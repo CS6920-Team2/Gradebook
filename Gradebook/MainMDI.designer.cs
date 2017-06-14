@@ -228,6 +228,7 @@
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "Gradebook++";
+            this.Load += new System.EventHandler(this.MainMDI_Load);
             this.mainToolStrip.ResumeLayout(false);
             this.mainToolStrip.PerformLayout();
             this.panel1.ResumeLayout(false);
