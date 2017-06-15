@@ -33,11 +33,15 @@
             this.btnClassView = new System.Windows.Forms.ToolStripButton();
             this.btnAssignmentsView = new System.Windows.Forms.ToolStripButton();
             this.btnGradebookView = new System.Windows.Forms.ToolStripButton();
-            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripButton();
+            this.btnReportsView = new System.Windows.Forms.ToolStripButton();
             this.btnLogout = new System.Windows.Forms.ToolStripButton();
+            this.comboBoxClasses = new System.Windows.Forms.ToolStripComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lblIDNumer = new System.Windows.Forms.Label();
-            this.lblRoll = new System.Windows.Forms.Label();
+            this.lblRoleIDNumber = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblErrorMessage = new System.Windows.Forms.Label();
+            this.lblIDNumber = new System.Windows.Forms.Label();
+            this.lblRole = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -55,8 +59,9 @@
             this.btnClassView,
             this.btnAssignmentsView,
             this.btnGradebookView,
-            this.toolStripComboBox1,
-            this.btnLogout});
+            this.btnReportsView,
+            this.btnLogout,
+            this.comboBoxClasses});
             this.mainToolStrip.Location = new System.Drawing.Point(0, 0);
             this.mainToolStrip.Name = "mainToolStrip";
             this.mainToolStrip.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
@@ -72,7 +77,6 @@
             this.btnClassView.Name = "btnClassView";
             this.btnClassView.Size = new System.Drawing.Size(81, 25);
             this.btnClassView.Text = "Classes";
-            this.btnClassView.ToolTipText = "\r\n";
             this.btnClassView.Click += new System.EventHandler(this.btnClassView_Click);
             // 
             // btnAssignmentsView
@@ -93,15 +97,15 @@
             this.btnGradebookView.Size = new System.Drawing.Size(107, 25);
             this.btnGradebookView.Text = "Gradebook";
             // 
-            // toolStripComboBox1
+            // btnReportsView
             // 
-            this.toolStripComboBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripComboBox1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripComboBox1.Image")));
-            this.toolStripComboBox1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripComboBox1.Name = "toolStripComboBox1";
-            this.toolStripComboBox1.Size = new System.Drawing.Size(84, 25);
-            this.toolStripComboBox1.Tag = "";
-            this.toolStripComboBox1.Text = "Reports";
+            this.btnReportsView.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReportsView.Image = ((System.Drawing.Image)(resources.GetObject("btnReportsView.Image")));
+            this.btnReportsView.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnReportsView.Name = "btnReportsView";
+            this.btnReportsView.Size = new System.Drawing.Size(84, 25);
+            this.btnReportsView.Tag = "";
+            this.btnReportsView.Text = "Reports";
             // 
             // btnLogout
             // 
@@ -115,10 +119,19 @@
             this.btnLogout.Text = "Logout";
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
+            // comboBoxClasses
+            // 
+            this.comboBoxClasses.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxClasses.Name = "comboBoxClasses";
+            this.comboBoxClasses.Size = new System.Drawing.Size(121, 28);
+            // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.lblIDNumer);
-            this.panel1.Controls.Add(this.lblRoll);
+            this.panel1.Controls.Add(this.lblRoleIDNumber);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.lblErrorMessage);
+            this.panel1.Controls.Add(this.lblIDNumber);
+            this.panel1.Controls.Add(this.lblRole);
             this.panel1.Controls.Add(this.lblName);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
@@ -130,25 +143,54 @@
             this.panel1.Size = new System.Drawing.Size(205, 718);
             this.panel1.TabIndex = 10;
             // 
-            // lblIDNumer
+            // lblRoleIDNumber
             // 
-            this.lblIDNumer.AutoSize = true;
-            this.lblIDNumer.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIDNumer.Location = new System.Drawing.Point(86, 144);
-            this.lblIDNumer.Name = "lblIDNumer";
-            this.lblIDNumer.Size = new System.Drawing.Size(82, 17);
-            this.lblIDNumer.TabIndex = 7;
-            this.lblIDNumer.Text = "lblIDNumber";
+            this.lblRoleIDNumber.AutoSize = true;
+            this.lblRoleIDNumber.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRoleIDNumber.Location = new System.Drawing.Point(86, 144);
+            this.lblRoleIDNumber.Name = "lblRoleIDNumber";
+            this.lblRoleIDNumber.Size = new System.Drawing.Size(108, 17);
+            this.lblRoleIDNumber.TabIndex = 10;
+            this.lblRoleIDNumber.Text = "lblRoleIDNumber";
             // 
-            // lblRoll
+            // label4
             // 
-            this.lblRoll.AutoSize = true;
-            this.lblRoll.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRoll.Location = new System.Drawing.Point(86, 115);
-            this.lblRoll.Name = "lblRoll";
-            this.lblRoll.Size = new System.Drawing.Size(48, 17);
-            this.lblRoll.TabIndex = 6;
-            this.lblRoll.Text = "lblRole";
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(7, 144);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 17);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Role ID:";
+            // 
+            // lblErrorMessage
+            // 
+            this.lblErrorMessage.AutoSize = true;
+            this.lblErrorMessage.ForeColor = System.Drawing.Color.Red;
+            this.lblErrorMessage.Location = new System.Drawing.Point(7, 202);
+            this.lblErrorMessage.Name = "lblErrorMessage";
+            this.lblErrorMessage.Size = new System.Drawing.Size(0, 13);
+            this.lblErrorMessage.TabIndex = 8;
+            // 
+            // lblIDNumber
+            // 
+            this.lblIDNumber.AutoSize = true;
+            this.lblIDNumber.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIDNumber.Location = new System.Drawing.Point(86, 173);
+            this.lblIDNumber.Name = "lblIDNumber";
+            this.lblIDNumber.Size = new System.Drawing.Size(82, 17);
+            this.lblIDNumber.TabIndex = 7;
+            this.lblIDNumber.Text = "lblIDNumber";
+            // 
+            // lblRole
+            // 
+            this.lblRole.AutoSize = true;
+            this.lblRole.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRole.Location = new System.Drawing.Point(86, 115);
+            this.lblRole.Name = "lblRole";
+            this.lblRole.Size = new System.Drawing.Size(48, 17);
+            this.lblRole.TabIndex = 6;
+            this.lblRole.Text = "lblRole";
             // 
             // lblName
             // 
@@ -164,11 +206,11 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(7, 144);
+            this.label3.Location = new System.Drawing.Point(7, 173);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 17);
+            this.label3.Size = new System.Drawing.Size(67, 17);
             this.label3.TabIndex = 3;
-            this.label3.Text = "ID Number:";
+            this.label3.Text = "Person ID:";
             // 
             // label2
             // 
@@ -228,6 +270,7 @@
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "Gradebook++";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainMDI_FormClosed);
             this.Load += new System.EventHandler(this.MainMDI_Load);
             this.mainToolStrip.ResumeLayout(false);
             this.mainToolStrip.PerformLayout();
@@ -251,9 +294,13 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblUserInformation;
-        private System.Windows.Forms.Label lblIDNumer;
-        private System.Windows.Forms.Label lblRoll;
-        private System.Windows.Forms.ToolStripButton toolStripComboBox1;
+        private System.Windows.Forms.Label lblIDNumber;
+        private System.Windows.Forms.Label lblRole;
+        private System.Windows.Forms.ToolStripButton btnReportsView;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lblErrorMessage;
+        private System.Windows.Forms.Label lblRoleIDNumber;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ToolStripComboBox comboBoxClasses;
     }
 }
