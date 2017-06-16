@@ -12,5 +12,8 @@ namespace Gradebook.Data.DAO
         public int creditID { get; set; }
         public string name { get; set; }
         public string description { get; set; }
+
+        // From TaughtCourses
+        public int taughtCourseID { get; set; }
     }
 }

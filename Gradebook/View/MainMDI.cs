@@ -23,6 +23,8 @@ namespace Gradebook
         private Person _user;
         private string _userName;
 
+        private int _taughtCoursesID;
+
         /// <summary>
         /// User name will be stored to help us retrieve user info
         /// 
@@ -35,7 +37,8 @@ namespace Gradebook
         {
             InitializeComponent();
             _loginWindow = loginWindow;
-            _userName = userName;
+            _user = new Person();
+            _user.userName = userName;
         }
         */
 
@@ -66,8 +69,6 @@ namespace Gradebook
                 // this.LoadLeftNav();
                 // this.LoadTopNav();
 
-
-
                 // Delete mock draft below after login form is added to app
                 _user = new Person()
                 {
@@ -82,7 +83,7 @@ namespace Gradebook
             }
             catch (Exception ex)
             {
-                lblErrorMessage.Text = "Error loading main window.";
+                lblErrorMessage.Text = "Error loading navigation bars.";
             }
         }
 
@@ -143,6 +144,7 @@ namespace Gradebook
         /// </summary>
         private void LoadLeftNav()
         {
+            // Loads in teacher information
             lblName.Text = _user.lastName + ", " + _user.firstName;
             lblRole.Text = _user.role;
             lblIDNumber.Text = _user.personID.ToString();
@@ -150,6 +152,47 @@ namespace Gradebook
                 lblRoleIDNumber.Text = _user.teacherID.ToString();
             else if (_user.role == "Admin")
                 lblRoleIDNumber.Text = _user.adminID.ToString();
+
+            // Loads in classes for teacher
+            if (_user.role == "Teacher")
+            {
+                try
+                {
+                    /* Keep code below
+                    * 1-Retrieve list of courses from Courses join Taught Courses: taughtCourseID, Courses.name 
+                    * 2-Set values to comboBox
+                    * 
+                    * Commented items below will replace the fake model objects
+                    */
+
+                    // List<Courses> = CoursesController.GetCoursesByTeacherID(teacherID);
+                    List<Course> courseList = new List<Course>();
+                    Course course1 = new Course()
+                    {
+                        name = "Math",
+                        taughtCourseID = 1
+                    };
+                    Course course2 = new Course()
+                    {
+                        name = "English",
+                        taughtCourseID = 4
+                    };
+                    courseList.Add(course1);
+                    courseList.Add(course2);
+
+                    // Keep items below
+                    cboCourses.DataSource = courseList;
+                    cboCourses.DisplayMember = "name";
+                    cboCourses.ValueMember = "taughtCourseID";
+                    cboCourses.SelectedIndex = 1;
+                    _taughtCoursesID = (int)cboCourses.SelectedValue;
+                    lblTaughtCourseID.Text = cboCourses.SelectedValue.ToString();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
         }
 
         /// <summary>
@@ -167,17 +210,16 @@ namespace Gradebook
                 btnAssignmentsView.Visible = false;
                 btnGradebookView.Visible = false;
                 btnReportsView.Visible = false;
-                comboBoxClasses.Visible = false;
+                cboCourses.Visible = false;
             }  
         }
+        ////////////////////////////////////////// Top Nav Event Triggers //////////////////////////////////////////
 
-        ////////////////////////////////////////// Button Actions //////////////////////////////////////////
-
-         /// <summary>
-         /// Opens the class view form in the MDI while closing
-         /// all other windows that may be open
-         /// </summary>
-        private void btnClassView_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Opens the class view form in the MDI while closing
+        /// all other windows that may be open
+        /// </summary>
+        private void BtnClassView_Click(object sender, EventArgs e)
         {
             if (_classView == null)
             {
@@ -185,17 +227,30 @@ namespace Gradebook
                 _classView.MdiParent = this;
                 _classView.Show();
 
-                this.removeChildWindowBorders(_classView);
-                this.closeUnusedFormsExcept(_classView);
+                this.RemoveChildWindowBorders(_classView);
+                this.CloseUnusedFormsExcept(_classView);
             } 
 
         }
 
         /// <summary> Allows user to logout of the system and return to the login screen </summary>
-        private void btnLogout_Click(object sender, EventArgs e)
+        private void BtnLogout_Click(object sender, EventArgs e)
         {
             this._loginWindow.Visibility = Visibility.Visible;
             this.Close();
+        }
+
+        /// <summary>
+        /// This method is used purely to help the development process.
+        /// 
+        /// When the cboClasses in the top nav is selected, the label to the right of
+        /// it will change and show the taught courseID. This will be removed (or hidden) 
+        /// in the final release of the application.
+        /// </summary>
+        private void CboClasses_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            _taughtCoursesID = (int)cboCourses.SelectedValue;
+            lblTaughtCourseID.Text = cboCourses.SelectedValue.ToString();
         }
 
         ////////////////////////////////////////// Form and Window Managers //////////////////////////////////////////
@@ -207,7 +262,7 @@ namespace Gradebook
         /// This method will remove those from the Windows that will appear in each 
         /// of our view
         /// </summary>
-        private void removeChildWindowBorders(Form form)
+        private void RemoveChildWindowBorders(Form form)
         {
             form.FormBorderStyle = FormBorderStyle.None;
             form.ControlBox  = false;
@@ -223,7 +278,7 @@ namespace Gradebook
         /// used and keep the one open that we want open. This way, we won't have 
         /// forms running in the background and slowing down the applicaiton.
         /// </summary>
-        private void closeUnusedFormsExcept(Form formToKeep)
+        private void CloseUnusedFormsExcept(Form formToKeep)
         {
             if (_classView != null && _classView != formToKeep)
                 _classView.Close();
@@ -242,5 +297,7 @@ namespace Gradebook
             _loginWindow.Visibility = Visibility.Visible;
             this.Dispose();
         }
+
+
     }
 }
