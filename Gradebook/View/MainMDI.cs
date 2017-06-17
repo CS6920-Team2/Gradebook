@@ -20,10 +20,10 @@ namespace Gradebook
         private Form _gradebookView;
         private Form _reportsView;
         private Window _loginWindow;
-        private Person _user;
         private string _userName;
 
-        private int _taughtCoursesID;
+        public Person user;
+        public int taughtCoursesID { get; set; }
 
         /// <summary>
         /// User name will be stored to help us retrieve user info
@@ -37,8 +37,8 @@ namespace Gradebook
         {
             InitializeComponent();
             _loginWindow = loginWindow;
-            _user = new Person();
-            _user.userName = userName;
+            user = new Person();
+            user.userName = userName;
         }
         */
 
@@ -70,7 +70,7 @@ namespace Gradebook
                 // this.LoadTopNav();
 
                 // Delete mock draft below after login form is added to app
-                _user = new Person()
+                user = new Person()
                 {
                     firstName = "Jacob",
                     lastName = "Radcliffe",
@@ -90,7 +90,7 @@ namespace Gradebook
         ////////////////////////////////////////// Load Helpers //////////////////////////////////////////
 
         /// <summary>
-        /// This method will pull user information for _user object.
+        /// This method will pull user information for user object.
         /// </summary>
         private void AssignPerson()
         {
@@ -98,36 +98,36 @@ namespace Gradebook
             try
             {
                 // Returns from Users joined with Roles: userID, userName, role
-                // _user = new Person();
-                // _user = UsersController.GetUserByUserName(_user.userName);
+                // user = new Person();
+                // user = UsersController.GetUserByUserName(user.userName);
 
-                if (_user.role == "Teacher")
+                if (user.role == "Teacher")
                 {
                     /* Returns from Teachers table: teacherID, PersonID
                      * 
                      * Person tempUser = TeacherController.GetTeacherByUserID(userID);
-                     * _user.teacherID = tempUser.teacherID;
-                     * _user.personID = tempUser.personID;
+                     * user.teacherID = tempUser.teacherID;
+                     * user.personID = tempUser.personID;
                      * 
                      * Returns from Persons table: firstName, lastName (can add more as we see needed)
                      * 
                      * tempUser = PersonsController.GetPersonByPersonID(personID);
-                     * _user.firstName = tempUser.firstName;
-                     * _user.lastName = tempUser.lastName;
+                     * user.firstName = tempUser.firstName;
+                     * user.lastName = tempUser.lastName;
                      */
                 }
-                else if (_user.role == "Admin")
+                else if (user.role == "Admin")
                 {
                     /* Returns from Administrators table: adminID, PersonID
                      * 
                      * Person tempUser = AdminController.GetAdminByUserID(userID);
-                     * _user.adminID = tempUser.adminID;
-                     * _user.personID = tempUser.personID;
+                     * user.adminID = tempUser.adminID;
+                     * user.personID = tempUser.personID;
                      * 
                      * Returns from Persons table: firstName, lastName (can add more as we see needed)
                      * tempUser = PersonsController.GetPersonByPersonID(personID);
-                     * _user.firstName = tempUser.firstName;
-                     * _user.lastName = tempUser.lastName;
+                     * user.firstName = tempUser.firstName;
+                     * user.lastName = tempUser.lastName;
                      */
 
                 }
@@ -145,16 +145,16 @@ namespace Gradebook
         private void LoadLeftNav()
         {
             // Loads in teacher information
-            lblName.Text = _user.lastName + ", " + _user.firstName;
-            lblRole.Text = _user.role;
-            lblIDNumber.Text = _user.personID.ToString();
-            if (_user.role == "Teacher")
-                lblRoleIDNumber.Text = _user.teacherID.ToString();
-            else if (_user.role == "Admin")
-                lblRoleIDNumber.Text = _user.adminID.ToString();
+            lblName.Text = user.lastName + ", " + user.firstName;
+            lblRole.Text = user.role;
+            lblIDNumber.Text = user.personID.ToString();
+            if (user.role == "Teacher")
+                lblRoleIDNumber.Text = user.teacherID.ToString();
+            else if (user.role == "Admin")
+                lblRoleIDNumber.Text = user.adminID.ToString();
 
             // Loads in classes for teacher
-            if (_user.role == "Teacher")
+            if (user.role == "Teacher")
             {
                 try
                 {
@@ -184,8 +184,8 @@ namespace Gradebook
                     cboCourses.DataSource = courseList;
                     cboCourses.DisplayMember = "name";
                     cboCourses.ValueMember = "taughtCourseID";
-                    cboCourses.SelectedIndex = 1;
-                    _taughtCoursesID = (int)cboCourses.SelectedValue;
+                    cboCourses.SelectedIndex = 0;
+                    taughtCoursesID = (int)cboCourses.SelectedValue;
                     lblTaughtCourseID.Text = cboCourses.SelectedValue.ToString();
                 }
                 catch (Exception ex)
@@ -205,7 +205,7 @@ namespace Gradebook
         /// </summary>
         private void LoadTopNav()
         {
-            if (_user.role == "Admin")
+            if (user.role == "Admin")
             {
                 btnAssignmentsView.Visible = false;
                 btnGradebookView.Visible = false;
@@ -223,7 +223,7 @@ namespace Gradebook
         {
             if (_classView == null)
             {
-                _classView = new ClassView();
+                _classView = new ClassView(this);
                 _classView.MdiParent = this;
                 _classView.Show();
 
@@ -249,7 +249,7 @@ namespace Gradebook
         /// </summary>
         private void CboClasses_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            _taughtCoursesID = (int)cboCourses.SelectedValue;
+            taughtCoursesID = (int)cboCourses.SelectedValue;
             lblTaughtCourseID.Text = cboCourses.SelectedValue.ToString();
         }
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Gradebook.Data.DAO
 {
-    class Person
+    public class Person
     {
         // Columns only hosted in the Persons table
         public int personID { get; set; }

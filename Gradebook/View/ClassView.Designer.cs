@@ -30,21 +30,26 @@
         {
             this.groupBoxClassDescription = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.comboBoxClass = new System.Windows.Forms.ComboBox();
             this.lblCourse = new System.Windows.Forms.Label();
             this.groupBoxCategoryWeights = new System.Windows.Forms.GroupBox();
+            this.textBoxProjects = new System.Windows.Forms.TextBox();
+            this.textBoxQuizzes = new System.Windows.Forms.TextBox();
+            this.textBoxExams = new System.Windows.Forms.TextBox();
+            this.textBoxParticipation = new System.Windows.Forms.TextBox();
+            this.textBoxHomework = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBoxHomework = new System.Windows.Forms.TextBox();
-            this.textBoxParticipation = new System.Windows.Forms.TextBox();
-            this.textBoxExams = new System.Windows.Forms.TextBox();
-            this.textBoxQuizzes = new System.Windows.Forms.TextBox();
-            this.textBoxProjects = new System.Windows.Forms.TextBox();
+            this.textBoxCourseName = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBoxTeacher = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.lblClassViewError = new System.Windows.Forms.Label();
             this.groupBoxClassDescription.SuspendLayout();
             this.groupBoxCategoryWeights.SuspendLayout();
             this.SuspendLayout();
@@ -52,7 +57,7 @@
             // groupBoxClassDescription
             // 
             this.groupBoxClassDescription.Controls.Add(this.textBox1);
-            this.groupBoxClassDescription.Location = new System.Drawing.Point(16, 56);
+            this.groupBoxClassDescription.Location = new System.Drawing.Point(15, 78);
             this.groupBoxClassDescription.Name = "groupBoxClassDescription";
             this.groupBoxClassDescription.Size = new System.Drawing.Size(332, 116);
             this.groupBoxClassDescription.TabIndex = 0;
@@ -69,27 +74,19 @@
             this.textBox1.Size = new System.Drawing.Size(326, 97);
             this.textBox1.TabIndex = 0;
             // 
-            // comboBoxClass
-            // 
-            this.comboBoxClass.AllowDrop = true;
-            this.comboBoxClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxClass.FormattingEnabled = true;
-            this.comboBoxClass.Location = new System.Drawing.Point(62, 27);
-            this.comboBoxClass.Name = "comboBoxClass";
-            this.comboBoxClass.Size = new System.Drawing.Size(286, 21);
-            this.comboBoxClass.TabIndex = 1;
-            // 
             // lblCourse
             // 
             this.lblCourse.AutoSize = true;
-            this.lblCourse.Location = new System.Drawing.Point(13, 30);
+            this.lblCourse.Location = new System.Drawing.Point(15, 48);
             this.lblCourse.Name = "lblCourse";
-            this.lblCourse.Size = new System.Drawing.Size(43, 13);
+            this.lblCourse.Size = new System.Drawing.Size(74, 13);
             this.lblCourse.TabIndex = 2;
-            this.lblCourse.Text = "Course:";
+            this.lblCourse.Text = "Course Name:";
             // 
             // groupBoxCategoryWeights
             // 
+            this.groupBoxCategoryWeights.Controls.Add(this.lblTotal);
+            this.groupBoxCategoryWeights.Controls.Add(this.label7);
             this.groupBoxCategoryWeights.Controls.Add(this.textBoxProjects);
             this.groupBoxCategoryWeights.Controls.Add(this.textBoxQuizzes);
             this.groupBoxCategoryWeights.Controls.Add(this.textBoxExams);
@@ -100,66 +97,47 @@
             this.groupBoxCategoryWeights.Controls.Add(this.label3);
             this.groupBoxCategoryWeights.Controls.Add(this.label2);
             this.groupBoxCategoryWeights.Controls.Add(this.label1);
-            this.groupBoxCategoryWeights.Location = new System.Drawing.Point(19, 188);
+            this.groupBoxCategoryWeights.Location = new System.Drawing.Point(18, 210);
             this.groupBoxCategoryWeights.Name = "groupBoxCategoryWeights";
-            this.groupBoxCategoryWeights.Size = new System.Drawing.Size(326, 166);
+            this.groupBoxCategoryWeights.Size = new System.Drawing.Size(326, 187);
             this.groupBoxCategoryWeights.TabIndex = 3;
             this.groupBoxCategoryWeights.TabStop = false;
             this.groupBoxCategoryWeights.Text = "Category Weights";
             // 
-            // btnReset
+            // textBoxProjects
             // 
-            this.btnReset.Location = new System.Drawing.Point(192, 360);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(75, 23);
-            this.btnReset.TabIndex = 4;
-            this.btnReset.Text = "Reset";
-            this.btnReset.UseVisualStyleBackColor = true;
+            this.textBoxProjects.Location = new System.Drawing.Point(111, 133);
+            this.textBoxProjects.Name = "textBoxProjects";
+            this.textBoxProjects.Size = new System.Drawing.Size(209, 20);
+            this.textBoxProjects.TabIndex = 5;
             // 
-            // btnUpdate
+            // textBoxQuizzes
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(273, 360);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
-            this.btnUpdate.TabIndex = 5;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.textBoxQuizzes.Location = new System.Drawing.Point(111, 107);
+            this.textBoxQuizzes.Name = "textBoxQuizzes";
+            this.textBoxQuizzes.Size = new System.Drawing.Size(209, 20);
+            this.textBoxQuizzes.TabIndex = 4;
             // 
-            // label1
+            // textBoxExams
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 32);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Homework:";
+            this.textBoxExams.Location = new System.Drawing.Point(111, 81);
+            this.textBoxExams.Name = "textBoxExams";
+            this.textBoxExams.Size = new System.Drawing.Size(209, 20);
+            this.textBoxExams.TabIndex = 3;
             // 
-            // label2
+            // textBoxParticipation
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 58);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Participation:";
+            this.textBoxParticipation.Location = new System.Drawing.Point(111, 55);
+            this.textBoxParticipation.Name = "textBoxParticipation";
+            this.textBoxParticipation.Size = new System.Drawing.Size(209, 20);
+            this.textBoxParticipation.TabIndex = 2;
             // 
-            // label3
+            // textBoxHomework
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 84);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Exams:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 110);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(47, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Quizzes:";
+            this.textBoxHomework.Location = new System.Drawing.Point(111, 29);
+            this.textBoxHomework.Name = "textBoxHomework";
+            this.textBoxHomework.Size = new System.Drawing.Size(209, 20);
+            this.textBoxHomework.TabIndex = 1;
             // 
             // label5
             // 
@@ -170,55 +148,129 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "Projects:";
             // 
-            // textBoxHomework
+            // label4
             // 
-            this.textBoxHomework.Location = new System.Drawing.Point(111, 29);
-            this.textBoxHomework.Name = "textBoxHomework";
-            this.textBoxHomework.Size = new System.Drawing.Size(209, 20);
-            this.textBoxHomework.TabIndex = 5;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 110);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(47, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Quizzes:";
             // 
-            // textBoxParticipation
+            // label3
             // 
-            this.textBoxParticipation.Location = new System.Drawing.Point(111, 55);
-            this.textBoxParticipation.Name = "textBoxParticipation";
-            this.textBoxParticipation.Size = new System.Drawing.Size(209, 20);
-            this.textBoxParticipation.TabIndex = 6;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 84);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Exams:";
             // 
-            // textBoxExams
+            // label2
             // 
-            this.textBoxExams.Location = new System.Drawing.Point(111, 81);
-            this.textBoxExams.Name = "textBoxExams";
-            this.textBoxExams.Size = new System.Drawing.Size(209, 20);
-            this.textBoxExams.TabIndex = 7;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 58);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(68, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Participation:";
             // 
-            // textBoxQuizzes
+            // label1
             // 
-            this.textBoxQuizzes.Location = new System.Drawing.Point(111, 107);
-            this.textBoxQuizzes.Name = "textBoxQuizzes";
-            this.textBoxQuizzes.Size = new System.Drawing.Size(209, 20);
-            this.textBoxQuizzes.TabIndex = 8;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 32);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Homework:";
             // 
-            // textBoxProjects
+            // btnReset
             // 
-            this.textBoxProjects.Location = new System.Drawing.Point(111, 133);
-            this.textBoxProjects.Name = "textBoxProjects";
-            this.textBoxProjects.Size = new System.Drawing.Size(209, 20);
-            this.textBoxProjects.TabIndex = 9;
+            this.btnReset.Location = new System.Drawing.Point(188, 403);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(75, 23);
+            this.btnReset.TabIndex = 4;
+            this.btnReset.Text = "Reset";
+            this.btnReset.UseVisualStyleBackColor = true;
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(269, 403);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdate.TabIndex = 5;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            // 
+            // textBoxCourseName
+            // 
+            this.textBoxCourseName.Location = new System.Drawing.Point(92, 45);
+            this.textBoxCourseName.Name = "textBoxCourseName";
+            this.textBoxCourseName.Size = new System.Drawing.Size(252, 20);
+            this.textBoxCourseName.TabIndex = 6;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(15, 22);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(50, 13);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "Teacher:";
+            // 
+            // textBoxTeacher
+            // 
+            this.textBoxTeacher.Location = new System.Drawing.Point(92, 19);
+            this.textBoxTeacher.Name = "textBoxTeacher";
+            this.textBoxTeacher.Size = new System.Drawing.Size(252, 20);
+            this.textBoxTeacher.TabIndex = 8;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(236, 156);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(37, 13);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Total: ";
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Location = new System.Drawing.Point(279, 156);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(41, 13);
+            this.lblTotal.TabIndex = 11;
+            this.lblTotal.Text = "lblTotal";
+            this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblClassViewError
+            // 
+            this.lblClassViewError.AutoSize = true;
+            this.lblClassViewError.ForeColor = System.Drawing.Color.Red;
+            this.lblClassViewError.Location = new System.Drawing.Point(15, 408);
+            this.lblClassViewError.Name = "lblClassViewError";
+            this.lblClassViewError.Size = new System.Drawing.Size(0, 13);
+            this.lblClassViewError.TabIndex = 9;
             // 
             // ClassView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(367, 409);
+            this.ClientSize = new System.Drawing.Size(367, 474);
+            this.Controls.Add(this.lblClassViewError);
+            this.Controls.Add(this.textBoxTeacher);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.textBoxCourseName);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.groupBoxCategoryWeights);
             this.Controls.Add(this.lblCourse);
-            this.Controls.Add(this.comboBoxClass);
             this.Controls.Add(this.groupBoxClassDescription);
             this.Name = "ClassView";
             this.Text = "Class View";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.ClassView_Load);
             this.groupBoxClassDescription.ResumeLayout(false);
             this.groupBoxClassDescription.PerformLayout();
             this.groupBoxCategoryWeights.ResumeLayout(false);
@@ -232,7 +284,6 @@
 
         private System.Windows.Forms.GroupBox groupBoxClassDescription;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox comboBoxClass;
         private System.Windows.Forms.Label lblCourse;
         private System.Windows.Forms.GroupBox groupBoxCategoryWeights;
         private System.Windows.Forms.Button btnReset;
@@ -247,5 +298,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBoxCourseName;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBoxTeacher;
+        private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblClassViewError;
     }
 }

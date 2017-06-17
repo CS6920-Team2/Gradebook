@@ -77,7 +77,7 @@
             // btnClassView
             // 
             this.btnClassView.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClassView.Image = ((System.Drawing.Image)(resources.GetObject("btnClassView.Image")));
+            this.btnClassView.Image = global::Gradebook.Properties.Resources.ClassesIcon;
             this.btnClassView.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnClassView.Name = "btnClassView";
             this.btnClassView.Size = new System.Drawing.Size(81, 25);
@@ -87,7 +87,7 @@
             // btnAssignmentsView
             // 
             this.btnAssignmentsView.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAssignmentsView.Image = ((System.Drawing.Image)(resources.GetObject("btnAssignmentsView.Image")));
+            this.btnAssignmentsView.Image = global::Gradebook.Properties.Resources.AssignmentsIcon;
             this.btnAssignmentsView.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAssignmentsView.Name = "btnAssignmentsView";
             this.btnAssignmentsView.Size = new System.Drawing.Size(119, 25);
@@ -96,7 +96,7 @@
             // btnGradebookView
             // 
             this.btnGradebookView.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGradebookView.Image = ((System.Drawing.Image)(resources.GetObject("btnGradebookView.Image")));
+            this.btnGradebookView.Image = global::Gradebook.Properties.Resources.GradesBookIcon;
             this.btnGradebookView.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnGradebookView.Name = "btnGradebookView";
             this.btnGradebookView.Size = new System.Drawing.Size(107, 25);
@@ -105,7 +105,7 @@
             // btnReportsView
             // 
             this.btnReportsView.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReportsView.Image = ((System.Drawing.Image)(resources.GetObject("btnReportsView.Image")));
+            this.btnReportsView.Image = global::Gradebook.Properties.Resources.ReportIcon;
             this.btnReportsView.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnReportsView.Name = "btnReportsView";
             this.btnReportsView.Size = new System.Drawing.Size(84, 25);
@@ -293,7 +293,7 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Image = global::Gradebook.Properties.Resources.GradeBookLogo;
             this.pictureBox1.Location = new System.Drawing.Point(205, 38);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(1179, 73);

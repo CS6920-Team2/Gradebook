@@ -10,13 +10,6 @@
         <DockPanel x:Name="dockPanelMain" HorizontalAlignment="Left" Height="{Binding ElementName=GridMain, Path=ActualHeight}" 
                    LastChildFill="True" VerticalAlignment="Top" Width="{Binding ElementName=GridMain, Path=ActualWidth}" Background="Black">
 
-            <Image x:Name="GradeBookLogo" HorizontalAlignment="Left" Height="100" Margin="60,0,0,0" VerticalAlignment="Top" Width="466" Stretch="UniformToFill"
-                       DockPanel.Dock="Top">
-                <Image.Source>
-                    <BitmapImage UriSource="file:///C:/Users/Jacob/OneDrive/Grad School/CS6920-PROJECT II/Gradebook/Gradebook/Gradebook/Images/GradeBookLogo.png"/>
-                </Image.Source>
-            </Image>
-
             <Menu x:Name="NavMenu" HorizontalAlignment="Stretch" Height="30" VerticalAlignment="Top" DockPanel.Dock="Top">
                 <MenuItem Header="Class View" Click="BtnClassViewClick" Height="30" FontSize="14"/>
                 <MenuItem Header="Assignments" Height="30" FontSize="14"/>

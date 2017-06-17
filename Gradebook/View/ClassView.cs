@@ -12,11 +12,18 @@ namespace Gradebook
 {
     public partial class ClassView : Form
     {
-        public ClassView()
+        private MainMDI _main;
+
+        public ClassView(MainMDI main)
         {
             InitializeComponent();
+            _main = main;
         }
 
-
+        private void ClassView_Load(object sender, EventArgs e)
+        {
+            textBoxTeacher.Text = _main.user.firstName + " " + _main.user.lastName;
+            textBoxCourseName.Text = _main.taughtCoursesID + " << course id for DB pulls";
+        }
     }
 }
