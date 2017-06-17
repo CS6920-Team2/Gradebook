@@ -29,9 +29,11 @@
         private void InitializeComponent()
         {
             this.groupBoxClassDescription = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxCourseDescription = new System.Windows.Forms.TextBox();
             this.lblCourse = new System.Windows.Forms.Label();
             this.groupBoxCategoryWeights = new System.Windows.Forms.GroupBox();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.textBoxProjects = new System.Windows.Forms.TextBox();
             this.textBoxQuizzes = new System.Windows.Forms.TextBox();
             this.textBoxExams = new System.Windows.Forms.TextBox();
@@ -47,8 +49,6 @@
             this.textBoxCourseName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxTeacher = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.lblTotal = new System.Windows.Forms.Label();
             this.lblClassViewError = new System.Windows.Forms.Label();
             this.groupBoxClassDescription.SuspendLayout();
             this.groupBoxCategoryWeights.SuspendLayout();
@@ -56,7 +56,7 @@
             // 
             // groupBoxClassDescription
             // 
-            this.groupBoxClassDescription.Controls.Add(this.textBox1);
+            this.groupBoxClassDescription.Controls.Add(this.textBoxCourseDescription);
             this.groupBoxClassDescription.Location = new System.Drawing.Point(15, 78);
             this.groupBoxClassDescription.Name = "groupBoxClassDescription";
             this.groupBoxClassDescription.Size = new System.Drawing.Size(332, 116);
@@ -64,15 +64,15 @@
             this.groupBoxClassDescription.TabStop = false;
             this.groupBoxClassDescription.Text = "Class Description";
             // 
-            // textBox1
+            // textBoxCourseDescription
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(3, 16);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(326, 97);
-            this.textBox1.TabIndex = 0;
+            this.textBoxCourseDescription.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxCourseDescription.Location = new System.Drawing.Point(3, 16);
+            this.textBoxCourseDescription.Multiline = true;
+            this.textBoxCourseDescription.Name = "textBoxCourseDescription";
+            this.textBoxCourseDescription.ReadOnly = true;
+            this.textBoxCourseDescription.Size = new System.Drawing.Size(326, 97);
+            this.textBoxCourseDescription.TabIndex = 0;
             // 
             // lblCourse
             // 
@@ -103,6 +103,25 @@
             this.groupBoxCategoryWeights.TabIndex = 3;
             this.groupBoxCategoryWeights.TabStop = false;
             this.groupBoxCategoryWeights.Text = "Category Weights";
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Location = new System.Drawing.Point(279, 156);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(41, 13);
+            this.lblTotal.TabIndex = 11;
+            this.lblTotal.Text = "lblTotal";
+            this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(236, 156);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(37, 13);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Total: ";
             // 
             // textBoxProjects
             // 
@@ -206,6 +225,7 @@
             // 
             this.textBoxCourseName.Location = new System.Drawing.Point(92, 45);
             this.textBoxCourseName.Name = "textBoxCourseName";
+            this.textBoxCourseName.ReadOnly = true;
             this.textBoxCourseName.Size = new System.Drawing.Size(252, 20);
             this.textBoxCourseName.TabIndex = 6;
             // 
@@ -222,27 +242,9 @@
             // 
             this.textBoxTeacher.Location = new System.Drawing.Point(92, 19);
             this.textBoxTeacher.Name = "textBoxTeacher";
+            this.textBoxTeacher.ReadOnly = true;
             this.textBoxTeacher.Size = new System.Drawing.Size(252, 20);
             this.textBoxTeacher.TabIndex = 8;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(236, 156);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(37, 13);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "Total: ";
-            // 
-            // lblTotal
-            // 
-            this.lblTotal.AutoSize = true;
-            this.lblTotal.Location = new System.Drawing.Point(279, 156);
-            this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(41, 13);
-            this.lblTotal.TabIndex = 11;
-            this.lblTotal.Text = "lblTotal";
-            this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblClassViewError
             // 
@@ -283,7 +285,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBoxClassDescription;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxCourseDescription;
         private System.Windows.Forms.Label lblCourse;
         private System.Windows.Forms.GroupBox groupBoxCategoryWeights;
         private System.Windows.Forms.Button btnReset;

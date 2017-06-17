@@ -21,15 +21,14 @@ namespace Gradebook
         private Form _reportsView;
         private Window _loginWindow;
         private string _userName;
-
-        public Person user;
-        public int taughtCoursesID { get; set; }
+        private Person _user;
+        private int _taughtCourseID;
 
         /// <summary>
-        /// User name will be stored to help us retrieve user info
+        /// User name will be stored to help us retrieve _user info
         /// 
         /// Login window will be hidden, but hosted here for 
-        /// when we want to make it visible (after user logs out)
+        /// when we want to make it visible (after _user logs out)
         /// </summary>
         
         /* 
@@ -37,8 +36,8 @@ namespace Gradebook
         {
             InitializeComponent();
             _loginWindow = loginWindow;
-            user = new Person();
-            user.userName = userName;
+            _user = new Person();
+            _user.userName = userName;
         }
         */
 
@@ -53,7 +52,7 @@ namespace Gradebook
         /// Upon loading we should: 
         /// 
         /// 1-Assign the person who is using the application
-        /// 2-Show left navigation info for that user: firstName, lastName, role, personID, roleID(teacher or admin)
+        /// 2-Show left navigation info for that _user: firstName, lastName, role, personID, roleID(teacher or admin)
         /// 3-Show menu items that the person should have access to.
         /// </summary>
         /// <param name="sender"></param>
@@ -62,7 +61,7 @@ namespace Gradebook
         {
             try
             {
-                // Mock user placed below to cover for the AssignPerson method
+                // Mock _user placed below to cover for the AssignPerson method
 
                 // Keep below methods in real application 
                 // this.AssignPerson();
@@ -70,7 +69,7 @@ namespace Gradebook
                 // this.LoadTopNav();
 
                 // Delete mock draft below after login form is added to app
-                user = new Person()
+                _user = new Person()
                 {
                     firstName = "Jacob",
                     lastName = "Radcliffe",
@@ -89,45 +88,43 @@ namespace Gradebook
 
         ////////////////////////////////////////// Load Helpers //////////////////////////////////////////
 
-        /// <summary>
-        /// This method will pull user information for user object.
-        /// </summary>
+        /// <summary> This method will pull and assign _user information. </summary>
         private void AssignPerson()
         {
 
             try
             {
                 // Returns from Users joined with Roles: userID, userName, role
-                // user = new Person();
-                // user = UsersController.GetUserByUserName(user.userName);
+                // _user = new Person();
+                // _user = UsersController.GetUserByUserName(_user.userName);
 
-                if (user.role == "Teacher")
+                if (_user.role == "Teacher")
                 {
                     /* Returns from Teachers table: teacherID, PersonID
                      * 
                      * Person tempUser = TeacherController.GetTeacherByUserID(userID);
-                     * user.teacherID = tempUser.teacherID;
-                     * user.personID = tempUser.personID;
+                     * _user.teacherID = tempUser.teacherID;
+                     * _user.personID = tempUser.personID;
                      * 
                      * Returns from Persons table: firstName, lastName (can add more as we see needed)
                      * 
                      * tempUser = PersonsController.GetPersonByPersonID(personID);
-                     * user.firstName = tempUser.firstName;
-                     * user.lastName = tempUser.lastName;
+                     * _user.firstName = tempUser.firstName;
+                     * _user.lastName = tempUser.lastName;
                      */
                 }
-                else if (user.role == "Admin")
+                else if (_user.role == "Admin")
                 {
                     /* Returns from Administrators table: adminID, PersonID
                      * 
                      * Person tempUser = AdminController.GetAdminByUserID(userID);
-                     * user.adminID = tempUser.adminID;
-                     * user.personID = tempUser.personID;
+                     * _user.adminID = tempUser.adminID;
+                     * _user.personID = tempUser.personID;
                      * 
                      * Returns from Persons table: firstName, lastName (can add more as we see needed)
                      * tempUser = PersonsController.GetPersonByPersonID(personID);
-                     * user.firstName = tempUser.firstName;
-                     * user.lastName = tempUser.lastName;
+                     * _user.firstName = tempUser.firstName;
+                     * _user.lastName = tempUser.lastName;
                      */
 
                 }
@@ -139,22 +136,22 @@ namespace Gradebook
         }
 
         /// <summary>
-        /// This method will load all of our user information into the navigation panel
+        /// This method will load all of our _user information into the navigation panel
         /// on the left side of the Main UI 
         /// </summary>
         private void LoadLeftNav()
         {
             // Loads in teacher information
-            lblName.Text = user.lastName + ", " + user.firstName;
-            lblRole.Text = user.role;
-            lblIDNumber.Text = user.personID.ToString();
-            if (user.role == "Teacher")
-                lblRoleIDNumber.Text = user.teacherID.ToString();
-            else if (user.role == "Admin")
-                lblRoleIDNumber.Text = user.adminID.ToString();
+            lblName.Text = _user.lastName + ", " + _user.firstName;
+            lblRole.Text = _user.role;
+            lblIDNumber.Text = _user.personID.ToString();
+            if (_user.role == "Teacher")
+                lblRoleIDNumber.Text = _user.teacherID.ToString();
+            else if (_user.role == "Admin")
+                lblRoleIDNumber.Text = _user.adminID.ToString();
 
             // Loads in classes for teacher
-            if (user.role == "Teacher")
+            if (_user.role == "Teacher")
             {
                 try
                 {
@@ -185,7 +182,7 @@ namespace Gradebook
                     cboCourses.DisplayMember = "name";
                     cboCourses.ValueMember = "taughtCourseID";
                     cboCourses.SelectedIndex = 0;
-                    taughtCoursesID = (int)cboCourses.SelectedValue;
+                    _taughtCourseID = (int)cboCourses.SelectedValue;
                     lblTaughtCourseID.Text = cboCourses.SelectedValue.ToString();
                 }
                 catch (Exception ex)
@@ -196,16 +193,16 @@ namespace Gradebook
         }
 
         /// <summary>
-        /// This method will laod all of the buttons that our user should be able to 
-        /// user in the top navigation panel of the Main UI 
+        /// This method will laod all of the buttons that our _user should be able to 
+        /// _user in the top navigation panel of the Main UI 
         /// 
-        /// Note: All buttons are naturally visible to the user.Thus, only
+        /// Note: All buttons are naturally visible to the _user.Thus, only
         /// restrictions that need to be applied are to the admin since
         /// we are only allowing them to use a few features right now.
         /// </summary>
         private void LoadTopNav()
         {
-            if (user.role == "Admin")
+            if (_user.role == "Admin")
             {
                 btnAssignmentsView.Visible = false;
                 btnGradebookView.Visible = false;
@@ -213,27 +210,53 @@ namespace Gradebook
                 cboCourses.Visible = false;
             }  
         }
-        ////////////////////////////////////////// Top Nav Event Triggers //////////////////////////////////////////
+        ////////////////////////////////////////// Nav Controller Even Triggers  //////////////////////////////////////////
 
-        /// <summary>
-        /// Opens the class view form in the MDI while closing
-        /// all other windows that may be open
-        /// </summary>
+        /// <summary> Opens the class view form in the MDI while closing all other forms </summary>
         private void BtnClassView_Click(object sender, EventArgs e)
         {
-            if (_classView == null)
-            {
-                _classView = new ClassView(this);
-                _classView.MdiParent = this;
-                _classView.Show();
+            if (ActiveMdiChild != null)
+               ActiveMdiChild.Close();
 
-                this.RemoveChildWindowBorders(_classView);
-                this.CloseUnusedFormsExcept(_classView);
-            } 
-
+            _classView = new ClassView(_user, _taughtCourseID) {MdiParent = this};
+            _classView.Show();
+            this.RemoveChildWindowBorders(_classView);
         }
 
-        /// <summary> Allows user to logout of the system and return to the login screen </summary>
+        /// <summary> Opens the assigments view form in the MDI while closing all other forms </summary>
+        private void BtnAssignmentsView_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+                ActiveMdiChild.Close();
+
+            //_assignmentsView = new AssignmentsView() { MdiParent = this };
+            //_assignmentsView.Show();
+            //this.RemoveChildWindowBorders(_assignmentsView);
+        }
+
+        /// <summary> Opens the gradebook view form in the MDI while closing all other forms </summary>
+        private void BtnGradebookView_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+                ActiveMdiChild.Close();
+
+            //_gradebookView = new GradebookView { MdiParent = this };
+            //_gradebookView.Show();
+            //this.RemoveChildWindowBorders(_gradebookView);
+        }
+
+        /// <summary> Opens the reports view form in the MDI while closing all other forms </summary>
+        private void BtnReportsView_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+                ActiveMdiChild.Close();
+
+            //_reportsView = new ReportsView() { MdiParent = this };
+            //_reportsView.Show();
+            //this.RemoveChildWindowBorders(_reportsView);
+        }
+
+        /// <summary> Allows _user to logout of the system and return to the login screen </summary>
         private void BtnLogout_Click(object sender, EventArgs e)
         {
             this._loginWindow.Visibility = Visibility.Visible;
@@ -249,8 +272,17 @@ namespace Gradebook
         /// </summary>
         private void CboClasses_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            taughtCoursesID = (int)cboCourses.SelectedValue;
+            _taughtCourseID = (int)cboCourses.SelectedValue;
             lblTaughtCourseID.Text = cboCourses.SelectedValue.ToString();
+
+            if (_classView != null)
+                this.BtnClassView_Click(null, null);
+            else if (_assignmentsView != null)
+                this.BtnAssignmentsView_Click(null, null);
+            else if (_gradebookView != null)
+                this.BtnGradebookView_Click(null, null);
+            else if (_reportsView != null)
+                this.BtnReportsView_Click(null, null);
         }
 
         ////////////////////////////////////////// Form and Window Managers //////////////////////////////////////////
@@ -273,31 +305,12 @@ namespace Gradebook
             form.Dock        = DockStyle.Fill;
         }
 
-        /// <summary>
-        /// This method will search through the MDI, close all Forms that aren't being
-        /// used and keep the one open that we want open. This way, we won't have 
-        /// forms running in the background and slowing down the applicaiton.
-        /// </summary>
-        private void CloseUnusedFormsExcept(Form formToKeep)
-        {
-            if (_classView != null && _classView != formToKeep)
-                _classView.Close();
-            else if (_assignmentsView != null && _assignmentsView != formToKeep)
-                _assignmentsView.Close();
-            else if (_gradebookView != null && _gradebookView != formToKeep)
-                _gradebookView.Close();
-            else if (_reportsView != null && _reportsView != formToKeep)
-                 _reportsView.Close();
-        }
-
-
         /// <summary> Disposes of the MainMDI window and shows the login window. </summary>
         private void MainMDI_FormClosed(object sender, FormClosedEventArgs e)
         {
             _loginWindow.Visibility = Visibility.Visible;
             this.Dispose();
         }
-
 
     }
 }

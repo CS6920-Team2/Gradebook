@@ -28,15 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMDI));
-            this.mainToolStrip = new System.Windows.Forms.ToolStrip();
+            this.topNav = new System.Windows.Forms.ToolStrip();
             this.btnClassView = new System.Windows.Forms.ToolStripButton();
             this.btnAssignmentsView = new System.Windows.Forms.ToolStripButton();
             this.btnGradebookView = new System.Windows.Forms.ToolStripButton();
             this.btnReportsView = new System.Windows.Forms.ToolStripButton();
             this.btnLogout = new System.Windows.Forms.ToolStripButton();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.leftNav = new System.Windows.Forms.Panel();
             this.lblTaughtCourseID = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -51,33 +50,31 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblUserInformation = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.courseBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.mainToolStrip.SuspendLayout();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.courseBindingSource)).BeginInit();
+            this.gradebookLogo = new System.Windows.Forms.PictureBox();
+            this.topNav.SuspendLayout();
+            this.leftNav.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gradebookLogo)).BeginInit();
             this.SuspendLayout();
             // 
-            // mainToolStrip
+            // topNav
             // 
-            this.mainToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.topNav.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnClassView,
             this.btnAssignmentsView,
             this.btnGradebookView,
             this.btnReportsView,
             this.btnLogout});
-            this.mainToolStrip.Location = new System.Drawing.Point(0, 0);
-            this.mainToolStrip.Name = "mainToolStrip";
-            this.mainToolStrip.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.mainToolStrip.Size = new System.Drawing.Size(1384, 38);
-            this.mainToolStrip.TabIndex = 1;
-            this.mainToolStrip.Text = "toolStrip1";
+            this.topNav.Location = new System.Drawing.Point(0, 0);
+            this.topNav.Name = "topNav";
+            this.topNav.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.topNav.Size = new System.Drawing.Size(1384, 38);
+            this.topNav.TabIndex = 1;
+            this.topNav.Text = "toolStrip1";
             // 
             // btnClassView
             // 
             this.btnClassView.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClassView.Image = global::Gradebook.Properties.Resources.ClassesIcon;
+            this.btnClassView.Image = ((System.Drawing.Image)(resources.GetObject("btnClassView.Image")));
             this.btnClassView.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnClassView.Name = "btnClassView";
             this.btnClassView.Size = new System.Drawing.Size(81, 25);
@@ -87,30 +84,33 @@
             // btnAssignmentsView
             // 
             this.btnAssignmentsView.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAssignmentsView.Image = global::Gradebook.Properties.Resources.AssignmentsIcon;
+            this.btnAssignmentsView.Image = ((System.Drawing.Image)(resources.GetObject("btnAssignmentsView.Image")));
             this.btnAssignmentsView.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAssignmentsView.Name = "btnAssignmentsView";
             this.btnAssignmentsView.Size = new System.Drawing.Size(119, 25);
             this.btnAssignmentsView.Text = "Assignments";
+            this.btnAssignmentsView.Click += new System.EventHandler(this.BtnAssignmentsView_Click);
             // 
             // btnGradebookView
             // 
             this.btnGradebookView.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGradebookView.Image = global::Gradebook.Properties.Resources.GradesBookIcon;
+            this.btnGradebookView.Image = ((System.Drawing.Image)(resources.GetObject("btnGradebookView.Image")));
             this.btnGradebookView.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnGradebookView.Name = "btnGradebookView";
             this.btnGradebookView.Size = new System.Drawing.Size(107, 25);
             this.btnGradebookView.Text = "Gradebook";
+            this.btnGradebookView.Click += new System.EventHandler(this.BtnGradebookView_Click);
             // 
             // btnReportsView
             // 
             this.btnReportsView.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReportsView.Image = global::Gradebook.Properties.Resources.ReportIcon;
+            this.btnReportsView.Image = ((System.Drawing.Image)(resources.GetObject("btnReportsView.Image")));
             this.btnReportsView.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnReportsView.Name = "btnReportsView";
             this.btnReportsView.Size = new System.Drawing.Size(84, 25);
             this.btnReportsView.Tag = "";
             this.btnReportsView.Text = "Reports";
+            this.btnReportsView.Click += new System.EventHandler(this.BtnReportsView_Click);
             // 
             // btnLogout
             // 
@@ -124,27 +124,27 @@
             this.btnLogout.Text = "Logout";
             this.btnLogout.Click += new System.EventHandler(this.BtnLogout_Click);
             // 
-            // panel1
+            // leftNav
             // 
-            this.panel1.Controls.Add(this.lblTaughtCourseID);
-            this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.cboCourses);
-            this.panel1.Controls.Add(this.lblRoleIDNumber);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.lblErrorMessage);
-            this.panel1.Controls.Add(this.lblIDNumber);
-            this.panel1.Controls.Add(this.lblRole);
-            this.panel1.Controls.Add(this.lblName);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.lblUserInformation);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 38);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(205, 723);
-            this.panel1.TabIndex = 10;
+            this.leftNav.Controls.Add(this.lblTaughtCourseID);
+            this.leftNav.Controls.Add(this.label7);
+            this.leftNav.Controls.Add(this.label5);
+            this.leftNav.Controls.Add(this.cboCourses);
+            this.leftNav.Controls.Add(this.lblRoleIDNumber);
+            this.leftNav.Controls.Add(this.label4);
+            this.leftNav.Controls.Add(this.lblErrorMessage);
+            this.leftNav.Controls.Add(this.lblIDNumber);
+            this.leftNav.Controls.Add(this.lblRole);
+            this.leftNav.Controls.Add(this.lblName);
+            this.leftNav.Controls.Add(this.label3);
+            this.leftNav.Controls.Add(this.label2);
+            this.leftNav.Controls.Add(this.label1);
+            this.leftNav.Controls.Add(this.lblUserInformation);
+            this.leftNav.Dock = System.Windows.Forms.DockStyle.Left;
+            this.leftNav.Location = new System.Drawing.Point(0, 38);
+            this.leftNav.Name = "leftNav";
+            this.leftNav.Size = new System.Drawing.Size(205, 723);
+            this.leftNav.TabIndex = 10;
             // 
             // lblTaughtCourseID
             // 
@@ -289,21 +289,17 @@
             this.lblUserInformation.Text = "User Information";
             this.lblUserInformation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // pictureBox1
+            // gradebookLogo
             // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox1.Image = global::Gradebook.Properties.Resources.GradeBookLogo;
-            this.pictureBox1.Location = new System.Drawing.Point(205, 38);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1179, 73);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 11;
-            this.pictureBox1.TabStop = false;
-            // 
-            // courseBindingSource
-            // 
-            this.courseBindingSource.DataSource = typeof(Gradebook.Data.DAO.Course);
+            this.gradebookLogo.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.gradebookLogo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gradebookLogo.Image = ((System.Drawing.Image)(resources.GetObject("gradebookLogo.Image")));
+            this.gradebookLogo.Location = new System.Drawing.Point(205, 38);
+            this.gradebookLogo.Name = "gradebookLogo";
+            this.gradebookLogo.Size = new System.Drawing.Size(1179, 73);
+            this.gradebookLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.gradebookLogo.TabIndex = 11;
+            this.gradebookLogo.TabStop = false;
             // 
             // MainMDI
             // 
@@ -311,9 +307,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1384, 761);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.mainToolStrip);
+            this.Controls.Add(this.gradebookLogo);
+            this.Controls.Add(this.leftNav);
+            this.Controls.Add(this.topNav);
             this.IsMdiContainer = true;
             this.Name = "MainMDI";
             this.ShowIcon = false;
@@ -322,24 +318,23 @@
             this.Text = "Gradebook++";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainMDI_FormClosed);
             this.Load += new System.EventHandler(this.MainMDI_Load);
-            this.mainToolStrip.ResumeLayout(false);
-            this.mainToolStrip.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.courseBindingSource)).EndInit();
+            this.topNav.ResumeLayout(false);
+            this.topNav.PerformLayout();
+            this.leftNav.ResumeLayout(false);
+            this.leftNav.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gradebookLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.ToolStrip mainToolStrip;
+        private System.Windows.Forms.ToolStrip topNav;
         private System.Windows.Forms.ToolStripButton btnAssignmentsView;
         private System.Windows.Forms.ToolStripButton btnGradebookView;
         private System.Windows.Forms.ToolStripButton btnLogout;
         private System.Windows.Forms.ToolStripButton btnClassView;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel leftNav;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -348,7 +343,7 @@
         private System.Windows.Forms.Label lblIDNumber;
         private System.Windows.Forms.Label lblRole;
         private System.Windows.Forms.ToolStripButton btnReportsView;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox gradebookLogo;
         private System.Windows.Forms.Label lblErrorMessage;
         private System.Windows.Forms.Label lblRoleIDNumber;
         private System.Windows.Forms.Label label4;
@@ -356,6 +351,5 @@
         private System.Windows.Forms.ComboBox cboCourses;
         private System.Windows.Forms.Label lblTaughtCourseID;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.BindingSource courseBindingSource;
     }
 }

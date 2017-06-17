@@ -84,6 +84,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Data\DAO\Category.cs" />
+    <Compile Include="Data\DAO\Course.cs" />
+    <Compile Include="Data\DAO\Person.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -102,9 +105,6 @@
     <Compile Include="View\ClassView.Designer.cs">
       <DependentUpon>ClassView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\Category.cs" />
-    <Compile Include="Model\Course.cs" />
-    <Compile Include="Model\Person.cs" />
     <Compile Include="View\MainMDI.cs">
       <SubType>Form</SubType>
     </Compile>
