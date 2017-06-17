@@ -6,6 +6,6 @@
              StartupUri="MainWindow.xaml"
              Startup="Application_Startup">
     <Application.Resources>
-        <system:String x:Key="database_connection">Server=(local)\\SqlExpress;Database=Gradebook;Trusted_connection=true;User Id=username;Password=password</system:String>
+        <system:String x:Key="database_connection">Server=(local);Database=Gradebook;Trusted_connection=true;User Id=username;Password=password</system:String>
     </Application.Resources>
 </Application>
