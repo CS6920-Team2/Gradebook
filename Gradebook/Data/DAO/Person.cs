@@ -34,5 +34,10 @@ namespace Gradebook.Data.DAO
 
         // Student
         public int studentID { get; set; }
+
+        public string fullName
+        {
+            get { return firstName + " " + lastName; }
+        }
     }
 }

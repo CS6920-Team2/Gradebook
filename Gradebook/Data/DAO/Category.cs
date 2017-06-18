@@ -9,7 +9,7 @@ namespace Gradebook.Data.DAO
     class Category
     {
         public int categoryID { get; set; }
-        public int courseID { get; set; }
+        public int taughtCourseID { get; set; }
         public string name { get; set; }
         public int weight { get; set; }
     }

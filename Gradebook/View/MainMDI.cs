@@ -22,7 +22,7 @@ namespace Gradebook
         private Window _loginWindow;
         private string _userName;
         private Person _user;
-        private int _taughtCourseID;
+        private Course _currentCourse;
 
         /// <summary>
         /// User name will be stored to help us retrieve _user info
@@ -71,10 +71,10 @@ namespace Gradebook
                 // Delete mock draft below after login form is added to app
                 _user = new Person()
                 {
-                    firstName = "Jacob",
-                    lastName = "Radcliffe",
+                    firstName = "Bob",
+                    lastName = "Monroe",
                     role = "Teacher",
-                    personID = 1,
+                    personID = 7,
                     teacherID = 1
                 };
                 this.LoadLeftNav();
@@ -166,12 +166,17 @@ namespace Gradebook
                     List<Course> courseList = new List<Course>();
                     Course course1 = new Course()
                     {
-                        name = "Math",
-                        taughtCourseID = 1
+                        name = "Algebra",
+                        courseID = 1,
+                        description = "Exploring equations and their relation to the coordinate plane.",
+                        taughtCourseID = 1,
+
                     };
                     Course course2 = new Course()
                     {
-                        name = "English",
+                        name = "Geometry",
+                        courseID = 2,
+                        description = "Deals with measurement, points, lines, angles, along with two and three dimensional sufaces.",
                         taughtCourseID = 4
                     };
                     courseList.Add(course1);
@@ -182,7 +187,7 @@ namespace Gradebook
                     cboCourses.DisplayMember = "name";
                     cboCourses.ValueMember = "taughtCourseID";
                     cboCourses.SelectedIndex = 0;
-                    _taughtCourseID = (int)cboCourses.SelectedValue;
+                    _currentCourse = (Course) cboCourses.SelectedItem;
                     lblTaughtCourseID.Text = cboCourses.SelectedValue.ToString();
                 }
                 catch (Exception ex)
@@ -218,7 +223,7 @@ namespace Gradebook
             if (ActiveMdiChild != null)
                ActiveMdiChild.Close();
 
-            _classView = new ClassView(_user, _taughtCourseID) {MdiParent = this};
+            _classView = new ClassView(_user, _currentCourse) {MdiParent = this};
             _classView.Show();
             this.RemoveChildWindowBorders(_classView);
         }
@@ -272,7 +277,7 @@ namespace Gradebook
         /// </summary>
         private void CboClasses_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            _taughtCourseID = (int)cboCourses.SelectedValue;
+            _currentCourse = (Course)cboCourses.SelectedItem;
             lblTaughtCourseID.Text = cboCourses.SelectedValue.ToString();
 
             if (_classView != null)
