@@ -108,7 +108,7 @@
             // lblTotal
             // 
             this.lblTotal.AutoSize = true;
-            this.lblTotal.Location = new System.Drawing.Point(279, 156);
+            this.lblTotal.Location = new System.Drawing.Point(285, 156);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(41, 13);
             this.lblTotal.TabIndex = 11;
@@ -127,42 +127,57 @@
             // textBoxProjects
             // 
             this.textBoxProjects.Location = new System.Drawing.Point(111, 107);
+            this.textBoxProjects.MaxLength = 3;
             this.textBoxProjects.Name = "textBoxProjects";
             this.textBoxProjects.Size = new System.Drawing.Size(209, 20);
             this.textBoxProjects.TabIndex = 5;
             this.textBoxProjects.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxProjects.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
+            this.textBoxProjects.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
             // 
             // textBoxQuizzes
             // 
             this.textBoxQuizzes.Location = new System.Drawing.Point(111, 133);
+            this.textBoxQuizzes.MaxLength = 3;
             this.textBoxQuizzes.Name = "textBoxQuizzes";
             this.textBoxQuizzes.Size = new System.Drawing.Size(209, 20);
             this.textBoxQuizzes.TabIndex = 4;
             this.textBoxQuizzes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxQuizzes.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
+            this.textBoxQuizzes.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
             // 
             // textBoxExams
             // 
             this.textBoxExams.Location = new System.Drawing.Point(111, 29);
+            this.textBoxExams.MaxLength = 3;
             this.textBoxExams.Name = "textBoxExams";
             this.textBoxExams.Size = new System.Drawing.Size(209, 20);
             this.textBoxExams.TabIndex = 3;
             this.textBoxExams.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxExams.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
+            this.textBoxExams.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
             // 
             // textBoxParticipation
             // 
             this.textBoxParticipation.Location = new System.Drawing.Point(111, 81);
+            this.textBoxParticipation.MaxLength = 3;
             this.textBoxParticipation.Name = "textBoxParticipation";
             this.textBoxParticipation.Size = new System.Drawing.Size(209, 20);
             this.textBoxParticipation.TabIndex = 2;
             this.textBoxParticipation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxParticipation.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
+            this.textBoxParticipation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
             // 
             // textBoxHomework
             // 
             this.textBoxHomework.Location = new System.Drawing.Point(111, 55);
+            this.textBoxHomework.MaxLength = 3;
             this.textBoxHomework.Name = "textBoxHomework";
             this.textBoxHomework.Size = new System.Drawing.Size(209, 20);
             this.textBoxHomework.TabIndex = 1;
             this.textBoxHomework.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxHomework.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
+            this.textBoxHomework.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
             // 
             // label5
             // 
@@ -217,6 +232,7 @@
             this.btnReset.TabIndex = 4;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // btnUpdate
             // 
@@ -226,6 +242,7 @@
             this.btnUpdate.TabIndex = 5;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // textBoxCourseName
             // 

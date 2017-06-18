@@ -55,8 +55,6 @@ namespace Gradebook
         /// 2-Show left navigation info for that _user: firstName, lastName, role, personID, roleID(teacher or admin)
         /// 3-Show menu items that the person should have access to.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void MainMDI_Load(object sender, EventArgs e)
         {
             try
@@ -215,7 +213,7 @@ namespace Gradebook
                 cboCourses.Visible = false;
             }  
         }
-        ////////////////////////////////////////// Nav Controller Even Triggers  //////////////////////////////////////////
+        ////////////////////////////////////////// Nav Controller Event Triggers  //////////////////////////////////////////
 
         /// <summary> Opens the class view form in the MDI while closing all other forms </summary>
         private void BtnClassView_Click(object sender, EventArgs e)

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Input;
 
 namespace Gradebook
 {
@@ -17,12 +18,20 @@ namespace Gradebook
         private Course _currentCourse;
         private List<Category> _categoriesList;
         private int _totalWeight;
+        private List<TextBox> _weightBoxes;
 
         public ClassView(Person user, Course currentCourse)
         {
             InitializeComponent();
             _user = user;
             _currentCourse = currentCourse;
+
+            _weightBoxes = new List<TextBox>();
+            _weightBoxes.Add(textBoxExams);
+            _weightBoxes.Add(textBoxHomework);
+            _weightBoxes.Add(textBoxParticipation);
+            _weightBoxes.Add(textBoxProjects);
+            _weightBoxes.Add(textBoxQuizzes);
         }
 
         /// <summary>
@@ -39,11 +48,10 @@ namespace Gradebook
         /// Will hardcode name based on which category is being filled in
         /// None exist? set to defaults
         /// 
-        /// 5- Totals of categories should be added up
+        /// 5- Totals of categories should be added up (event handlers)
         /// </summary>
         private void ClassView_Load(object sender, EventArgs e)
         {
-            // 1 
             if (_user.role == "Teacher")
             {
                 cboTeacherName.Hide();
@@ -54,18 +62,9 @@ namespace Gradebook
                 textBoxTeacherName.Hide();
                 // Get list of teachers and add to comboBox
             }
-            
-            // 2
             textBoxCourseName.Text = _currentCourse.name;
-
-            // 3
             textBoxCourseDescription.Text = _currentCourse.description;
-
-            // 4
             this.FillCategories(_currentCourse.taughtCourseID);
-
-            //
-            this.TotalCategories(_categoriesList);
         }
 
         /// <summary> 
@@ -128,7 +127,6 @@ namespace Gradebook
                     else if (category.name == "Quizzes")
                         textBoxQuizzes.Text = category.weight.ToString();
                 }
-                
             }
             catch (Exception ex)
             {
@@ -137,15 +135,108 @@ namespace Gradebook
         }
 
         /// <summary> Adds all the category weights together </summary>
-        private void TotalCategories(List<Category> categoriesList)
+        private void TotalCategories(List<TextBox> weightBoxes)
         {
-            foreach (Category category in categoriesList)
+            _totalWeight = 0;
+            foreach (TextBox weight in weightBoxes)
             {
-                _totalWeight += category.weight;
+                _totalWeight += TextBoxToInt(weight);
             }
 
             lblTotal.Text = _totalWeight + "%";
         }
 
+        private int TextBoxToInt(TextBox textBox)
+        {
+            try
+            {
+                if (textBox.Text != "")
+                {
+                    int number;
+                    number = Convert.ToInt32(textBox.Text);
+                    number = int.Parse(textBox.Text);
+                    return number;
+                }
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                lblClassViewError.Text = "Error converting text to string" + textBox.Name.ToString();
+                return 0;
+            }
+        }
+
+        ////////////////////////////////////////// Event Handlers  //////////////////////////////////////////
+
+        /// <summary> Changes totals when weight text boxes are changed. </summary>
+        private void TextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (_weightBoxes != null)
+                this.TotalCategories(_weightBoxes);
+        }
+
+
+        /// <summary> 
+        /// The event below and its helper make it so only integers
+        /// are allowed to be entered into the category weights. 
+        /// </summary>
+        private void AllowOnlyNumber(KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private void AllowOnlyNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.AllowOnlyNumber(e);
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            this.FillCategories(_currentCourse.taughtCourseID);
+            lblClassViewError.Text = "";
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (_totalWeight != 100)
+            {
+                lblClassViewError.Text = "Totals must be equal 100%";
+                return;
+            }
+            
+            // Updates DB with new categories
+            try
+            {
+
+                foreach (Category category in _categoriesList)
+                {
+                    if (category.name == "Exams")
+                        category.weight = TextBoxToInt(textBoxExams);
+                    else if (category.name == "Homework")
+                        category.weight = TextBoxToInt(textBoxHomework);
+                    else if (category.name == "Participation")
+                        category.weight = TextBoxToInt(textBoxParticipation);
+                    else if (category.name == "Projects")
+                        category.weight = TextBoxToInt(textBoxProjects);
+                    else if (category.name == "Quizzes")
+                        category.weight = TextBoxToInt(textBoxQuizzes);
+
+                    //bool updated = CategoriesController.CategoriesDB.UpdateCategory(category);
+                    bool updated = false;
+                    if (!updated)
+                    {
+                        lblClassViewError.Text = "Failed to update category " + category.name;
+                        return;
+                    }
+                        
+                }
+            }
+            catch (Exception ex)
+            {
+                lblClassViewError.Text = "Unable to update categories in DB.";
+            }
+        }
     }
 }
