@@ -10,10 +10,11 @@ using System.Windows;
 using System.Windows.Forms;
 using Gradebook;
 using Gradebook.Data.DAO;
+using Gradebook.Controls;
 
 namespace Gradebook
 {
-    public partial class MainMDI : Form
+    public partial class MainMDI : BaseForm
     {
         private Form _classView;
         private Form _assignmentsView;
@@ -46,6 +47,13 @@ namespace Gradebook
         {
             InitializeComponent();
             _loginWindow = loginWindow;
+        }
+
+        public MainMDI()
+        {
+            //TODO 
+            //need to discuss with the team why the other constructor is done that way
+            InitializeComponent();
         }
 
         /// <summary>
@@ -262,7 +270,11 @@ namespace Gradebook
         /// <summary> Allows _user to logout of the system and return to the login screen </summary>
         private void BtnLogout_Click(object sender, EventArgs e)
         {
-            this._loginWindow.Visibility = Visibility.Visible;
+            if(_loginWindow != null)
+            {
+                this._loginWindow.Visibility = Visibility.Visible;
+            }
+            
             this.Close();
         }
 
@@ -311,7 +323,11 @@ namespace Gradebook
         /// <summary> Disposes of the MainMDI window and shows the login window. </summary>
         private void MainMDI_FormClosed(object sender, FormClosedEventArgs e)
         {
-            _loginWindow.Visibility = Visibility.Visible;
+            if(_loginWindow != null)
+            {
+                _loginWindow.Visibility = Visibility.Visible;
+            }
+
             this.Dispose();
         }
 

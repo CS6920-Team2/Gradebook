@@ -56,6 +56,7 @@
       <HintPath>..\packages\dbup.3.3.5\lib\net35\DbUp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -75,32 +76,23 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="View\App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Page Include="View\ClassPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
+    <Compile Include="Controls\BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Data\DAO\Category.cs" />
     <Compile Include="Data\DAO\Course.cs" />
     <Compile Include="Data\DAO\Person.cs" />
+    <Compile Include="Data\DAO\User.cs" />
+    <Compile Include="Data\Factories\ConnectionFactory.cs" />
+    <Compile Include="Data\Interfaces\IUserService.cs" />
+    <Compile Include="Data\Services\UserService.cs" />
+    <Compile Include="Data\Utils\FormManager.cs" />
+    <Compile Include="Data\Utils\SecurityUtils.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="View\App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="View\ClassPage.xaml.cs">
-      <DependentUpon>ClassPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ClassView.cs">
       <SubType>Form</SubType>
@@ -108,15 +100,23 @@
     <Compile Include="View\ClassView.Designer.cs">
       <DependentUpon>ClassView.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\LoginView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\LoginView.Designer.cs">
+      <DependentUpon>LoginView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\MainMDI.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\MainMDI.designer.cs">
       <DependentUpon>MainMDI.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <Compile Include="View\ResetPasswordView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ResetPasswordView.Designer.cs">
+      <DependentUpon>ResetPasswordView.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -131,6 +131,9 @@
     <EmbeddedResource Include="View\ClassView.resx">
       <DependentUpon>ClassView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\LoginView.resx">
+      <DependentUpon>LoginView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\MainMDI.resx">
       <DependentUpon>MainMDI.cs</DependentUpon>
     </EmbeddedResource>
@@ -139,6 +142,9 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\ResetPasswordView.resx">
+      <DependentUpon>ResetPasswordView.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -146,7 +152,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
@@ -188,7 +196,13 @@
     <None Include="Resources\Trophy.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Scripts\1_001_ADD_RESET_PASSWORD_FLAG_TO_USERS.sql" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Scripts\1_000_DB_INITIALIZATION_AND_DEFAULT_USERS.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\1_002_FORCE_PASSWORD_RESET_ALL_USERS.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
