@@ -1,9 +1,0 @@
-C:\Users\Jacob\OneDrive\Grad School\CS6920-PROJECT II\Gradebook\Gradebook\DbUpRunner\bin\Debug\DbUpRunner.exe.config
-C:\Users\Jacob\OneDrive\Grad School\CS6920-PROJECT II\Gradebook\Gradebook\DbUpRunner\bin\Debug\DbUpRunner.exe
-C:\Users\Jacob\OneDrive\Grad School\CS6920-PROJECT II\Gradebook\Gradebook\DbUpRunner\bin\Debug\DbUpRunner.pdb
-C:\Users\Jacob\OneDrive\Grad School\CS6920-PROJECT II\Gradebook\Gradebook\DbUpRunner\bin\Debug\DbUp.dll
-C:\Users\Jacob\OneDrive\Grad School\CS6920-PROJECT II\Gradebook\Gradebook\DbUpRunner\bin\Debug\DbUp.pdb
-C:\Users\Jacob\OneDrive\Grad School\CS6920-PROJECT II\Gradebook\Gradebook\DbUpRunner\bin\Debug\DbUp.xml
-C:\Users\Jacob\OneDrive\Grad School\CS6920-PROJECT II\Gradebook\Gradebook\DbUpRunner\obj\Debug\DbUpRunner.csprojResolveAssemblyReference.cache
-C:\Users\Jacob\OneDrive\Grad School\CS6920-PROJECT II\Gradebook\Gradebook\DbUpRunner\obj\Debug\DbUpRunner.exe
-C:\Users\Jacob\OneDrive\Grad School\CS6920-PROJECT II\Gradebook\Gradebook\DbUpRunner\obj\Debug\DbUpRunner.pdb
