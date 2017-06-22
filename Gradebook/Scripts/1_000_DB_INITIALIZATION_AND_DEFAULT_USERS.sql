@@ -1,139 +1,30 @@
-﻿USE [gradebook]
+﻿CREATE TABLE [Admins] ( [adminID] integer PRIMARY KEY AUTOINCREMENT NOT NULL, [personID] integer NOT NULL, [userID] integer , FOREIGN KEY ([personID]) REFERENCES [Persons]([personID]), FOREIGN KEY ([userID]) REFERENCES [Users]([userID]) )
 
-CREATE TABLE [dbo].[Admins](
-	[adminID] [int] IDENTITY(1,1) NOT NULL,
-	[personID] [int] NOT NULL,
-	[userID] [int] NULL,
- CONSTRAINT [PK_Admins] PRIMARY KEY CLUSTERED 
-(
-	[adminID] ASC
-))
+CREATE TABLE [Assignments] ( [assignmentID] integer PRIMARY KEY AUTOINCREMENT NOT NULL, [categoryID] integer, [name] varchar(50) NOT NULL COLLATE NOCASE, [description] varchar(50) NOT NULL COLLATE NOCASE, [assignedDate] datetime NOT NULL COLLATE NOCASE, [dueDate] datetime NOT NULL COLLATE NOCASE, [possiblePoints] integer NOT NULL , FOREIGN KEY ([categoryID]) REFERENCES [Categories]([categoryID]) )
 
-CREATE TABLE [dbo].[Assignments](
-	[assignmentID] [int] IDENTITY(1,1) NOT NULL,
-	[categoryID] [int] NULL,
-	[name] [varchar](50) NOT NULL,
-	[description] [varchar](50) NOT NULL,
-	[assignedDate] [date] NOT NULL,
-	[dueDate] [date] NOT NULL,
-	[possiblePoints] [int] NOT NULL,
- CONSTRAINT [PK_Assignments_1] PRIMARY KEY CLUSTERED 
-(
-	[assignmentID] ASC
-))
+CREATE TABLE [Categories] ( [categoryID] integer PRIMARY KEY AUTOINCREMENT NOT NULL, [taughtCourseID] integer, [name] varchar(50) NOT NULL COLLATE NOCASE, [weight] integer NOT NULL , FOREIGN KEY ([taughtCourseID]) REFERENCES [TaughtCourses]([taughtCourseID]) )
 
+CREATE TABLE [Courses] ( [courseID] integer PRIMARY KEY AUTOINCREMENT NOT NULL, [creditID] integer, [name] varchar(50) NOT NULL COLLATE NOCASE, [description] varchar(50) NOT NULL COLLATE NOCASE , FOREIGN KEY ([creditID]) REFERENCES [Credits]([creditID]) )
 
-CREATE TABLE [dbo].[Categories](
-	[categoryID] [int] IDENTITY(1,1) NOT NULL,
-	[taughtCourseID] [int] NULL,
-	[name] [varchar](50) NOT NULL,
-	[weight] [int] NOT NULL,
- CONSTRAINT [PK_Categories] PRIMARY KEY CLUSTERED 
-(
-	[categoryID] ASC
-))
+CREATE TABLE [Credits] ( [creditID] integer PRIMARY KEY AUTOINCREMENT NOT NULL, [type] varchar(50) NOT NULL COLLATE NOCASE, [months] integer NOT NULL )
 
+CREATE TABLE [Grades] ( [gradeID] integer PRIMARY KEY AUTOINCREMENT NOT NULL, [registeredStudentID] integer NOT NULL, [assignmentID] integer NOT NULL, [actualPoints] integer NOT NULL, [comment] varchar(50) NOT NULL COLLATE NOCASE , FOREIGN KEY ([registeredStudentID]) REFERENCES [RegisteredStudents]([registeredStudentID]), FOREIGN KEY ([assignmentID]) REFERENCES [Assignments]([assignmentID]) )
 
-CREATE TABLE [dbo].[Courses](
-	[courseID] [int] IDENTITY(1,1) NOT NULL,
-	[creditID] [int] NULL,
-	[name] [varchar](50) NOT NULL,
-	[description] [varchar](50) NOT NULL,
- CONSTRAINT [PK_Courses] PRIMARY KEY CLUSTERED 
-(
-	[courseID] ASC
-))
+CREATE TABLE [Persons] ( [personID] integer PRIMARY KEY AUTOINCREMENT NOT NULL, [firstName] varchar(50) NOT NULL COLLATE NOCASE, [lastName] varchar(50) NOT NULL COLLATE NOCASE, [dateOfBirth] datetime COLLATE NOCASE, [street] varchar(50) COLLATE NOCASE, [city] varchar(50) COLLATE NOCASE, [stateCode] char(2) COLLATE NOCASE, [zipCode] char(5) COLLATE NOCASE, [gender] varchar(50) NOT NULL COLLATE NOCASE, [phoneNumber] varchar(50) COLLATE NOCASE, [email] varchar(50) COLLATE NOCASE )
 
-CREATE TABLE [dbo].[Credits](
-	[creditID] [int] IDENTITY(1,1) NOT NULL,
-	[type] [varchar](50) NOT NULL,
-	[months] [int] NOT NULL,
- CONSTRAINT [PK_Divisions] PRIMARY KEY CLUSTERED 
-(
-	[creditID] ASC
-))
+CREATE TABLE [RegisteredStudents] ( [registeredStudentID] integer PRIMARY KEY AUTOINCREMENT NOT NULL, [studentID] integer NOT NULL, [taughtCourseID] integer NOT NULL , FOREIGN KEY ([studentID]) REFERENCES [Students]([studentID]), FOREIGN KEY ([taughtCourseID]) REFERENCES [TaughtCourses]([taughtCourseID]) )
 
-CREATE TABLE [dbo].[Grades](
-	[gradeID] [int] IDENTITY(1,1) NOT NULL,
-	[registeredStudentID] [int] NOT NULL,
-	[assignmentID] [int] NOT NULL,
-	[actualPoints] [int] NOT NULL,
-	[comment] [varchar](50) NOT NULL,
- CONSTRAINT [PK_Grades] PRIMARY KEY CLUSTERED 
-(
-	[gradeID] ASC
-))
+CREATE TABLE [Roles] ( [roleID] integer NOT NULL, [role] varchar(50) NOT NULL COLLATE NOCASE, PRIMARY KEY ([roleID]) )
 
-CREATE TABLE [dbo].[Persons](
-	[personID] [int] IDENTITY(1,1) NOT NULL,
-	[firstName] [varchar](50) NOT NULL,
-	[lastName] [varchar](50) NOT NULL,
-	[dateOfBirth] [date] NULL,
-	[street] [varchar](50) NULL,
-	[city] [varchar](50) NULL,
-	[stateCode] [char](2) NULL,
-	[zipCode] [char](5) NULL,
-	[gender] [varchar](50) NOT NULL,
-	[phoneNumber] [varchar](50) NULL,
-	[email] [varchar](50) NULL,
- CONSTRAINT [PK_Persons] PRIMARY KEY CLUSTERED 
-(
-	[personID] ASC
-))
+CREATE TABLE [Students] ( [studentID] integer PRIMARY KEY AUTOINCREMENT NOT NULL, [personID] integer NOT NULL, [userID] integer , FOREIGN KEY ([personID]) REFERENCES [Persons]([personID]), FOREIGN KEY ([userID]) REFERENCES [Users]([userID]) )
 
-CREATE TABLE [dbo].[RegisteredStudents](
-	[registeredStudentID] [int] IDENTITY(1,1) NOT NULL,
-	[studentID] [int] NOT NULL,
-	[taughtCourseID] [int] NOT NULL,
- CONSTRAINT [PK_RegisteredStudents] PRIMARY KEY CLUSTERED 
-(
-	[registeredStudentID] ASC
-))
+CREATE TABLE [TaughtCourses] ( [taughtCourseID] integer PRIMARY KEY AUTOINCREMENT NOT NULL, [teacherID] integer NOT NULL, [courseID] integer NOT NULL , FOREIGN KEY ([teacherID]) REFERENCES [Teachers]([teacherID]), FOREIGN KEY ([courseID]) REFERENCES [Courses]([courseID]) )
 
-CREATE TABLE [dbo].[Roles](
-	[roleID] [int] NOT NULL,
-	[role] [varchar](50) NOT NULL,
- CONSTRAINT [PK_Roles] PRIMARY KEY CLUSTERED 
-(
-	[roleID] ASC
-))
+CREATE TABLE [Teachers] ( [teacherID] integer PRIMARY KEY AUTOINCREMENT NOT NULL, [personID] integer NOT NULL, [userID] integer , FOREIGN KEY ([personID]) REFERENCES [Persons]([personID]), FOREIGN KEY ([userID]) REFERENCES [Users]([userID]) )
 
-CREATE TABLE [dbo].[Students](
-	[studentID] [int] IDENTITY(1,1) NOT NULL,
-	[personID] [int] NOT NULL,
-	[userID] [int] NULL,
- CONSTRAINT [PK_Students] PRIMARY KEY CLUSTERED 
-(
-	[studentID] ASC
-))
+CREATE TABLE [Users] ( [userID] integer NOT NULL, [userName] varchar(50) NOT NULL COLLATE NOCASE, [password] varchar(64) COLLATE NOCASE, [roleID] integer, [resetPassword] bit NOT NULL DEFAULT 0, PRIMARY KEY ([userID]) , FOREIGN KEY ([roleID]) REFERENCES [Roles]([roleID]) )
 
-CREATE TABLE [dbo].[TaughtCourses](
-	[taughtCourseID] [int] IDENTITY(1,1) NOT NULL,
-	[teacherID] [int] NOT NULL,
-	[courseID] [int] NOT NULL,
- CONSTRAINT [PK_TaughtCourses] PRIMARY KEY CLUSTERED 
-(
-	[taughtCourseID] ASC
-))
-
-CREATE TABLE [dbo].[Teachers](
-	[teacherID] [int] IDENTITY(1,1) NOT NULL,
-	[personID] [int] NOT NULL,
-	[userID] [int] NULL,
- CONSTRAINT [PK_Teachers] PRIMARY KEY CLUSTERED 
-(
-	[teacherID] ASC
-))
-
-CREATE TABLE [dbo].[Users](
-	[userID] [int] NOT NULL,
-	[userName] [varchar](50) NOT NULL,
-	[password] [varchar](64) NULL,
-	[roleID] [int] NULL,
- CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
-(
-	[userID] ASC
-))
+CREATE INDEX [Assignments_IX_Assignments] ON [Assignments] ([assignmentID] DESC)
 
 
 SET IDENTITY_INSERT [dbo].[Admins] ON 
