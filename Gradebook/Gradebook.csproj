@@ -216,13 +216,7 @@
     <None Include="Resources\Trophy.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Scripts\1_001_ADD_RESET_PASSWORD_FLAG_TO_USERS.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Scripts\1_000_DB_INITIALIZATION_AND_DEFAULT_USERS.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Scripts\1_002_FORCE_PASSWORD_RESET_ALL_USERS.sql" />
+    <Content Include="Scripts\1_000_DB_INITIALIZATION_WITH_ALL_TABLE_DATA.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
