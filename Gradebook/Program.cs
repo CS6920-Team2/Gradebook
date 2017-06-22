@@ -30,7 +30,7 @@ namespace Gradebook
 
         private static void deployPendingMigrations()
         {
-            var dbFilePath = @"../../Data/Database/Gradebook.sqlite";
+            var dbFilePath = @"../../Data/Database/GradebookDB.sqlite";
             if (!File.Exists(dbFilePath))
             {
                 SQLiteConnection.CreateFile(dbFilePath);
