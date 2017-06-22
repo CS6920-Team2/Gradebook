@@ -3,21 +3,19 @@ SELECT 1;
 PRAGMA foreign_keys=OFF;
 BEGIN TRANSACTION;
 CREATE TABLE [Roles] (
-  [roleID] int AUTOINCREMENT NOT NULL
+  [roleID] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
 , [role] nvarchar(50) NOT NULL
-, CONSTRAINT [PK_Roles] PRIMARY KEY ([roleID])
 );
 CREATE TABLE [Users] (
-  [userID] int AUTOINCREMENT NOT NULL
+  [userID] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
 , [userName] nvarchar(50) NOT NULL
 , [password] nvarchar(100) NULL
-, [roleID] int NULL
+, [roleID] INTEGER NULL
 , [resetPassword] bit DEFAULT 0 NOT NULL
-, CONSTRAINT [PK_Users] PRIMARY KEY ([userID])
 , FOREIGN KEY ([roleID]) REFERENCES [Roles] ([roleID]) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 CREATE TABLE [Persons] (
-  [personID] INTEGER AUTOINCREMENT NOT NULL
+  [personID] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
 , [firstName] nvarchar(50) NOT NULL
 , [lastName] nvarchar(50) NOT NULL
 , [dateOfBirth] datetime NULL
@@ -28,20 +26,19 @@ CREATE TABLE [Persons] (
 , [gender] nvarchar(50) NOT NULL
 , [phoneNumber] nvarchar(50) NULL
 , [email] nvarchar(50) NULL
-, CONSTRAINT [PK_Persons] PRIMARY KEY ([personID])
 );
 CREATE TABLE [Teachers] (
   [teacherID] INTEGER AUTOINCREMENT NOT NULL
-, [personID] int NOT NULL
-, [userID] int NULL
+, [personID] INTEGER NOT NULL
+, [userID] INTEGER NULL
 , CONSTRAINT [PK_Teachers] PRIMARY KEY ([teacherID])
 , FOREIGN KEY ([personID]) REFERENCES [Persons] ([personID]) ON DELETE NO ACTION ON UPDATE NO ACTION
 , FOREIGN KEY ([userID]) REFERENCES [Users] ([userID]) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 CREATE TABLE [Students] (
   [studentID] INTEGER AUTOINCREMENT NOT NULL
-, [personID] int NOT NULL
-, [userID] int NULL
+, [personID] INTEGER NOT NULL
+, [userID] INTEGER NULL
 , CONSTRAINT [PK_Students] PRIMARY KEY ([studentID])
 , FOREIGN KEY ([personID]) REFERENCES [Persons] ([personID]) ON DELETE NO ACTION ON UPDATE NO ACTION
 , FOREIGN KEY ([userID]) REFERENCES [Users] ([userID]) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -49,12 +46,12 @@ CREATE TABLE [Students] (
 CREATE TABLE [Credits] (
   [creditID] INTEGER AUTOINCREMENT NOT NULL
 , [type] nvarchar(50) NOT NULL
-, [months] int NOT NULL
+, [months] INTEGER NOT NULL
 , CONSTRAINT [PK_Divisions] PRIMARY KEY ([creditID])
 );
 CREATE TABLE [Courses] (
   [courseID] INTEGER AUTOINCREMENT NOT NULL
-, [creditID] int NULL
+, [creditID] INTEGER NULL
 , [name] nvarchar(50) NOT NULL
 , [description] nvarchar(50) NOT NULL
 , CONSTRAINT [PK_Courses] PRIMARY KEY ([courseID])
@@ -62,44 +59,44 @@ CREATE TABLE [Courses] (
 );
 CREATE TABLE [TaughtCourses] (
   [taughtCourseID] INTEGER AUTOINCREMENT NOT NULL
-, [teacherID] int NOT NULL
-, [courseID] int NOT NULL
+, [teacherID] INTEGER NOT NULL
+, [courseID] INTEGER NOT NULL
 , CONSTRAINT [PK_TaughtCourses] PRIMARY KEY ([taughtCourseID])
 , FOREIGN KEY ([courseID]) REFERENCES [Courses] ([courseID]) ON DELETE CASCADE ON UPDATE CASCADE
 , FOREIGN KEY ([teacherID]) REFERENCES [Teachers] ([teacherID]) ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE TABLE [RegisteredStudents] (
   [registeredStudentID] INTEGER AUTOINCREMENT NOT NULL
-, [studentID] int NOT NULL
-, [taughtCourseID] int NOT NULL
+, [studentID] INTEGER NOT NULL
+, [taughtCourseID] INTEGER NOT NULL
 , CONSTRAINT [PK_RegisteredStudents] PRIMARY KEY ([registeredStudentID])
 , FOREIGN KEY ([studentID]) REFERENCES [Students] ([studentID]) ON DELETE NO ACTION ON UPDATE NO ACTION
 , FOREIGN KEY ([taughtCourseID]) REFERENCES [TaughtCourses] ([taughtCourseID]) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 CREATE TABLE [Categories] (
   [categoryID] INTEGER AUTOINCREMENT NOT NULL
-, [taughtCourseID] int NULL
+, [taughtCourseID] INTEGER NULL
 , [name] nvarchar(50) NOT NULL
-, [weight] int NOT NULL
+, [weight] INTEGER NOT NULL
 , CONSTRAINT [PK_Categories] PRIMARY KEY ([categoryID])
 , FOREIGN KEY ([taughtCourseID]) REFERENCES [TaughtCourses] ([taughtCourseID]) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 CREATE TABLE [Assignments] (
   [assignmentID] INTEGER AUTOINCREMENT NOT NULL
-, [categoryID] int NULL
+, [categoryID] INTEGER NULL
 , [name] nvarchar(50) NOT NULL
 , [description] nvarchar(50) NOT NULL
 , [assignedDate] datetime NOT NULL
 , [dueDate] datetime NOT NULL
-, [possiblePoints] int NOT NULL
+, [possiblePoints] INTEGER NOT NULL
 , CONSTRAINT [PK_Assignments_1] PRIMARY KEY ([assignmentID])
 , FOREIGN KEY ([categoryID]) REFERENCES [Categories] ([categoryID]) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 CREATE TABLE [Grades] (
   [gradeID] INTEGER AUTOINCREMENT NOT NULL
-, [registeredStudentID] int NOT NULL
-, [assignmentID] int NOT NULL
-, [actualPoints] int NOT NULL
+, [registeredStudentID] INTEGER NOT NULL
+, [assignmentID] INTEGER NOT NULL
+, [actualPoints] INTEGER NOT NULL
 , [comment] nvarchar(50) NOT NULL
 , CONSTRAINT [PK_Grades] PRIMARY KEY ([gradeID])
 , FOREIGN KEY ([assignmentID]) REFERENCES [Assignments] ([assignmentID]) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -107,8 +104,8 @@ CREATE TABLE [Grades] (
 );
 CREATE TABLE [Admins] (
   [adminID] INTEGER AUTOINCREMENT NOT NULL
-, [personID] int NOT NULL
-, [userID] int NULL
+, [personID] INTEGER NOT NULL
+, [userID] INTEGER NULL
 , CONSTRAINT [PK_Admins] PRIMARY KEY ([adminID])
 , FOREIGN KEY ([personID]) REFERENCES [Persons] ([personID]) ON DELETE NO ACTION ON UPDATE NO ACTION
 , FOREIGN KEY ([userID]) REFERENCES [Users] ([userID]) ON DELETE NO ACTION ON UPDATE NO ACTION
