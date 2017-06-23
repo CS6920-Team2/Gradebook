@@ -112,10 +112,14 @@
     <Compile Include="Data\DAO\User.cs" />
     <Compile Include="Data\Factories\ConnectionFactory.cs" />
     <Compile Include="Data\Interfaces\IAssignmentService.cs" />
+    <Compile Include="Data\Interfaces\IPersonService.cs" />
     <Compile Include="Data\Interfaces\IRoleService.cs" />
+    <Compile Include="Data\Interfaces\ITeacherService.cs" />
     <Compile Include="Data\Interfaces\IUserService.cs" />
     <Compile Include="Data\Services\AssignmentService.cs" />
+    <Compile Include="Data\Services\PersonService.cs" />
     <Compile Include="Data\Services\RoleService.cs" />
+    <Compile Include="Data\Services\TeacherService.cs" />
     <Compile Include="Data\Services\UserService.cs" />
     <Compile Include="Data\Utils\FormManager.cs" />
     <Compile Include="Data\Utils\SecurityUtils.cs" />
