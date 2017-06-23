@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Gradebook.Data.DAO;
 
 namespace Gradebook.Controls
 {
@@ -12,6 +13,7 @@ namespace Gradebook.Controls
     {
         private List<String> errors;
         public String SuccessMessage { get; set; }
+        public User currentUser { get; set; }
 
         public Boolean isValid { get; set; }
 
