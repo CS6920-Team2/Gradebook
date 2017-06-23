@@ -103,51 +103,33 @@ CREATE TABLE [Admins] (
 INSERT INTO [Roles] ([roleID],[role]) VALUES (
 1,'Student');
 INSERT INTO [Roles] ([roleID],[role]) VALUES (
-2,'Student');
+2,'Teacher');
 INSERT INTO [Roles] ([roleID],[role]) VALUES (
-3,'Student');
-INSERT INTO [Roles] ([roleID],[role]) VALUES (
-4,'Student');
-INSERT INTO [Roles] ([roleID],[role]) VALUES (
-5,'Student');
-INSERT INTO [Roles] ([roleID],[role]) VALUES (
-6,'Student');
-INSERT INTO [Roles] ([roleID],[role]) VALUES (
-7,'Teacher');
-INSERT INTO [Roles] ([roleID],[role]) VALUES (
-8,'Teacher');
-INSERT INTO [Roles] ([roleID],[role]) VALUES (
-9,'Teacher');
-INSERT INTO [Roles] ([roleID],[role]) VALUES (
-10,'Teacher');
-INSERT INTO [Roles] ([roleID],[role]) VALUES (
-11,'Administrator');
-INSERT INTO [Roles] ([roleID],[role]) VALUES (
-12,'Administrator');
+3,'Administrator');
 INSERT INTO [Users] ([userID],[userName],[password],[roleID],[resetPassword]) VALUES (
 1,'amy.stewart','83FAEACAA189777DC154A43A502A7A73899DDB029C245777E454F1D7C25CA1D2',1,1);
 INSERT INTO [Users] ([userID],[userName],[password],[roleID],[resetPassword]) VALUES (
-2,'brett.jackson','83FAEACAA189777DC154A43A502A7A73899DDB029C245777E454F1D7C25CA1D2',2,1);
+2,'brett.jackson','83FAEACAA189777DC154A43A502A7A73899DDB029C245777E454F1D7C25CA1D2',1,1);
 INSERT INTO [Users] ([userID],[userName],[password],[roleID],[resetPassword]) VALUES (
-3,'marcus.patterson','83FAEACAA189777DC154A43A502A7A73899DDB029C245777E454F1D7C25CA1D2',3,1);
+3,'marcus.patterson','83FAEACAA189777DC154A43A502A7A73899DDB029C245777E454F1D7C25CA1D2',1,1);
 INSERT INTO [Users] ([userID],[userName],[password],[roleID],[resetPassword]) VALUES (
-4,'tammy.mann','83FAEACAA189777DC154A43A502A7A73899DDB029C245777E454F1D7C25CA1D2',4,1);
+4,'tammy.mann','83FAEACAA189777DC154A43A502A7A73899DDB029C245777E454F1D7C25CA1D2',1,1);
 INSERT INTO [Users] ([userID],[userName],[password],[roleID],[resetPassword]) VALUES (
-5,'richard.barnes','83FAEACAA189777DC154A43A502A7A73899DDB029C245777E454F1D7C25CA1D2',5,1);
+5,'richard.barnes','83FAEACAA189777DC154A43A502A7A73899DDB029C245777E454F1D7C25CA1D2',1,1);
 INSERT INTO [Users] ([userID],[userName],[password],[roleID],[resetPassword]) VALUES (
-6,'mercedes.clarkson','83FAEACAA189777DC154A43A502A7A73899DDB029C245777E454F1D7C25CA1D2',6,1);
+6,'mercedes.clarkson','83FAEACAA189777DC154A43A502A7A73899DDB029C245777E454F1D7C25CA1D2',1,1);
 INSERT INTO [Users] ([userID],[userName],[password],[roleID],[resetPassword]) VALUES (
-7,'bob.monroe','83FAEACAA189777DC154A43A502A7A73899DDB029C245777E454F1D7C25CA1D2',7,1);
+7,'bob.monroe','83FAEACAA189777DC154A43A502A7A73899DDB029C245777E454F1D7C25CA1D2',2,1);
 INSERT INTO [Users] ([userID],[userName],[password],[roleID],[resetPassword]) VALUES (
-8,'jason.franks','83FAEACAA189777DC154A43A502A7A73899DDB029C245777E454F1D7C25CA1D2',8,1);
+8,'jason.franks','83FAEACAA189777DC154A43A502A7A73899DDB029C245777E454F1D7C25CA1D2',2,1);
 INSERT INTO [Users] ([userID],[userName],[password],[roleID],[resetPassword]) VALUES (
-9,'lauren.hill','83FAEACAA189777DC154A43A502A7A73899DDB029C245777E454F1D7C25CA1D2',9,1);
+9,'lauren.hill','83FAEACAA189777DC154A43A502A7A73899DDB029C245777E454F1D7C25CA1D2',2,1);
 INSERT INTO [Users] ([userID],[userName],[password],[roleID],[resetPassword]) VALUES (
-10,'peggy.walcott','83FAEACAA189777DC154A43A502A7A73899DDB029C245777E454F1D7C25CA1D2',10,1);
+10,'peggy.walcott','83FAEACAA189777DC154A43A502A7A73899DDB029C245777E454F1D7C25CA1D2',2,1);
 INSERT INTO [Users] ([userID],[userName],[password],[roleID],[resetPassword]) VALUES (
-11,'shawn.carter','83FAEACAA189777DC154A43A502A7A73899DDB029C245777E454F1D7C25CA1D2',11,1);
+11,'shawn.carter','83FAEACAA189777DC154A43A502A7A73899DDB029C245777E454F1D7C25CA1D2',3,1);
 INSERT INTO [Users] ([userID],[userName],[password],[roleID],[resetPassword]) VALUES (
-12,'porsha.gates','83FAEACAA189777DC154A43A502A7A73899DDB029C245777E454F1D7C25CA1D2',12,1);
+12,'porsha.gates','83FAEACAA189777DC154A43A502A7A73899DDB029C245777E454F1D7C25CA1D2',3,1);
 INSERT INTO [Persons] ([personID],[firstName],[lastName],[dateOfBirth],[street],[city],[stateCode],[zipCode],[gender],[phoneNumber],[email]) VALUES (
 1,'Amy','Stewart','2005-02-17 00:00:00.000','4417 Brannon Street','Los Angeles','CA','90017','Female','8053223938','amy.stewart@gmail.com');
 INSERT INTO [Persons] ([personID],[firstName],[lastName],[dateOfBirth],[street],[city],[stateCode],[zipCode],[gender],[phoneNumber],[email]) VALUES (
