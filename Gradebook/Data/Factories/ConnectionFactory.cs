@@ -20,5 +20,14 @@ namespace Gradebook.Data.Factories
 
             return connection;
         }
+
+        // Separate connection for datagridview
+        public static SQLiteConnection GetOpenSQLiteConnection()
+        {
+            var sqlConnection = new SQLiteConnection(ConfigurationManager.AppSettings[AppKeys.DatabaseConnection].ToString());
+            sqlConnection.Open();
+
+            return sqlConnection;
+        }
     }
 }
