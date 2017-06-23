@@ -155,6 +155,7 @@
             this.Controls.Add(this.txtUserName);
             this.Controls.Add(this.pictureBox1);
             this.Name = "LoginView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LoginView";
             this.Load += new System.EventHandler(this.LoginView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

@@ -1,22 +1,20 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
-namespace Gradebook
+namespace Gradebook.View
 {
-    internal class AssignmentsView : Form
+    public partial class AssignmentsView : Form
     {
-        public MainMDI MdiParent { get; set; }
-
-        private void InitializeComponent()
+        public AssignmentsView()
         {
-            this.SuspendLayout();
-            // 
-            // AssignmentsView
-            // 
-            this.ClientSize = new System.Drawing.Size(356, 338);
-            this.Name = "AssignmentsView";
-            this.Text = "Assignments View";
-            this.ResumeLayout(false);
-
+            InitializeComponent();
         }
     }
 }

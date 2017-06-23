@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Gradebook;
 using Gradebook.Data.DAO;
 using Gradebook.Controls;
+using Gradebook.View;
 
 namespace Gradebook
 {
