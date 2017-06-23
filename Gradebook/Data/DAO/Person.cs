@@ -22,19 +22,6 @@ namespace Gradebook.Data.DAO
         public string phoneNumber { get; set; }
         public string email { get; set; }
 
-        // Columns that all users have that aren't from Persons table
-        public string userName { get; set; }
-        public string role { get; set; }
-
-        // Teacher
-        public int teacherID { get; set; }
-
-        // Administrator
-        public int adminID { get; set; }
-
-        // Student
-        public int studentID { get; set; }
-
         public string fullName
         {
             get { return firstName + " " + lastName; }

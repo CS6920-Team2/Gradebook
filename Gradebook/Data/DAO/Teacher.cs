@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Gradebook.Data.DAO
 {
-    class Role
+    public class Teacher : Person
     {
-        public int roleID { get; set; }
-        public string role { get; set; }
+        public int teacherID { get; set; }
     }
 }
