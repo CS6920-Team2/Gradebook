@@ -240,9 +240,9 @@ namespace Gradebook
             if (ActiveMdiChild != null)
                 ActiveMdiChild.Close();
 
-            //_assignmentsView = new AssignmentsView() { MdiParent = this };
-            //_assignmentsView.Show();
-            //this.RemoveChildWindowBorders(_assignmentsView);
+            _assignmentsView = new AssignmentsView() { MdiParent = this };
+            _assignmentsView.Show();
+            this.RemoveChildWindowBorders(_assignmentsView);
         }
 
         /// <summary> Opens the gradebook view form in the MDI while closing all other forms </summary>

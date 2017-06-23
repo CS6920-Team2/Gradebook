@@ -116,6 +116,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="View\AssignmentsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="View\ClassView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,6 +153,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="View\AssignmentsView.resx">
+      <DependentUpon>AssignmentsView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\ClassView.resx">
       <DependentUpon>ClassView.cs</DependentUpon>
     </EmbeddedResource>
