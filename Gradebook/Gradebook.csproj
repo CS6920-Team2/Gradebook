@@ -101,6 +101,7 @@
     <Compile Include="Controls\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Data\DAO\Assignment.cs" />
     <Compile Include="Data\DAO\Category.cs" />
     <Compile Include="Data\DAO\Course.cs" />
     <Compile Include="Data\DAO\Person.cs" />

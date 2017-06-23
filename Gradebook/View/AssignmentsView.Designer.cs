@@ -183,6 +183,7 @@
             this.Controls.Add(this.nameTB);
             this.Controls.Add(this.assignmentName);
             this.Name = "AssignmentsView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Assignments View";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.AssignmentsView_Load);
