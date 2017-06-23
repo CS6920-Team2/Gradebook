@@ -105,11 +105,14 @@
     <Compile Include="Data\DAO\Category.cs" />
     <Compile Include="Data\DAO\Course.cs" />
     <Compile Include="Data\DAO\Person.cs" />
+    <Compile Include="Data\DAO\Role.cs" />
     <Compile Include="Data\DAO\User.cs" />
     <Compile Include="Data\Factories\ConnectionFactory.cs" />
     <Compile Include="Data\Interfaces\IAssignmentService.cs" />
+    <Compile Include="Data\Interfaces\IRoleService.cs" />
     <Compile Include="Data\Interfaces\IUserService.cs" />
     <Compile Include="Data\Services\AssignmentService.cs" />
+    <Compile Include="Data\Services\RoleService.cs" />
     <Compile Include="Data\Services\UserService.cs" />
     <Compile Include="Data\Utils\FormManager.cs" />
     <Compile Include="Data\Utils\SecurityUtils.cs" />
