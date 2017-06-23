@@ -52,6 +52,7 @@ namespace Gradebook
         /// </summary>
         private void ClassView_Load(object sender, EventArgs e)
         {
+            /*
             if (_user.role == "Teacher")
             {
                 cboTeacherName.Hide();
@@ -65,6 +66,7 @@ namespace Gradebook
             textBoxCourseName.Text = _currentCourse.name;
             textBoxCourseDescription.Text = _currentCourse.description;
             this.FillCategories(_currentCourse.taughtCourseID);
+            */
         }
 
         /// <summary> 
