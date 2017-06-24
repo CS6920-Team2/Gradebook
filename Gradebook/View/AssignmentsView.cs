@@ -31,5 +31,22 @@ namespace Gradebook.View
             DataSet ds = assignmentService.CreateDataSet();
             dataGridView1.DataSource = ds.Tables[0];
         }
+
+        private void saveBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1)  // ignore header row
+                return;
+            nameTB.Text = dataGridView1.Rows[e.RowIndex].Cells[2].FormattedValue.ToString();
+            descriptionTB.Text = dataGridView1.Rows[e.RowIndex].Cells[3].FormattedValue.ToString();
+            assignedDatedtp.Value = (DateTime)dataGridView1.Rows[e.RowIndex].Cells[4].Value;
+            dueDatedtp.Value = (DateTime)dataGridView1.Rows[e.RowIndex].Cells[5].Value;
+            possiblePointsTB.Text = dataGridView1.Rows[e.RowIndex].Cells[6].FormattedValue.ToString();
+            categoryCB.Text = dataGridView1.Rows[e.RowIndex].Cells[1].FormattedValue.ToString();
+        }
     }
 }

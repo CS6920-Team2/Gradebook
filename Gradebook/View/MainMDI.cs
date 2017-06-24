@@ -190,10 +190,10 @@ namespace Gradebook
         {
             if (ActiveMdiChild != null)
                 ActiveMdiChild.Close();
-
-            //_assignmentsView = new AssignmentsView() { MdiParent = this };
-            //_assignmentsView.Show();
-            //this.RemoveChildWindowBorders(_assignmentsView);
+            AssignmentsView _assignmentsView;
+            _assignmentsView = new AssignmentsView() { MdiParent = this };
+            _assignmentsView.Show();
+            this.RemoveChildWindowBorders(_assignmentsView);
         }
 
         private void BtnGradebookView_Click(object sender, EventArgs e)
