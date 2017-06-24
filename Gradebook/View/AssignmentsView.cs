@@ -34,7 +34,9 @@ namespace Gradebook.View
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
-
+            bool updated = assignmentService.updateAssignment(3, 3, nameTB.Text, descriptionTB.Text,
+            assignedDatedtp.Value, dueDatedtp.Value, Int32.Parse(possiblePointsTB.Text));
+            dataGridView1.Refresh();
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -47,6 +49,7 @@ namespace Gradebook.View
             dueDatedtp.Value = (DateTime)dataGridView1.Rows[e.RowIndex].Cells[5].Value;
             possiblePointsTB.Text = dataGridView1.Rows[e.RowIndex].Cells[6].FormattedValue.ToString();
             categoryCB.Text = dataGridView1.Rows[e.RowIndex].Cells[1].FormattedValue.ToString();
+
         }
     }
 }

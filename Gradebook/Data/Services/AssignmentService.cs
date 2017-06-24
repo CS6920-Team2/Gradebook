@@ -25,5 +25,21 @@ namespace Gradebook.Data.Services
 
             return ds;
         }
+
+        public bool updateAssignment(int newAssignmentID, int newCategoryID, string newName, string newDescription,
+            DateTime newAssignedDate, DateTime newDueDate, int newPossiblePoints)
+        {
+            int rowsAffected = 0;
+            using (var connection = ConnectionFactory.GetOpenConnection())
+            {
+                rowsAffected = connection.Execute("update Assignments set categoryID = @categoryID, name = @name," +
+                    "description = @description, assignedDate = @assignedDate, dueDate = @dueDate, possiblePoints = @possiblePoints" +
+                    " where assignmentID=@assignmentID",
+                    new { categoryID = newCategoryID, name = newName, description = newDescription,
+                    assignedDate = newAssignedDate, dueDate = newDueDate, possiblePoints = newPossiblePoints,
+                    assignmentID = newAssignmentID});
+            }
+            return rowsAffected > 0;
+        }
     }
 }
