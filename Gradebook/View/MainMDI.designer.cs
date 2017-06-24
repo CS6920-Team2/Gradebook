@@ -38,7 +38,7 @@
             this.leftNav = new System.Windows.Forms.Panel();
             this.lblTaughtCourseID = new System.Windows.Forms.Label();
             this.lblTaughtCourseID1 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblClassInfo = new System.Windows.Forms.Label();
             this.cboCourses = new System.Windows.Forms.ComboBox();
             this.lblWorkIDNumber = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -128,7 +128,7 @@
             // 
             this.leftNav.Controls.Add(this.lblTaughtCourseID);
             this.leftNav.Controls.Add(this.lblTaughtCourseID1);
-            this.leftNav.Controls.Add(this.label5);
+            this.leftNav.Controls.Add(this.lblClassInfo);
             this.leftNav.Controls.Add(this.cboCourses);
             this.leftNav.Controls.Add(this.lblWorkIDNumber);
             this.leftNav.Controls.Add(this.label4);
@@ -166,17 +166,17 @@
             this.lblTaughtCourseID1.TabIndex = 13;
             this.lblTaughtCourseID1.Text = "Taught Course ID:";
             // 
-            // label5
+            // lblClassInfo
             // 
-            this.label5.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label5.Font = new System.Drawing.Font("Rockwell", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label5.Location = new System.Drawing.Point(0, 235);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(205, 73);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Class Information";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblClassInfo.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblClassInfo.Font = new System.Drawing.Font("Rockwell", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblClassInfo.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblClassInfo.Location = new System.Drawing.Point(0, 235);
+            this.lblClassInfo.Name = "lblClassInfo";
+            this.lblClassInfo.Size = new System.Drawing.Size(205, 73);
+            this.lblClassInfo.TabIndex = 12;
+            this.lblClassInfo.Text = "Class Information";
+            this.lblClassInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cboCourses
             // 
@@ -346,7 +346,7 @@
         private System.Windows.Forms.Label lblError;
         private System.Windows.Forms.Label lblWorkIDNumber;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblClassInfo;
         private System.Windows.Forms.ComboBox cboCourses;
         private System.Windows.Forms.Label lblTaughtCourseID;
         private System.Windows.Forms.Label lblTaughtCourseID1;

@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Gradebook.Data.DAO
 {
-    public class Course
+    public class TaughtCourse : Course
     {
+        public int taughtCourseID { get; set; }
+        public int teacherID { get; set; }
         public int courseID { get; set; }
-        public int creditID { get; set; }
-        public string name { get; set; }
-        public string description { get; set; }
     }
 }

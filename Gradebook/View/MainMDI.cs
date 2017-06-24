@@ -23,12 +23,13 @@ namespace Gradebook
         private AdminService adminService;
         private TeacherService teacherService;
         private PersonService personService;
+        private CourseService courseService;
 
         private string role;
         private Person currentPerson;
         private int teacherID;
         private int adminID;
-        private Course currentCourse;
+        private TaughtCourse currentCourse;
 
         public MainMDI()
         {
@@ -37,6 +38,7 @@ namespace Gradebook
             adminService = new AdminService();
             teacherService = new TeacherService();
             personService = new PersonService();
+            courseService = new CourseService();
         }
 
         private void MainMDI_Load(object sender, EventArgs e)
@@ -46,7 +48,7 @@ namespace Gradebook
                 // Keep below methods in real application 
                 this.AssignPerson();
                 this.LoadLeftNav();
-                // this.LoadTopNav();
+                this.AdjustNavForUser();
             }
             catch (Exception ex)
             {
@@ -55,11 +57,8 @@ namespace Gradebook
         }
 
         ////////////////////////////////////////// Load Helpers //////////////////////////////////////////
-
-        /// <summary> This method will pull and assign _user information. </summary>
         private void AssignPerson()
         {
-
             try
             {
                 role = roleService.findRole(currentUser.RoleID);
@@ -93,44 +92,16 @@ namespace Gradebook
             else if (role == "Admin")
                 lblWorkIDNumber.Text = adminID.ToString();
 
-            // Loads in classes for teacher
             if (role == "Teacher")
             {
                 try
                 {
-                    /* Keep code below
-                    * 1-Retrieve list of courses from Courses join Taught Courses: taughtCourseID, Courses.name 
-                    * 2-Set values to comboBox
-                    * 
-                    * Commented items below will replace the fake model objects
-                    */
-
-                    // List<Courses> = CoursesController.GetCoursesByTeacherID(teacherID);
-                    List<Course> courseList = new List<Course>();
-                    Course course1 = new Course()
-                    {
-                        name = "Algebra",
-                        courseID = 1,
-                        description = "Exploring equations and their relation to the coordinate plane.",
-                        taughtCourseID = 1,
-
-                    };
-                    Course course2 = new Course()
-                    {
-                        name = "Geometry",
-                        courseID = 2,
-                        description = "Deals with measurement, points, lines, angles, along with two and three dimensional sufaces.",
-                        taughtCourseID = 4
-                    };
-                    courseList.Add(course1);
-                    courseList.Add(course2);
-
-                    // Keep items below
+                    List<TaughtCourse> courseList = courseService.findCoursesByTeacherID(teacherID);
                     cboCourses.DataSource = courseList;
                     cboCourses.DisplayMember = "name";
                     cboCourses.ValueMember = "taughtCourseID";
                     cboCourses.SelectedIndex = 0;
-                    currentCourse = (Course) cboCourses.SelectedItem;
+                    currentCourse = (TaughtCourse) cboCourses.SelectedItem;
                     lblTaughtCourseID.Text = cboCourses.SelectedValue.ToString();
                 }
                 catch (Exception ex)
@@ -140,9 +111,9 @@ namespace Gradebook
             }
         }
 
-        private void LoadTopNav()
+        private void AdjustNavForUser()
         {
-            if (role == "Admin")
+            if (role == "Administrator")
             {
                 btnAssignmentsView.Visible = false;
                 btnGradebookView.Visible = false;
@@ -150,24 +121,21 @@ namespace Gradebook
                 cboCourses.Visible = false;
                 lblTaughtCourseID.Visible = false;
                 lblTaughtCourseID1.Visible = false;
+                lblClassInfo.Visible = false;
             }  
         }
         ////////////////////////////////////////// Nav Controller Event Triggers  //////////////////////////////////////////
         
-        /// <summary> Opens the class view form in the MDI while closing all other forms </summary>
         private void BtnClassView_Click(object sender, EventArgs e)
         {
-            //var form = FormManager.Current.CreateForm<ClassView>();
-            var form = this;
-            if (ActiveMdiChild != null)
-               ActiveMdiChild.Close();
-
-            form.MdiParent = this;
-            form.Show();
-            this.RemoveChildWindowBorders(form);
+            //if (ActiveMdiChild != null)
+             //   ActiveMdiChild.Close();
+            //ClassView classView;
+            //classView = new ClassView() { MdiParent = this };
+            //classView.Show();
+            //this.RemoveChildWindowBorders(classView);
         }
 
-        /// <summary> Opens the assigments view form in the MDI while closing all other forms </summary>
         private void BtnAssignmentsView_Click(object sender, EventArgs e)
         {
             if (ActiveMdiChild != null)
@@ -210,8 +178,8 @@ namespace Gradebook
 
         private void CboClasses_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            currentCourse = (Course)cboCourses.SelectedItem;
-            lblTaughtCourseID.Text = cboCourses.SelectedValue.ToString();
+            currentCourse = (TaughtCourse)cboCourses.SelectedItem;
+            lblTaughtCourseID.Text = currentCourse.taughtCourseID.ToString();
 
             //if (_classView != null)
             //    this.BtnClassView_Click(null, null);

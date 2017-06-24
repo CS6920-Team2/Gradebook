@@ -196,7 +196,7 @@ namespace Gradebook
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            this.FillCategories(_currentCourse.taughtCourseID);
+            //this.FillCategories(_currentCourse.taughtCourseID);
             lblClassViewError.Text = "";
         }
 
