@@ -32,17 +32,21 @@ namespace Gradebook.View
             dataGridView1.DataSource = ds.Tables[0];
         }
 
-        private void saveBtn_Click(object sender, EventArgs e)
+
+        // Clicking the submit button will complete the transaction of deleting, inserting or updating.
+        private void submitBtn_Click(object sender, EventArgs e)
         {
-            bool updated = assignmentService.updateAssignment(3, 3, nameTB.Text, descriptionTB.Text,
+            bool updated = assignmentService.updateAssignment(Int32.Parse(assignmentIDTB.Text), 3, nameTB.Text, descriptionTB.Text,
             assignedDatedtp.Value, dueDatedtp.Value, Int32.Parse(possiblePointsTB.Text));
-            dataGridView1.Refresh();
+            dataGridView1.Update();
         }
 
+        // Clicking the datagrid selects a row and assigns the values to the textboxes.
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1)  // ignore header row
                 return;
+            assignmentIDTB.Text = dataGridView1.Rows[e.RowIndex].Cells[0].FormattedValue.ToString();
             nameTB.Text = dataGridView1.Rows[e.RowIndex].Cells[2].FormattedValue.ToString();
             descriptionTB.Text = dataGridView1.Rows[e.RowIndex].Cells[3].FormattedValue.ToString();
             assignedDatedtp.Value = (DateTime)dataGridView1.Rows[e.RowIndex].Cells[4].Value;
