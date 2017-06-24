@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Gradebook.Data.DAO
 {
-    public class User
+    public class User : Person
     {
         public int UserID { get; set; }
         public String UserName { get; set; }

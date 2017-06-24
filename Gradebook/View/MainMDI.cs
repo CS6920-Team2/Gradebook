@@ -101,7 +101,7 @@ namespace Gradebook
                     cboCourses.DisplayMember = "name";
                     cboCourses.ValueMember = "taughtCourseID";
                     cboCourses.SelectedIndex = 0;
-                    currentCourse = (TaughtCourse) cboCourses.SelectedItem;
+                    currentCourse = (TaughtCourse)cboCourses.SelectedItem;
                     lblTaughtCourseID.Text = cboCourses.SelectedValue.ToString();
                 }
                 catch (Exception ex)
@@ -122,28 +122,29 @@ namespace Gradebook
                 lblTaughtCourseID.Visible = false;
                 lblTaughtCourseID1.Visible = false;
                 lblClassInfo.Visible = false;
-            }  
+            }
         }
         ////////////////////////////////////////// Nav Controller Event Triggers  //////////////////////////////////////////
-        
+
         private void BtnClassView_Click(object sender, EventArgs e)
         {
-            //if (ActiveMdiChild != null)
-             //   ActiveMdiChild.Close();
-            //ClassView classView;
-            //classView = new ClassView() { MdiParent = this };
-            //classView.Show();
-            //this.RemoveChildWindowBorders(classView);
+            if (ActiveMdiChild != null)
+                ActiveMdiChild.Close();
+
+            ClassView classView = new ClassView(currentPerson, currentCourse, role);
+            classView.MdiParent = this;
+            classView.Show();
+            RemoveChildWindowBorders(classView);
         }
 
         private void BtnAssignmentsView_Click(object sender, EventArgs e)
         {
             if (ActiveMdiChild != null)
                 ActiveMdiChild.Close();
-            AssignmentsView _assignmentsView;
-            _assignmentsView = new AssignmentsView() { MdiParent = this };
-            _assignmentsView.Show();
-            this.RemoveChildWindowBorders(_assignmentsView);
+            AssignmentsView assignmentsView;
+            assignmentsView = new AssignmentsView() { MdiParent = this };
+            assignmentsView.Show();
+            this.RemoveChildWindowBorders(assignmentsView);
         }
 
         private void BtnGradebookView_Click(object sender, EventArgs e)
@@ -168,12 +169,9 @@ namespace Gradebook
 
         private void BtnLogout_Click(object sender, EventArgs e)
         {
-            //if(_loginWindow != null)
-            //{
-             //   this._loginWindow.Visibility = Visibility.Visible;
-            //}
-            
-            //this.Close();
+            var form = FormManager.Current.CreateForm<LoginView>();
+            form.Show();
+            this.Close();
         }
 
         private void CboClasses_SelectionChangeCommitted(object sender, EventArgs e)
@@ -181,8 +179,10 @@ namespace Gradebook
             currentCourse = (TaughtCourse)cboCourses.SelectedItem;
             lblTaughtCourseID.Text = currentCourse.taughtCourseID.ToString();
 
-            //if (_classView != null)
-            //    this.BtnClassView_Click(null, null);
+            if (ActiveMdiChild == null)
+                return;
+            else if (ActiveMdiChild is ClassView)
+                this.BtnClassView_Click(null, null);
             //else if (_assignmentsView != null)
             //    this.BtnAssignmentsView_Click(null, null);
             //else if (_gradebookView != null)
@@ -190,20 +190,20 @@ namespace Gradebook
             //else if (_reportsView != null)
             //    this.BtnReportsView_Click(null, null);
         }
-        
+
 
         ////////////////////////////////////////// Form and Window Managers //////////////////////////////////////////
 
         private void RemoveChildWindowBorders(Form form)
         {
             form.FormBorderStyle = FormBorderStyle.None;
-            form.ControlBox  = false;
+            form.ControlBox = false;
             form.MaximizeBox = false;
             form.MinimizeBox = false;
-            form.ShowIcon    = false;
-            form.Text        = "";
-            form.Dock        = DockStyle.Fill;
+            form.ShowIcon = false;
+            form.Text = "";
+            form.Dock = DockStyle.Fill;
         }
-        
+
     }
 }

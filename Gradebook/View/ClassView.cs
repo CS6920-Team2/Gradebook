@@ -9,35 +9,37 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
+using Gradebook.Controls;
 
 namespace Gradebook
 {
-    public partial class ClassView : Form
+    public partial class ClassView : BaseForm
     {
-        private Person _user;
-        private Course _currentCourse;
-        private List<Category> _categoriesList;
-        private int _totalWeight;
-        private List<TextBox> _weightBoxes;
-
-        public ClassView(Person user, Course currentCourse)
+        private Person currentPerson;
+        private TaughtCourse currentCourse;
+        private string role;
+        private List<Category> categoriesList;
+        private int totalWeight;
+        private List<TextBox> weightBoxes;
+        public ClassView(Person person, TaughtCourse course, string personRole)
         {
             InitializeComponent();
-            _user = user;
-            _currentCourse = currentCourse;
+            currentPerson = person;
+            currentCourse = course;
+            role = personRole;
 
-            _weightBoxes = new List<TextBox>();
-            _weightBoxes.Add(textBoxExams);
-            _weightBoxes.Add(textBoxHomework);
-            _weightBoxes.Add(textBoxParticipation);
-            _weightBoxes.Add(textBoxProjects);
-            _weightBoxes.Add(textBoxQuizzes);
+            weightBoxes = new List<TextBox>();
+            weightBoxes.Add(textBoxExams);
+            weightBoxes.Add(textBoxHomework);
+            weightBoxes.Add(textBoxParticipation);
+            weightBoxes.Add(textBoxProjects);
+            weightBoxes.Add(textBoxQuizzes);
         }
 
         /// <summary>
         /// On load the following should happen: 
         /// 1- Teacher name should be placed in: textBoxTeacher
-        /// Gather from user
+        /// Gather from currentPerson
         /// 
         /// 2- Course name should be placed in: textBoxCoureName
         /// Gather from courses combo box in left nav
@@ -52,21 +54,21 @@ namespace Gradebook
         /// </summary>
         private void ClassView_Load(object sender, EventArgs e)
         {
-            /*
-            if (_user.role == "Teacher")
+
+            if (role.Equals("Teacher"))
             {
                 cboTeacherName.Hide();
-                textBoxTeacherName.Text = _user.fullName;
+                textBoxTeacherName.Text = currentPerson.fullName;
             }
-            else if (_user.role == "Admin")
+            else if (role.Equals("Admin"))
             {
                 textBoxTeacherName.Hide();
                 // Get list of teachers and add to comboBox
             }
-            textBoxCourseName.Text = _currentCourse.name;
-            textBoxCourseDescription.Text = _currentCourse.description;
-            this.FillCategories(_currentCourse.taughtCourseID);
-            */
+            textBoxCourseName.Text = currentCourse.name;
+            textBoxCourseDescription.Text = currentCourse.description;
+            this.FillCategories(currentCourse.taughtCourseID);
+
         }
 
         /// <summary> 
@@ -75,10 +77,11 @@ namespace Gradebook
         /// </summary>
         private void FillCategories(int taughtCourseID)
         {
-            try
+            /*
+             * try
             {
-                // _categoryList = CoursesController.GetCategoriesByTaughtCourseID(_currentCourse.courseID)
-                _categoriesList = new List<Category>();
+                // _categoryList = CoursesController.GetCategoriesByTaughtCourseID(currentCourse.courseID)
+                categoriesList = new List<Category>();
                 Category exams = new Category()
                 {
                     categoryID = 1,
@@ -109,14 +112,14 @@ namespace Gradebook
                     name = "Quizzes",
                     weight = 20
                 };
-                _categoriesList.Add(exams);
-                _categoriesList.Add(homework);
-                _categoriesList.Add(participation);
-                _categoriesList.Add(projects);
-                _categoriesList.Add(quizzes);
+                categoriesList.Add(exams);
+                categoriesList.Add(homework);
+                categoriesList.Add(participation);
+                categoriesList.Add(projects);
+                categoriesList.Add(quizzes);
 
                 // Keep the code below 
-                foreach (Category category in _categoriesList)
+                foreach (Category category in categoriesList)
                 {
                     if (category.name == "Exams")
                         textBoxExams.Text = category.weight.ToString();
@@ -134,18 +137,22 @@ namespace Gradebook
             {
                 lblClassViewError.Text = "Error loading categories.";
             }
+            */
         }
 
         /// <summary> Adds all the category weights together </summary>
         private void TotalCategories(List<TextBox> weightBoxes)
         {
-            _totalWeight = 0;
+            /*
+             * 
+            totalWeight = 0;
             foreach (TextBox weight in weightBoxes)
             {
-                _totalWeight += TextBoxToInt(weight);
+                totalWeight += TextBoxToInt(weight);
             }
 
-            lblTotal.Text = _totalWeight + "%";
+            lblTotal.Text = totalWeight + "%";
+            */
         }
 
         private int TextBoxToInt(TextBox textBox)
@@ -173,8 +180,8 @@ namespace Gradebook
         /// <summary> Changes totals when weight text boxes are changed. </summary>
         private void TextBox_TextChanged(object sender, EventArgs e)
         {
-            if (_weightBoxes != null)
-                this.TotalCategories(_weightBoxes);
+            if (weightBoxes != null)
+                this.TotalCategories(weightBoxes);
         }
 
 
@@ -191,28 +198,28 @@ namespace Gradebook
         }
         private void AllowOnlyNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
-            this.AllowOnlyNumber(e);
+            AllowOnlyNumber(e);
         }
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            //this.FillCategories(_currentCourse.taughtCourseID);
+            //this.FillCategories(currentCourse.taughtCourseID);
             lblClassViewError.Text = "";
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (_totalWeight != 100)
+            if (totalWeight != 100)
             {
                 lblClassViewError.Text = "Totals must be equal 100%";
                 return;
             }
-            
+
             // Updates DB with new categories
             try
             {
 
-                foreach (Category category in _categoriesList)
+                foreach (Category category in categoriesList)
                 {
                     if (category.name == "Exams")
                         category.weight = TextBoxToInt(textBoxExams);
@@ -232,7 +239,7 @@ namespace Gradebook
                         lblClassViewError.Text = "Failed to update category " + category.name;
                         return;
                     }
-                        
+
                 }
             }
             catch (Exception ex)
