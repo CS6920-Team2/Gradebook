@@ -37,12 +37,12 @@
             this.btnLogout = new System.Windows.Forms.ToolStripButton();
             this.leftNav = new System.Windows.Forms.Panel();
             this.lblTaughtCourseID = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblTaughtCourseID1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.cboCourses = new System.Windows.Forms.ComboBox();
-            this.lblRoleIDNumber = new System.Windows.Forms.Label();
+            this.lblWorkIDNumber = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.lblErrorMessage = new System.Windows.Forms.Label();
+            this.lblError = new System.Windows.Forms.Label();
             this.lblIDNumber = new System.Windows.Forms.Label();
             this.lblRole = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
@@ -127,12 +127,12 @@
             // leftNav
             // 
             this.leftNav.Controls.Add(this.lblTaughtCourseID);
-            this.leftNav.Controls.Add(this.label7);
+            this.leftNav.Controls.Add(this.lblTaughtCourseID1);
             this.leftNav.Controls.Add(this.label5);
             this.leftNav.Controls.Add(this.cboCourses);
-            this.leftNav.Controls.Add(this.lblRoleIDNumber);
+            this.leftNav.Controls.Add(this.lblWorkIDNumber);
             this.leftNav.Controls.Add(this.label4);
-            this.leftNav.Controls.Add(this.lblErrorMessage);
+            this.leftNav.Controls.Add(this.lblError);
             this.leftNav.Controls.Add(this.lblIDNumber);
             this.leftNav.Controls.Add(this.lblRole);
             this.leftNav.Controls.Add(this.lblName);
@@ -156,15 +156,15 @@
             this.lblTaughtCourseID.TabIndex = 14;
             this.lblTaughtCourseID.Text = "lblTaughtCourseID";
             // 
-            // label7
+            // lblTaughtCourseID1
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(7, 353);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(111, 17);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "Taught Course ID:";
+            this.lblTaughtCourseID1.AutoSize = true;
+            this.lblTaughtCourseID1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTaughtCourseID1.Location = new System.Drawing.Point(7, 353);
+            this.lblTaughtCourseID1.Name = "lblTaughtCourseID1";
+            this.lblTaughtCourseID1.Size = new System.Drawing.Size(111, 17);
+            this.lblTaughtCourseID1.TabIndex = 13;
+            this.lblTaughtCourseID1.Text = "Taught Course ID:";
             // 
             // label5
             // 
@@ -188,15 +188,15 @@
             this.cboCourses.TabIndex = 11;
             this.cboCourses.SelectionChangeCommitted += new System.EventHandler(this.CboClasses_SelectionChangeCommitted);
             // 
-            // lblRoleIDNumber
+            // lblWorkIDNumber
             // 
-            this.lblRoleIDNumber.AutoSize = true;
-            this.lblRoleIDNumber.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRoleIDNumber.Location = new System.Drawing.Point(86, 144);
-            this.lblRoleIDNumber.Name = "lblRoleIDNumber";
-            this.lblRoleIDNumber.Size = new System.Drawing.Size(108, 17);
-            this.lblRoleIDNumber.TabIndex = 10;
-            this.lblRoleIDNumber.Text = "lblRoleIDNumber";
+            this.lblWorkIDNumber.AutoSize = true;
+            this.lblWorkIDNumber.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWorkIDNumber.Location = new System.Drawing.Point(86, 144);
+            this.lblWorkIDNumber.Name = "lblWorkIDNumber";
+            this.lblWorkIDNumber.Size = new System.Drawing.Size(112, 17);
+            this.lblWorkIDNumber.TabIndex = 10;
+            this.lblWorkIDNumber.Text = "lblWorkIDNumber";
             // 
             // label4
             // 
@@ -204,18 +204,18 @@
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(7, 144);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 17);
+            this.label4.Size = new System.Drawing.Size(57, 17);
             this.label4.TabIndex = 9;
-            this.label4.Text = "Role ID:";
+            this.label4.Text = "Work ID:";
             // 
-            // lblErrorMessage
+            // lblError
             // 
-            this.lblErrorMessage.AutoSize = true;
-            this.lblErrorMessage.ForeColor = System.Drawing.Color.Red;
-            this.lblErrorMessage.Location = new System.Drawing.Point(7, 202);
-            this.lblErrorMessage.Name = "lblErrorMessage";
-            this.lblErrorMessage.Size = new System.Drawing.Size(0, 13);
-            this.lblErrorMessage.TabIndex = 8;
+            this.lblError.AutoSize = true;
+            this.lblError.ForeColor = System.Drawing.Color.Red;
+            this.lblError.Location = new System.Drawing.Point(7, 202);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(0, 13);
+            this.lblError.TabIndex = 8;
             // 
             // lblIDNumber
             // 
@@ -343,12 +343,12 @@
         private System.Windows.Forms.Label lblRole;
         private System.Windows.Forms.ToolStripButton btnReportsView;
         private System.Windows.Forms.PictureBox gradebookLogo;
-        private System.Windows.Forms.Label lblErrorMessage;
-        private System.Windows.Forms.Label lblRoleIDNumber;
+        private System.Windows.Forms.Label lblError;
+        private System.Windows.Forms.Label lblWorkIDNumber;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cboCourses;
         private System.Windows.Forms.Label lblTaughtCourseID;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblTaughtCourseID1;
     }
 }

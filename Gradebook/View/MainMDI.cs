@@ -20,18 +20,21 @@ namespace Gradebook
     public partial class MainMDI : BaseForm
     {
         private RoleService roleService;
+        private AdminService adminService;
         private TeacherService teacherService;
         private PersonService personService;
 
         private string role;
-        private Teacher currentTeacher;
-        private Admin currentAdmin;
+        private Person currentPerson;
+        private int teacherID;
+        private int adminID;
         private Course currentCourse;
 
         public MainMDI()
         {
             InitializeComponent();
             roleService = new RoleService();
+            adminService = new AdminService();
             teacherService = new TeacherService();
             personService = new PersonService();
         }
@@ -42,12 +45,12 @@ namespace Gradebook
             {
                 // Keep below methods in real application 
                 this.AssignPerson();
-                // this.LoadLeftNav();
+                this.LoadLeftNav();
                 // this.LoadTopNav();
             }
             catch (Exception ex)
             {
-                lblErrorMessage.Text = "Error loading navigation bars.";
+                lblError.Text = "Error loading navigation bars.";
             }
         }
 
@@ -59,41 +62,19 @@ namespace Gradebook
 
             try
             {
-                // Returns from Users joined with Roles: userID, userName, role
                 role = roleService.findRole(currentUser.RoleID);
 
                 if (role.Equals("Teacher"))
                 {
                     Teacher tempTeacher = teacherService.getTeacherByUserID(currentUser.UserID);
-                    currentTeacher = (Teacher)personService.getPersonByPersonID(tempTeacher.personID);
-                    currentTeacher.teacherID = tempTeacher.teacherID;
-                    /* Returns from Teachers table: teacherID, PersonID
-                     * 
-                     * Person tempUser = TeacherController.GetTeacherByUserID(userID);
-                     * _user.teacherID = tempUser.teacherID;
-                     * _user.personID = tempUser.personID;
-                     * 
-                     * Returns from Persons table: firstName, lastName (can add more as we see needed)
-                     * 
-                     * tempUser = PersonsController.GetPersonByPersonID(personID);
-                     * _user.firstName = tempUser.firstName;
-                     * _user.lastName = tempUser.lastName;
-                     */
+                    currentPerson = personService.getPersonByPersonID(tempTeacher.personID);
+                    teacherID = tempTeacher.teacherID;
                 }
                 else if (role.Equals("Administrator"))
                 {
-                    /* Returns from Administrators table: adminID, PersonID
-                     * 
-                     * Person tempUser = AdminController.GetAdminByUserID(userID);
-                     * _user.adminID = tempUser.adminID;
-                     * _user.personID = tempUser.personID;
-                     * 
-                     * Returns from Persons table: firstName, lastName (can add more as we see needed)
-                     * tempUser = PersonsController.GetPersonByPersonID(personID);
-                     * _user.firstName = tempUser.firstName;
-                     * _user.lastName = tempUser.lastName;
-                     */
-
+                    Admin tempAdmin = adminService.getAdminByUserID(currentUser.UserID);
+                    currentPerson = personService.getPersonByPersonID(tempAdmin.personID);
+                    adminID = tempAdmin.adminID;
                 }
             }
             catch (Exception ex)
@@ -104,15 +85,14 @@ namespace Gradebook
 
         private void LoadLeftNav()
         {
-            /* Loads in person information
-            lblName.Text = currentPerson.lastName + ", " + currentPerson.firstName;
-            lblRole.Text = currentPerson.role;
+            lblName.Text = currentPerson.fullName;
+            lblRole.Text = role;
             lblIDNumber.Text = currentPerson.personID.ToString();
-            if (currentPerson.role == "Teacher")
-                lblRoleIDNumber.Text = currentPerson.teacherID.ToString();
-            else if (currentPerson.role == "Admin")
-                lblRoleIDNumber.Text = currentPerson.adminID.ToString();
-            */
+            if (role == "Teacher")
+                lblWorkIDNumber.Text = teacherID.ToString();
+            else if (role == "Admin")
+                lblWorkIDNumber.Text = adminID.ToString();
+
             // Loads in classes for teacher
             if (role == "Teacher")
             {
@@ -168,6 +148,8 @@ namespace Gradebook
                 btnGradebookView.Visible = false;
                 btnReportsView.Visible = false;
                 cboCourses.Visible = false;
+                lblTaughtCourseID.Visible = false;
+                lblTaughtCourseID1.Visible = false;
             }  
         }
         ////////////////////////////////////////// Nav Controller Event Triggers  //////////////////////////////////////////
