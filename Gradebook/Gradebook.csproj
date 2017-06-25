@@ -134,6 +134,7 @@
     <Compile Include="Data\Services\UserService.cs" />
     <Compile Include="Data\Utils\FormManager.cs" />
     <Compile Include="Data\Utils\SecurityUtils.cs" />
+    <Compile Include="Data\Utils\Validator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

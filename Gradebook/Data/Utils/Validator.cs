@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Forms;
 
 namespace Gradebook.Data.Utils
 {
@@ -34,7 +34,7 @@ namespace Gradebook.Data.Utils
                 TextBox textBox = (TextBox)control;
                 if (string.IsNullOrWhiteSpace(textBox.Text))
                 {
-                    MessageBox.Show(textBox.Tag.ToString() + " is a required field.", Title);
+                    System.Windows.Forms.MessageBox.Show(textBox.Tag.ToString() + " is a required field.", Title);
                     textBox.Focus();
                     return false;
                 }
@@ -48,7 +48,7 @@ namespace Gradebook.Data.Utils
                 ComboBox comboBox = (ComboBox)control;
                 if (comboBox.SelectedIndex == -1)
                 {
-                    MessageBox.Show(comboBox.Tag.ToString() + " is a required field.", Title);
+                    System.Windows.Forms.MessageBox.Show(comboBox.Tag.ToString() + " is a required field.", Title);
                     comboBox.Focus();
                     return false;
                 }

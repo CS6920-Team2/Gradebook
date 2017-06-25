@@ -1,6 +1,7 @@
 ﻿using Gradebook.Controls;
 using Gradebook.Data.Factories;
 using Gradebook.Data.Services;
+using Gradebook.Data.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,14 +39,19 @@ namespace Gradebook.View
         // Clicking the submit button will complete the transaction of deleting, inserting or updating.
         private void submitBtn_Click(object sender, EventArgs e)
         {
-            bool updated = assignmentService.updateAssignment(Int32.Parse(assignmentIDTB.Text), 3, nameTB.Text, descriptionTB.Text,
-            assignedDatedtp.Value, dueDatedtp.Value, Int32.Parse(possiblePointsTB.Text));
-            dataGridView1.Update();
+            if (isValidData() == true)
+            {
+
+                bool updated = assignmentService.updateAssignment(Int32.Parse(assignmentIDTB.Text), 3, nameTB.Text, descriptionTB.Text,
+                assignedDatedtp.Value, dueDatedtp.Value, Int32.Parse(possiblePointsTB.Text));
+                dataGridView1.Update();
+            }
         }
 
         // Clicking the datagrid selects a row and assigns the values to the textboxes.
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            controlsEnabled();
             if (e.RowIndex == -1)  // ignore header row
                 return;
             assignmentIDTB.Text = dataGridView1.Rows[e.RowIndex].Cells[0].FormattedValue.ToString();
@@ -65,7 +71,7 @@ namespace Gradebook.View
 
         private void modifyBtn_Click(object sender, EventArgs e)
         {
-            clickModify();
+                clickModify();
         }
 
         private void clickAdd()
@@ -91,6 +97,7 @@ namespace Gradebook.View
 
         private void clickModify()
         {
+            controlsDisabled();
             addBtn.Enabled = true;
             addBtn.ForeColor = Color.Red;
             modifyBtn.Enabled = false;
@@ -100,7 +107,42 @@ namespace Gradebook.View
             dataGridView1.ForeColor = Color.Black;
             dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
             dataGridView1.EnableHeadersVisualStyles = true;
-            dataGridView1.ReadOnly = false;
+        }
+
+        private bool isValidData()
+        {
+            if (Validator.IsPresent(nameTB) &&
+                Validator.IsPresent(descriptionTB) &&
+                Validator.IsPresent(categoryCB) &&
+                Validator.IsPresent(possiblePointsTB))
+            {
+                return true;
+
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void controlsDisabled()
+        {
+            nameTB.Enabled = false;
+            descriptionTB.Enabled = false;
+            assignedDatedtp.Enabled = false;
+            dueDatedtp.Enabled = false;
+            categoryCB.Enabled = false;
+            possiblePointsTB.Enabled = false;
+        }
+
+        private void controlsEnabled()
+        {
+            nameTB.Enabled = true;
+            descriptionTB.Enabled = true;
+            assignedDatedtp.Enabled = true;
+            dueDatedtp.Enabled = true;
+            categoryCB.Enabled = true;
+            possiblePointsTB.Enabled = true;
         }
     }
 }

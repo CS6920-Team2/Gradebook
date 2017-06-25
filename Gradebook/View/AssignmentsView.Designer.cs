@@ -55,6 +55,7 @@
             this.nameTB.Name = "nameTB";
             this.nameTB.Size = new System.Drawing.Size(186, 20);
             this.nameTB.TabIndex = 3;
+            this.nameTB.Tag = "Name";
             // 
             // assignmentName
             // 
@@ -72,6 +73,7 @@
             this.descriptionTB.Name = "descriptionTB";
             this.descriptionTB.Size = new System.Drawing.Size(186, 76);
             this.descriptionTB.TabIndex = 5;
+            this.descriptionTB.Tag = "Description";
             // 
             // description
             // 
@@ -120,6 +122,7 @@
             this.possiblePointsTB.Name = "possiblePointsTB";
             this.possiblePointsTB.Size = new System.Drawing.Size(202, 20);
             this.possiblePointsTB.TabIndex = 12;
+            this.possiblePointsTB.Tag = "Points Possible";
             // 
             // possiblePoints
             // 
@@ -147,6 +150,7 @@
             this.categoryCB.Name = "categoryCB";
             this.categoryCB.Size = new System.Drawing.Size(202, 21);
             this.categoryCB.TabIndex = 14;
+            this.categoryCB.Tag = "Category";
             // 
             // dataGridView1
             // 
