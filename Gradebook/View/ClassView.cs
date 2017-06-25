@@ -21,12 +21,9 @@ namespace Gradebook
         private List<Category> categoriesList;
         private int totalWeight;
         private List<TextBox> weightBoxes;
-        public ClassView(Person person, TaughtCourse course, string personRole)
+        public ClassView()
         {
             InitializeComponent();
-            currentPerson = person;
-            currentCourse = course;
-            role = personRole;
 
             weightBoxes = new List<TextBox>();
             weightBoxes.Add(textBoxExams);
@@ -54,6 +51,9 @@ namespace Gradebook
         /// </summary>
         private void ClassView_Load(object sender, EventArgs e)
         {
+            role = MainView.role;
+            currentPerson = MainView.currentPerson;
+            currentCourse = MainView.currentCourse;
 
             if (role.Equals("Teacher"))
             {

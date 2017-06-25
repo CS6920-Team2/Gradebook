@@ -25,11 +25,12 @@ namespace Gradebook
         private PersonService personService;
         private CourseService courseService;
 
-        private string role;
-        private Person currentPerson;
+        public static string role;
+        public static Person currentPerson;
+        public static TaughtCourse currentCourse;
         private int teacherID;
         private int adminID;
-        private TaughtCourse currentCourse;
+        
 
         public MainView()
         {
@@ -113,7 +114,7 @@ namespace Gradebook
 
         private void AdjustNavForUser()
         {
-            if (role == "Administrator")
+            if (role == "Administrator" || role == "Student")
             {
                 btnAssignmentsView.Visible = false;
                 btnGradebookView.Visible = false;
@@ -123,31 +124,20 @@ namespace Gradebook
                 lblTaughtCourseID1.Visible = false;
                 lblClassInfo.Visible = false;
             }
+
+            if (role == "Student")
+                btnClassView.Visible = false;
         }
         ////////////////////////////////////////// Nav Controller Event Triggers  //////////////////////////////////////////
 
         private void BtnClassView_Click(object sender, EventArgs e)
         {
-            if (ActiveMdiChild != null)
-                ActiveMdiChild.Close();
-
-            ClassView classView = new ClassView(currentPerson, currentCourse, role);
-            classView.MdiParent = this;
-            classView.Show();
-            RemoveChildWindowBorders(classView);
+            FormManager.Current.UpdateMainViewContent<ClassView>();
         }
 
         private void BtnAssignmentsView_Click(object sender, EventArgs e)
         {
-
             FormManager.Current.UpdateMainViewContent<AssignmentsView>();
-        }
-
-        public T UpdatePanelView<T>() where T : Form, new() {
-            var form = FormManager.Current.CreateForm<T>();
-            form.MdiParent = this;
-            this.contentPanel.Controls.Add(form);
-            return null;
         }
 
         private void BtnGradebookView_Click(object sender, EventArgs e)
@@ -157,12 +147,15 @@ namespace Gradebook
 
         private void BtnReportsView_Click(object sender, EventArgs e)
         {
-            if (ActiveMdiChild != null)
-                ActiveMdiChild.Close();
+            //FormManager.Current.UpdateMainViewContent<GradebookView>();
+        }
 
-            //_reportsView = new ReportsView() { MdiParent = this };
-            //_reportsView.Show();
-            //this.RemoveChildWindowBorders(_reportsView);
+        public T UpdatePanelView<T>() where T : Form, new()
+        {
+            var form = FormManager.Current.CreateForm<T>();
+            form.MdiParent = this;
+            this.contentPanel.Controls.Add(form);
+            return null;
         }
 
         public void updateContentPanel(Form form)
@@ -182,9 +175,10 @@ namespace Gradebook
 
         private void BtnLogout_Click(object sender, EventArgs e)
         {
-            var form = FormManager.Current.CreateForm<LoginView>();
-            form.Show();
-            this.Close();
+            // Must close content panel so that main view can close
+            while (contentPanel.Controls.Count > 0)
+                contentPanel.Controls[0].Dispose();
+            FormManager.Current.CreateAndShowForm<LoginView>();
         }
 
         private void CboClasses_SelectionChangeCommitted(object sender, EventArgs e)
@@ -192,31 +186,18 @@ namespace Gradebook
             currentCourse = (TaughtCourse)cboCourses.SelectedItem;
             lblTaughtCourseID.Text = currentCourse.taughtCourseID.ToString();
 
-            if (ActiveMdiChild == null)
+            if (contentPanel.Controls.Count == 0)
                 return;
-            else if (ActiveMdiChild is ClassView)
-                this.BtnClassView_Click(null, null);
-            //else if (_assignmentsView != null)
-            //    this.BtnAssignmentsView_Click(null, null);
-            //else if (_gradebookView != null)
-            //    this.BtnGradebookView_Click(null, null);
-            //else if (_reportsView != null)
-            //    this.BtnReportsView_Click(null, null);
+            else if ((string)contentPanel.Controls[0].Tag == "ClassView")
+                BtnClassView_Click(null, null);
+            // This will allow our data to update according to a specific class. 
         }
 
-
-        ////////////////////////////////////////// Form and Window Managers //////////////////////////////////////////
-
-        private void RemoveChildWindowBorders(Form form)
+        private void MainView_FormClosed(object sender, FormClosedEventArgs e)
         {
-            form.FormBorderStyle = FormBorderStyle.None;
-            form.ControlBox = false;
-            form.MaximizeBox = false;
-            form.MinimizeBox = false;
-            form.ShowIcon = false;
-            form.Text = "";
-            form.Dock = DockStyle.Fill;
+            // Must close content panel so that main view can close
+            while (contentPanel.Controls.Count > 0)
+                contentPanel.Controls[0].Dispose();
         }
-
     }
 }

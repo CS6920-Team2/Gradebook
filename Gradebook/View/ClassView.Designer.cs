@@ -303,6 +303,7 @@
             this.Controls.Add(this.lblCourse);
             this.Controls.Add(this.groupBoxClassDescription);
             this.Name = "ClassView";
+            this.Tag = "ClassView";
             this.Text = "Class View";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.ClassView_Load);
