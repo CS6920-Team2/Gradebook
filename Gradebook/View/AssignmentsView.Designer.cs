@@ -152,14 +152,14 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(99, 178);
+            this.dataGridView1.Location = new System.Drawing.Point(40, 178);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 50;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(691, 180);
+            this.dataGridView1.Size = new System.Drawing.Size(824, 180);
             this.dataGridView1.TabIndex = 15;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
@@ -199,6 +199,7 @@
             this.addBtn.TabIndex = 20;
             this.addBtn.Text = "Add ";
             this.addBtn.UseVisualStyleBackColor = true;
+            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
             // modifyBtn
             // 
@@ -208,12 +209,13 @@
             this.modifyBtn.TabIndex = 21;
             this.modifyBtn.Text = "Modify";
             this.modifyBtn.UseVisualStyleBackColor = true;
+            this.modifyBtn.Click += new System.EventHandler(this.modifyBtn_Click);
             // 
             // AssignmentsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Highlight;
+            this.BackColor = System.Drawing.SystemColors.HotTrack;
             this.ClientSize = new System.Drawing.Size(895, 474);
             this.Controls.Add(this.modifyBtn);
             this.Controls.Add(this.addBtn);
@@ -233,6 +235,7 @@
             this.Controls.Add(this.description);
             this.Controls.Add(this.nameTB);
             this.Controls.Add(this.assignmentName);
+            this.MinimizeBox = false;
             this.Name = "AssignmentsView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Assignments View";

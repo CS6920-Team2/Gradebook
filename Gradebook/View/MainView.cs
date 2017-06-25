@@ -139,12 +139,8 @@ namespace Gradebook
 
         private void BtnAssignmentsView_Click(object sender, EventArgs e)
         {
-            if (ActiveMdiChild != null)
-                ActiveMdiChild.Close();
-            AssignmentsView assignmentsView;
-            assignmentsView = new AssignmentsView() { MdiParent = this };
-            assignmentsView.Show();
-            this.RemoveChildWindowBorders(assignmentsView);
+
+            FormManager.Current.UpdateMainViewContent<AssignmentsView>();
         }
 
         public T UpdatePanelView<T>() where T : Form, new() {
