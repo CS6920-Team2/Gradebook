@@ -46,6 +46,8 @@
             this.assignmentIDTB = new System.Windows.Forms.TextBox();
             this.addBtn = new System.Windows.Forms.Button();
             this.modifyBtn = new System.Windows.Forms.Button();
+            this.updateBtn = new System.Windows.Forms.Button();
+            this.deleteBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -215,12 +217,32 @@
             this.modifyBtn.UseVisualStyleBackColor = true;
             this.modifyBtn.Click += new System.EventHandler(this.modifyBtn_Click);
             // 
+            // updateBtn
+            // 
+            this.updateBtn.Location = new System.Drawing.Point(693, 375);
+            this.updateBtn.Name = "updateBtn";
+            this.updateBtn.Size = new System.Drawing.Size(97, 40);
+            this.updateBtn.TabIndex = 22;
+            this.updateBtn.Text = "Update";
+            this.updateBtn.UseVisualStyleBackColor = true;
+            // 
+            // deleteBtn
+            // 
+            this.deleteBtn.Location = new System.Drawing.Point(588, 375);
+            this.deleteBtn.Name = "deleteBtn";
+            this.deleteBtn.Size = new System.Drawing.Size(97, 40);
+            this.deleteBtn.TabIndex = 23;
+            this.deleteBtn.Text = "Delete";
+            this.deleteBtn.UseVisualStyleBackColor = true;
+            // 
             // AssignmentsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.HotTrack;
             this.ClientSize = new System.Drawing.Size(895, 474);
+            this.Controls.Add(this.deleteBtn);
+            this.Controls.Add(this.updateBtn);
             this.Controls.Add(this.modifyBtn);
             this.Controls.Add(this.addBtn);
             this.Controls.Add(this.assignmentIDTB);
@@ -271,5 +293,7 @@
         private System.Windows.Forms.TextBox assignmentIDTB;
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.Button modifyBtn;
+        private System.Windows.Forms.Button updateBtn;
+        private System.Windows.Forms.Button deleteBtn;
     }
 }
