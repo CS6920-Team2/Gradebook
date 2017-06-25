@@ -67,7 +67,7 @@ namespace Gradebook.View
                 }
 
                 //TODO Set Authentication context and user principal, for now just move on to the next page
-                var main = FormManager.Current.CreateForm<MainMDI>();
+                var main = FormManager.Current.CreateMainForm();
                 main.currentUser = userService.findUser(txtUserName.Text);
                 main.Show();
                 this.Close();

@@ -22,10 +22,21 @@ namespace Gradebook
         [STAThread]
         static void Main()
         {
+
             deployPendingMigrations();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(FormManager.Current);
+
+            try
+            {
+                Application.Run(FormManager.Current);
+            }
+            catch (Exception e)
+            {
+#if DEBUG
+                MessageBox.Show(e.ToString());
+#endif
+            }
         }
 
         private static void deployPendingMigrations()

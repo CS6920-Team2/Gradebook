@@ -101,6 +101,12 @@
     <Compile Include="Controls\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Controls\ContentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\ContentForm.Designer.cs">
+      <DependentUpon>ContentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Data\DAO\Admin.cs" />
     <Compile Include="Data\DAO\Assignment.cs" />
     <Compile Include="Data\DAO\Category.cs" />
@@ -146,17 +152,23 @@
     <Compile Include="View\ClassView.Designer.cs">
       <DependentUpon>ClassView.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\GradebookView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\GradebookView.Designer.cs">
+      <DependentUpon>GradebookView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\LoginView.Designer.cs">
       <DependentUpon>LoginView.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\MainMDI.cs">
+    <Compile Include="View\MainView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\MainMDI.designer.cs">
-      <DependentUpon>MainMDI.cs</DependentUpon>
+    <Compile Include="View\MainView.designer.cs">
+      <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
     <Compile Include="View\ResetPasswordView.cs">
       <SubType>Form</SubType>
@@ -180,11 +192,14 @@
     <EmbeddedResource Include="View\ClassView.resx">
       <DependentUpon>ClassView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\GradebookView.resx">
+      <DependentUpon>GradebookView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\LoginView.resx">
       <DependentUpon>LoginView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\MainMDI.resx">
-      <DependentUpon>MainMDI.cs</DependentUpon>
+    <EmbeddedResource Include="View\MainView.resx">
+      <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -249,6 +264,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Data\Database\temp.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\1_001_ADD _COURSE_ID_TO_ASSIGNMENTS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\1_002_ADD_DEFAULT_ADMIN.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.105.2\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.105.2\build\net451\System.Data.SQLite.Core.targets')" />

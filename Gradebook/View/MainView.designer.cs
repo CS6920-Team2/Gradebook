@@ -1,6 +1,6 @@
 ﻿namespace Gradebook
 {
-    partial class MainMDI
+    partial class MainView
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMDI));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.topNav = new System.Windows.Forms.ToolStrip();
             this.btnClassView = new System.Windows.Forms.ToolStripButton();
             this.btnAssignmentsView = new System.Windows.Forms.ToolStripButton();
@@ -51,9 +51,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblUserInformation = new System.Windows.Forms.Label();
             this.gradebookLogo = new System.Windows.Forms.PictureBox();
+            this.contentPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.topNav.SuspendLayout();
             this.leftNav.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gradebookLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
             // topNav
@@ -301,17 +304,30 @@
             this.gradebookLogo.TabIndex = 11;
             this.gradebookLogo.TabStop = false;
             // 
-            // MainMDI
+            // contentPanel
+            // 
+            this.contentPanel.Location = new System.Drawing.Point(204, 111);
+            this.contentPanel.Name = "contentPanel";
+            this.contentPanel.Size = new System.Drawing.Size(1180, 650);
+            this.contentPanel.TabIndex = 13;
+            // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            // 
+            // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1384, 761);
+            this.Controls.Add(this.contentPanel);
             this.Controls.Add(this.gradebookLogo);
             this.Controls.Add(this.leftNav);
             this.Controls.Add(this.topNav);
             this.IsMdiContainer = true;
-            this.Name = "MainMDI";
+            this.Name = "MainView";
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -322,6 +338,7 @@
             this.leftNav.ResumeLayout(false);
             this.leftNav.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gradebookLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -350,5 +367,7 @@
         private System.Windows.Forms.ComboBox cboCourses;
         private System.Windows.Forms.Label lblTaughtCourseID;
         private System.Windows.Forms.Label lblTaughtCourseID1;
+        private System.Windows.Forms.FlowLayoutPanel contentPanel;
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
     }
 }

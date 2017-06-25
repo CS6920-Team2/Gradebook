@@ -17,7 +17,7 @@ using Gradebook.View;
 
 namespace Gradebook
 {
-    public partial class MainMDI : BaseForm
+    public partial class MainView : BaseForm
     {
         private RoleService roleService;
         private AdminService adminService;
@@ -31,7 +31,7 @@ namespace Gradebook
         private int adminID;
         private TaughtCourse currentCourse;
 
-        public MainMDI()
+        public MainView()
         {
             InitializeComponent();
             roleService = new RoleService();
@@ -147,14 +147,16 @@ namespace Gradebook
             this.RemoveChildWindowBorders(assignmentsView);
         }
 
+        public T UpdatePanelView<T>() where T : Form, new() {
+            var form = FormManager.Current.CreateForm<T>();
+            form.MdiParent = this;
+            this.contentPanel.Controls.Add(form);
+            return null;
+        }
+
         private void BtnGradebookView_Click(object sender, EventArgs e)
         {
-            if (ActiveMdiChild != null)
-                ActiveMdiChild.Close();
-
-            //_gradebookView = new GradebookView { MdiParent = this };
-            //_gradebookView.Show();
-            //this.RemoveChildWindowBorders(_gradebookView);
+            FormManager.Current.UpdateMainViewContent<GradebookView>();
         }
 
         private void BtnReportsView_Click(object sender, EventArgs e)
@@ -165,6 +167,21 @@ namespace Gradebook
             //_reportsView = new ReportsView() { MdiParent = this };
             //_reportsView.Show();
             //this.RemoveChildWindowBorders(_reportsView);
+        }
+
+        public void updateContentPanel(Form form)
+        {
+            if(form == null)
+            {
+                throw new ArgumentNullException("Cannot add null form to MainView!");
+            }
+
+            while (contentPanel.Controls.Count > 0)
+            {
+                contentPanel.Controls[0].Dispose();
+            }
+
+            contentPanel.Controls.Add(form);
         }
 
         private void BtnLogout_Click(object sender, EventArgs e)
