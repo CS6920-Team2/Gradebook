@@ -33,7 +33,11 @@ namespace Gradebook.View
             dataGridView1.DataSource = ds.Tables[0];
             dataGridView1.Columns["Category ID"].Visible = false;
             dataGridView1.Columns["assignmentID"].Visible = false;
+            dataGridView1.Columns["Description"].Visible = false;
             dataGridView1.Enabled = false;
+            submitBtn.Visible = false;
+            updateBtn.Visible = false;
+            deleteBtn.Visible = false;
         }
 
 
@@ -43,8 +47,10 @@ namespace Gradebook.View
             if (isValidData() == true)
             {
 
-                bool updated = assignmentService.updateAssignment(Int32.Parse(assignmentIDTB.Text), 3, nameTB.Text, descriptionTB.Text,
-                assignedDatedtp.Value, dueDatedtp.Value, Int32.Parse(possiblePointsTB.Text));
+                // updated = assignmentService.updateAssignment(Int32.Parse(assignmentIDTB.Text), 3, nameTB.Text, descriptionTB.Text,
+               // assignedDatedtp.Value, dueDatedtp.Value, Int32.Parse(possiblePointsTB.Text));
+               assignmentService.addAssignment(3, nameTB.Text, descriptionTB.Text, 
+                   assignedDatedtp.Value, dueDatedtp.Value, Int32.Parse(possiblePointsTB.Text));
                 dataGridView1.Update();
             }
         }
@@ -56,12 +62,12 @@ namespace Gradebook.View
             if (e.RowIndex == -1)  // ignore header row
                 return;
             assignmentIDTB.Text = dataGridView1.Rows[e.RowIndex].Cells[0].FormattedValue.ToString();
-            nameTB.Text = dataGridView1.Rows[e.RowIndex].Cells[3].FormattedValue.ToString();
-            descriptionTB.Text = dataGridView1.Rows[e.RowIndex].Cells[4].FormattedValue.ToString();
-            assignedDatedtp.Value = (DateTime)dataGridView1.Rows[e.RowIndex].Cells[5].Value;
-            dueDatedtp.Value = (DateTime)dataGridView1.Rows[e.RowIndex].Cells[6].Value;
+            nameTB.Text = dataGridView1.Rows[e.RowIndex].Cells[4].FormattedValue.ToString();
+            descriptionTB.Text = dataGridView1.Rows[e.RowIndex].Cells[6].FormattedValue.ToString();
+            assignedDatedtp.Value = (DateTime)dataGridView1.Rows[e.RowIndex].Cells[2].Value;
+            dueDatedtp.Value = (DateTime)dataGridView1.Rows[e.RowIndex].Cells[3].Value;
             possiblePointsTB.Text = dataGridView1.Rows[e.RowIndex].Cells[7].FormattedValue.ToString();
-            categoryCB.Text = dataGridView1.Rows[e.RowIndex].Cells[2].FormattedValue.ToString();
+            categoryCB.Text = dataGridView1.Rows[e.RowIndex].Cells[5].FormattedValue.ToString();
 
         }
 
@@ -77,6 +83,7 @@ namespace Gradebook.View
 
         private void clickAdd()
         {
+            controlsEnabled();
             addBtn.Enabled = false;
             addBtn.ForeColor = Color.Black;
             modifyBtn.Enabled = true;
@@ -86,6 +93,9 @@ namespace Gradebook.View
             dataGridView1.ForeColor = Color.Gray;
             dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.Gray;
             dataGridView1.EnableHeadersVisualStyles = false;
+            submitBtn.Visible = true;
+            updateBtn.Visible = false;
+            deleteBtn.Visible = false;
             resetControls();
         }
 
@@ -101,6 +111,10 @@ namespace Gradebook.View
             dataGridView1.ForeColor = Color.Black;
             dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
             dataGridView1.EnableHeadersVisualStyles = true;
+
+            submitBtn.Visible = false;
+            updateBtn.Visible = true;
+            deleteBtn.Visible = true;
         }
 
         // Checks that all data is valid before a transaction.
@@ -108,7 +122,7 @@ namespace Gradebook.View
         {
             if (Validator.IsPresent(nameTB) &&
                 Validator.IsPresent(descriptionTB) &&
-                Validator.IsPresent(categoryCB) &&
+                //Validator.IsPresent(categoryCB) &&
                 Validator.IsPresent(possiblePointsTB))
             {
                 return true;

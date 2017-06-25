@@ -19,14 +19,15 @@ namespace Gradebook.Data.Services
         {
             var connection = ConnectionFactory.GetOpenSQLiteConnection();
             SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("SELECT a.assignmentID, " +
-                "a.categoryID AS 'Category ID', c.name AS 'Category', a.name AS 'Assignment', " +
-                "a.description AS 'Description', a.assignedDate AS 'Assigned'," +
-                " a.dueDate AS 'Due Date', a.possiblePoints AS 'Possible Points' " +
+                "a.categoryID AS 'Category ID', a.assignedDate AS 'Assigned'," +
+                " a.dueDate AS 'Due', a.name AS 'Assignment', c.name AS 'Category'," +
+                " a.description AS 'Description', a.possiblePoints AS 'Value' " +
                 "FROM TaughtCourses tc " +
                 "JOIN Categories c " +
                 "ON c.taughtCourseID = tc.taughtCourseID " +
                 "JOIN Assignments a " +
-                "ON c.categoryID = a.categoryID; ", connection);
+                "ON c.categoryID = a.categoryID " +
+                "ORDER BY a.assignedDate ASC; ", connection);
             DataSet ds = new System.Data.DataSet();
 
             dataAdapter.Fill(ds, "Assignments");
