@@ -29,9 +29,10 @@ namespace Gradebook.View
 
         private void AssignmentsView_Load(object sender, EventArgs e)
         {
-            DataSet ds = assignmentService.CreateDataSet();
+            DataSet ds = assignmentService.CreateAssignmentDataSet();
             dataGridView1.DataSource = ds.Tables[0];
-
+            dataGridView1.Columns["Category ID"].Visible = false;
+            dataGridView1.Columns["assignmentID"].Visible = false;
             dataGridView1.Enabled = false;
         }
 
@@ -85,14 +86,7 @@ namespace Gradebook.View
             dataGridView1.ForeColor = Color.Gray;
             dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.Gray;
             dataGridView1.EnableHeadersVisualStyles = false;
-
-            assignmentIDTB.Text = "";
-            nameTB.Text = "";
-            descriptionTB.Text = "";
-            assignedDatedtp.Value = DateTime.Today;
-            dueDatedtp.Value = DateTime.Today;
-            possiblePointsTB.Text = "";
-            categoryCB.Text = "";
+            resetControls();
         }
 
         private void clickModify()
@@ -109,6 +103,7 @@ namespace Gradebook.View
             dataGridView1.EnableHeadersVisualStyles = true;
         }
 
+        // Checks that all data is valid before a transaction.
         private bool isValidData()
         {
             if (Validator.IsPresent(nameTB) &&
@@ -125,6 +120,7 @@ namespace Gradebook.View
             }
         }
 
+        // Sets combo and text box controls to Disabled.
         private void controlsDisabled()
         {
             nameTB.Enabled = false;
@@ -135,6 +131,7 @@ namespace Gradebook.View
             possiblePointsTB.Enabled = false;
         }
 
+        // Sets combo and text box controls to Enabled.
         private void controlsEnabled()
         {
             nameTB.Enabled = true;
@@ -143,6 +140,17 @@ namespace Gradebook.View
             dueDatedtp.Enabled = true;
             categoryCB.Enabled = true;
             possiblePointsTB.Enabled = true;
+        }
+
+        private void resetControls()
+        {
+            assignmentIDTB.Text = "";
+            nameTB.Text = "";
+            descriptionTB.Text = "";
+            assignedDatedtp.Value = DateTime.Today;
+            dueDatedtp.Value = DateTime.Today;
+            possiblePointsTB.Text = "";
+            categoryCB.Text = "";
         }
     }
 }

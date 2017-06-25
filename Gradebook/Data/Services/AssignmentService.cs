@@ -15,10 +15,18 @@ namespace Gradebook.Data.Services
     public class AssignmentService : IAssignmentService
     {
 
-        public DataSet CreateDataSet()
+        public DataSet CreateAssignmentDataSet()
         {
             var connection = ConnectionFactory.GetOpenSQLiteConnection();
-            SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("Select * FROM Assignments", connection);
+            SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("SELECT a.assignmentID, " +
+                "a.categoryID AS 'Category ID', c.name AS 'Category', a.name AS 'Assignment', " +
+                "a.description AS 'Description', a.assignedDate AS 'Assigned'," +
+                " a.dueDate AS 'Due Date', a.possiblePoints AS 'Possible Points' " +
+                "FROM TaughtCourses tc " +
+                "JOIN Categories c " +
+                "ON c.taughtCourseID = tc.taughtCourseID " +
+                "JOIN Assignments a " +
+                "ON c.categoryID = a.categoryID; ", connection);
             DataSet ds = new System.Data.DataSet();
 
             dataAdapter.Fill(ds, "Assignments");
@@ -50,6 +58,28 @@ namespace Gradebook.Data.Services
                     assignmentID = newAssignmentID});
             }
             return rowsAffected > 0;
+        }
+
+        public void addAssignment(int newCategoryID, string newName, string newDescription,
+            DateTime newAssignedDate, DateTime newDueDate, int newPossiblePoints)
+        {
+            int rowsAffected = 0;
+            using (var connection = ConnectionFactory.GetOpenConnection())
+            {
+                rowsAffected = connection.Execute("insert into Assignments (categoryID, name, " +
+                    "description, assignedDate, dueDate, possiblePoints)" +
+                    " VALUES (@categoryID, @name, @description, " +
+                    "@assignedDate, @dueDate, @possiblePoints)",
+                    new
+                    {
+                        categoryID = newCategoryID,
+                        name = newName,
+                        description = newDescription,
+                        assignedDate = newAssignedDate,
+                        dueDate = newDueDate,
+                        possiblePoints = newPossiblePoints
+                    });
+            }
         }
     }
 }
