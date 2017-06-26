@@ -134,6 +134,7 @@
     <Compile Include="Data\Services\RoleService.cs" />
     <Compile Include="Data\Services\TeacherService.cs" />
     <Compile Include="Data\Services\UserService.cs" />
+    <Compile Include="Data\Utils\ConversionUtils.cs" />
     <Compile Include="Data\Utils\FormManager.cs" />
     <Compile Include="Data\Utils\SecurityUtils.cs" />
     <Compile Include="Data\Utils\Validator.cs" />

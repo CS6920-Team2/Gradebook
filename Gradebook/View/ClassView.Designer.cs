@@ -130,10 +130,12 @@
             this.txtProjects.MaxLength = 3;
             this.txtProjects.Name = "txtProjects";
             this.txtProjects.Size = new System.Drawing.Size(209, 20);
-            this.txtProjects.TabIndex = 5;
+            this.txtProjects.TabIndex = 3;
+            this.txtProjects.Tag = "projects";
             this.txtProjects.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtProjects.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             this.txtProjects.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
+            this.txtProjects.Leave += new System.EventHandler(this.SetWeightToZero_LeaveText);
             // 
             // txtQuizzes
             // 
@@ -142,9 +144,11 @@
             this.txtQuizzes.Name = "txtQuizzes";
             this.txtQuizzes.Size = new System.Drawing.Size(209, 20);
             this.txtQuizzes.TabIndex = 4;
+            this.txtQuizzes.Tag = "quizzes";
             this.txtQuizzes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtQuizzes.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             this.txtQuizzes.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
+            this.txtQuizzes.Leave += new System.EventHandler(this.SetWeightToZero_LeaveText);
             // 
             // txtExams
             // 
@@ -152,10 +156,12 @@
             this.txtExams.MaxLength = 3;
             this.txtExams.Name = "txtExams";
             this.txtExams.Size = new System.Drawing.Size(209, 20);
-            this.txtExams.TabIndex = 3;
+            this.txtExams.TabIndex = 0;
+            this.txtExams.Tag = "exams";
             this.txtExams.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtExams.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             this.txtExams.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
+            this.txtExams.Leave += new System.EventHandler(this.SetWeightToZero_LeaveText);
             // 
             // txtParticipation
             // 
@@ -164,9 +170,11 @@
             this.txtParticipation.Name = "txtParticipation";
             this.txtParticipation.Size = new System.Drawing.Size(209, 20);
             this.txtParticipation.TabIndex = 2;
+            this.txtParticipation.Tag = "participation";
             this.txtParticipation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtParticipation.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             this.txtParticipation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
+            this.txtParticipation.Leave += new System.EventHandler(this.SetWeightToZero_LeaveText);
             // 
             // txtHomework
             // 
@@ -175,9 +183,11 @@
             this.txtHomework.Name = "txtHomework";
             this.txtHomework.Size = new System.Drawing.Size(209, 20);
             this.txtHomework.TabIndex = 1;
+            this.txtHomework.Tag = "homework";
             this.txtHomework.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtHomework.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             this.txtHomework.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
+            this.txtHomework.Leave += new System.EventHandler(this.SetWeightToZero_LeaveText);
             // 
             // label5
             // 
@@ -232,7 +242,7 @@
             this.btnReset.TabIndex = 4;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = true;
-            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            this.btnReset.Click += new System.EventHandler(this.BtnReset_Click);
             // 
             // btnUpdate
             // 
@@ -242,7 +252,7 @@
             this.btnUpdate.TabIndex = 5;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            this.btnUpdate.Click += new System.EventHandler(this.BtnUpdate_Click);
             // 
             // txtCourseName
             // 
@@ -265,7 +275,7 @@
             // 
             this.lblClassViewError.AutoSize = true;
             this.lblClassViewError.ForeColor = System.Drawing.Color.Red;
-            this.lblClassViewError.Location = new System.Drawing.Point(15, 408);
+            this.lblClassViewError.Location = new System.Drawing.Point(24, 440);
             this.lblClassViewError.Name = "lblClassViewError";
             this.lblClassViewError.Size = new System.Drawing.Size(0, 13);
             this.lblClassViewError.TabIndex = 9;

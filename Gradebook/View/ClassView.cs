@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using Gradebook.Controls;
 using Gradebook.Data.Services;
+using Gradebook.Data.Utils;
 
 namespace Gradebook
 {
@@ -44,12 +45,12 @@ namespace Gradebook
                 return;
             }
 
-            if (MainView.role.Equals("Teacher"))
+            if (currentRole.Equals("Teacher"))
             {
                 cboTeacherName.Hide();
                 txtTeacherName.Text = currentPerson.fullName;
             }
-            else if (MainView.role.Equals("Admin"))
+            else if (currentRole.Equals("Admin"))
             {
                 txtTeacherName.Hide();
                 // Get list of teachers and add to comboBox
@@ -62,7 +63,6 @@ namespace Gradebook
 
         private void FillCategories()
         {
-            
             try
             {
                 categoriesList = categoryService.findCategoriesByTaughtCourseID(currentCourse.taughtCourseID);
@@ -85,7 +85,6 @@ namespace Gradebook
             {
                 lblClassViewError.Text = "Error loading categories.";
             }
-            
         }
 
         private void TotalCategories(List<TextBox> weightBoxes)
@@ -93,30 +92,23 @@ namespace Gradebook
             totalWeight = 0;
             foreach (TextBox weight in weightBoxes)
             {
-                totalWeight += TextBoxToInt(weight);
+                try
+                {
+                    totalWeight += ConversionUtils.TextBoxToInt(weight);
+                }
+                catch (Exception ex)
+                {
+                    lblClassViewError.Text = "Unable to convert " + weight.Tag + " to number.";
+                    break;
+                }
             }
 
             lblTotal.Text = totalWeight + "%";
-        }
 
-        private int TextBoxToInt(TextBox textBox)
-        {
-            try
-            {
-                if (textBox.Text != "")
-                {
-                    int number;
-                    number = Convert.ToInt32(textBox.Text);
-                    number = int.Parse(textBox.Text);
-                    return number;
-                }
-                return 0;
-            }
-            catch (Exception ex)
-            {
-                lblClassViewError.Text = "Error converting text to string" + textBox.Name.ToString();
-                return 0;
-            }
+            if (totalWeight != 100)
+                lblTotal.ForeColor = Color.Red;
+            else
+                lblTotal.ForeColor = Color.Black;
         }
 
         ////////////////////////////////////////// Event Handlers  //////////////////////////////////////////
@@ -124,28 +116,26 @@ namespace Gradebook
         private void TextBox_TextChanged(object sender, EventArgs e)
         {
             if (weightBoxes != null)
-                this.TotalCategories(weightBoxes);
+                TotalCategories(weightBoxes);            
         }
 
         private void AllowOnlyNumber(KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
                 e.Handled = true;
-            }
         }
         private void AllowOnlyNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
             AllowOnlyNumber(e);
         }
 
-        private void btnReset_Click(object sender, EventArgs e)
+        private void BtnReset_Click(object sender, EventArgs e)
         {
             FillCategories();
             lblClassViewError.Text = "";
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private void BtnUpdate_Click(object sender, EventArgs e)
         {
             if (totalWeight != 100)
             {
@@ -156,33 +146,46 @@ namespace Gradebook
             // Updates DB with new categories
             try
             {
-
                 foreach (Category category in categoriesList)
                 {
                     if (category.name == "Exams")
-                        category.weight = TextBoxToInt(txtExams);
+                        category.weight = ConversionUtils.TextBoxToInt(txtExams);
                     else if (category.name == "Homework")
-                        category.weight = TextBoxToInt(txtHomework);
+                        category.weight = ConversionUtils.TextBoxToInt(txtHomework);
                     else if (category.name == "Participation")
-                        category.weight = TextBoxToInt(txtParticipation);
+                        category.weight = ConversionUtils.TextBoxToInt(txtParticipation);
                     else if (category.name == "Projects")
-                        category.weight = TextBoxToInt(txtProjects);
+                        category.weight = ConversionUtils.TextBoxToInt(txtProjects);
                     else if (category.name == "Quizzes")
-                        category.weight = TextBoxToInt(txtQuizzes);
-
+                        category.weight = ConversionUtils.TextBoxToInt(txtQuizzes);
+                    
                     //bool updated = CategoriesController.CategoriesDB.UpdateCategory(category);
                     bool updated = false;
                     if (!updated)
                     {
                         lblClassViewError.Text = "Failed to update category " + category.name;
-                        return;
+                        break;
                     }
 
                 }
             }
             catch (Exception ex)
             {
-                lblClassViewError.Text = "Unable to update categories in DB.";
+                lblClassViewError.Text = "Failed to update categories.";
+            }
+        }
+
+        private void SetWeightToZero_LeaveText(object sender, EventArgs e)
+        {
+            if (weightBoxes != null)
+            {
+                foreach (TextBox weight in weightBoxes)
+                {
+                    if (String.IsNullOrEmpty(weight.Text))
+                    {
+                        weight.Text = "0";
+                    }
+                } 
             }
         }
     }
