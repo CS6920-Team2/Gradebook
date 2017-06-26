@@ -51,6 +51,7 @@
             this.lblClassViewError = new System.Windows.Forms.Label();
             this.cboTeacherName = new System.Windows.Forms.ComboBox();
             this.txtTeacherName = new System.Windows.Forms.TextBox();
+            this.lblClassViewSuccess = new System.Windows.Forms.Label();
             this.groupBoxClassDescription.SuspendLayout();
             this.groupBoxCategoryWeights.SuspendLayout();
             this.SuspendLayout();
@@ -236,7 +237,7 @@
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(188, 403);
+            this.btnReset.Location = new System.Drawing.Point(26, 419);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 23);
             this.btnReset.TabIndex = 4;
@@ -246,7 +247,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(269, 403);
+            this.btnUpdate.Location = new System.Drawing.Point(107, 419);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.TabIndex = 5;
@@ -275,8 +276,9 @@
             // 
             this.lblClassViewError.AutoSize = true;
             this.lblClassViewError.ForeColor = System.Drawing.Color.Red;
-            this.lblClassViewError.Location = new System.Drawing.Point(24, 440);
+            this.lblClassViewError.Location = new System.Drawing.Point(24, 400);
             this.lblClassViewError.Name = "lblClassViewError";
+            this.lblClassViewError.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblClassViewError.Size = new System.Drawing.Size(0, 13);
             this.lblClassViewError.TabIndex = 9;
             // 
@@ -297,11 +299,22 @@
             this.txtTeacherName.Size = new System.Drawing.Size(252, 20);
             this.txtTeacherName.TabIndex = 11;
             // 
+            // lblClassViewSuccess
+            // 
+            this.lblClassViewSuccess.AutoSize = true;
+            this.lblClassViewSuccess.ForeColor = System.Drawing.Color.ForestGreen;
+            this.lblClassViewSuccess.Location = new System.Drawing.Point(24, 403);
+            this.lblClassViewSuccess.Name = "lblClassViewSuccess";
+            this.lblClassViewSuccess.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblClassViewSuccess.Size = new System.Drawing.Size(0, 13);
+            this.lblClassViewSuccess.TabIndex = 12;
+            // 
             // ClassView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(367, 474);
+            this.Controls.Add(this.lblClassViewSuccess);
             this.Controls.Add(this.txtTeacherName);
             this.Controls.Add(this.cboTeacherName);
             this.Controls.Add(this.lblClassViewError);
@@ -351,5 +364,6 @@
         private System.Windows.Forms.Label lblClassViewError;
         private System.Windows.Forms.ComboBox cboTeacherName;
         private System.Windows.Forms.TextBox txtTeacherName;
+        private System.Windows.Forms.Label lblClassViewSuccess;
     }
 }

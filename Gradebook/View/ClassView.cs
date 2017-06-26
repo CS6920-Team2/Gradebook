@@ -24,6 +24,7 @@ namespace Gradebook
         private List<Category> categoriesList;
         private int totalWeight;
         private List<TextBox> weightBoxes;
+
         public ClassView()
         {
             InitializeComponent();
@@ -54,6 +55,7 @@ namespace Gradebook
             {
                 txtTeacherName.Hide();
                 // Get list of teachers and add to comboBox
+                // Possibly move admin to their own form to clean things up
             }
             txtCourseName.Text = currentCourse.name;
             txtCourseDescription.Text = currentCourse.description;
@@ -63,6 +65,7 @@ namespace Gradebook
 
         private void FillCategories()
         {
+            ClearMessageFields();
             try
             {
                 categoriesList = categoryService.findCategoriesByTaughtCourseID(currentCourse.taughtCourseID);
@@ -89,6 +92,7 @@ namespace Gradebook
 
         private void TotalCategories(List<TextBox> weightBoxes)
         {
+            ClearMessageFields();
             totalWeight = 0;
             foreach (TextBox weight in weightBoxes)
             {
@@ -108,7 +112,7 @@ namespace Gradebook
             if (totalWeight != 100)
                 lblTotal.ForeColor = Color.Red;
             else
-                lblTotal.ForeColor = Color.Black;
+                lblTotal.ForeColor = Color.Green;
         }
 
         ////////////////////////////////////////// Event Handlers  //////////////////////////////////////////
@@ -131,12 +135,13 @@ namespace Gradebook
 
         private void BtnReset_Click(object sender, EventArgs e)
         {
+            ClearMessageFields();
             FillCategories();
-            lblClassViewError.Text = "";
         }
 
         private void BtnUpdate_Click(object sender, EventArgs e)
         {
+            ClearMessageFields();
             if (totalWeight != 100)
             {
                 lblClassViewError.Text = "Totals must be equal 100%";
@@ -158,16 +163,13 @@ namespace Gradebook
                         category.weight = ConversionUtils.TextBoxToInt(txtProjects);
                     else if (category.name == "Quizzes")
                         category.weight = ConversionUtils.TextBoxToInt(txtQuizzes);
-                    
-                    //bool updated = CategoriesController.CategoriesDB.UpdateCategory(category);
-                    bool updated = false;
-                    if (!updated)
-                    {
-                        lblClassViewError.Text = "Failed to update category " + category.name;
-                        break;
-                    }
-
                 }
+
+                bool successful = categoryService.updateAllCategoriesForTaughtCourse(categoriesList);
+                if (successful)
+                    lblClassViewSuccess.Text = "Update was successful.";
+                else
+                    lblClassViewError.Text = "Update not working";
             }
             catch (Exception ex)
             {
@@ -187,6 +189,12 @@ namespace Gradebook
                     }
                 } 
             }
+        }
+
+        private void ClearMessageFields()
+        {
+            lblClassViewError.Text = "";
+            lblClassViewSuccess.Text = "";
         }
     }
 }
