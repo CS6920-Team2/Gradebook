@@ -19,7 +19,7 @@ namespace Gradebook.Data.Services
             {
                 var sql = @"SELECT * FROM 
 	                            TaughtCourses t JOIN Courses c ON t.courseID = c.courseID
-	                            WHERE t.teacherID = 1;";
+	                            WHERE t.teacherID = @teacherID;";
                 courses = (List<TaughtCourse>) connection.Query<TaughtCourse>(sql, new {teacherID = teacherID});
             }
             return courses;

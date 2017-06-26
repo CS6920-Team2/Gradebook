@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.groupBoxClassDescription = new System.Windows.Forms.GroupBox();
-            this.textBoxCourseDescription = new System.Windows.Forms.TextBox();
+            this.txtCourseDescription = new System.Windows.Forms.TextBox();
             this.lblCourse = new System.Windows.Forms.Label();
             this.groupBoxCategoryWeights = new System.Windows.Forms.GroupBox();
             this.lblTotal = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBoxProjects = new System.Windows.Forms.TextBox();
-            this.textBoxQuizzes = new System.Windows.Forms.TextBox();
-            this.textBoxExams = new System.Windows.Forms.TextBox();
-            this.textBoxParticipation = new System.Windows.Forms.TextBox();
-            this.textBoxHomework = new System.Windows.Forms.TextBox();
+            this.txtProjects = new System.Windows.Forms.TextBox();
+            this.txtQuizzes = new System.Windows.Forms.TextBox();
+            this.txtExams = new System.Windows.Forms.TextBox();
+            this.txtParticipation = new System.Windows.Forms.TextBox();
+            this.txtHomework = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -46,18 +46,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
-            this.textBoxCourseName = new System.Windows.Forms.TextBox();
+            this.txtCourseName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.lblClassViewError = new System.Windows.Forms.Label();
             this.cboTeacherName = new System.Windows.Forms.ComboBox();
-            this.textBoxTeacherName = new System.Windows.Forms.TextBox();
+            this.txtTeacherName = new System.Windows.Forms.TextBox();
             this.groupBoxClassDescription.SuspendLayout();
             this.groupBoxCategoryWeights.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxClassDescription
             // 
-            this.groupBoxClassDescription.Controls.Add(this.textBoxCourseDescription);
+            this.groupBoxClassDescription.Controls.Add(this.txtCourseDescription);
             this.groupBoxClassDescription.Location = new System.Drawing.Point(15, 78);
             this.groupBoxClassDescription.Name = "groupBoxClassDescription";
             this.groupBoxClassDescription.Size = new System.Drawing.Size(332, 116);
@@ -65,15 +65,15 @@
             this.groupBoxClassDescription.TabStop = false;
             this.groupBoxClassDescription.Text = "Class Description";
             // 
-            // textBoxCourseDescription
+            // txtCourseDescription
             // 
-            this.textBoxCourseDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxCourseDescription.Location = new System.Drawing.Point(3, 16);
-            this.textBoxCourseDescription.Multiline = true;
-            this.textBoxCourseDescription.Name = "textBoxCourseDescription";
-            this.textBoxCourseDescription.ReadOnly = true;
-            this.textBoxCourseDescription.Size = new System.Drawing.Size(326, 97);
-            this.textBoxCourseDescription.TabIndex = 0;
+            this.txtCourseDescription.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtCourseDescription.Location = new System.Drawing.Point(3, 16);
+            this.txtCourseDescription.Multiline = true;
+            this.txtCourseDescription.Name = "txtCourseDescription";
+            this.txtCourseDescription.ReadOnly = true;
+            this.txtCourseDescription.Size = new System.Drawing.Size(326, 97);
+            this.txtCourseDescription.TabIndex = 0;
             // 
             // lblCourse
             // 
@@ -88,11 +88,11 @@
             // 
             this.groupBoxCategoryWeights.Controls.Add(this.lblTotal);
             this.groupBoxCategoryWeights.Controls.Add(this.label7);
-            this.groupBoxCategoryWeights.Controls.Add(this.textBoxProjects);
-            this.groupBoxCategoryWeights.Controls.Add(this.textBoxQuizzes);
-            this.groupBoxCategoryWeights.Controls.Add(this.textBoxExams);
-            this.groupBoxCategoryWeights.Controls.Add(this.textBoxParticipation);
-            this.groupBoxCategoryWeights.Controls.Add(this.textBoxHomework);
+            this.groupBoxCategoryWeights.Controls.Add(this.txtProjects);
+            this.groupBoxCategoryWeights.Controls.Add(this.txtQuizzes);
+            this.groupBoxCategoryWeights.Controls.Add(this.txtExams);
+            this.groupBoxCategoryWeights.Controls.Add(this.txtParticipation);
+            this.groupBoxCategoryWeights.Controls.Add(this.txtHomework);
             this.groupBoxCategoryWeights.Controls.Add(this.label5);
             this.groupBoxCategoryWeights.Controls.Add(this.label4);
             this.groupBoxCategoryWeights.Controls.Add(this.label3);
@@ -124,60 +124,60 @@
             this.label7.TabIndex = 10;
             this.label7.Text = "Total: ";
             // 
-            // textBoxProjects
+            // txtProjects
             // 
-            this.textBoxProjects.Location = new System.Drawing.Point(111, 107);
-            this.textBoxProjects.MaxLength = 3;
-            this.textBoxProjects.Name = "textBoxProjects";
-            this.textBoxProjects.Size = new System.Drawing.Size(209, 20);
-            this.textBoxProjects.TabIndex = 5;
-            this.textBoxProjects.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBoxProjects.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
-            this.textBoxProjects.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
+            this.txtProjects.Location = new System.Drawing.Point(111, 107);
+            this.txtProjects.MaxLength = 3;
+            this.txtProjects.Name = "txtProjects";
+            this.txtProjects.Size = new System.Drawing.Size(209, 20);
+            this.txtProjects.TabIndex = 5;
+            this.txtProjects.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtProjects.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
+            this.txtProjects.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
             // 
-            // textBoxQuizzes
+            // txtQuizzes
             // 
-            this.textBoxQuizzes.Location = new System.Drawing.Point(111, 133);
-            this.textBoxQuizzes.MaxLength = 3;
-            this.textBoxQuizzes.Name = "textBoxQuizzes";
-            this.textBoxQuizzes.Size = new System.Drawing.Size(209, 20);
-            this.textBoxQuizzes.TabIndex = 4;
-            this.textBoxQuizzes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBoxQuizzes.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
-            this.textBoxQuizzes.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
+            this.txtQuizzes.Location = new System.Drawing.Point(111, 133);
+            this.txtQuizzes.MaxLength = 3;
+            this.txtQuizzes.Name = "txtQuizzes";
+            this.txtQuizzes.Size = new System.Drawing.Size(209, 20);
+            this.txtQuizzes.TabIndex = 4;
+            this.txtQuizzes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtQuizzes.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
+            this.txtQuizzes.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
             // 
-            // textBoxExams
+            // txtExams
             // 
-            this.textBoxExams.Location = new System.Drawing.Point(111, 29);
-            this.textBoxExams.MaxLength = 3;
-            this.textBoxExams.Name = "textBoxExams";
-            this.textBoxExams.Size = new System.Drawing.Size(209, 20);
-            this.textBoxExams.TabIndex = 3;
-            this.textBoxExams.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBoxExams.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
-            this.textBoxExams.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
+            this.txtExams.Location = new System.Drawing.Point(111, 29);
+            this.txtExams.MaxLength = 3;
+            this.txtExams.Name = "txtExams";
+            this.txtExams.Size = new System.Drawing.Size(209, 20);
+            this.txtExams.TabIndex = 3;
+            this.txtExams.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtExams.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
+            this.txtExams.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
             // 
-            // textBoxParticipation
+            // txtParticipation
             // 
-            this.textBoxParticipation.Location = new System.Drawing.Point(111, 81);
-            this.textBoxParticipation.MaxLength = 3;
-            this.textBoxParticipation.Name = "textBoxParticipation";
-            this.textBoxParticipation.Size = new System.Drawing.Size(209, 20);
-            this.textBoxParticipation.TabIndex = 2;
-            this.textBoxParticipation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBoxParticipation.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
-            this.textBoxParticipation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
+            this.txtParticipation.Location = new System.Drawing.Point(111, 81);
+            this.txtParticipation.MaxLength = 3;
+            this.txtParticipation.Name = "txtParticipation";
+            this.txtParticipation.Size = new System.Drawing.Size(209, 20);
+            this.txtParticipation.TabIndex = 2;
+            this.txtParticipation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtParticipation.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
+            this.txtParticipation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
             // 
-            // textBoxHomework
+            // txtHomework
             // 
-            this.textBoxHomework.Location = new System.Drawing.Point(111, 55);
-            this.textBoxHomework.MaxLength = 3;
-            this.textBoxHomework.Name = "textBoxHomework";
-            this.textBoxHomework.Size = new System.Drawing.Size(209, 20);
-            this.textBoxHomework.TabIndex = 1;
-            this.textBoxHomework.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBoxHomework.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
-            this.textBoxHomework.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
+            this.txtHomework.Location = new System.Drawing.Point(111, 55);
+            this.txtHomework.MaxLength = 3;
+            this.txtHomework.Name = "txtHomework";
+            this.txtHomework.Size = new System.Drawing.Size(209, 20);
+            this.txtHomework.TabIndex = 1;
+            this.txtHomework.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtHomework.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
+            this.txtHomework.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
             // 
             // label5
             // 
@@ -244,13 +244,13 @@
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
-            // textBoxCourseName
+            // txtCourseName
             // 
-            this.textBoxCourseName.Location = new System.Drawing.Point(92, 45);
-            this.textBoxCourseName.Name = "textBoxCourseName";
-            this.textBoxCourseName.ReadOnly = true;
-            this.textBoxCourseName.Size = new System.Drawing.Size(252, 20);
-            this.textBoxCourseName.TabIndex = 6;
+            this.txtCourseName.Location = new System.Drawing.Point(92, 45);
+            this.txtCourseName.Name = "txtCourseName";
+            this.txtCourseName.ReadOnly = true;
+            this.txtCourseName.Size = new System.Drawing.Size(252, 20);
+            this.txtCourseName.TabIndex = 6;
             // 
             // label6
             // 
@@ -279,24 +279,24 @@
             this.cboTeacherName.Size = new System.Drawing.Size(252, 21);
             this.cboTeacherName.TabIndex = 10;
             // 
-            // textBoxTeacherName
+            // txtTeacherName
             // 
-            this.textBoxTeacherName.Location = new System.Drawing.Point(92, 19);
-            this.textBoxTeacherName.Name = "textBoxTeacherName";
-            this.textBoxTeacherName.ReadOnly = true;
-            this.textBoxTeacherName.Size = new System.Drawing.Size(252, 20);
-            this.textBoxTeacherName.TabIndex = 11;
+            this.txtTeacherName.Location = new System.Drawing.Point(92, 19);
+            this.txtTeacherName.Name = "txtTeacherName";
+            this.txtTeacherName.ReadOnly = true;
+            this.txtTeacherName.Size = new System.Drawing.Size(252, 20);
+            this.txtTeacherName.TabIndex = 11;
             // 
             // ClassView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(367, 474);
-            this.Controls.Add(this.textBoxTeacherName);
+            this.Controls.Add(this.txtTeacherName);
             this.Controls.Add(this.cboTeacherName);
             this.Controls.Add(this.lblClassViewError);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBoxCourseName);
+            this.Controls.Add(this.txtCourseName);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.groupBoxCategoryWeights);
@@ -319,27 +319,27 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBoxClassDescription;
-        private System.Windows.Forms.TextBox textBoxCourseDescription;
+        private System.Windows.Forms.TextBox txtCourseDescription;
         private System.Windows.Forms.Label lblCourse;
         private System.Windows.Forms.GroupBox groupBoxCategoryWeights;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.TextBox textBoxProjects;
-        private System.Windows.Forms.TextBox textBoxQuizzes;
-        private System.Windows.Forms.TextBox textBoxExams;
-        private System.Windows.Forms.TextBox textBoxParticipation;
-        private System.Windows.Forms.TextBox textBoxHomework;
+        private System.Windows.Forms.TextBox txtProjects;
+        private System.Windows.Forms.TextBox txtQuizzes;
+        private System.Windows.Forms.TextBox txtExams;
+        private System.Windows.Forms.TextBox txtParticipation;
+        private System.Windows.Forms.TextBox txtHomework;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxCourseName;
+        private System.Windows.Forms.TextBox txtCourseName;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lblClassViewError;
         private System.Windows.Forms.ComboBox cboTeacherName;
-        private System.Windows.Forms.TextBox textBoxTeacherName;
+        private System.Windows.Forms.TextBox txtTeacherName;
     }
 }

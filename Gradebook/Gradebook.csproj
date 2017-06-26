@@ -120,6 +120,7 @@
     <Compile Include="Data\Factories\ConnectionFactory.cs" />
     <Compile Include="Data\Interfaces\IAdminService.cs" />
     <Compile Include="Data\Interfaces\IAssignmentService.cs" />
+    <Compile Include="Data\Interfaces\ICategoryService.cs" />
     <Compile Include="Data\Interfaces\ICourseService.cs" />
     <Compile Include="Data\Interfaces\IPersonService.cs" />
     <Compile Include="Data\Interfaces\IRoleService.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="Data\Interfaces\IUserService.cs" />
     <Compile Include="Data\Services\AdminService.cs" />
     <Compile Include="Data\Services\AssignmentService.cs" />
+    <Compile Include="Data\Services\CategoryService.cs" />
     <Compile Include="Data\Services\CourseService.cs" />
     <Compile Include="Data\Services\PersonService.cs" />
     <Compile Include="Data\Services\RoleService.cs" />

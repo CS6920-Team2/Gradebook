@@ -10,45 +10,35 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
 using Gradebook.Controls;
+using Gradebook.Data.Services;
 
 namespace Gradebook
 {
     public partial class ClassView : ContentForm
     {
+        private CategoryService categoryService;
+        private string currentRole = MainView.role;
+        private Person currentPerson = MainView.currentPerson;
+        private TaughtCourse currentCourse = MainView.currentCourse;
         private List<Category> categoriesList;
         private int totalWeight;
         private List<TextBox> weightBoxes;
         public ClassView()
         {
             InitializeComponent();
+            categoryService = new CategoryService();
 
             weightBoxes = new List<TextBox>();
-            weightBoxes.Add(textBoxExams);
-            weightBoxes.Add(textBoxHomework);
-            weightBoxes.Add(textBoxParticipation);
-            weightBoxes.Add(textBoxProjects);
-            weightBoxes.Add(textBoxQuizzes);
+            weightBoxes.Add(txtExams);
+            weightBoxes.Add(txtHomework);
+            weightBoxes.Add(txtParticipation);
+            weightBoxes.Add(txtProjects);
+            weightBoxes.Add(txtQuizzes);
         }
 
-        /// <summary>
-        /// On load the following should happen: 
-        /// 1- Teacher name should be placed in: textBoxTeacher
-        /// Gather from currentPerson
-        /// 
-        /// 2- Course name should be placed in: textBoxCoureName
-        /// Gather from courses combo box in left nav
-        /// 
-        /// 3- Course description should be placed in: textCourseDescription
-        /// 
-        /// 4- Category weights should be placed in for each category: 
-        /// Will hardcode name based on which category is being filled in
-        /// None exist? set to defaults
-        /// 
-        /// 5- Totals of categories should be added up (event handlers)
-        /// </summary>
         private void ClassView_Load(object sender, EventArgs e)
         {
-            if (MainView.role == null || MainView.currentPerson == null || MainView.currentCourse == null)
+            if (currentRole == null || currentPerson == null || currentCourse == null)
             {
                 lblClassViewError.Text = "Error loading form.";
                 return;
@@ -57,93 +47,49 @@ namespace Gradebook
             if (MainView.role.Equals("Teacher"))
             {
                 cboTeacherName.Hide();
-                textBoxTeacherName.Text = MainView.currentPerson.fullName;
+                txtTeacherName.Text = currentPerson.fullName;
             }
             else if (MainView.role.Equals("Admin"))
             {
-                textBoxTeacherName.Hide();
+                txtTeacherName.Hide();
                 // Get list of teachers and add to comboBox
             }
-            textBoxCourseName.Text = MainView.currentCourse.name;
-            textBoxCourseDescription.Text = MainView.currentCourse.description;
-            this.FillCategories(MainView.currentCourse.taughtCourseID);
+            txtCourseName.Text = currentCourse.name;
+            txtCourseDescription.Text = currentCourse.description;
+            FillCategories();
 
         }
 
-        /// <summary> 
-        /// Returns from TaughtCourses join Categories: categoryID, name, weight 
-        /// Fills in text boxes accordingly. 
-        /// </summary>
-        private void FillCategories(int taughtCourseID)
+        private void FillCategories()
         {
-            /*
-             * try
+            
+            try
             {
-                // _categoryList = CoursesController.GetCategoriesByTaughtCourseID(currentCourse.courseID)
-                categoriesList = new List<Category>();
-                Category exams = new Category()
-                {
-                    categoryID = 1,
-                    name = "Exams",
-                    weight = 20
-                };
-                Category homework = new Category()
-                {
-                    categoryID = 2,
-                    name = "Homework",
-                    weight = 20
-                };
-                Category participation = new Category()
-                {
-                    categoryID = 3,
-                    name = "Participation",
-                    weight = 20
-                };
-                Category projects = new Category()
-                {
-                    categoryID = 4,
-                    name = "Projects",
-                    weight = 20
-                };
-                Category quizzes = new Category()
-                {
-                    categoryID = 5,
-                    name = "Quizzes",
-                    weight = 20
-                };
-                categoriesList.Add(exams);
-                categoriesList.Add(homework);
-                categoriesList.Add(participation);
-                categoriesList.Add(projects);
-                categoriesList.Add(quizzes);
-
-                // Keep the code below 
+                categoriesList = categoryService.findCategoriesByTaughtCourseID(currentCourse.taughtCourseID);
+                
                 foreach (Category category in categoriesList)
                 {
                     if (category.name == "Exams")
-                        textBoxExams.Text = category.weight.ToString();
+                        txtExams.Text = category.weight.ToString();
                     else if (category.name == "Homework")
-                        textBoxHomework.Text = category.weight.ToString();
+                        txtHomework.Text = category.weight.ToString();
                     else if (category.name == "Participation")
-                        textBoxParticipation.Text = category.weight.ToString();
+                        txtParticipation.Text = category.weight.ToString();
                     else if (category.name == "Projects")
-                        textBoxProjects.Text = category.weight.ToString();
+                        txtProjects.Text = category.weight.ToString();
                     else if (category.name == "Quizzes")
-                        textBoxQuizzes.Text = category.weight.ToString();
+                        txtQuizzes.Text = category.weight.ToString();
                 }
             }
             catch (Exception ex)
             {
                 lblClassViewError.Text = "Error loading categories.";
             }
-            */
+            
         }
 
-        /// <summary> Adds all the category weights together </summary>
         private void TotalCategories(List<TextBox> weightBoxes)
         {
-            /*
-             * 
             totalWeight = 0;
             foreach (TextBox weight in weightBoxes)
             {
@@ -151,7 +97,6 @@ namespace Gradebook
             }
 
             lblTotal.Text = totalWeight + "%";
-            */
         }
 
         private int TextBoxToInt(TextBox textBox)
@@ -176,18 +121,12 @@ namespace Gradebook
 
         ////////////////////////////////////////// Event Handlers  //////////////////////////////////////////
 
-        /// <summary> Changes totals when weight text boxes are changed. </summary>
         private void TextBox_TextChanged(object sender, EventArgs e)
         {
             if (weightBoxes != null)
                 this.TotalCategories(weightBoxes);
         }
 
-
-        /// <summary> 
-        /// The event below and its helper make it so only integers
-        /// are allowed to be entered into the category weights. 
-        /// </summary>
         private void AllowOnlyNumber(KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -202,7 +141,7 @@ namespace Gradebook
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            //this.FillCategories(currentCourse.taughtCourseID);
+            FillCategories();
             lblClassViewError.Text = "";
         }
 
@@ -221,15 +160,15 @@ namespace Gradebook
                 foreach (Category category in categoriesList)
                 {
                     if (category.name == "Exams")
-                        category.weight = TextBoxToInt(textBoxExams);
+                        category.weight = TextBoxToInt(txtExams);
                     else if (category.name == "Homework")
-                        category.weight = TextBoxToInt(textBoxHomework);
+                        category.weight = TextBoxToInt(txtHomework);
                     else if (category.name == "Participation")
-                        category.weight = TextBoxToInt(textBoxParticipation);
+                        category.weight = TextBoxToInt(txtParticipation);
                     else if (category.name == "Projects")
-                        category.weight = TextBoxToInt(textBoxProjects);
+                        category.weight = TextBoxToInt(txtProjects);
                     else if (category.name == "Quizzes")
-                        category.weight = TextBoxToInt(textBoxQuizzes);
+                        category.weight = TextBoxToInt(txtQuizzes);
 
                     //bool updated = CategoriesController.CategoriesDB.UpdateCategory(category);
                     bool updated = false;
