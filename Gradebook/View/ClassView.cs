@@ -13,11 +13,8 @@ using Gradebook.Controls;
 
 namespace Gradebook
 {
-    public partial class ClassView : BaseForm
+    public partial class ClassView : ContentForm
     {
-        private Person currentPerson;
-        private TaughtCourse currentCourse;
-        private string role;
         private List<Category> categoriesList;
         private int totalWeight;
         private List<TextBox> weightBoxes;
@@ -51,23 +48,25 @@ namespace Gradebook
         /// </summary>
         private void ClassView_Load(object sender, EventArgs e)
         {
-            role = MainView.role;
-            currentPerson = MainView.currentPerson;
-            currentCourse = MainView.currentCourse;
+            if (MainView.role == null || MainView.currentPerson == null || MainView.currentCourse == null)
+            {
+                lblClassViewError.Text = "Error loading form.";
+                return;
+            }
 
-            if (role.Equals("Teacher"))
+            if (MainView.role.Equals("Teacher"))
             {
                 cboTeacherName.Hide();
-                textBoxTeacherName.Text = currentPerson.fullName;
+                textBoxTeacherName.Text = MainView.currentPerson.fullName;
             }
-            else if (role.Equals("Admin"))
+            else if (MainView.role.Equals("Admin"))
             {
                 textBoxTeacherName.Hide();
                 // Get list of teachers and add to comboBox
             }
-            textBoxCourseName.Text = currentCourse.name;
-            textBoxCourseDescription.Text = currentCourse.description;
-            this.FillCategories(currentCourse.taughtCourseID);
+            textBoxCourseName.Text = MainView.currentCourse.name;
+            textBoxCourseDescription.Text = MainView.currentCourse.description;
+            this.FillCategories(MainView.currentCourse.taughtCourseID);
 
         }
 
