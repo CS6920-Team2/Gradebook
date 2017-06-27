@@ -7,13 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Gradebook.Data.DAO;
 
-namespace Gradebook.GradebookTests.ServiceTests
+namespace Gradebook.Tests.ServiceTests
 {
     [TestClass]
     public class AdminServiceTests
     {
         private AdminService adminService;
-        private Admin admin;
 
         [TestInitialize]
         public void TestSetUp()
@@ -24,17 +23,17 @@ namespace Gradebook.GradebookTests.ServiceTests
         [TestMethod]
         public void getAdminByUserIDTestSuccess()
         {
-            admin = adminService.getAdminByUserID(11);
+            Admin admin = adminService.getAdminByUserID(11);
             Assert.IsNotNull(admin);
             Assert.AreEqual(1, admin.adminID);
             Assert.AreEqual(11, admin.personID);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void getAdminByUserIDReturnNull()
+        public void getAdminByUserIDReturnsNull()
         {
-            admin = adminService.getAdminByUserID(1);
+            Admin admin = adminService.getAdminByUserID(-1);
+            Assert.IsNull(admin);
         }
     }
 }

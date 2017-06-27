@@ -147,6 +147,8 @@
     </Compile>
     <Compile Include="Tests\ConnectionFactoryTests\ConnectionFactoryTests.cs" />
     <Compile Include="Tests\ServiceTests\AdminServiceTests.cs" />
+    <Compile Include="Tests\ServiceTests\CategoryServiceTests.cs" />
+    <Compile Include="Tests\ServiceTests\TeacherServiceTests.cs" />
     <Compile Include="View\AssignmentsView.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -17,7 +17,7 @@ namespace Gradebook.Data.Services
             Admin admin;
             using (var connection = ConnectionFactory.GetOpenSQLiteConnection())
             {
-                admin = connection.Query<Admin>("select * from Admins where userID = @userID", new { userID = userID }).First();
+                admin = connection.Query<Admin>("select * from Admins where userID = @userID", new { userID = userID }).FirstOrDefault();
             }
             return admin;
         }
