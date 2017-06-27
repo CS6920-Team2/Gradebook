@@ -34,31 +34,52 @@ namespace Gradebook.View
             dataGridView1.Columns["Category ID"].Visible = false;
             dataGridView1.Columns["assignmentID"].Visible = false;
             dataGridView1.Columns["Description"].Visible = false;
-            dataGridView1.Enabled = false;
-            submitBtn.Visible = false;
-            updateBtn.Visible = false;
-            deleteBtn.Visible = false;
+            clickView();
+            DataGridViewRow row = this.dataGridView1.RowTemplate;
+            row.DefaultCellStyle.BackColor = Color.Black;
+            row.DefaultCellStyle.ForeColor = Color.White;
+            row.Height = 35;
+            row.MinimumHeight = 20;
         }
 
 
-        // Clicking the submit button will complete the transaction of deleting, inserting or updating.
+        // Clicking the submit button will complete the transaction of a insertion
         private void submitBtn_Click(object sender, EventArgs e)
         {
             if (isValidData() == true)
             {
-
-                // updated = assignmentService.updateAssignment(Int32.Parse(assignmentIDTB.Text), 3, nameTB.Text, descriptionTB.Text,
-               // assignedDatedtp.Value, dueDatedtp.Value, Int32.Parse(possiblePointsTB.Text));
                assignmentService.addAssignment(3, nameTB.Text, descriptionTB.Text, 
                    assignedDatedtp.Value, dueDatedtp.Value, Int32.Parse(possiblePointsTB.Text));
+                MessageBox.Show("Successful Addition");
                 dataGridView1.Update();
             }
+        }
+
+
+        // Clicking the update button will complete the transaction of a update
+        private void updateBtn_Click(object sender, EventArgs e)
+        {
+            if (isValidData() == true)
+            {
+                bool updated = assignmentService.updateAssignment(Int32.Parse(assignmentIDTB.Text), 3, nameTB.Text, descriptionTB.Text,
+                assignedDatedtp.Value, dueDatedtp.Value, Int32.Parse(possiblePointsTB.Text));
+                MessageBox.Show("Successful Update");
+                dataGridView1.Update();
+            }
+
+        }
+
+        // Clicking the delete button will complete the transaction of a deletion
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+            assignmentService.deleteAssignment(Int32.Parse(assignmentIDTB.Text));
+            MessageBox.Show("Successful Deletion");
+            dataGridView1.Update();
         }
 
         // Clicking the datagrid selects a row and assigns the values to the textboxes.
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            controlsEnabled();
             if (e.RowIndex == -1)  // ignore header row
                 return;
             assignmentIDTB.Text = dataGridView1.Rows[e.RowIndex].Cells[0].FormattedValue.ToString();
@@ -68,22 +89,32 @@ namespace Gradebook.View
             dueDatedtp.Value = (DateTime)dataGridView1.Rows[e.RowIndex].Cells[3].Value;
             possiblePointsTB.Text = dataGridView1.Rows[e.RowIndex].Cells[7].FormattedValue.ToString();
             categoryCB.Text = dataGridView1.Rows[e.RowIndex].Cells[5].FormattedValue.ToString();
-
         }
 
+        // Clicking event shows the Add View
         private void addBtn_Click(object sender, EventArgs e)
         {
             clickAdd();
         }
 
+        // Clicking event shows the Modify View
         private void modifyBtn_Click(object sender, EventArgs e)
         {
-                clickModify();
+            clickModify();
         }
 
+        // Clicking event shows the View only
+        private void viewBtn_Click(object sender, EventArgs e)
+        {
+            clickView();
+        }
+
+        // Toggles to Add View
         private void clickAdd()
         {
             controlsEnabled();
+            viewBtn.Enabled = true;
+            viewBtn.ForeColor = Color.Red;
             addBtn.Enabled = false;
             addBtn.ForeColor = Color.Black;
             modifyBtn.Enabled = true;
@@ -99,9 +130,12 @@ namespace Gradebook.View
             resetControls();
         }
 
+        // Toggles to the Modify View
         private void clickModify()
         {
-            controlsDisabled();
+            controlsEnabled();
+            viewBtn.Enabled = true;
+            viewBtn.ForeColor = Color.Red;
             addBtn.Enabled = true;
             addBtn.ForeColor = Color.Red;
             modifyBtn.Enabled = false;
@@ -115,6 +149,26 @@ namespace Gradebook.View
             submitBtn.Visible = false;
             updateBtn.Visible = true;
             deleteBtn.Visible = true;
+        }
+
+        // Toggles to the View only
+        private void clickView()
+        {
+            controlsDisabled();
+            viewBtn.Enabled = false;
+            addBtn.Enabled = true;
+            modifyBtn.Enabled = true;
+            submitBtn.Visible = false;
+            updateBtn.Visible = false;
+            deleteBtn.Visible = false;
+            viewBtn.ForeColor = Color.Black;
+            modifyBtn.ForeColor = Color.Red;
+            addBtn.ForeColor = Color.Red;
+            dataGridView1.Enabled = true;
+            dataGridView1.BackgroundColor = Color.White;
+            dataGridView1.ForeColor = Color.Black;
+            dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
+            dataGridView1.EnableHeadersVisualStyles = true;
         }
 
         // Checks that all data is valid before a transaction.
@@ -156,6 +210,7 @@ namespace Gradebook.View
             possiblePointsTB.Enabled = true;
         }
 
+        // Resets the controls to default values.
         private void resetControls()
         {
             assignmentIDTB.Text = "";

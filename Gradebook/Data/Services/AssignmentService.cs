@@ -82,5 +82,18 @@ namespace Gradebook.Data.Services
                     });
             }
         }
+
+        public void deleteAssignment(int newAssignmentID)
+        {
+            int rowsAffected = 0;
+            using (var connection = ConnectionFactory.GetOpenConnection())
+            {
+                rowsAffected = connection.Execute("delete from Assignments where assignmentID = @assignmentID",
+                    new
+                    {
+                        assignmentID = newAssignmentID
+                    });
+            }
+        }
     }
 }

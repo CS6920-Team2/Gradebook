@@ -13,5 +13,8 @@ namespace Gradebook.Data.Interfaces
         DataSet CreateAssignmentDataSet();
         bool updateAssignment(int newAssignmentID, int newCategoryID, string newName, string newDescription,
             DateTime newAssignedDate, DateTime newDueDate, int newPossiblePoints);
+        void addAssignment(int newCategoryID, string newName, string newDescription,
+            DateTime newAssignedDate, DateTime newDueDate, int newPossiblePoints);
+        void deleteAssignment(int newAssignmentID);
     }
 }

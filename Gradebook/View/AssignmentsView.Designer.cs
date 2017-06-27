@@ -48,6 +48,7 @@
             this.modifyBtn = new System.Windows.Forms.Button();
             this.updateBtn = new System.Windows.Forms.Button();
             this.deleteBtn = new System.Windows.Forms.Button();
+            this.viewBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -158,14 +159,14 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(40, 178);
+            this.dataGridView1.Location = new System.Drawing.Point(293, 178);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 50;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(824, 180);
+            this.dataGridView1.Size = new System.Drawing.Size(499, 238);
             this.dataGridView1.TabIndex = 15;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
@@ -181,7 +182,7 @@
             // 
             // submitBtn
             // 
-            this.submitBtn.Location = new System.Drawing.Point(693, 375);
+            this.submitBtn.Location = new System.Drawing.Point(695, 422);
             this.submitBtn.Name = "submitBtn";
             this.submitBtn.Size = new System.Drawing.Size(97, 40);
             this.submitBtn.TabIndex = 17;
@@ -199,7 +200,7 @@
             // 
             // addBtn
             // 
-            this.addBtn.Location = new System.Drawing.Point(99, 56);
+            this.addBtn.Location = new System.Drawing.Point(99, 108);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(97, 40);
             this.addBtn.TabIndex = 20;
@@ -209,7 +210,7 @@
             // 
             // modifyBtn
             // 
-            this.modifyBtn.Location = new System.Drawing.Point(99, 122);
+            this.modifyBtn.Location = new System.Drawing.Point(99, 154);
             this.modifyBtn.Name = "modifyBtn";
             this.modifyBtn.Size = new System.Drawing.Size(97, 40);
             this.modifyBtn.TabIndex = 21;
@@ -219,21 +220,33 @@
             // 
             // updateBtn
             // 
-            this.updateBtn.Location = new System.Drawing.Point(693, 375);
+            this.updateBtn.Location = new System.Drawing.Point(695, 422);
             this.updateBtn.Name = "updateBtn";
             this.updateBtn.Size = new System.Drawing.Size(97, 40);
             this.updateBtn.TabIndex = 22;
             this.updateBtn.Text = "Update";
             this.updateBtn.UseVisualStyleBackColor = true;
+            this.updateBtn.Click += new System.EventHandler(this.updateBtn_Click);
             // 
             // deleteBtn
             // 
-            this.deleteBtn.Location = new System.Drawing.Point(588, 375);
+            this.deleteBtn.Location = new System.Drawing.Point(588, 422);
             this.deleteBtn.Name = "deleteBtn";
             this.deleteBtn.Size = new System.Drawing.Size(97, 40);
             this.deleteBtn.TabIndex = 23;
             this.deleteBtn.Text = "Delete";
             this.deleteBtn.UseVisualStyleBackColor = true;
+            this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
+            // 
+            // viewBtn
+            // 
+            this.viewBtn.Location = new System.Drawing.Point(99, 62);
+            this.viewBtn.Name = "viewBtn";
+            this.viewBtn.Size = new System.Drawing.Size(97, 40);
+            this.viewBtn.TabIndex = 24;
+            this.viewBtn.Text = "View";
+            this.viewBtn.UseVisualStyleBackColor = true;
+            this.viewBtn.Click += new System.EventHandler(this.viewBtn_Click);
             // 
             // AssignmentsView
             // 
@@ -241,6 +254,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.HotTrack;
             this.ClientSize = new System.Drawing.Size(895, 474);
+            this.Controls.Add(this.viewBtn);
             this.Controls.Add(this.deleteBtn);
             this.Controls.Add(this.updateBtn);
             this.Controls.Add(this.modifyBtn);
@@ -295,5 +309,6 @@
         private System.Windows.Forms.Button modifyBtn;
         private System.Windows.Forms.Button updateBtn;
         private System.Windows.Forms.Button deleteBtn;
+        private System.Windows.Forms.Button viewBtn;
     }
 }
