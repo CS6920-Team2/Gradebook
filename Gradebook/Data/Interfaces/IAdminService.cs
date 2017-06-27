@@ -7,7 +7,7 @@ using Gradebook.Data.DAO;
 
 namespace Gradebook.Data.Interfaces
 {
-    interface IAdminService
+    public interface IAdminService
     {
         Admin getAdminByUserID(int userID);
     }

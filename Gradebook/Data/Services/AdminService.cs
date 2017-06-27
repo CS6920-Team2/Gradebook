@@ -10,7 +10,7 @@ using Gradebook.Data.Factories;
 
 namespace Gradebook.Data.Services
 {
-    class AdminService : IAdminService
+    public class AdminService : IAdminService
     {
         public Admin getAdminByUserID(int userID)
         {
