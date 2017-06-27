@@ -10,16 +10,17 @@ using Gradebook.Data.Interfaces;
 
 namespace Gradebook.Data.Services
 {
-    class RoleService : IRoleService
+    public class RoleService : IRoleService
     {
-        public string findRole(int roleID)
+        public string findRoleByRoleID(int roleID)
         {
             Role roleObject;
-            using (var connection = ConnectionFactory.GetOpenConnection())
+            using (var connection = ConnectionFactory.GetOpenSQLiteConnection())
             {
                 roleObject = connection.Query<Role>("select role from Roles where roleID = @roleID", new {roleID = roleID}).FirstOrDefault();
             }
-            return roleObject.role;
+
+            return roleObject != null ? roleObject.role : null;
         }
     }
 }

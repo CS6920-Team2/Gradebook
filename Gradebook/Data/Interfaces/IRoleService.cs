@@ -7,8 +7,8 @@ using Gradebook.Data.DAO;
 
 namespace Gradebook.Data.Interfaces
 {
-    interface IRoleService
+    public interface IRoleService
     {
-        string findRole(int roleID);
+        string findRoleByRoleID(int roleID);
     }
 }

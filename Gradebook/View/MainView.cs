@@ -62,7 +62,7 @@ namespace Gradebook
         {
             try
             {
-                role = roleService.findRole(currentUser.RoleID);
+                role = roleService.findRoleByRoleID(currentUser.RoleID);
 
                 if (role.Equals("Teacher"))
                 {
