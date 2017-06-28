@@ -17,10 +17,12 @@ using static Gradebook.Data.Factories.ConnectionFactory;
 
 namespace Gradebook.View
 {
-    public partial class AssignmentsView : BaseForm
+    public partial class AssignmentsView : ContentForm
     {
 
         private AssignmentService assignmentService;
+
+        DataSet ds;
         public AssignmentsView()
         {
             InitializeComponent();
@@ -29,7 +31,7 @@ namespace Gradebook.View
 
         private void AssignmentsView_Load(object sender, EventArgs e)
         {
-            DataSet ds = assignmentService.CreateAssignmentDataSet();
+            ds = assignmentService.CreateAssignmentDataSet();
             dataGridView1.DataSource = ds.Tables[0];
             dataGridView1.Columns["Category ID"].Visible = false;
             dataGridView1.Columns["assignmentID"].Visible = false;
@@ -51,7 +53,7 @@ namespace Gradebook.View
                assignmentService.addAssignment(3, nameTB.Text, descriptionTB.Text, 
                    assignedDatedtp.Value, dueDatedtp.Value, Int32.Parse(possiblePointsTB.Text));
                 MessageBox.Show("Successful Addition");
-                dataGridView1.Update();
+                loadDataGridView();
             }
         }
 
@@ -64,7 +66,7 @@ namespace Gradebook.View
                 bool updated = assignmentService.updateAssignment(Int32.Parse(assignmentIDTB.Text), 3, nameTB.Text, descriptionTB.Text,
                 assignedDatedtp.Value, dueDatedtp.Value, Int32.Parse(possiblePointsTB.Text));
                 MessageBox.Show("Successful Update");
-                dataGridView1.Update();
+                loadDataGridView();
             }
 
         }
@@ -74,7 +76,7 @@ namespace Gradebook.View
         {
             assignmentService.deleteAssignment(Int32.Parse(assignmentIDTB.Text));
             MessageBox.Show("Successful Deletion");
-            dataGridView1.Update();
+            loadDataGridView();
         }
 
         // Clicking the datagrid selects a row and assigns the values to the textboxes.
@@ -221,5 +223,14 @@ namespace Gradebook.View
             possiblePointsTB.Text = "";
             categoryCB.Text = "";
         }
+
+        // Loads the datagridview .
+        private void loadDataGridView()
+        {
+            ds = assignmentService.CreateAssignmentDataSet();
+            dataGridView1.DataSource = ds.Tables[0];
+        }
     }
+
+
 }
