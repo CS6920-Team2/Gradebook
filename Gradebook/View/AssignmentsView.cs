@@ -52,7 +52,8 @@ namespace Gradebook.View
             {
                assignmentService.addAssignment(3, nameTB.Text, descriptionTB.Text, 
                    assignedDatedtp.Value, dueDatedtp.Value, Int32.Parse(possiblePointsTB.Text));
-                MessageBox.Show("Successful Addition");
+                MessageBox.Show("You have succesfully added the Assignment", "Successful Addition");
+                resetControls();
                 loadDataGridView();
             }
         }
@@ -65,7 +66,8 @@ namespace Gradebook.View
             {
                 bool updated = assignmentService.updateAssignment(Int32.Parse(assignmentIDTB.Text), 3, nameTB.Text, descriptionTB.Text,
                 assignedDatedtp.Value, dueDatedtp.Value, Int32.Parse(possiblePointsTB.Text));
-                MessageBox.Show("Successful Update");
+                MessageBox.Show("You have succesfully updated the Assignment", "Successful Update");
+                resetControls();
                 loadDataGridView();
             }
 
@@ -75,7 +77,8 @@ namespace Gradebook.View
         private void deleteBtn_Click(object sender, EventArgs e)
         {
             assignmentService.deleteAssignment(Int32.Parse(assignmentIDTB.Text));
-            MessageBox.Show("Successful Deletion");
+            MessageBox.Show("You have succesfully deleted the Assignment", "Successful Deletion");
+            resetControls();
             loadDataGridView();
         }
 
