@@ -184,6 +184,11 @@ namespace Gradebook.View
         // Checks that all data is valid before a transaction.
         private bool isValidData()
         {
+            if (Int32.Parse(possiblePointsTB.Text) < 1 || Int32.Parse(possiblePointsTB.Text) > 100)
+            {
+                MessageBox.Show("Possible points should be between 1 and 100", "Points Error");
+                return false;
+            }
             if (assignedDatedtp.Value > dueDatedtp.Value)
             {
                 MessageBox.Show("Due Date must be greater than or equal to Assigned Date", "Date Error");
