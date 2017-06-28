@@ -55,7 +55,7 @@ namespace Gradebook.View
         {
             if (isValidData() == true)
             {
-               assignmentService.addAssignment(3, nameTB.Text, descriptionTB.Text, 
+               assignmentService.addAssignment((int)categoryCB.SelectedValue, nameTB.Text, descriptionTB.Text, 
                    assignedDatedtp.Value, dueDatedtp.Value, Int32.Parse(possiblePointsTB.Text));
                 MessageBox.Show("You have succesfully added the Assignment", "Successful Addition");
                 resetControls();
@@ -69,7 +69,7 @@ namespace Gradebook.View
         {
             if (isValidData() == true)
             {
-                bool updated = assignmentService.updateAssignment(Int32.Parse(assignmentIDTB.Text), 3, nameTB.Text, descriptionTB.Text,
+                bool updated = assignmentService.updateAssignment(Int32.Parse(assignmentIDTB.Text), (int)categoryCB.SelectedValue, nameTB.Text, descriptionTB.Text,
                 assignedDatedtp.Value, dueDatedtp.Value, Int32.Parse(possiblePointsTB.Text));
                 MessageBox.Show("You have succesfully updated the Assignment", "Successful Update");
                 resetControls();
