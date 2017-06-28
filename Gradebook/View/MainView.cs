@@ -24,12 +24,14 @@ namespace Gradebook
         private TeacherService teacherService;
         private PersonService personService;
         private CourseService courseService;
+        private StudentService studentService;
 
         public static string role;
         public static Person currentPerson;
         public static TaughtCourse currentCourse;
         private int teacherID;
         private int adminID;
+        private int studentID;
         
 
         public MainView()
@@ -40,16 +42,16 @@ namespace Gradebook
             teacherService = new TeacherService();
             personService = new PersonService();
             courseService = new CourseService();
+            studentService = new StudentService();
         }
 
         private void MainMDI_Load(object sender, EventArgs e)
         {
             try
             {
-                // Keep below methods in real application 
                 this.AssignPerson();
                 this.LoadLeftNav();
-                this.AdjustNavForUser();
+                this.LoadTopNav();
             }
             catch (Exception ex)
             {
@@ -76,6 +78,12 @@ namespace Gradebook
                     currentPerson = personService.getPersonByPersonID(tempAdmin.personID);
                     adminID = tempAdmin.adminID;
                 }
+                else if (role.Equals("Student"))
+                {
+                    Student tempStudent = studentService.getStudentByUserID(currentUser.UserID);
+                    currentPerson = personService.getPersonByPersonID(tempStudent.personID);
+                    studentID = tempStudent.studentID;
+                }
             }
             catch (Exception ex)
             {
@@ -85,13 +93,16 @@ namespace Gradebook
 
         private void LoadLeftNav()
         {
+            currentCourse = null;
             lblName.Text = currentPerson.fullName;
             lblRole.Text = role;
             lblIDNumber.Text = currentPerson.personID.ToString();
             if (role == "Teacher")
                 lblWorkIDNumber.Text = teacherID.ToString();
-            else if (role == "Admin")
+            else if (role == "Administrator")
                 lblWorkIDNumber.Text = adminID.ToString();
+            else if (role == "Student")
+                lblWorkIDNumber.Text = studentID.ToString();
 
             if (role == "Teacher")
             {
@@ -112,7 +123,7 @@ namespace Gradebook
             }
         }
 
-        private void AdjustNavForUser()
+        private void LoadTopNav()
         {
             if (role == "Administrator" || role == "Student")
             {
@@ -147,7 +158,7 @@ namespace Gradebook
 
         private void BtnReportsView_Click(object sender, EventArgs e)
         {
-            //FormManager.Current.UpdateMainViewContent<GradebookView>();
+            //FormManager.Current.UpdateMainViewContent<ReportsView>();
         }
 
         public T UpdatePanelView<T>() where T : Form, new()
@@ -178,6 +189,7 @@ namespace Gradebook
             // Must close content panel so that main view can close
             while (contentPanel.Controls.Count > 0)
                 contentPanel.Controls[0].Dispose();
+
             FormManager.Current.CreateAndShowForm<LoginView>();
         }
 

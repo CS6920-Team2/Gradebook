@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Gradebook.Data.DAO
 {
-    class Student : Person
+    public class Student : Person
     {
         public int studentID { get; set; }
     }

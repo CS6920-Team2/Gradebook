@@ -125,6 +125,7 @@
     <Compile Include="Data\Interfaces\ICourseService.cs" />
     <Compile Include="Data\Interfaces\IPersonService.cs" />
     <Compile Include="Data\Interfaces\IRoleService.cs" />
+    <Compile Include="Data\Interfaces\IStudentService.cs" />
     <Compile Include="Data\Interfaces\ITeacherService.cs" />
     <Compile Include="Data\Interfaces\IUserService.cs" />
     <Compile Include="Data\Services\AdminService.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Data\Services\CourseService.cs" />
     <Compile Include="Data\Services\PersonService.cs" />
     <Compile Include="Data\Services\RoleService.cs" />
+    <Compile Include="Data\Services\StudentService.cs" />
     <Compile Include="Data\Services\TeacherService.cs" />
     <Compile Include="Data\Services\UserService.cs" />
     <Compile Include="Data\Utils\ConversionUtils.cs" />
@@ -151,6 +153,7 @@
     <Compile Include="Tests\ServiceTests\CourseServiceTests.cs" />
     <Compile Include="Tests\ServiceTests\PersonServiceTests.cs" />
     <Compile Include="Tests\ServiceTests\RoleServiceTests.cs" />
+    <Compile Include="Tests\ServiceTests\StudentServiceTests.cs" />
     <Compile Include="Tests\ServiceTests\TeacherServiceTests.cs" />
     <Compile Include="View\AssignmentsView.cs">
       <SubType>Form</SubType>
