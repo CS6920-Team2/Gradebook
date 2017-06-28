@@ -184,13 +184,19 @@ namespace Gradebook.View
         // Checks that all data is valid before a transaction.
         private bool isValidData()
         {
+            if (assignedDatedtp.Value > dueDatedtp.Value)
+            {
+                MessageBox.Show("Due Date must be greater than or equal to Assigned Date", "Date Error");
+                return false;
+            }
             if (Validator.IsPresent(nameTB) &&
                 Validator.IsPresent(descriptionTB) &&
-                //Validator.IsPresent(categoryCB) &&
-                Validator.IsPresent(possiblePointsTB))
+                Validator.IsPresent(categoryCB) &&
+                Validator.IsPresent(possiblePointsTB) &&
+                Validator.IsInt32(possiblePointsTB))
+
             {
                 return true;
-
             }
             else
             {
