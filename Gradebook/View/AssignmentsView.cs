@@ -1,4 +1,5 @@
 ﻿using Gradebook.Controls;
+using Gradebook.Data.DAO;
 using Gradebook.Data.Factories;
 using Gradebook.Data.Services;
 using Gradebook.Data.Utils;
@@ -21,12 +22,15 @@ namespace Gradebook.View
     {
 
         private AssignmentService assignmentService;
+        private CategoryService categoryService;
+        private TaughtCourse currentCourse = MainView.currentCourse;
 
         DataSet ds;
         public AssignmentsView()
         {
             InitializeComponent();
             assignmentService = new AssignmentService();
+            categoryService = new CategoryService();
         }
 
         private void AssignmentsView_Load(object sender, EventArgs e)
@@ -37,6 +41,7 @@ namespace Gradebook.View
             dataGridView1.Columns["assignmentID"].Visible = false;
             dataGridView1.Columns["Description"].Visible = false;
             clickView();
+            loadCategoryCMB();
             DataGridViewRow row = this.dataGridView1.RowTemplate;
             row.DefaultCellStyle.BackColor = Color.Black;
             row.DefaultCellStyle.ForeColor = Color.White;
@@ -232,6 +237,23 @@ namespace Gradebook.View
         {
             ds = assignmentService.CreateAssignmentDataSet();
             dataGridView1.DataSource = ds.Tables[0];
+        }
+
+        private void loadCategoryCMB()
+        {
+            try
+            {
+                List<Category> categoryList = categoryService.findCategoriesByTaughtCourseID(currentCourse.taughtCourseID);
+                categoryCB.DataSource = categoryList;
+                categoryCB.DisplayMember = "name";
+                categoryCB.ValueMember = "categoryID";
+                categoryCB.SelectedIndex = -1;
+                //currentCourse = (TaughtCourse)categoryCB.SelectedItem;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 
