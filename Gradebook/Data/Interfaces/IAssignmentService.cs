@@ -10,7 +10,7 @@ namespace Gradebook.Data.Interfaces
 {
     interface IAssignmentService
     {
-        DataSet CreateAssignmentDataSet();
+        DataSet CreateAssignmentDataSet(int taughtCourseID);
         bool updateAssignment(int newAssignmentID, int newCategoryID, string newName, string newDescription,
             DateTime newAssignedDate, DateTime newDueDate, int newPossiblePoints);
         void addAssignment(int newCategoryID, string newName, string newDescription,

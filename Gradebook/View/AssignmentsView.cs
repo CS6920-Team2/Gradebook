@@ -35,8 +35,7 @@ namespace Gradebook.View
 
         private void AssignmentsView_Load(object sender, EventArgs e)
         {
-            ds = assignmentService.CreateAssignmentDataSet();
-            dataGridView1.DataSource = ds.Tables[0];
+            loadDataGridView();
             dataGridView1.Columns["Category ID"].Visible = false;
             dataGridView1.Columns["assignmentID"].Visible = false;
             dataGridView1.Columns["Description"].Visible = false;
@@ -246,7 +245,7 @@ namespace Gradebook.View
         // Loads the datagridview .
         private void loadDataGridView()
         {
-            ds = assignmentService.CreateAssignmentDataSet();
+            ds = assignmentService.CreateAssignmentDataSet(currentCourse.taughtCourseID);
             dataGridView1.DataSource = ds.Tables[0];
         }
 

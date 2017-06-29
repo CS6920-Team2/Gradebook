@@ -5,6 +5,7 @@ using Gradebook.Data.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Data.SQLite;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,8 @@ namespace Gradebook.Data.Services
     public class AssignmentService : IAssignmentService
     {
 
-        public DataSet CreateAssignmentDataSet()
+
+        public DataSet CreateAssignmentDataSet(int taughtCourseID)
         {
             var connection = ConnectionFactory.GetOpenSQLiteConnection();
             SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("SELECT a.assignmentID, " +
@@ -27,13 +29,17 @@ namespace Gradebook.Data.Services
                 "ON c.taughtCourseID = tc.taughtCourseID " +
                 "JOIN Assignments a " +
                 "ON c.categoryID = a.categoryID " +
-                "ORDER BY a.assignedDate ASC; ", connection);
+                "WHERE c.taughtCourseID = "+taughtCourseID + 
+                " ORDER BY a.assignedDate ASC; ", connection);
+
             DataSet ds = new System.Data.DataSet();
 
             dataAdapter.Fill(ds, "Assignments");
 
             return ds;
         }
+
+
 
         public DataSet GetAssignments(int classId, DataSet dataSet)
         {
