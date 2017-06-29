@@ -18,17 +18,19 @@ namespace Gradebook
     public partial class ClassView : ContentForm
     {
         private CategoryService categoryService;
+        private TeacherService teacherService;
         private List<Category> categoriesList;
         private List<TextBox> categoryBoxes;
         private TaughtCourse currentCourse;
-        private bool addToggleActive;
         private int totalWeight;
         
         public ClassView()
         {
             InitializeComponent();
-            categoryService = new CategoryService();
             InitializeCategoryBoxes();
+            categoryService = new CategoryService();
+            teacherService = new TeacherService();
+            
         }
 
         private void ClassView_Load(object sender, EventArgs e)
@@ -76,11 +78,11 @@ namespace Gradebook
         {
             ClearMessageFields();
 
-            if (totalWeight == 100)
+            if (IsWeightTotal100())
             {
                 try
                 {
-                    PullCategoriesInForm();
+                    UpdateCategoryListUsingFormValues();
 
                     bool updateSuccessful = categoryService.updateAllCategoriesForTaughtCourse(categoriesList);
 
@@ -97,22 +99,43 @@ namespace Gradebook
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////// ADMIN VIEW //////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////// ADD ADMIN VIEW //////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
 
         private void LoadAdminAddView()
         {
-            ToggleAdminControls(true);
-
-            FillAllCategoriesTo(20);
+            ToggleSetForAddNewCourse(true);
+            
+            FillTeacherComboBox();
+            txtCourseName.Text = "";
+            txtCourseDescription.Text = "";
+            FillAllCategoryBoxesTo(20);
         }
 
-        private void LoadAdminDeleteView()
+        private void BtnAdd_Click(object sender, EventArgs e)
         {
-            ToggleAdminControls(false);
+            ClearMessageFields();
+            bool formIsValid = ValidateAddForm();
 
-            // Delete item below later
-            FillAllCategoriesTo(20);
+            if (formIsValid)
+            {
+                // Teacher ID
+                int teacherID = (int)cboTeacherName.SelectedValue;
+
+                // Course info
+                Course newCourse = new Course()
+                {
+                    creditID = 1,
+                    name = txtCourseName.Text,
+                    description = txtCourseDescription.Text
+                };
+
+                // Set categories
+                categoriesList = InitializeNewCategoryList();
+                UpdateCategoryListUsingFormValues(); 
+
+                // Add to DB
+            }
         }
 
         private void BtnAddToggle_Click(object sender, EventArgs e)
@@ -123,6 +146,33 @@ namespace Gradebook
             LoadAdminAddView();
         }
 
+        private bool ValidateAddForm()
+        {
+            return (!Validator.IsPresent(txtCourseName, lblClassViewError) ||
+                    !Validator.IsPresent(txtCourseDescription, lblClassViewError) ||
+                    !IsWeightTotal100());
+        }
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////// DELETE ADMIN VIEW ///////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+
+        private void LoadAdminDeleteView()
+        {
+            ToggleSetForAddNewCourse(false);
+
+            FillTeacherComboBox();
+
+            // Delete item below later
+            FillAllCategoryBoxesTo(20);
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void BtnDeleteToggle_Click(object sender, EventArgs e)
         {
             btnAddToggle.CheckState = CheckState.Unchecked;
@@ -130,7 +180,8 @@ namespace Gradebook
 
             LoadAdminDeleteView();
         }
-        private void ToggleAdminControls(bool activate)
+
+        private void ToggleSetForAddNewCourse(bool activate)
         {
             txtCourseName.Visible = activate;
 
@@ -146,21 +197,46 @@ namespace Gradebook
             txtCourseName.ReadOnly = false;
         }
 
+        private void FillTeacherComboBox()
+        {
+            try
+            {
+                List<Teacher> teachers = teacherService.getAllTeachers();
+                cboTeacherName.DataSource = teachers;
+                cboTeacherName.DisplayMember = "fullName";
+                cboTeacherName.ValueMember = "teacherID";
+                cboTeacherName.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                lblClassViewError.Text = "Unable to find any teachers.";
+            }
+        }
+
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////// CATEGORY WEIGHT HELPERS /////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
 
         public void InitializeCategoryBoxes()
         {
-            categoryBoxes = new List<TextBox>();
-            categoryBoxes.Add(txtExams);
-            categoryBoxes.Add(txtHomework);
-            categoryBoxes.Add(txtParticipation);
-            categoryBoxes.Add(txtProjects);
-            categoryBoxes.Add(txtQuizzes);
+            categoryBoxes = new List<TextBox>() { txtExams, txtHomework, txtParticipation, txtProjects, txtQuizzes };
         }
 
-        private void FillAllCategoriesTo(int fillAmount)
+        private List<Category> InitializeNewCategoryList()
+        {
+            List<String> categoryNames = new List<string>() { "Exams", "Homework", "Participation", "Projects", "Quizzes" };
+            List<Category> newCategories = new List<Category>();
+
+            foreach (String categoryName in categoryNames)
+            {
+                Category category = new Category() { name = categoryName };
+                newCategories.Add(category);
+            }
+
+            return newCategories;
+        }
+
+        private void FillAllCategoryBoxesTo(int fillAmount)
         {
             foreach (TextBox categoryBox in categoryBoxes)
             {
@@ -196,7 +272,7 @@ namespace Gradebook
             }
         }
 
-        private void PullCategoriesInForm()
+        private void UpdateCategoryListUsingFormValues()
         {
             foreach (Category category in categoriesList)
             {
@@ -233,6 +309,16 @@ namespace Gradebook
 
             lblTotal.Text = totalWeight + "%";
             lblTotal.ForeColor = totalWeight != 100 ? Color.Red : Color.Green;
+        }
+
+        private bool IsWeightTotal100()
+        {
+            if (totalWeight != 100)
+            {
+                lblClassViewError.Text = "Total weight must equal 100.";
+                return false;
+            }
+            return true;
         }
 
         private void SetCategoryToZero_LeaveText(object sender, EventArgs e)

@@ -10,5 +10,6 @@ namespace Gradebook.Data.Interfaces
     interface ITeacherService
     {
         Teacher getTeacherByUserID(int userID);
+        List<Teacher> getAllTeachers();
     }
 }

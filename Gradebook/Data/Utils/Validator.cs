@@ -83,5 +83,16 @@ namespace Gradebook.Data.Utils
                 return false;
             }
         }
+
+        public static bool IsPresent (TextBox textBox, Label errorLabel)
+        {
+            if (String.IsNullOrWhiteSpace(textBox.Text))
+            {
+                errorLabel.Text = textBox.Tag + " is required.";
+                textBox.Focus();
+                return false;
+            }
+            return true;
+        }
     }
 }

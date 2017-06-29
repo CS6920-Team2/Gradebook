@@ -73,7 +73,7 @@
             this.groupBoxClassDescription.Size = new System.Drawing.Size(332, 116);
             this.groupBoxClassDescription.TabIndex = 0;
             this.groupBoxClassDescription.TabStop = false;
-            this.groupBoxClassDescription.Text = "Class Description";
+            this.groupBoxClassDescription.Text = "Course Description";
             // 
             // txtCourseDescription
             // 
@@ -85,6 +85,7 @@
             this.txtCourseDescription.ReadOnly = true;
             this.txtCourseDescription.Size = new System.Drawing.Size(326, 97);
             this.txtCourseDescription.TabIndex = 0;
+            this.txtCourseDescription.Tag = "Course description";
             // 
             // lblCourse
             // 
@@ -268,11 +269,12 @@
             // txtCourseName
             // 
             this.txtCourseName.Location = new System.Drawing.Point(92, 45);
-            this.txtCourseName.MaxLength = 50;
+            this.txtCourseName.MaxLength = 20;
             this.txtCourseName.Name = "txtCourseName";
             this.txtCourseName.ReadOnly = true;
             this.txtCourseName.Size = new System.Drawing.Size(252, 20);
             this.txtCourseName.TabIndex = 6;
+            this.txtCourseName.Tag = "Course name";
             // 
             // label6
             // 
@@ -363,6 +365,7 @@
             this.btnAdd.TabIndex = 16;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
             // btnDelete
             // 
@@ -372,6 +375,7 @@
             this.btnDelete.TabIndex = 17;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
             // cboCourseName
             // 
@@ -379,13 +383,13 @@
             this.cboCourseName.FormattingEnabled = true;
             this.cboCourseName.Location = new System.Drawing.Point(92, 45);
             this.cboCourseName.Name = "cboCourseName";
-            this.cboCourseName.Size = new System.Drawing.Size(145, 21);
+            this.cboCourseName.Size = new System.Drawing.Size(156, 21);
             this.cboCourseName.TabIndex = 18;
             // 
             // lblCourseID
             // 
             this.lblCourseID.AutoSize = true;
-            this.lblCourseID.Location = new System.Drawing.Point(254, 48);
+            this.lblCourseID.Location = new System.Drawing.Point(255, 48);
             this.lblCourseID.Name = "lblCourseID";
             this.lblCourseID.Size = new System.Drawing.Size(21, 13);
             this.lblCourseID.TabIndex = 19;
