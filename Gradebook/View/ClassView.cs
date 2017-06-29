@@ -18,58 +18,164 @@ namespace Gradebook
     public partial class ClassView : ContentForm
     {
         private CategoryService categoryService;
-        private string currentRole = MainView.role;
-        private Person currentPerson = MainView.currentPerson;
-        private TaughtCourse currentCourse = MainView.currentCourse;
         private List<Category> categoriesList;
+        private List<TextBox> categoryBoxes;
+        private TaughtCourse currentCourse;
+        private bool addToggleActive;
         private int totalWeight;
-        private List<TextBox> weightBoxes;
-
+        
         public ClassView()
         {
             InitializeComponent();
             categoryService = new CategoryService();
-
-            weightBoxes = new List<TextBox>();
-            weightBoxes.Add(txtExams);
-            weightBoxes.Add(txtHomework);
-            weightBoxes.Add(txtParticipation);
-            weightBoxes.Add(txtProjects);
-            weightBoxes.Add(txtQuizzes);
+            InitializeCategoryBoxes();
         }
 
         private void ClassView_Load(object sender, EventArgs e)
         {
-            if (currentRole == null || currentPerson == null || currentCourse == null)
+            if (MainView.role.Equals("Teacher"))
             {
-                lblClassViewError.Text = "Error loading form.";
-                return;
+                LoadTeacherView();
             }
-
-            if (currentRole.Equals("Teacher"))
+            else if (MainView.role.Equals("Administrator"))
             {
-                cboTeacherName.Hide();
-                txtTeacherName.Text = currentPerson.fullName;
+                LoadAdminAddView();
+                btnAddToggle.CheckState = CheckState.Checked;
             }
-            else if (currentRole.Equals("Admin"))
-            {
-                txtTeacherName.Hide();
-                // Get list of teachers and add to comboBox
-                // Possibly move admin to their own form to clean things up
-            }
-            txtCourseName.Text = currentCourse.name;
-            txtCourseDescription.Text = currentCourse.description;
-            FillCategories();
-
         }
 
-        private void FillCategories()
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////// TEACHER VIEW ////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+
+        private void LoadTeacherView()
+        {
+            currentCourse = MainView.currentCourse;
+            txtTeacherName.Text = MainView.currentPerson.fullName;
+            txtCourseName.Text = currentCourse.name;
+            txtCourseDescription.Text = currentCourse.description;
+
+            cboTeacherName.Visible = false;
+            cboCourseName.Visible = false;
+            lblCourseID.Visible = false;
+            txtCourseID.Visible = false;
+            btnAdd.Visible = false;
+            btnDelete.Visible = false;
+            gboxUserOptions.Visible = false;
+
+            FillCategoriesForTaughtCourse();
+        }
+
+        private void BtnReset_Click(object sender, EventArgs e)
         {
             ClearMessageFields();
+            FillCategoriesForTaughtCourse();
+        }
+
+        private void BtnUpdate_Click(object sender, EventArgs e)
+        {
+            ClearMessageFields();
+
+            if (totalWeight == 100)
+            {
+                try
+                {
+                    PullCategoriesInForm();
+
+                    bool updateSuccessful = categoryService.updateAllCategoriesForTaughtCourse(categoriesList);
+
+                    if (updateSuccessful)
+                        lblClassViewSuccess.Text = "Update was successful.";
+                    else
+                        lblClassViewError.Text = "Update not working";
+                }
+                catch (Exception ex)
+                {
+                    lblClassViewError.Text = "Error updating weights in database.";
+                }
+            }
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////// ADMIN VIEW //////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+
+        private void LoadAdminAddView()
+        {
+            ToggleAdminControls(true);
+
+            FillAllCategoriesTo(20);
+        }
+
+        private void LoadAdminDeleteView()
+        {
+            ToggleAdminControls(false);
+
+            // Delete item below later
+            FillAllCategoriesTo(20);
+        }
+
+        private void BtnAddToggle_Click(object sender, EventArgs e)
+        {
+            btnAddToggle.CheckState = CheckState.Checked;
+            btnDeleteToggle.CheckState = CheckState.Unchecked;
+
+            LoadAdminAddView();
+        }
+
+        private void BtnDeleteToggle_Click(object sender, EventArgs e)
+        {
+            btnAddToggle.CheckState = CheckState.Unchecked;
+            btnDeleteToggle.CheckState = CheckState.Checked;
+
+            LoadAdminDeleteView();
+        }
+        private void ToggleAdminControls(bool activate)
+        {
+            txtCourseName.Visible = activate;
+
+            txtCourseDescription.ReadOnly = !activate;
+            cboCourseName.Visible = !activate;
+            lblCourseID.Visible = !activate;
+            txtCourseID.Visible = !activate;
+            btnDelete.Visible = !activate;
+
+            btnReset.Visible = false;
+            btnUpdate.Visible = false;
+            txtTeacherName.Visible = false;
+            txtCourseName.ReadOnly = false;
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////// CATEGORY WEIGHT HELPERS /////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+
+        public void InitializeCategoryBoxes()
+        {
+            categoryBoxes = new List<TextBox>();
+            categoryBoxes.Add(txtExams);
+            categoryBoxes.Add(txtHomework);
+            categoryBoxes.Add(txtParticipation);
+            categoryBoxes.Add(txtProjects);
+            categoryBoxes.Add(txtQuizzes);
+        }
+
+        private void FillAllCategoriesTo(int fillAmount)
+        {
+            foreach (TextBox categoryBox in categoryBoxes)
+            {
+                categoryBox.Text = fillAmount + "";
+            }
+        }
+
+        private void FillCategoriesForTaughtCourse()
+        {
+            ClearMessageFields();
+
             try
             {
                 categoriesList = categoryService.findCategoriesByTaughtCourseID(currentCourse.taughtCourseID);
-                
+
                 foreach (Category category in categoriesList)
                 {
                     if (category.name == "Exams")
@@ -90,9 +196,27 @@ namespace Gradebook
             }
         }
 
+        private void PullCategoriesInForm()
+        {
+            foreach (Category category in categoriesList)
+            {
+                if (category.name == "Exams")
+                    category.weight = ConversionUtils.TextBoxToInt(txtExams);
+                else if (category.name == "Homework")
+                    category.weight = ConversionUtils.TextBoxToInt(txtHomework);
+                else if (category.name == "Participation")
+                    category.weight = ConversionUtils.TextBoxToInt(txtParticipation);
+                else if (category.name == "Projects")
+                    category.weight = ConversionUtils.TextBoxToInt(txtProjects);
+                else if (category.name == "Quizzes")
+                    category.weight = ConversionUtils.TextBoxToInt(txtQuizzes);
+            }
+        }
+
         private void TotalCategories(List<TextBox> weightBoxes)
         {
             ClearMessageFields();
+
             totalWeight = 0;
             foreach (TextBox weight in weightBoxes)
             {
@@ -108,80 +232,14 @@ namespace Gradebook
             }
 
             lblTotal.Text = totalWeight + "%";
-
-            if (totalWeight != 100)
-                lblTotal.ForeColor = Color.Red;
-            else
-                lblTotal.ForeColor = Color.Green;
+            lblTotal.ForeColor = totalWeight != 100 ? Color.Red : Color.Green;
         }
 
-        ////////////////////////////////////////// Event Handlers  //////////////////////////////////////////
-
-        private void TextBox_TextChanged(object sender, EventArgs e)
+        private void SetCategoryToZero_LeaveText(object sender, EventArgs e)
         {
-            if (weightBoxes != null)
-                TotalCategories(weightBoxes);            
-        }
-
-        private void AllowOnlyNumber(KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-                e.Handled = true;
-        }
-        private void AllowOnlyNumber_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            AllowOnlyNumber(e);
-        }
-
-        private void BtnReset_Click(object sender, EventArgs e)
-        {
-            ClearMessageFields();
-            FillCategories();
-        }
-
-        private void BtnUpdate_Click(object sender, EventArgs e)
-        {
-            ClearMessageFields();
-            if (totalWeight != 100)
+            if (categoryBoxes != null)
             {
-                lblClassViewError.Text = "Totals must be equal 100%";
-                return;
-            }
-
-            // Updates DB with new categories
-            try
-            {
-                foreach (Category category in categoriesList)
-                {
-                    if (category.name == "Exams")
-                        category.weight = ConversionUtils.TextBoxToInt(txtExams);
-                    else if (category.name == "Homework")
-                        category.weight = ConversionUtils.TextBoxToInt(txtHomework);
-                    else if (category.name == "Participation")
-                        category.weight = ConversionUtils.TextBoxToInt(txtParticipation);
-                    else if (category.name == "Projects")
-                        category.weight = ConversionUtils.TextBoxToInt(txtProjects);
-                    else if (category.name == "Quizzes")
-                        category.weight = ConversionUtils.TextBoxToInt(txtQuizzes);
-                }
-
-                bool successful = categoryService.updateAllCategoriesForTaughtCourse(categoriesList);
-                if (successful)
-                    lblClassViewSuccess.Text = "Update was successful.";
-                else
-                    lblClassViewError.Text = "Update not working";
-            }
-            catch (Exception ex)
-            {
-                lblClassViewError.Text = "Failed to update categories.";
-            }
-        }
-
-        private void SetWeightToZero_LeaveText(object sender, EventArgs e)
-        {
-            if (weightBoxes != null)
-            {
-                foreach (TextBox weight in weightBoxes)
+                foreach (TextBox weight in categoryBoxes)
                 {
                     if (String.IsNullOrEmpty(weight.Text))
                     {
@@ -189,6 +247,27 @@ namespace Gradebook
                     }
                 } 
             }
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////// CLASS VIEW MANAGERS /////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+
+        private void TextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (categoryBoxes != null)
+                TotalCategories(categoryBoxes);
+        }
+
+        private void AllowOnlyNumber(KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void AllowOnlyNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            AllowOnlyNumber(e);
         }
 
         private void ClearMessageFields()

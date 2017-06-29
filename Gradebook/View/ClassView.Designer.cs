@@ -52,8 +52,17 @@
             this.cboTeacherName = new System.Windows.Forms.ComboBox();
             this.txtTeacherName = new System.Windows.Forms.TextBox();
             this.lblClassViewSuccess = new System.Windows.Forms.Label();
+            this.gboxUserOptions = new System.Windows.Forms.GroupBox();
+            this.btnDeleteToggle = new System.Windows.Forms.CheckBox();
+            this.btnAddToggle = new System.Windows.Forms.CheckBox();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.cboCourseName = new System.Windows.Forms.ComboBox();
+            this.lblCourseID = new System.Windows.Forms.Label();
+            this.txtCourseID = new System.Windows.Forms.TextBox();
             this.groupBoxClassDescription.SuspendLayout();
             this.groupBoxCategoryWeights.SuspendLayout();
+            this.gboxUserOptions.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxClassDescription
@@ -70,6 +79,7 @@
             // 
             this.txtCourseDescription.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtCourseDescription.Location = new System.Drawing.Point(3, 16);
+            this.txtCourseDescription.MaxLength = 50;
             this.txtCourseDescription.Multiline = true;
             this.txtCourseDescription.Name = "txtCourseDescription";
             this.txtCourseDescription.ReadOnly = true;
@@ -136,7 +146,7 @@
             this.txtProjects.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtProjects.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             this.txtProjects.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
-            this.txtProjects.Leave += new System.EventHandler(this.SetWeightToZero_LeaveText);
+            this.txtProjects.Leave += new System.EventHandler(this.SetCategoryToZero_LeaveText);
             // 
             // txtQuizzes
             // 
@@ -149,7 +159,7 @@
             this.txtQuizzes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtQuizzes.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             this.txtQuizzes.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
-            this.txtQuizzes.Leave += new System.EventHandler(this.SetWeightToZero_LeaveText);
+            this.txtQuizzes.Leave += new System.EventHandler(this.SetCategoryToZero_LeaveText);
             // 
             // txtExams
             // 
@@ -162,7 +172,7 @@
             this.txtExams.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtExams.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             this.txtExams.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
-            this.txtExams.Leave += new System.EventHandler(this.SetWeightToZero_LeaveText);
+            this.txtExams.Leave += new System.EventHandler(this.SetCategoryToZero_LeaveText);
             // 
             // txtParticipation
             // 
@@ -175,7 +185,7 @@
             this.txtParticipation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtParticipation.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             this.txtParticipation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
-            this.txtParticipation.Leave += new System.EventHandler(this.SetWeightToZero_LeaveText);
+            this.txtParticipation.Leave += new System.EventHandler(this.SetCategoryToZero_LeaveText);
             // 
             // txtHomework
             // 
@@ -188,7 +198,7 @@
             this.txtHomework.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtHomework.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             this.txtHomework.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllowOnlyNumber_KeyPress);
-            this.txtHomework.Leave += new System.EventHandler(this.SetWeightToZero_LeaveText);
+            this.txtHomework.Leave += new System.EventHandler(this.SetCategoryToZero_LeaveText);
             // 
             // label5
             // 
@@ -237,7 +247,7 @@
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(26, 419);
+            this.btnReset.Location = new System.Drawing.Point(99, 419);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 23);
             this.btnReset.TabIndex = 4;
@@ -247,7 +257,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(107, 419);
+            this.btnUpdate.Location = new System.Drawing.Point(18, 419);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.TabIndex = 5;
@@ -258,6 +268,7 @@
             // txtCourseName
             // 
             this.txtCourseName.Location = new System.Drawing.Point(92, 45);
+            this.txtCourseName.MaxLength = 50;
             this.txtCourseName.Name = "txtCourseName";
             this.txtCourseName.ReadOnly = true;
             this.txtCourseName.Size = new System.Drawing.Size(252, 20);
@@ -309,17 +320,102 @@
             this.lblClassViewSuccess.Size = new System.Drawing.Size(0, 13);
             this.lblClassViewSuccess.TabIndex = 12;
             // 
+            // gboxUserOptions
+            // 
+            this.gboxUserOptions.Controls.Add(this.btnDeleteToggle);
+            this.gboxUserOptions.Controls.Add(this.btnAddToggle);
+            this.gboxUserOptions.Location = new System.Drawing.Point(383, 12);
+            this.gboxUserOptions.Name = "gboxUserOptions";
+            this.gboxUserOptions.Size = new System.Drawing.Size(162, 88);
+            this.gboxUserOptions.TabIndex = 15;
+            this.gboxUserOptions.TabStop = false;
+            this.gboxUserOptions.Text = "User Options Toggle";
+            // 
+            // btnDeleteToggle
+            // 
+            this.btnDeleteToggle.Appearance = System.Windows.Forms.Appearance.Button;
+            this.btnDeleteToggle.Location = new System.Drawing.Point(8, 52);
+            this.btnDeleteToggle.Name = "btnDeleteToggle";
+            this.btnDeleteToggle.Size = new System.Drawing.Size(148, 27);
+            this.btnDeleteToggle.TabIndex = 17;
+            this.btnDeleteToggle.Text = "Delete Existing Course";
+            this.btnDeleteToggle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnDeleteToggle.UseVisualStyleBackColor = true;
+            this.btnDeleteToggle.Click += new System.EventHandler(this.BtnDeleteToggle_Click);
+            // 
+            // btnAddToggle
+            // 
+            this.btnAddToggle.Appearance = System.Windows.Forms.Appearance.Button;
+            this.btnAddToggle.Location = new System.Drawing.Point(8, 19);
+            this.btnAddToggle.Name = "btnAddToggle";
+            this.btnAddToggle.Size = new System.Drawing.Size(148, 27);
+            this.btnAddToggle.TabIndex = 16;
+            this.btnAddToggle.Text = "Add New Course";
+            this.btnAddToggle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnAddToggle.UseVisualStyleBackColor = true;
+            this.btnAddToggle.Click += new System.EventHandler(this.BtnAddToggle_Click);
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(269, 419);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnAdd.TabIndex = 16;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(269, 419);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.TabIndex = 17;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            // 
+            // cboCourseName
+            // 
+            this.cboCourseName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCourseName.FormattingEnabled = true;
+            this.cboCourseName.Location = new System.Drawing.Point(92, 45);
+            this.cboCourseName.Name = "cboCourseName";
+            this.cboCourseName.Size = new System.Drawing.Size(145, 21);
+            this.cboCourseName.TabIndex = 18;
+            // 
+            // lblCourseID
+            // 
+            this.lblCourseID.AutoSize = true;
+            this.lblCourseID.Location = new System.Drawing.Point(254, 48);
+            this.lblCourseID.Name = "lblCourseID";
+            this.lblCourseID.Size = new System.Drawing.Size(21, 13);
+            this.lblCourseID.TabIndex = 19;
+            this.lblCourseID.Text = "ID:";
+            // 
+            // txtCourseID
+            // 
+            this.txtCourseID.Location = new System.Drawing.Point(282, 45);
+            this.txtCourseID.Name = "txtCourseID";
+            this.txtCourseID.ReadOnly = true;
+            this.txtCourseID.Size = new System.Drawing.Size(62, 20);
+            this.txtCourseID.TabIndex = 20;
+            // 
             // ClassView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(367, 474);
+            this.ClientSize = new System.Drawing.Size(570, 474);
+            this.Controls.Add(this.txtCourseID);
+            this.Controls.Add(this.txtCourseName);
+            this.Controls.Add(this.lblCourseID);
+            this.Controls.Add(this.cboCourseName);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.gboxUserOptions);
             this.Controls.Add(this.lblClassViewSuccess);
             this.Controls.Add(this.txtTeacherName);
             this.Controls.Add(this.cboTeacherName);
             this.Controls.Add(this.lblClassViewError);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.txtCourseName);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.groupBoxCategoryWeights);
@@ -334,6 +430,7 @@
             this.groupBoxClassDescription.PerformLayout();
             this.groupBoxCategoryWeights.ResumeLayout(false);
             this.groupBoxCategoryWeights.PerformLayout();
+            this.gboxUserOptions.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -365,5 +462,13 @@
         private System.Windows.Forms.ComboBox cboTeacherName;
         private System.Windows.Forms.TextBox txtTeacherName;
         private System.Windows.Forms.Label lblClassViewSuccess;
+        private System.Windows.Forms.GroupBox gboxUserOptions;
+        private System.Windows.Forms.CheckBox btnDeleteToggle;
+        private System.Windows.Forms.CheckBox btnAddToggle;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.ComboBox cboCourseName;
+        private System.Windows.Forms.Label lblCourseID;
+        private System.Windows.Forms.TextBox txtCourseID;
     }
 }
