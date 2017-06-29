@@ -202,6 +202,8 @@ namespace Gradebook
                 return;
             else if ((string)contentPanel.Controls[0].Tag == "ClassView")
                 BtnClassView_Click(null, null);
+            else if ((string)contentPanel.Controls[0].Tag == "AssignmentsView")
+                BtnAssignmentsView_Click(null, null);
             // This will allow our data to update according to a specific class. 
         }
 
@@ -211,5 +213,6 @@ namespace Gradebook
             while (contentPanel.Controls.Count > 0)
                 contentPanel.Controls[0].Dispose();
         }
+        
     }
 }

@@ -70,7 +70,7 @@
             this.topNav.Location = new System.Drawing.Point(0, 0);
             this.topNav.Name = "topNav";
             this.topNav.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.topNav.Size = new System.Drawing.Size(1384, 38);
+            this.topNav.Size = new System.Drawing.Size(1362, 38);
             this.topNav.TabIndex = 1;
             this.topNav.Text = "toolStrip1";
             // 
@@ -146,7 +146,7 @@
             this.leftNav.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftNav.Location = new System.Drawing.Point(0, 38);
             this.leftNav.Name = "leftNav";
-            this.leftNav.Size = new System.Drawing.Size(205, 723);
+            this.leftNav.Size = new System.Drawing.Size(205, 703);
             this.leftNav.TabIndex = 10;
             // 
             // lblTaughtCourseID
@@ -299,7 +299,7 @@
             this.gradebookLogo.Image = ((System.Drawing.Image)(resources.GetObject("gradebookLogo.Image")));
             this.gradebookLogo.Location = new System.Drawing.Point(205, 38);
             this.gradebookLogo.Name = "gradebookLogo";
-            this.gradebookLogo.Size = new System.Drawing.Size(1179, 73);
+            this.gradebookLogo.Size = new System.Drawing.Size(1157, 73);
             this.gradebookLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.gradebookLogo.TabIndex = 11;
             this.gradebookLogo.TabStop = false;
@@ -321,7 +321,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1384, 761);
+            this.ClientSize = new System.Drawing.Size(1362, 741);
             this.Controls.Add(this.contentPanel);
             this.Controls.Add(this.gradebookLogo);
             this.Controls.Add(this.leftNav);
