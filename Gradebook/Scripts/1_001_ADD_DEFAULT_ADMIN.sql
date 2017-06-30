@@ -3,3 +3,6 @@ INSERT INTO [Users] ([userID],[userName],[password],[roleID],[resetPassword]) VA
 
 INSERT INTO [Persons] ([personID],[firstName],[lastName],[dateOfBirth],[street],[city],[stateCode],[zipCode],[gender],[phoneNumber],[email]) VALUES (
 13,'Admin','Admin','1964-02-11 00:00:00.000','2137 Hilltop Haven Drive','Los Angeles','CA','90001','Female','9738781040','porsha.gates@gmail.com');
+
+INSERT INTO [Teachers] ([teacherID],[personID],[userID]) VALUES (
+5,13,13);

@@ -13,8 +13,9 @@ namespace Gradebook.Controls
     {
         private List<String> errors;
         public String SuccessMessage { get; set; }
-        public User currentUser { get; set; }
-
+        public User AuthenticatedUser { get; set; }
+        public Teacher AuthenticatedTeacher { get; set; }
+        public MainView MainView { get; set; }
         public Boolean isValid { get; set; }
 
         public BaseForm()

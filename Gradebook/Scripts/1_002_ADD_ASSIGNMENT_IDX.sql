@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX Assignments_Name_Idx ON Assignments(courseID, name);

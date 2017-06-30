@@ -12,6 +12,7 @@ namespace Gradebook.Controls
 {
     public partial class ContentForm : BaseForm
     {
+        public MainView MainView { get; set; }
         public ContentForm()
         {
             InitializeComponent();

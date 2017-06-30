@@ -108,16 +108,19 @@
     <Compile Include="Controls\ContentForm.Designer.cs">
       <DependentUpon>ContentForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\ComboBoxItem.cs" />
     <Compile Include="Data\DAO\Admin.cs" />
     <Compile Include="Data\DAO\Assignment.cs" />
     <Compile Include="Data\DAO\Category.cs" />
     <Compile Include="Data\DAO\Course.cs" />
+    <Compile Include="Data\DAO\GradeInfo.cs" />
     <Compile Include="Data\DAO\Person.cs" />
     <Compile Include="Data\DAO\Role.cs" />
     <Compile Include="Data\DAO\Student.cs" />
     <Compile Include="Data\DAO\TaughtCourse.cs" />
     <Compile Include="Data\DAO\Teacher.cs" />
     <Compile Include="Data\DAO\User.cs" />
+    <Compile Include="Data\DAO\WeightedGrade.cs" />
     <Compile Include="Data\Factories\ConnectionFactory.cs" />
     <Compile Include="Data\Interfaces\IAdminService.cs" />
     <Compile Include="Data\Interfaces\IAssignmentService.cs" />
@@ -126,15 +129,18 @@
     <Compile Include="Data\Interfaces\IPersonService.cs" />
     <Compile Include="Data\Interfaces\IRoleService.cs" />
     <Compile Include="Data\Interfaces\IStudentService.cs" />
+    <Compile Include="Data\Interfaces\ITaughtCourseService.cs" />
     <Compile Include="Data\Interfaces\ITeacherService.cs" />
     <Compile Include="Data\Interfaces\IUserService.cs" />
     <Compile Include="Data\Services\AdminService.cs" />
     <Compile Include="Data\Services\AssignmentService.cs" />
     <Compile Include="Data\Services\CategoryService.cs" />
     <Compile Include="Data\Services\CourseService.cs" />
+    <Compile Include="Data\Services\GradeService.cs" />
     <Compile Include="Data\Services\PersonService.cs" />
     <Compile Include="Data\Services\RoleService.cs" />
     <Compile Include="Data\Services\StudentService.cs" />
+    <Compile Include="Data\Services\TaughtCourseService.cs" />
     <Compile Include="Data\Services\TeacherService.cs" />
     <Compile Include="Data\Services\UserService.cs" />
     <Compile Include="Data\Utils\ConversionUtils.cs" />
@@ -282,17 +288,17 @@
     <Resource Include="Data\Database\temp.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Scripts\1_001_ADD _COURSE_ID_TO_ASSIGNMENTS.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Scripts\1_002_ADD_DEFAULT_ADMIN.sql">
+    <EmbeddedResource Include="Scripts\1_001_ADD_DEFAULT_ADMIN.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\1_002_ADD_ASSIGNMENT_IDX.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.105.2\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.105.2\build\net451\System.Data.SQLite.Core.targets')" />

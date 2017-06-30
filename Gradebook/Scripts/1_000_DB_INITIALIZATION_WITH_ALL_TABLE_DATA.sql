@@ -50,7 +50,7 @@ CREATE TABLE [Courses] (
   [courseID] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
 , [creditID] INTEGER NULL
 , [name] nvarchar(50) NOT NULL
-, [description] nvarchar(50) NOT NULL
+, [description] nvarchar(250) NOT NULL
 , FOREIGN KEY ([creditID]) REFERENCES [Credits] ([creditID]) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 CREATE TABLE [TaughtCourses] (
@@ -181,21 +181,21 @@ INSERT INTO [Credits] ([creditID],[type],[months]) VALUES (
 INSERT INTO [Credits] ([creditID],[type],[months]) VALUES (
 3,'Term',6);
 INSERT INTO [Courses] ([courseID],[creditID],[name],[description]) VALUES (
-1,2,'Math','Math Semester');
+1,2,'Math','General mathematics course covering the basics of probability, statistics, algebra, and geometry.');
 INSERT INTO [Courses] ([courseID],[creditID],[name],[description]) VALUES (
-2,2,'English','English Semester');
+2,2,'English','Studies in 18th Century Literature');
 INSERT INTO [Courses] ([courseID],[creditID],[name],[description]) VALUES (
-3,2,'Science','Science Semester');
+3,2,'Science','This general science course will introduce students to the rock cycle, biomes, and the oganization of living systems.');
 INSERT INTO [Courses] ([courseID],[creditID],[name],[description]) VALUES (
-4,2,'History','History Semester');
+4,2,'History','This course introduces western civilization from pre-history to the early modern era.');
 INSERT INTO [Courses] ([courseID],[creditID],[name],[description]) VALUES (
-5,1,'Math','Math Quarter');
+5,1,'Math','General mathematics course covering the basics of probability, statistics, algebra, and geometry.');
 INSERT INTO [Courses] ([courseID],[creditID],[name],[description]) VALUES (
-6,1,'English','English Quarter');
+6,1,'English','Studies in Medieval Literature');
 INSERT INTO [Courses] ([courseID],[creditID],[name],[description]) VALUES (
-7,3,'Math','Math Term');
+7,3,'Geometry','Course that will teach students about points, lines, shapes, and space.');
 INSERT INTO [Courses] ([courseID],[creditID],[name],[description]) VALUES (
-8,3,'English','English Term');
+8,3,'English','This course will take a closer look at the different literature involved in the performing arts.');
 INSERT INTO [TaughtCourses] ([taughtCourseID],[teacherID],[courseID]) VALUES (
 1,1,1);
 INSERT INTO [TaughtCourses] ([taughtCourseID],[teacherID],[courseID]) VALUES (

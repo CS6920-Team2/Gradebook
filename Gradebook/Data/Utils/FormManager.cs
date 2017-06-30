@@ -1,4 +1,5 @@
-﻿using Gradebook.View;
+﻿using Gradebook.Controls;
+using Gradebook.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +48,7 @@ namespace Gradebook.Data.Utils
             return this.mainView;
         }
 
-        public T UpdateMainViewContent<T>() where T : Form, new()
+        public T UpdateMainViewContent<T>() where T : BaseForm, new()
         {
             var form = FormManager.Current.CreateForm<T>();
             form.MdiParent = mainView;
