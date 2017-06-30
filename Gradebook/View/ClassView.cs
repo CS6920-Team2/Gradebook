@@ -19,6 +19,7 @@ namespace Gradebook
     {
         private CategoryService categoryService;
         private TeacherService teacherService;
+        private TaughtCourseService tcService;
         private List<Category> categoriesList;
         private List<TextBox> categoryBoxes;
         private TaughtCourse currentCourse;
@@ -31,10 +32,11 @@ namespace Gradebook
             InitializeCategoryBoxes();
             categoryService = new CategoryService();
             teacherService = new TeacherService();
-            
-        }
+            tcService = new TaughtCourseService();
 
-        private void ClassView_Load(object sender, EventArgs e)
+    }
+
+    private void ClassView_Load(object sender, EventArgs e)
         {
             if (MainView.role.Equals("Teacher"))
             {
@@ -128,11 +130,27 @@ namespace Gradebook
                     description = txtCourseDescription.Text
                 };
 
-                // Set categories
+                // Categories
                 categoriesList = InitializeNewCategoryList();
                 UpdateCategoryListUsingFormValues(); 
 
                 // Add to DB
+                try
+                {
+                    bool success = tcService.addTaughtCourseWithCategories(teacherID, newCourse, categoriesList);
+
+                    if (success)
+                    {
+                        lblClassViewSuccess.Text = "Class added successfully.";
+                        LoadAdminAddView();
+                    }
+                    else
+                        lblClassViewError.Text = "Unable to add class successfully.";
+                }
+                catch (Exception ex)
+                {
+                    lblClassViewError.Text = "Error adding class to database.";
+                }
             }
         }
 
@@ -149,9 +167,9 @@ namespace Gradebook
 
         private bool ValidateAddForm()
         {
-            return (!Validator.IsPresent(txtCourseName, lblClassViewError) ||
-                    !Validator.IsPresent(txtCourseDescription, lblClassViewError) ||
-                    !IsWeightTotal100());
+            return (Validator.IsPresent(txtCourseName, lblClassViewError) &&
+                    Validator.IsPresent(txtCourseDescription, lblClassViewError) &&
+                    IsWeightTotal100());
         }
 
 
@@ -299,8 +317,6 @@ namespace Gradebook
 
         private void TotalCategories(List<TextBox> weightBoxes)
         {
-            ClearMessageFields();
-
             totalWeight = 0;
             foreach (TextBox weight in weightBoxes)
             {
