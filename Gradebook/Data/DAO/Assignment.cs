@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Gradebook.Data.DAO
 {
-    class Assignment
+    public class Assignment
     {
         public int assignmentID { get; set; }
         public int categoryID { get; set; }
