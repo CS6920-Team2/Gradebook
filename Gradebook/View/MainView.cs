@@ -32,17 +32,26 @@ namespace Gradebook
         private int teacherID;
         private int adminID;
         private int studentID;
-        
+        private static MainView current;
 
         public MainView()
         {
             InitializeComponent();
+            current = this;
             roleService = new RoleService();
             adminService = new AdminService();
             teacherService = new TeacherService();
             personService = new PersonService();
             courseService = new CourseService();
             studentService = new StudentService();
+        }
+
+        public static MainView Current
+        {
+            get
+            {
+                return current;
+            }
         }
 
         private void MainMDI_Load(object sender, EventArgs e)
@@ -64,23 +73,23 @@ namespace Gradebook
         {
             try
             {
-                role = roleService.findRoleByRoleID(currentUser.RoleID);
+                role = roleService.findRoleByRoleID(MainView.Current.AuthenticatedUser.RoleID);
 
                 if (role.Equals("Teacher"))
                 {
-                    Teacher tempTeacher = teacherService.getTeacherByUserID(currentUser.UserID);
+                    Teacher tempTeacher = teacherService.getTeacherByUserID(AuthenticatedUser.UserID);
                     currentPerson = personService.getPersonByPersonID(tempTeacher.personID);
                     teacherID = tempTeacher.teacherID;
                 }
                 else if (role.Equals("Administrator"))
                 {
-                    Admin tempAdmin = adminService.getAdminByUserID(currentUser.UserID);
+                    Admin tempAdmin = adminService.getAdminByUserID(AuthenticatedUser.UserID);
                     currentPerson = personService.getPersonByPersonID(tempAdmin.personID);
                     adminID = tempAdmin.adminID;
                 }
                 else if (role.Equals("Student"))
                 {
-                    Student tempStudent = studentService.getStudentByUserID(currentUser.UserID);
+                    Student tempStudent = studentService.getStudentByUserID(MainView.Current.AuthenticatedUser.RoleID);
                     currentPerson = personService.getPersonByPersonID(tempStudent.personID);
                     studentID = tempStudent.studentID;
                 }

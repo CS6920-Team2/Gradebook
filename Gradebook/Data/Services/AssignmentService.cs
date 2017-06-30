@@ -39,18 +39,6 @@ namespace Gradebook.Data.Services
             return ds;
         }
 
-
-
-        public DataSet GetAssignments(int classId, DataSet dataSet)
-        {
-            //TODO: Kevin -- finish writing method
-            SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("Select * FROM Assignments", ConnectionFactory.GetOpenSQLiteConnection());
-
-            dataAdapter.Fill(dataSet, "Assignments");
-
-            return dataSet;
-        }
-
         public bool updateAssignment(int newAssignmentID, int newCategoryID, string newName, string newDescription,
             DateTime newAssignedDate, DateTime newDueDate, int newPossiblePoints)
         {

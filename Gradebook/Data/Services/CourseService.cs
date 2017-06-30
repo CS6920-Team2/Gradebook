@@ -12,6 +12,15 @@ namespace Gradebook.Data.Services
 {
     class CourseService : ICourseService
     {
+        public List<TaughtCourse> findCourses()
+        {
+            if (MainView.Current.AuthenticatedTeacher != null)
+            {
+                return findCoursesByTeacherID(MainView.Current.AuthenticatedTeacher.teacherID);
+            }
+
+            return null;
+        }
         public List<TaughtCourse> findCoursesByTeacherID(int teacherID)
         {
             List<TaughtCourse> courses;

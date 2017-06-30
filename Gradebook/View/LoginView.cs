@@ -16,10 +16,12 @@ namespace Gradebook.View
     public partial class LoginView : BaseForm
     {
         private UserService userService;
+        private TeacherService teacherService;
         public LoginView()
         {
             InitializeComponent();
             userService = new UserService();
+            teacherService = new TeacherService();
         }
 
         private void LoginView_Load(object sender, EventArgs e)
@@ -68,7 +70,8 @@ namespace Gradebook.View
 
                 //TODO Set Authentication context and user principal, for now just move on to the next page
                 var main = FormManager.Current.CreateMainForm();
-                main.currentUser = userService.findUser(txtUserName.Text);
+                main.AuthenticatedUser = userService.findUser(txtUserName.Text);
+                main.AuthenticatedTeacher = teacherService.getTeacherByUserID(main.AuthenticatedUser.UserID);
                 main.Show();
                 this.Close();
             }
