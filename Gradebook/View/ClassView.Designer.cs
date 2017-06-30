@@ -348,6 +348,8 @@
             // btnAddToggle
             // 
             this.btnAddToggle.Appearance = System.Windows.Forms.Appearance.Button;
+            this.btnAddToggle.Checked = true;
+            this.btnAddToggle.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btnAddToggle.Location = new System.Drawing.Point(8, 19);
             this.btnAddToggle.Name = "btnAddToggle";
             this.btnAddToggle.Size = new System.Drawing.Size(148, 27);

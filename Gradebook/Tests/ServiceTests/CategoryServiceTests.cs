@@ -71,7 +71,6 @@ namespace Gradebook.Tests.ServiceTests
             List<Category> categories = categoryService.findCategoriesByTaughtCourseID(1);
 
             // Remove one category, preventing full update of all categories from being possible
-            Category temp = categories[4];
             categories.Remove(categories[4]);
 
             foreach (Category category in categories)

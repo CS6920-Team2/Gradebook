@@ -22,8 +22,9 @@ namespace Gradebook
         private List<Category> categoriesList;
         private List<TextBox> categoryBoxes;
         private TaughtCourse currentCourse;
+        private bool addCourseToggleIsActive;
         private int totalWeight;
-        
+
         public ClassView()
         {
             InitializeComponent();
@@ -42,7 +43,6 @@ namespace Gradebook
             else if (MainView.role.Equals("Administrator"))
             {
                 LoadAdminAddView();
-                btnAddToggle.CheckState = CheckState.Checked;
             }
         }
 
@@ -107,8 +107,6 @@ namespace Gradebook
             ToggleSetForAddNewCourse(true);
             
             FillTeacherComboBox();
-            txtCourseName.Text = "";
-            txtCourseDescription.Text = "";
             FillAllCategoryBoxesTo(20);
         }
 
@@ -140,10 +138,13 @@ namespace Gradebook
 
         private void BtnAddToggle_Click(object sender, EventArgs e)
         {
-            btnAddToggle.CheckState = CheckState.Checked;
-            btnDeleteToggle.CheckState = CheckState.Unchecked;
+            if (!addCourseToggleIsActive)
+            {
+                btnAddToggle.CheckState = CheckState.Checked;
+                btnDeleteToggle.CheckState = CheckState.Unchecked;
 
-            LoadAdminAddView();
+                LoadAdminAddView(); 
+            }
         }
 
         private bool ValidateAddForm()
@@ -175,14 +176,18 @@ namespace Gradebook
 
         private void BtnDeleteToggle_Click(object sender, EventArgs e)
         {
-            btnAddToggle.CheckState = CheckState.Unchecked;
-            btnDeleteToggle.CheckState = CheckState.Checked;
+            if (addCourseToggleIsActive)
+            {
+                btnAddToggle.CheckState = CheckState.Unchecked;
+                btnDeleteToggle.CheckState = CheckState.Checked;
 
-            LoadAdminDeleteView();
+                LoadAdminDeleteView(); 
+            }
         }
 
         private void ToggleSetForAddNewCourse(bool activate)
         {
+            addCourseToggleIsActive = activate;
             txtCourseName.Visible = activate;
 
             txtCourseDescription.ReadOnly = !activate;
@@ -195,6 +200,9 @@ namespace Gradebook
             btnUpdate.Visible = false;
             txtTeacherName.Visible = false;
             txtCourseName.ReadOnly = false;
+
+            txtCourseName.Text = "";
+            txtCourseDescription.Text = "";
         }
 
         private void FillTeacherComboBox()
