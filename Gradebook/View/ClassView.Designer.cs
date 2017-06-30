@@ -71,7 +71,7 @@
             this.groupBoxClassDescription.Location = new System.Drawing.Point(15, 78);
             this.groupBoxClassDescription.Name = "groupBoxClassDescription";
             this.groupBoxClassDescription.Size = new System.Drawing.Size(332, 116);
-            this.groupBoxClassDescription.TabIndex = 0;
+            this.groupBoxClassDescription.TabIndex = 3;
             this.groupBoxClassDescription.TabStop = false;
             this.groupBoxClassDescription.Text = "Course Description";
             // 
@@ -84,7 +84,7 @@
             this.txtCourseDescription.Name = "txtCourseDescription";
             this.txtCourseDescription.ReadOnly = true;
             this.txtCourseDescription.Size = new System.Drawing.Size(326, 97);
-            this.txtCourseDescription.TabIndex = 0;
+            this.txtCourseDescription.TabIndex = 3;
             this.txtCourseDescription.Tag = "Course description";
             // 
             // lblCourse
@@ -113,7 +113,7 @@
             this.groupBoxCategoryWeights.Location = new System.Drawing.Point(18, 210);
             this.groupBoxCategoryWeights.Name = "groupBoxCategoryWeights";
             this.groupBoxCategoryWeights.Size = new System.Drawing.Size(326, 187);
-            this.groupBoxCategoryWeights.TabIndex = 3;
+            this.groupBoxCategoryWeights.TabIndex = 4;
             this.groupBoxCategoryWeights.TabStop = false;
             this.groupBoxCategoryWeights.Text = "Category Weights";
             // 
@@ -142,7 +142,7 @@
             this.txtProjects.MaxLength = 3;
             this.txtProjects.Name = "txtProjects";
             this.txtProjects.Size = new System.Drawing.Size(209, 20);
-            this.txtProjects.TabIndex = 3;
+            this.txtProjects.TabIndex = 7;
             this.txtProjects.Tag = "projects";
             this.txtProjects.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtProjects.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
@@ -155,7 +155,7 @@
             this.txtQuizzes.MaxLength = 3;
             this.txtQuizzes.Name = "txtQuizzes";
             this.txtQuizzes.Size = new System.Drawing.Size(209, 20);
-            this.txtQuizzes.TabIndex = 4;
+            this.txtQuizzes.TabIndex = 8;
             this.txtQuizzes.Tag = "quizzes";
             this.txtQuizzes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtQuizzes.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
@@ -168,7 +168,7 @@
             this.txtExams.MaxLength = 3;
             this.txtExams.Name = "txtExams";
             this.txtExams.Size = new System.Drawing.Size(209, 20);
-            this.txtExams.TabIndex = 0;
+            this.txtExams.TabIndex = 4;
             this.txtExams.Tag = "exams";
             this.txtExams.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtExams.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
@@ -181,7 +181,7 @@
             this.txtParticipation.MaxLength = 3;
             this.txtParticipation.Name = "txtParticipation";
             this.txtParticipation.Size = new System.Drawing.Size(209, 20);
-            this.txtParticipation.TabIndex = 2;
+            this.txtParticipation.TabIndex = 6;
             this.txtParticipation.Tag = "participation";
             this.txtParticipation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtParticipation.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
@@ -194,7 +194,7 @@
             this.txtHomework.MaxLength = 3;
             this.txtHomework.Name = "txtHomework";
             this.txtHomework.Size = new System.Drawing.Size(209, 20);
-            this.txtHomework.TabIndex = 1;
+            this.txtHomework.TabIndex = 5;
             this.txtHomework.Tag = "homework";
             this.txtHomework.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtHomework.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
@@ -252,6 +252,7 @@
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 23);
             this.btnReset.TabIndex = 4;
+            this.btnReset.TabStop = false;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.BtnReset_Click);
@@ -262,18 +263,19 @@
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.TabIndex = 5;
+            this.btnUpdate.TabStop = false;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.BtnUpdate_Click);
             // 
             // txtCourseName
             // 
-            this.txtCourseName.Location = new System.Drawing.Point(92, 45);
+            this.txtCourseName.Location = new System.Drawing.Point(92, 46);
             this.txtCourseName.MaxLength = 20;
             this.txtCourseName.Name = "txtCourseName";
             this.txtCourseName.ReadOnly = true;
             this.txtCourseName.Size = new System.Drawing.Size(252, 20);
-            this.txtCourseName.TabIndex = 6;
+            this.txtCourseName.TabIndex = 2;
             this.txtCourseName.Tag = "Course name";
             // 
             // label6
@@ -302,7 +304,7 @@
             this.cboTeacherName.Location = new System.Drawing.Point(92, 19);
             this.cboTeacherName.Name = "cboTeacherName";
             this.cboTeacherName.Size = new System.Drawing.Size(252, 21);
-            this.cboTeacherName.TabIndex = 10;
+            this.cboTeacherName.TabIndex = 1;
             // 
             // txtTeacherName
             // 
@@ -310,7 +312,7 @@
             this.txtTeacherName.Name = "txtTeacherName";
             this.txtTeacherName.ReadOnly = true;
             this.txtTeacherName.Size = new System.Drawing.Size(252, 20);
-            this.txtTeacherName.TabIndex = 11;
+            this.txtTeacherName.TabIndex = 1;
             // 
             // lblClassViewSuccess
             // 
@@ -340,6 +342,7 @@
             this.btnDeleteToggle.Name = "btnDeleteToggle";
             this.btnDeleteToggle.Size = new System.Drawing.Size(148, 27);
             this.btnDeleteToggle.TabIndex = 17;
+            this.btnDeleteToggle.TabStop = false;
             this.btnDeleteToggle.Text = "Delete Existing Course";
             this.btnDeleteToggle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnDeleteToggle.UseVisualStyleBackColor = true;
@@ -354,6 +357,7 @@
             this.btnAddToggle.Name = "btnAddToggle";
             this.btnAddToggle.Size = new System.Drawing.Size(148, 27);
             this.btnAddToggle.TabIndex = 16;
+            this.btnAddToggle.TabStop = false;
             this.btnAddToggle.Text = "Add New Course";
             this.btnAddToggle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnAddToggle.UseVisualStyleBackColor = true;
@@ -361,20 +365,22 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(269, 419);
+            this.btnAdd.Location = new System.Drawing.Point(18, 419);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 16;
+            this.btnAdd.TabStop = false;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(269, 419);
+            this.btnDelete.Location = new System.Drawing.Point(18, 419);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 17;
+            this.btnDelete.TabStop = false;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
@@ -386,7 +392,7 @@
             this.cboCourseName.Location = new System.Drawing.Point(92, 45);
             this.cboCourseName.Name = "cboCourseName";
             this.cboCourseName.Size = new System.Drawing.Size(156, 21);
-            this.cboCourseName.TabIndex = 18;
+            this.cboCourseName.TabIndex = 2;
             // 
             // lblCourseID
             // 
@@ -404,6 +410,7 @@
             this.txtCourseID.ReadOnly = true;
             this.txtCourseID.Size = new System.Drawing.Size(62, 20);
             this.txtCourseID.TabIndex = 20;
+            this.txtCourseID.TabStop = false;
             // 
             // ClassView
             // 

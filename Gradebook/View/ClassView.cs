@@ -24,6 +24,7 @@ namespace Gradebook
         private List<TextBox> categoryBoxes;
         private TaughtCourse currentCourse;
         private bool addCourseToggleIsActive;
+        private bool keepCurrentAttributes = false;
         private int totalWeight;
 
         public ClassView()
@@ -73,7 +74,19 @@ namespace Gradebook
         private void BtnReset_Click(object sender, EventArgs e)
         {
             ClearMessageFields();
-            FillCategoriesForTaughtCourse();
+
+            if (addCourseToggleIsActive)
+            {
+                ClearCourseAttributes();
+                FillTeacherComboBox();
+                FillAllCategoryBoxesTo(20);
+                keepCurrentAttributes = false;
+                btnAdd.Enabled = true;
+            }
+            else
+            {
+                FillCategoriesForTaughtCourse();
+            }
         }
 
         private void BtnUpdate_Click(object sender, EventArgs e)
@@ -108,8 +121,11 @@ namespace Gradebook
         {
             ToggleSetForAddNewCourse(true);
             
-            FillTeacherComboBox();
-            FillAllCategoryBoxesTo(20);
+            if (!keepCurrentAttributes)
+            {
+                FillAllCategoryBoxesTo(20);
+                FillTeacherComboBox();
+            }
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -142,7 +158,9 @@ namespace Gradebook
                     if (success)
                     {
                         lblClassViewSuccess.Text = "Class added successfully.";
+                        keepCurrentAttributes = true;
                         LoadAdminAddView();
+                        btnAdd.Enabled = false;
                     }
                     else
                         lblClassViewError.Text = "Unable to add class successfully.";
@@ -214,11 +232,14 @@ namespace Gradebook
             txtCourseID.Visible = !activate;
             btnDelete.Visible = !activate;
 
-            btnReset.Visible = false;
+            btnReset.Visible = true;
             btnUpdate.Visible = false;
             txtTeacherName.Visible = false;
             txtCourseName.ReadOnly = false;
+        }
 
+        private void ClearCourseAttributes()
+        {
             txtCourseName.Text = "";
             txtCourseDescription.Text = "";
         }
