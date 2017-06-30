@@ -26,6 +26,7 @@ namespace Gradebook
         private CourseService courseService;
         private StudentService studentService;
 
+        private bool teacherHasNoCourses;
         public static string role;
         public static Person currentPerson;
         public static TaughtCourse currentCourse;
@@ -127,14 +128,15 @@ namespace Gradebook
                 }
                 catch (Exception ex)
                 {
-                    throw ex;
+                    teacherHasNoCourses = true;
+                    lblError.Text = "Please contact your administrator \n to have classes added for you.";
                 }
             }
         }
 
         private void LoadTopNav()
         {
-            if (role == "Administrator" || role == "Student")
+            if (role == "Administrator" || role == "Student" || teacherHasNoCourses)
             {
                 btnAssignmentsView.Visible = false;
                 btnGradebookView.Visible = false;
@@ -145,7 +147,7 @@ namespace Gradebook
                 lblClassInfo.Visible = false;
             }
 
-            if (role == "Student")
+            if (role == "Student" || teacherHasNoCourses)
                 btnClassView.Visible = false;
         }
         ////////////////////////////////////////// Nav Controller Event Triggers  //////////////////////////////////////////
