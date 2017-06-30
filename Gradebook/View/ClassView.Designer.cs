@@ -58,7 +58,7 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.cboCourses = new System.Windows.Forms.ComboBox();
-            this.lblCourseID = new System.Windows.Forms.Label();
+            this.lblTaughtCourseID = new System.Windows.Forms.Label();
             this.txtTaughtCourseID = new System.Windows.Forms.TextBox();
             this.groupBoxClassDescription.SuspendLayout();
             this.groupBoxCategoryWeights.SuspendLayout();
@@ -398,12 +398,12 @@
             // 
             // lblCourseID
             // 
-            this.lblCourseID.AutoSize = true;
-            this.lblCourseID.Location = new System.Drawing.Point(255, 48);
-            this.lblCourseID.Name = "lblCourseID";
-            this.lblCourseID.Size = new System.Drawing.Size(35, 13);
-            this.lblCourseID.TabIndex = 19;
-            this.lblCourseID.Text = "TCID:";
+            this.lblTaughtCourseID.AutoSize = true;
+            this.lblTaughtCourseID.Location = new System.Drawing.Point(255, 48);
+            this.lblTaughtCourseID.Name = "lblTaughtCourseID";
+            this.lblTaughtCourseID.Size = new System.Drawing.Size(35, 13);
+            this.lblTaughtCourseID.TabIndex = 19;
+            this.lblTaughtCourseID.Text = "TCID:";
             // 
             // txtTaughtCourseID
             // 
@@ -421,7 +421,7 @@
             this.ClientSize = new System.Drawing.Size(570, 474);
             this.Controls.Add(this.txtTaughtCourseID);
             this.Controls.Add(this.txtCourseName);
-            this.Controls.Add(this.lblCourseID);
+            this.Controls.Add(this.lblTaughtCourseID);
             this.Controls.Add(this.cboCourses);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnAdd);
@@ -483,7 +483,7 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.ComboBox cboCourses;
-        private System.Windows.Forms.Label lblCourseID;
+        private System.Windows.Forms.Label lblTaughtCourseID;
         private System.Windows.Forms.TextBox txtTaughtCourseID;
     }
 }

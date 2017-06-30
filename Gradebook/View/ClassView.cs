@@ -21,7 +21,6 @@ namespace Gradebook
         private TeacherService teacherService;
         private TaughtCourseService tcService;
         private CourseService courseService;
-
         private List<Category> categoriesList;
         private List<TextBox> categoryBoxes;
         private TaughtCourse currentCourse;
@@ -34,7 +33,6 @@ namespace Gradebook
         {
             InitializeComponent();
             InitializeCategoryBoxes();
-            keepCurrentAttributes = false;
             categoryService = new CategoryService();
             teacherService = new TeacherService();
             tcService = new TaughtCourseService();
@@ -66,13 +64,13 @@ namespace Gradebook
 
             cboTeachers.Visible = false;
             cboCourses.Visible = false;
-            lblCourseID.Visible = false;
+            lblTaughtCourseID.Visible = false;
             txtTaughtCourseID.Visible = false;
             btnAdd.Visible = false;
             btnDelete.Visible = false;
             gboxUserOptions.Visible = false;
 
-            FillCategoriesForTaughtCourse();
+            SetCategoriesForTaughtCourse();
         }
 
         private void BtnReset_Click(object sender, EventArgs e)
@@ -83,13 +81,13 @@ namespace Gradebook
             {
                 ClearCourseAttributes();
                 FillTeacherComboBox();
-                FillAllCategoryBoxesTo(20);
+                SetAllCategoryBoxesTo(20);
                 keepCurrentAttributes = false;
                 btnAdd.Enabled = true;
             }
             else
             {
-                FillCategoriesForTaughtCourse();
+                SetCategoriesForTaughtCourse();
             }
         }
 
@@ -123,14 +121,13 @@ namespace Gradebook
 
         private void LoadAdminAddView()
         {
-            if (!keepCurrentAttributes)
-            {
-                ClearCourseAttributes();
-                FillTeacherComboBox();
-                FillAllCategoryBoxesTo(20);
-            }
-
             ToggleSetForAddNewCourse(true);
+
+            ClearCourseAttributes();
+            FillTeacherComboBox();
+            SetAllCategoryBoxesTo(20);
+
+
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -158,10 +155,9 @@ namespace Gradebook
 
                     if (success)
                     {
-                        lblClassViewSuccess.Text = "Class added successfully.";
                         keepCurrentAttributes = true;
                         btnAdd.Enabled = false;
-                        LoadAdminAddView();
+                        lblClassViewSuccess.Text = "Class added successfully.";
                     }
                     else
                         lblClassViewError.Text = "Unable to add class successfully.";
@@ -199,55 +195,7 @@ namespace Gradebook
 
             FillTeacherComboBox();
             FillCourseInformation();
-            FillCategoriesForTaughtCourse();
-        }
-
-        private void BtnDelete_Click(object sender, EventArgs e)
-        {
-            DialogResult reuslt = MessageBox.Show(
-                            "Are you sure you want to delete this class?\n" +
-                            "This change will be irreversible.", "Caution", 
-                            MessageBoxButtons.OKCancel, 
-                            MessageBoxIcon.Warning);
-
-            if (reuslt == DialogResult.OK)
-            {
-                // Delete
-            }    
-        }
-
-        private void BtnDeleteToggle_Click(object sender, EventArgs e)
-        {
-            btnAddToggle.CheckState = CheckState.Unchecked;
-            btnDeleteToggle.CheckState = CheckState.Checked;
-
-            ClearCourseAttributes();
-            LoadAdminDeleteView(); 
-        }
-
-        private void ToggleSetForAddNewCourse(bool activate)
-        {
-            addCourseToggleIsActive = activate;
-            txtCourseName.Visible = activate;
-            btnReset.Visible = activate;
-            keepCurrentAttributes = activate;
-
-            txtCourseDescription.ReadOnly = !activate;
-            cboCourses.Visible = !activate;
-            lblCourseID.Visible = !activate;
-            txtTaughtCourseID.Visible = !activate;
-            btnDelete.Visible = !activate;
-            SetCategoryBoxesToReadOnly(!activate);
-
-            btnUpdate.Visible = false;
-            txtTeacherName.Visible = false;
-            txtCourseName.ReadOnly = false;
-        }
-
-        private void ClearCourseAttributes()
-        {
-            txtCourseName.Text = "";
-            txtCourseDescription.Text = "";
+            SetCategoriesForTaughtCourse();
         }
 
         private void FillTeacherComboBox()
@@ -263,6 +211,9 @@ namespace Gradebook
                 cboTeachers.SelectedIndex = 0;
 
                 currentTeacherID = (int)cboTeachers.SelectedValue;
+
+                if (!addCourseToggleIsActive)
+                    FillCourseInformation();
             }
             catch (Exception ex)
             {
@@ -272,8 +223,12 @@ namespace Gradebook
 
         private void CboTeachers_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            currentTeacherID = (int)cboTeachers.SelectedValue;
-            FillCourseInformation();
+            if (!addCourseToggleIsActive)
+            {
+                currentTeacherID = (int)cboTeachers.SelectedValue;
+                FillCourseInformation();
+                SetCategoriesForTaughtCourse();
+            }
         }
 
         private void FillCourseInformation()
@@ -287,13 +242,15 @@ namespace Gradebook
                 cboCourses.DisplayMember = "name";
                 cboCourses.ValueMember = "taughtCourseID";
                 cboCourses.SelectedIndex = 0;
-                currentCourse = (TaughtCourse)cboCourses.SelectedItem;
 
+                currentCourse = (TaughtCourse)cboCourses.SelectedItem;
                 txtTaughtCourseID.Text = currentCourse.taughtCourseID.ToString();
                 txtCourseDescription.Text = currentCourse.description;
             }
             catch (Exception ex)
             {
+                ClearCourseAttributes();
+                currentCourse = null;
                 lblClassViewError.Text = "Unable to find courses for teacher.";
             }
         }
@@ -301,11 +258,80 @@ namespace Gradebook
 
         private void CboCourses_SelectChangeCommitted(object sender, EventArgs e)
         {
-            currentCourse = (TaughtCourse) cboCourses.SelectedItem;
+            currentCourse = (TaughtCourse)cboCourses.SelectedItem;
             txtTaughtCourseID.Text = currentCourse.taughtCourseID.ToString();
             txtCourseDescription.Text = currentCourse.description;
 
-            FillCategoriesForTaughtCourse();
+            SetCategoriesForTaughtCourse();
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            ClearMessageFields();
+            DialogResult reuslt = MessageBox.Show("Are you sure you want to delete this class?\n" +
+                            "This change will be irreversible.", "Caution", 
+                            MessageBoxButtons.OKCancel, 
+                            MessageBoxIcon.Warning);
+
+            if (reuslt == DialogResult.OK)
+            {
+                try
+                {
+                    bool success = tcService.deleteTaughtCourseWithCategories(currentCourse);
+
+                    if (success)
+                    {
+                        LoadAdminDeleteView();
+                        lblClassViewSuccess.Text = "Course successfully deleted.";
+                    }
+                    else
+                        lblClassViewError.Text = "Course was unable to be deleted.";
+                }
+                catch (Exception)
+                {
+                    lblClassViewError.Text = "Database error. Please try again.";
+                }
+            }    
+        }
+
+        private void BtnDeleteToggle_Click(object sender, EventArgs e)
+        {
+            btnAddToggle.CheckState = CheckState.Unchecked;
+            btnDeleteToggle.CheckState = CheckState.Checked;
+
+            LoadAdminDeleteView(); 
+        }
+
+        private void ToggleSetForAddNewCourse(bool activate)
+        {
+            addCourseToggleIsActive = activate;
+            txtCourseName.Visible = activate;
+            btnReset.Visible = activate;
+            btnAdd.Enabled = activate;
+
+            txtCourseDescription.ReadOnly = !activate;
+            txtTaughtCourseID.Visible = !activate;
+            lblTaughtCourseID.Visible = !activate;
+            SetCategoryBoxesToReadOnly(!activate);
+            cboCourses.Visible = !activate;
+            btnDelete.Visible = !activate;
+
+            txtTeacherName.Visible = false;
+            txtCourseName.ReadOnly = false;
+            keepCurrentAttributes = false;
+            btnUpdate.Visible = false;
+        }
+
+        private void ClearCourseAttributes()
+        {
+            txtCourseName.Text = "";
+            txtCourseDescription.Text = "";
+
+            if (!addCourseToggleIsActive)
+            {
+                txtTaughtCourseID.Text = "";
+                SetAllCategoryBoxesTo(0);
+            }     
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -319,10 +345,7 @@ namespace Gradebook
 
         private List<Category> InitializeNewCategoryList()
         {
-            List<String> categoryNames = new List<string>()
-            {
-                "Exams", "Homework", "Participation", "Projects", "Quizzes"
-            };
+            List<String> categoryNames = new List<string>() { "Exams", "Homework", "Participation", "Projects", "Quizzes" };
             List<Category> newCategories = new List<Category>();
 
             foreach (String categoryName in categoryNames)
@@ -334,7 +357,7 @@ namespace Gradebook
             return newCategories;
         }
 
-        private void FillAllCategoryBoxesTo(int fillAmount)
+        private void SetAllCategoryBoxesTo(int fillAmount)
         {
             foreach (TextBox categoryBox in categoryBoxes)
             {
@@ -342,10 +365,8 @@ namespace Gradebook
             }
         }
 
-        private void FillCategoriesForTaughtCourse()
+        private void SetCategoriesForTaughtCourse()
         {
-            ClearMessageFields();
-
             try
             {
                 categoriesList = categoryService.findCategoriesByTaughtCourseID(currentCourse.taughtCourseID);
