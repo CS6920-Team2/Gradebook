@@ -227,7 +227,6 @@ namespace Gradebook
             {
                 currentTeacherID = (int)cboTeachers.SelectedValue;
                 FillCourseInformation();
-                SetCategoriesForTaughtCourse();
             }
         }
 

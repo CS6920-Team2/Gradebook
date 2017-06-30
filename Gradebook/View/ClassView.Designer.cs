@@ -79,7 +79,7 @@
             // 
             this.txtCourseDescription.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtCourseDescription.Location = new System.Drawing.Point(3, 16);
-            this.txtCourseDescription.MaxLength = 50;
+            this.txtCourseDescription.MaxLength = 250;
             this.txtCourseDescription.Multiline = true;
             this.txtCourseDescription.Name = "txtCourseDescription";
             this.txtCourseDescription.ReadOnly = true;
@@ -271,7 +271,7 @@
             // txtCourseName
             // 
             this.txtCourseName.Location = new System.Drawing.Point(92, 45);
-            this.txtCourseName.MaxLength = 20;
+            this.txtCourseName.MaxLength = 25;
             this.txtCourseName.Name = "txtCourseName";
             this.txtCourseName.ReadOnly = true;
             this.txtCourseName.Size = new System.Drawing.Size(252, 20);
@@ -396,7 +396,7 @@
             this.cboCourses.TabIndex = 2;
             this.cboCourses.SelectionChangeCommitted += new System.EventHandler(this.CboCourses_SelectChangeCommitted);
             // 
-            // lblCourseID
+            // lblTaughtCourseID
             // 
             this.lblTaughtCourseID.AutoSize = true;
             this.lblTaughtCourseID.Location = new System.Drawing.Point(255, 48);
