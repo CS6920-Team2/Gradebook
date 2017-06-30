@@ -10,6 +10,5 @@ namespace Gradebook.Data.DAO
     {
         public int taughtCourseID { get; set; }
         public int teacherID { get; set; }
-        public int courseID { get; set; }
     }
 }

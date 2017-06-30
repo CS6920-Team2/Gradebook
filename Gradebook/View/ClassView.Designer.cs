@@ -49,7 +49,7 @@
             this.txtCourseName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.lblClassViewError = new System.Windows.Forms.Label();
-            this.cboTeacherName = new System.Windows.Forms.ComboBox();
+            this.cboTeachers = new System.Windows.Forms.ComboBox();
             this.txtTeacherName = new System.Windows.Forms.TextBox();
             this.lblClassViewSuccess = new System.Windows.Forms.Label();
             this.gboxUserOptions = new System.Windows.Forms.GroupBox();
@@ -57,9 +57,9 @@
             this.btnAddToggle = new System.Windows.Forms.CheckBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.cboCourseName = new System.Windows.Forms.ComboBox();
+            this.cboCourses = new System.Windows.Forms.ComboBox();
             this.lblCourseID = new System.Windows.Forms.Label();
-            this.txtCourseID = new System.Windows.Forms.TextBox();
+            this.txtTaughtCourseID = new System.Windows.Forms.TextBox();
             this.groupBoxClassDescription.SuspendLayout();
             this.groupBoxCategoryWeights.SuspendLayout();
             this.gboxUserOptions.SuspendLayout();
@@ -270,7 +270,7 @@
             // 
             // txtCourseName
             // 
-            this.txtCourseName.Location = new System.Drawing.Point(92, 46);
+            this.txtCourseName.Location = new System.Drawing.Point(92, 45);
             this.txtCourseName.MaxLength = 20;
             this.txtCourseName.Name = "txtCourseName";
             this.txtCourseName.ReadOnly = true;
@@ -297,18 +297,19 @@
             this.lblClassViewError.Size = new System.Drawing.Size(0, 13);
             this.lblClassViewError.TabIndex = 9;
             // 
-            // cboTeacherName
+            // cboTeachers
             // 
-            this.cboTeacherName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboTeacherName.FormattingEnabled = true;
-            this.cboTeacherName.Location = new System.Drawing.Point(92, 19);
-            this.cboTeacherName.Name = "cboTeacherName";
-            this.cboTeacherName.Size = new System.Drawing.Size(252, 21);
-            this.cboTeacherName.TabIndex = 1;
+            this.cboTeachers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTeachers.FormattingEnabled = true;
+            this.cboTeachers.Location = new System.Drawing.Point(92, 19);
+            this.cboTeachers.Name = "cboTeachers";
+            this.cboTeachers.Size = new System.Drawing.Size(252, 21);
+            this.cboTeachers.TabIndex = 1;
+            this.cboTeachers.SelectionChangeCommitted += new System.EventHandler(this.CboTeachers_SelectionChangeCommitted);
             // 
             // txtTeacherName
             // 
-            this.txtTeacherName.Location = new System.Drawing.Point(92, 19);
+            this.txtTeacherName.Location = new System.Drawing.Point(92, 20);
             this.txtTeacherName.Name = "txtTeacherName";
             this.txtTeacherName.ReadOnly = true;
             this.txtTeacherName.Size = new System.Drawing.Size(252, 20);
@@ -385,48 +386,49 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
-            // cboCourseName
+            // cboCourses
             // 
-            this.cboCourseName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboCourseName.FormattingEnabled = true;
-            this.cboCourseName.Location = new System.Drawing.Point(92, 45);
-            this.cboCourseName.Name = "cboCourseName";
-            this.cboCourseName.Size = new System.Drawing.Size(156, 21);
-            this.cboCourseName.TabIndex = 2;
+            this.cboCourses.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCourses.FormattingEnabled = true;
+            this.cboCourses.Location = new System.Drawing.Point(92, 45);
+            this.cboCourses.Name = "cboCourses";
+            this.cboCourses.Size = new System.Drawing.Size(156, 21);
+            this.cboCourses.TabIndex = 2;
+            this.cboCourses.SelectionChangeCommitted += new System.EventHandler(this.CboCourses_SelectChangeCommitted);
             // 
             // lblCourseID
             // 
             this.lblCourseID.AutoSize = true;
             this.lblCourseID.Location = new System.Drawing.Point(255, 48);
             this.lblCourseID.Name = "lblCourseID";
-            this.lblCourseID.Size = new System.Drawing.Size(21, 13);
+            this.lblCourseID.Size = new System.Drawing.Size(35, 13);
             this.lblCourseID.TabIndex = 19;
-            this.lblCourseID.Text = "ID:";
+            this.lblCourseID.Text = "TCID:";
             // 
-            // txtCourseID
+            // txtTaughtCourseID
             // 
-            this.txtCourseID.Location = new System.Drawing.Point(282, 45);
-            this.txtCourseID.Name = "txtCourseID";
-            this.txtCourseID.ReadOnly = true;
-            this.txtCourseID.Size = new System.Drawing.Size(62, 20);
-            this.txtCourseID.TabIndex = 20;
-            this.txtCourseID.TabStop = false;
+            this.txtTaughtCourseID.Location = new System.Drawing.Point(296, 45);
+            this.txtTaughtCourseID.Name = "txtTaughtCourseID";
+            this.txtTaughtCourseID.ReadOnly = true;
+            this.txtTaughtCourseID.Size = new System.Drawing.Size(48, 20);
+            this.txtTaughtCourseID.TabIndex = 20;
+            this.txtTaughtCourseID.TabStop = false;
             // 
             // ClassView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(570, 474);
-            this.Controls.Add(this.txtCourseID);
+            this.Controls.Add(this.txtTaughtCourseID);
             this.Controls.Add(this.txtCourseName);
             this.Controls.Add(this.lblCourseID);
-            this.Controls.Add(this.cboCourseName);
+            this.Controls.Add(this.cboCourses);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.gboxUserOptions);
             this.Controls.Add(this.lblClassViewSuccess);
             this.Controls.Add(this.txtTeacherName);
-            this.Controls.Add(this.cboTeacherName);
+            this.Controls.Add(this.cboTeachers);
             this.Controls.Add(this.lblClassViewError);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnUpdate);
@@ -472,7 +474,7 @@
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lblClassViewError;
-        private System.Windows.Forms.ComboBox cboTeacherName;
+        private System.Windows.Forms.ComboBox cboTeachers;
         private System.Windows.Forms.TextBox txtTeacherName;
         private System.Windows.Forms.Label lblClassViewSuccess;
         private System.Windows.Forms.GroupBox gboxUserOptions;
@@ -480,8 +482,8 @@
         private System.Windows.Forms.CheckBox btnAddToggle;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.ComboBox cboCourseName;
+        private System.Windows.Forms.ComboBox cboCourses;
         private System.Windows.Forms.Label lblCourseID;
-        private System.Windows.Forms.TextBox txtCourseID;
+        private System.Windows.Forms.TextBox txtTaughtCourseID;
     }
 }
