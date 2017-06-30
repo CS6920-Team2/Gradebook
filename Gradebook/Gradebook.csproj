@@ -155,7 +155,6 @@
     </Compile>
     <Compile Include="Tests\ConnectionFactoryTests\ConnectionFactoryTests.cs" />
     <Compile Include="Tests\ServiceTests\AdminServiceTests.cs" />
-    <Compile Include="Tests\ServiceTests\AssignmentServiceTests.cs" />
     <Compile Include="Tests\ServiceTests\CategoryServiceTests.cs" />
     <Compile Include="Tests\ServiceTests\CourseServiceTests.cs" />
     <Compile Include="Tests\ServiceTests\PersonServiceTests.cs" />
