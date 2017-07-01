@@ -63,7 +63,7 @@ namespace Gradebook.View
             if (ddlCourses.SelectedItem != null)
             {
                 ComboBoxItem selected = (ComboBoxItem) ddlCourses.SelectedItem;
-                dgAssignments.DataSource = gradeService.FindCourseGrades((int)selected.Value);
+                dgAssignments.DataSource = gradeService.findCourseGrades((int)selected.Value);
 
                 //unable to sort correctly due to multiple header columns
                 foreach (DataGridViewColumn column in dgAssignments.Columns)

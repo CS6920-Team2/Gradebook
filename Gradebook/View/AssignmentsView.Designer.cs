@@ -173,10 +173,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(35, 20);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(179, 25);
+            this.label1.Size = new System.Drawing.Size(291, 37);
             this.label1.TabIndex = 16;
             this.label1.Text = "Assignment Details";
             // 
@@ -200,9 +200,9 @@
             // 
             // addBtn
             // 
-            this.addBtn.Location = new System.Drawing.Point(99, 108);
+            this.addBtn.Location = new System.Drawing.Point(139, 88);
             this.addBtn.Name = "addBtn";
-            this.addBtn.Size = new System.Drawing.Size(97, 40);
+            this.addBtn.Size = new System.Drawing.Size(75, 23);
             this.addBtn.TabIndex = 20;
             this.addBtn.Text = "Add ";
             this.addBtn.UseVisualStyleBackColor = true;
@@ -210,9 +210,9 @@
             // 
             // modifyBtn
             // 
-            this.modifyBtn.Location = new System.Drawing.Point(99, 154);
+            this.modifyBtn.Location = new System.Drawing.Point(139, 122);
             this.modifyBtn.Name = "modifyBtn";
-            this.modifyBtn.Size = new System.Drawing.Size(97, 40);
+            this.modifyBtn.Size = new System.Drawing.Size(75, 23);
             this.modifyBtn.TabIndex = 21;
             this.modifyBtn.Text = "Modify";
             this.modifyBtn.UseVisualStyleBackColor = true;
@@ -240,9 +240,9 @@
             // 
             // viewBtn
             // 
-            this.viewBtn.Location = new System.Drawing.Point(99, 62);
+            this.viewBtn.Location = new System.Drawing.Point(139, 54);
             this.viewBtn.Name = "viewBtn";
-            this.viewBtn.Size = new System.Drawing.Size(97, 40);
+            this.viewBtn.Size = new System.Drawing.Size(75, 23);
             this.viewBtn.TabIndex = 24;
             this.viewBtn.Text = "View";
             this.viewBtn.UseVisualStyleBackColor = true;
@@ -252,7 +252,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(895, 474);
             this.Controls.Add(this.viewBtn);
             this.Controls.Add(this.deleteBtn);

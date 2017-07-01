@@ -163,7 +163,6 @@
     <Compile Include="Tests\ServiceTests\RoleServiceTests.cs" />
     <Compile Include="Tests\ServiceTests\StudentServiceTests.cs" />
     <Compile Include="Tests\ServiceTests\TeacherServiceTests.cs" />
-    <Compile Include="Tests\ServiceTests\UserServiceTests.cs" />
     <Compile Include="View\AssignmentsView.cs">
       <SubType>Form</SubType>
     </Compile>
