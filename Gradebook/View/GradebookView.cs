@@ -63,7 +63,7 @@ namespace Gradebook.View
             if (ddlCourses.SelectedItem != null)
             {
                 ComboBoxItem selected = (ComboBoxItem) ddlCourses.SelectedItem;
-                dgAssignments.DataSource = gradeService.findCourseGrades((int)selected.Value);
+                dgAssignments.DataSource = gradeService.FindCourseGrades((int)selected.Value);
 
                 //unable to sort correctly due to multiple header columns
                 foreach (DataGridViewColumn column in dgAssignments.Columns)
@@ -72,6 +72,60 @@ namespace Gradebook.View
                     column.SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
             }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch(keyData)
+            {
+                case Keys.Left:
+                    prevClass();
+                    return true;
+                case Keys.Right:
+                    nextClass();
+                    return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void nextClass()
+        {
+            int current = ddlCourses.SelectedIndex;
+            int max = ddlCourses.Items.Count;
+
+            if(current + 1 < max)
+            {
+                ddlCourses.SelectedIndex = current + 1;
+            }
+            else
+            {
+                ddlCourses.SelectedIndex = 0;
+            }
+        }
+
+        private void prevClass()
+        {
+            int current = ddlCourses.SelectedIndex;
+            int max = ddlCourses.Items.Count;
+
+            if (current > 0)
+            {
+                ddlCourses.SelectedIndex = current - 1;
+            }
+            else
+            {
+                ddlCourses.SelectedIndex = max - 1;
+            }
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            nextClass();
+        }
+
+        private void btnPrev_Click(object sender, EventArgs e)
+        {
+            prevClass();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Gradebook.Data.DAO;
 using Gradebook.Data.Factories;
+using Gradebook.Data.Interfaces;
 using Gradebook.Data.Utils;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Gradebook.Data.Services
 {
-    public class GradeService
+    public class GradeService : IGradeService
     {
         private static class GradeColumns
         {
@@ -38,11 +39,11 @@ namespace Gradebook.Data.Services
 
         public DataTable findCourseGrades(int taughtCourseID)
         {
-            var connection = ConnectionFactory.GetOpenConnection();
-            try
+            List<GradeInfo> gradeInfo = new List<GradeInfo>();
+            using (var connection = ConnectionFactory.GetOpenConnection())
             {
                 //create the sql query, send in an anonymous object which contains the parameters, then select the first result
-                var gradeInfo = connection.Query<GradeInfo>(
+                gradeInfo = connection.Query<GradeInfo>(
                     "SELECT p.personID, a.assignmentID, " +
                     "p.firstName as 'FirstName', p.lastName as 'LastName'," +
                     "a.name as 'AssignmentName', a.description as 'AssignmentDescription', " +
@@ -63,98 +64,83 @@ namespace Gradebook.Data.Services
                     "JOIN Grades g ON g.registeredStudentID = rs.registeredStudentID and g.assignmentID = a.assignmentID " +
                     "WHERE t.teacherID = @teacherID AND t.taughtCourseID = @taughtCourseID",
                     new { teacherID = AuthenticatedTeacher.teacherID, taughtCourseID = taughtCourseID }).ToList();
-                connection.Close();
-                connection.Dispose();
-
-                var gradeInfoData = gradeInfo.GroupBy(s => s.PersonID).ToList();
-
-                DataTable dt = new DataTable(GradeColumns.Grades);
-                //user names
-                dt.Columns.Add(new DataColumn(GradeColumns.Student, typeof(string)));
-                //averages
-                dt.Columns.Add(new DataColumn(GradeColumns.Average, typeof(string)));
-
-                var nameInfoGroup = gradeInfo.GroupBy(a => a.AssignmentName);
-
-                //add column for each assignment
-                foreach (var assignment in gradeInfo.GroupBy(a => a.AssignmentID))
-                {
-                    if(assignment.Count() > 0)
-                    {
-                        String column = assignment.First().AssignmentName;
-                        dt.Columns.Add(new DataColumn(column, typeof(string)));
-                    }
-                }
-
-                DataRow dueDateRow = dt.NewRow();
-                dueDateRow[GradeColumns.Average] = GradeColumns.DueDate;
-                DataRow pointsPossibleRow = dt.NewRow();
-                pointsPossibleRow[GradeColumns.Average] = GradeColumns.PointsPossible;
-
-                dt.Rows.Add(dueDateRow);
-                dt.Rows.Add(pointsPossibleRow);
-                
-                if(gradeInfoData.Count() == 0)
-                {
-                    return new DataTable(GradeColumns.Grades);
-                }
-                foreach (var gradeData in gradeInfoData)
-                {
-                    List<WeightedGrade> grades = new List<WeightedGrade>();
-
-                    //create new record for the person
-                    DataRow dr = dt.NewRow();
-
-                    //set student name
-                    if (gradeData.Count() > 0)
-                    {
-                        var gradeItem = gradeData.First();
-                        dr[GradeColumns.Student] = gradeItem.LastName + ", " + gradeItem.FirstName;
-                    }
-
-                    //iterate each assignment and add column
-                    foreach (var gradeItem in gradeData)
-                    {
-                        dr[gradeItem.AssignmentName] = gradeItem.Grade;
-                        pointsPossibleRow[gradeItem.AssignmentName] = gradeItem.PointsPossible;
-                        dueDateRow[gradeItem.AssignmentName] =  gradeItem.DueDate.ToShortDateString();
-
-                        grades.Add(new WeightedGrade(gradeItem.Weight, gradeItem.Grade, gradeItem.PointsPossible, gradeItem.CategoryName));
-                    }
-
-                    double totalEarned = 0;
-                    
-                    foreach(var grade in grades.GroupBy(g => g.CategoryName))
-                    {
-                        double maxPointsByWeight = 100.0 * (grade.First().Weight * .01);
-
-                        double totalPointsForCategory = grade.Sum(g => g.TotalPoints);
-                        double totalEarnedForCategory = grade.Sum(g => g.TotalEarned);
-
-                        totalEarned += maxPointsByWeight * (totalEarnedForCategory / totalPointsForCategory);
-                    }
-                    dr[GradeColumns.Average] = String.Format("{0:P2}", totalEarned / 100);
-                    dt.Rows.Add(dr);
-                }
-
-                dt.Locale = System.Globalization.CultureInfo.InvariantCulture;
-                return dt;
             }
-            catch (Exception e)
+
+            var gradeInfoData = gradeInfo.GroupBy(s => s.PersonID).ToList();
+
+            DataTable dt = new DataTable(GradeColumns.Grades);
+            //user names
+            dt.Columns.Add(new DataColumn(GradeColumns.Student, typeof(string)));
+            //averages
+            dt.Columns.Add(new DataColumn(GradeColumns.Average, typeof(string)));
+
+            var nameInfoGroup = gradeInfo.GroupBy(a => a.AssignmentName);
+
+            //add column for each assignment
+            foreach (var assignment in gradeInfo.GroupBy(a => a.AssignmentID))
             {
-                try
+                if (assignment.Count() > 0)
                 {
-                    //in case of exception, close the connection then toss it back up the chain
-                    connection.Close();
-                    connection.Dispose();
+                    String column = assignment.First().AssignmentName;
+                    dt.Columns.Add(new DataColumn(column, typeof(string)));
                 }
-                catch (Exception)
-                {
-                    //swallow exception
-                }
-                
-                throw e;
             }
+
+            //creating two header rows
+            DataRow dueDateRow = dt.NewRow();
+            dueDateRow[GradeColumns.Average] = GradeColumns.DueDate;
+            DataRow pointsPossibleRow = dt.NewRow();
+            pointsPossibleRow[GradeColumns.Average] = GradeColumns.PointsPossible;
+
+            dt.Rows.Add(dueDateRow);
+            dt.Rows.Add(pointsPossibleRow);
+
+            if (gradeInfoData.Count() == 0)
+            {
+                return new DataTable(GradeColumns.Grades);
+            }
+
+            foreach (var gradeData in gradeInfoData)
+            {
+                List<WeightedGrade> grades = new List<WeightedGrade>();
+
+                //create new record for the person
+                DataRow dr = dt.NewRow();
+
+                //set student name
+                if (gradeData.Count() > 0)
+                {
+                    var gradeItem = gradeData.First();
+                    dr[GradeColumns.Student] = gradeItem.LastName + ", " + gradeItem.FirstName;
+                }
+
+                //iterate each assignment and add column
+                foreach (var gradeItem in gradeData)
+                {
+                    dr[gradeItem.AssignmentName] = gradeItem.Grade;
+                    pointsPossibleRow[gradeItem.AssignmentName] = gradeItem.PointsPossible;
+                    dueDateRow[gradeItem.AssignmentName] = gradeItem.DueDate.ToShortDateString();
+
+                    grades.Add(new WeightedGrade(gradeItem.Weight, gradeItem.Grade, gradeItem.PointsPossible, gradeItem.CategoryName));
+                }
+
+                //calculate weighted grade
+                double totalEarned = 0;
+                foreach (var grade in grades.GroupBy(g => g.CategoryName))
+                {
+                    double maxPointsByWeight = 100.0 * (grade.First().Weight * .01);
+
+                    double totalPointsForCategory = grade.Sum(g => g.TotalPoints);
+                    double totalEarnedForCategory = grade.Sum(g => g.TotalEarned);
+
+                    totalEarned += maxPointsByWeight * (totalEarnedForCategory / totalPointsForCategory);
+                }
+                dr[GradeColumns.Average] = String.Format("{0:P2}", totalEarned / 100);
+                dt.Rows.Add(dr);
+            }
+
+            dt.Locale = System.Globalization.CultureInfo.InvariantCulture;
+            return dt;
         }
     }
 }
