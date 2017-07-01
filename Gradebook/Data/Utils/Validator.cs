@@ -71,14 +71,14 @@ namespace Gradebook.Data.Utils
                 }
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show(textBox.Tag.ToString() + " must be an integer value.", Title);
+                    System.Windows.Forms.MessageBox.Show(textBox.Tag.ToString() + " must be a number.", Title);
                     textBox.Focus();
                     return false;
                 }
             }
             catch (FormatException)
             {
-                System.Windows.Forms.MessageBox.Show(textBox.Tag.ToString() + " must be an integer value.", Title);
+                System.Windows.Forms.MessageBox.Show(textBox.Tag.ToString() + " must be a number.", Title);
                 textBox.Focus();
                 return false;
             }

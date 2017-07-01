@@ -55,6 +55,7 @@
             // nameTB
             // 
             this.nameTB.Location = new System.Drawing.Point(293, 62);
+            this.nameTB.MaxLength = 50;
             this.nameTB.Name = "nameTB";
             this.nameTB.Size = new System.Drawing.Size(186, 20);
             this.nameTB.TabIndex = 3;
@@ -72,6 +73,7 @@
             // descriptionTB
             // 
             this.descriptionTB.Location = new System.Drawing.Point(293, 96);
+            this.descriptionTB.MaxLength = 50;
             this.descriptionTB.Multiline = true;
             this.descriptionTB.Name = "descriptionTB";
             this.descriptionTB.Size = new System.Drawing.Size(186, 76);
@@ -122,6 +124,7 @@
             // possiblePointsTB
             // 
             this.possiblePointsTB.Location = new System.Drawing.Point(588, 149);
+            this.possiblePointsTB.MaxLength = 3;
             this.possiblePointsTB.Name = "possiblePointsTB";
             this.possiblePointsTB.Size = new System.Drawing.Size(202, 20);
             this.possiblePointsTB.TabIndex = 12;

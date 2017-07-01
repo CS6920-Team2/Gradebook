@@ -183,6 +183,16 @@ namespace Gradebook.View
         // Checks that all data is valid before a transaction.
         private bool isValidData()
         {
+
+            if (!Validator.IsPresent(nameTB) ||
+                !Validator.IsPresent(descriptionTB) ||
+                !Validator.IsPresent(categoryCB) ||
+                !Validator.IsPresent(possiblePointsTB) ||
+                !Validator.IsInt32(possiblePointsTB))
+
+            {
+                return false;
+            }
             if (Int32.Parse(possiblePointsTB.Text) < 1 || Int32.Parse(possiblePointsTB.Text) > 100)
             {
                 MessageBox.Show("Possible points should be between 1 and 100", "Points Error");
@@ -193,18 +203,9 @@ namespace Gradebook.View
                 MessageBox.Show("Due Date must be greater than or equal to Assigned Date", "Date Error");
                 return false;
             }
-            if (Validator.IsPresent(nameTB) &&
-                Validator.IsPresent(descriptionTB) &&
-                Validator.IsPresent(categoryCB) &&
-                Validator.IsPresent(possiblePointsTB) &&
-                Validator.IsInt32(possiblePointsTB))
-
-            {
-                return true;
-            }
             else
             {
-                return false;
+                return true;
             }
         }
 
