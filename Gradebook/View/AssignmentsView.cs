@@ -24,6 +24,7 @@ namespace Gradebook.View
         private AssignmentService assignmentService;
         private CategoryService categoryService;
         private TaughtCourse currentCourse = MainView.currentCourse;
+        private bool canModify;
 
         DataSet ds;
         public AssignmentsView()
@@ -31,6 +32,7 @@ namespace Gradebook.View
             InitializeComponent();
             assignmentService = new AssignmentService();
             categoryService = new CategoryService();
+            canModify = false;
         }
 
         private void AssignmentsView_Load(object sender, EventArgs e)
@@ -39,13 +41,8 @@ namespace Gradebook.View
             dataGridView1.Columns["Category ID"].Visible = false;
             dataGridView1.Columns["assignmentID"].Visible = false;
             dataGridView1.Columns["Description"].Visible = false;
-            clickView();
+            clickAdd();
             loadCategoryCMB();
-            DataGridViewRow row = this.dataGridView1.RowTemplate;
-            row.DefaultCellStyle.BackColor = Color.Black;
-            row.DefaultCellStyle.ForeColor = Color.White;
-            row.Height = 35;
-            row.MinimumHeight = 20;
         }
 
 
@@ -91,13 +88,20 @@ namespace Gradebook.View
         {
             if (e.RowIndex == -1)  // ignore header row
                 return;
-            assignmentIDTB.Text = dataGridView1.Rows[e.RowIndex].Cells[0].FormattedValue.ToString();
-            nameTB.Text = dataGridView1.Rows[e.RowIndex].Cells[4].FormattedValue.ToString();
-            descriptionTB.Text = dataGridView1.Rows[e.RowIndex].Cells[6].FormattedValue.ToString();
-            assignedDatedtp.Value = (DateTime)dataGridView1.Rows[e.RowIndex].Cells[2].Value;
-            dueDatedtp.Value = (DateTime)dataGridView1.Rows[e.RowIndex].Cells[3].Value;
-            possiblePointsTB.Text = dataGridView1.Rows[e.RowIndex].Cells[7].FormattedValue.ToString();
-            categoryCB.Text = dataGridView1.Rows[e.RowIndex].Cells[5].FormattedValue.ToString();
+            if (canModify)
+            {
+                assignmentIDTB.Text = dataGridView1.Rows[e.RowIndex].Cells[0].FormattedValue.ToString();
+                nameTB.Text = dataGridView1.Rows[e.RowIndex].Cells[4].FormattedValue.ToString();
+                descriptionTB.Text = dataGridView1.Rows[e.RowIndex].Cells[6].FormattedValue.ToString();
+                assignedDatedtp.Value = (DateTime)dataGridView1.Rows[e.RowIndex].Cells[2].Value;
+                dueDatedtp.Value = (DateTime)dataGridView1.Rows[e.RowIndex].Cells[3].Value;
+                possiblePointsTB.Text = dataGridView1.Rows[e.RowIndex].Cells[7].FormattedValue.ToString();
+                categoryCB.Text = dataGridView1.Rows[e.RowIndex].Cells[5].FormattedValue.ToString();
+            }
+            else
+            {
+                resetControls();
+            }
         }
 
         // Clicking event shows the Add View
@@ -111,28 +115,15 @@ namespace Gradebook.View
         {
             clickModify();
         }
-
-        // Clicking event shows the View only
-        private void viewBtn_Click(object sender, EventArgs e)
-        {
-            clickView();
-        }
-
+        
         // Toggles to Add View
         private void clickAdd()
         {
+            headerLBL.Text = "Add Assignment";
+            canModify = false;
             controlsEnabled();
-            viewBtn.Enabled = true;
-            viewBtn.ForeColor = Color.Red;
             addBtn.Enabled = false;
-            addBtn.ForeColor = Color.Black;
             modifyBtn.Enabled = true;
-            modifyBtn.ForeColor = Color.Red;
-            dataGridView1.Enabled = false;
-            dataGridView1.BackgroundColor = Color.LightGray;
-            dataGridView1.ForeColor = Color.Gray;
-            dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.Gray;
-            dataGridView1.EnableHeadersVisualStyles = false;
             submitBtn.Visible = true;
             updateBtn.Visible = false;
             deleteBtn.Visible = false;
@@ -142,42 +133,14 @@ namespace Gradebook.View
         // Toggles to the Modify View
         private void clickModify()
         {
+            headerLBL.Text = "Modify Assignment";
+            canModify = true;
             controlsEnabled();
-            viewBtn.Enabled = true;
-            viewBtn.ForeColor = Color.Red;
             addBtn.Enabled = true;
-            addBtn.ForeColor = Color.Red;
             modifyBtn.Enabled = false;
-            modifyBtn.ForeColor = Color.Black;
-            dataGridView1.Enabled = true;
-            dataGridView1.BackgroundColor = Color.White;
-            dataGridView1.ForeColor = Color.Black;
-            dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
-            dataGridView1.EnableHeadersVisualStyles = true;
-
             submitBtn.Visible = false;
             updateBtn.Visible = true;
             deleteBtn.Visible = true;
-        }
-
-        // Toggles to the View only
-        private void clickView()
-        {
-            controlsDisabled();
-            viewBtn.Enabled = false;
-            addBtn.Enabled = true;
-            modifyBtn.Enabled = true;
-            submitBtn.Visible = false;
-            updateBtn.Visible = false;
-            deleteBtn.Visible = false;
-            viewBtn.ForeColor = Color.Black;
-            modifyBtn.ForeColor = Color.Red;
-            addBtn.ForeColor = Color.Red;
-            dataGridView1.Enabled = true;
-            dataGridView1.BackgroundColor = Color.White;
-            dataGridView1.ForeColor = Color.Black;
-            dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
-            dataGridView1.EnableHeadersVisualStyles = true;
         }
 
         // Checks that all data is valid before a transaction.

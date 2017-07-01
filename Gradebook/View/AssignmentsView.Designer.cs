@@ -41,14 +41,13 @@
             this.category = new System.Windows.Forms.Label();
             this.categoryCB = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
+            this.headerLBL = new System.Windows.Forms.Label();
             this.submitBtn = new System.Windows.Forms.Button();
             this.assignmentIDTB = new System.Windows.Forms.TextBox();
             this.addBtn = new System.Windows.Forms.Button();
             this.modifyBtn = new System.Windows.Forms.Button();
             this.updateBtn = new System.Windows.Forms.Button();
             this.deleteBtn = new System.Windows.Forms.Button();
-            this.viewBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -173,15 +172,15 @@
             this.dataGridView1.TabIndex = 15;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
-            // label1
+            // headerLBL
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(291, 37);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "Assignment Details";
+            this.headerLBL.AutoSize = true;
+            this.headerLBL.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headerLBL.Location = new System.Drawing.Point(12, 20);
+            this.headerLBL.Name = "headerLBL";
+            this.headerLBL.Size = new System.Drawing.Size(291, 37);
+            this.headerLBL.TabIndex = 16;
+            this.headerLBL.Text = "Assignment Details";
             // 
             // submitBtn
             // 
@@ -203,7 +202,7 @@
             // 
             // addBtn
             // 
-            this.addBtn.Location = new System.Drawing.Point(139, 88);
+            this.addBtn.Location = new System.Drawing.Point(124, 62);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(75, 23);
             this.addBtn.TabIndex = 20;
@@ -213,7 +212,7 @@
             // 
             // modifyBtn
             // 
-            this.modifyBtn.Location = new System.Drawing.Point(139, 122);
+            this.modifyBtn.Location = new System.Drawing.Point(124, 96);
             this.modifyBtn.Name = "modifyBtn";
             this.modifyBtn.Size = new System.Drawing.Size(75, 23);
             this.modifyBtn.TabIndex = 21;
@@ -241,30 +240,19 @@
             this.deleteBtn.UseVisualStyleBackColor = true;
             this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
-            // viewBtn
-            // 
-            this.viewBtn.Location = new System.Drawing.Point(139, 54);
-            this.viewBtn.Name = "viewBtn";
-            this.viewBtn.Size = new System.Drawing.Size(75, 23);
-            this.viewBtn.TabIndex = 24;
-            this.viewBtn.Text = "View";
-            this.viewBtn.UseVisualStyleBackColor = true;
-            this.viewBtn.Click += new System.EventHandler(this.viewBtn_Click);
-            // 
             // AssignmentsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(895, 474);
-            this.Controls.Add(this.viewBtn);
             this.Controls.Add(this.deleteBtn);
             this.Controls.Add(this.updateBtn);
             this.Controls.Add(this.modifyBtn);
             this.Controls.Add(this.addBtn);
             this.Controls.Add(this.assignmentIDTB);
             this.Controls.Add(this.submitBtn);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.headerLBL);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.categoryCB);
             this.Controls.Add(this.category);
@@ -306,13 +294,12 @@
         private System.Windows.Forms.Label category;
         private System.Windows.Forms.ComboBox categoryCB;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label headerLBL;
         private System.Windows.Forms.Button submitBtn;
         private System.Windows.Forms.TextBox assignmentIDTB;
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.Button modifyBtn;
         private System.Windows.Forms.Button updateBtn;
         private System.Windows.Forms.Button deleteBtn;
-        private System.Windows.Forms.Button viewBtn;
     }
 }
