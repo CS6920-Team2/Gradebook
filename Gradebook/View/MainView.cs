@@ -34,6 +34,7 @@ namespace Gradebook
         private int adminID;
         private int studentID;
         private static MainView current;
+        private static ComboBox courseList;
 
         public MainView()
         {
@@ -45,6 +46,7 @@ namespace Gradebook
             personService = new PersonService();
             courseService = new CourseService();
             studentService = new StudentService();
+            courseList = cboCourses;
         }
 
         public static MainView Current
@@ -52,6 +54,14 @@ namespace Gradebook
             get
             {
                 return current;
+            }
+        }
+
+        public static ComboBox CourseList
+        {
+            get
+            {
+                return courseList;
             }
         }
 
@@ -189,9 +199,16 @@ namespace Gradebook
 
             while (contentPanel.Controls.Count > 0)
             {
-                contentPanel.Controls[0].Dispose();
+                if(contentPanel.Controls[0] is Form)
+                {
+                    ((Form)contentPanel.Controls[0]).Close();
+                }
+                else
+                {
+                    contentPanel.Controls[0].Dispose();
+                }
             }
-
+            
             contentPanel.Controls.Add(form);
         }
 

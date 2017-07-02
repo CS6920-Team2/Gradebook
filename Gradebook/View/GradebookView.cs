@@ -36,34 +36,27 @@ namespace Gradebook.View
                 currentCourse = new ComboBoxItem(MainView.currentCourse.name + ", " + MainView.currentCourse.description, MainView.currentCourse.courseID);
             }
 
-            foreach (TaughtCourse course in courses)
-            {
-                if(currentCourse != null && course.courseID == (int)currentCourse.Value)
-                {
-                    ddlCourses.Items.Add(currentCourse);
-                } else
-                {
-                    ddlCourses.Items.Add(new ComboBoxItem(course.name + ", " + course.description, course.courseID));
-                }
-            }
+            MainView.CourseList.SelectedIndexChanged += CourseList_SelectedIndexChanged;
 
-            if(MainView.currentCourse != null)
-            {
-                ddlCourses.SelectedItem = currentCourse;
-            }
+            this.FormClosed += GradebookView_FormClosed;
         }
 
-        private void ddlCourses_SelectedIndexChanged(object sender, EventArgs e)
+        private void GradebookView_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MainView.CourseList.SelectedIndexChanged -= CourseList_SelectedIndexChanged;
+        }
+
+        private void CourseList_SelectedIndexChanged(object sender, EventArgs e)
         {
             fillDataSet();
         }
 
         private void fillDataSet()
         {
-            if (ddlCourses.SelectedItem != null)
+            if (MainView.CourseList.SelectedItem != null)
             {
-                ComboBoxItem selected = (ComboBoxItem) ddlCourses.SelectedItem;
-                dgAssignments.DataSource = gradeService.findCourseGrades((int)selected.Value);
+                TaughtCourse selected = (TaughtCourse)MainView.CourseList.SelectedItem;
+                dgAssignments.DataSource = gradeService.findCourseGrades(selected.courseID);
 
                 //unable to sort correctly due to multiple header columns
                 foreach (DataGridViewColumn column in dgAssignments.Columns)
@@ -90,31 +83,31 @@ namespace Gradebook.View
 
         private void nextClass()
         {
-            int current = ddlCourses.SelectedIndex;
-            int max = ddlCourses.Items.Count;
+            int current = MainView.CourseList.SelectedIndex;
+            int max = MainView.CourseList.Items.Count;
 
             if(current + 1 < max)
             {
-                ddlCourses.SelectedIndex = current + 1;
+                MainView.CourseList.SelectedIndex = current + 1;
             }
             else
             {
-                ddlCourses.SelectedIndex = 0;
+                MainView.CourseList.SelectedIndex = 0;
             }
         }
 
         private void prevClass()
         {
-            int current = ddlCourses.SelectedIndex;
-            int max = ddlCourses.Items.Count;
+            int current = MainView.CourseList.SelectedIndex;
+            int max = MainView.CourseList.Items.Count;
 
             if (current > 0)
             {
-                ddlCourses.SelectedIndex = current - 1;
+                MainView.CourseList.SelectedIndex = current - 1;
             }
             else
             {
-                ddlCourses.SelectedIndex = max - 1;
+                MainView.CourseList.SelectedIndex = max - 1;
             }
         }
 
@@ -126,6 +119,11 @@ namespace Gradebook.View
         private void btnPrev_Click(object sender, EventArgs e)
         {
             prevClass();
+        }
+
+        private void GradebookView_Load(object sender, EventArgs e)
+        {
+            fillDataSet();
         }
     }
 }
