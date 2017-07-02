@@ -245,6 +245,7 @@ namespace Gradebook
                 currentCourse = (TaughtCourse)cboCourses.SelectedItem;
                 txtTaughtCourseID.Text = currentCourse.taughtCourseID.ToString();
                 txtCourseDescription.Text = currentCourse.description;
+                SetCategoriesForTaughtCourse();
             }
             catch (Exception ex)
             {
@@ -281,6 +282,7 @@ namespace Gradebook
                     if (success)
                     {
                         LoadAdminDeleteView();
+                        ClearMessageFields();
                         lblClassViewSuccess.Text = "Course successfully deleted.";
                     }
                     else

@@ -326,7 +326,10 @@
             this.Controls.Add(this.gradebookLogo);
             this.Controls.Add(this.leftNav);
             this.Controls.Add(this.topNav);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.IsMdiContainer = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MainView";
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;

@@ -183,19 +183,19 @@ INSERT INTO [Credits] ([creditID],[type],[months]) VALUES (
 INSERT INTO [Courses] ([courseID],[creditID],[name],[description]) VALUES (
 1,2,'Math','General mathematics course covering the basics of probability, statistics, algebra, and geometry.');
 INSERT INTO [Courses] ([courseID],[creditID],[name],[description]) VALUES (
-2,2,'English','Studies in 18th Century Literature');
+2,2,'American Literature','In this genre-based course, students sharpen their reading comprehension skills and analyze important themes in classic and modern works of American literature.');
 INSERT INTO [Courses] ([courseID],[creditID],[name],[description]) VALUES (
 3,2,'Science','This general science course will introduce students to the rock cycle, biomes, and the oganization of living systems.');
 INSERT INTO [Courses] ([courseID],[creditID],[name],[description]) VALUES (
 4,2,'History','This course introduces western civilization from pre-history to the early modern era.');
 INSERT INTO [Courses] ([courseID],[creditID],[name],[description]) VALUES (
-5,1,'Math','General mathematics course covering the basics of probability, statistics, algebra, and geometry.');
+5,1,'Algebra','Studying the part of mathematics in which letters and other general symbols are used to represent numbers and quantities in formulae and equations');
 INSERT INTO [Courses] ([courseID],[creditID],[name],[description]) VALUES (
-6,1,'English','Studies in Medieval Literature');
+6,1,'World Literature','World Literature is a genre-based course in which students sharpen their reading comprehension skills and analyze important themes in classic and modern works of World literature,');
 INSERT INTO [Courses] ([courseID],[creditID],[name],[description]) VALUES (
 7,3,'Geometry','Course that will teach students about points, lines, shapes, and space.');
 INSERT INTO [Courses] ([courseID],[creditID],[name],[description]) VALUES (
-8,3,'English','This course will take a closer look at the different literature involved in the performing arts.');
+8,3,'Drama','This course will take a closer look at the different literature involved in the performing arts.');
 INSERT INTO [TaughtCourses] ([taughtCourseID],[teacherID],[courseID]) VALUES (
 1,1,1);
 INSERT INTO [TaughtCourses] ([taughtCourseID],[teacherID],[courseID]) VALUES (
