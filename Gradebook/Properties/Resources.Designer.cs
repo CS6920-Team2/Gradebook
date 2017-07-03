@@ -113,6 +113,16 @@ namespace Gradebook.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Missing_Work {
+            get {
+                object obj = ResourceManager.GetObject("Missing_Work", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Report_Card {
             get {
                 object obj = ResourceManager.GetObject("Report_Card", resourceCulture);

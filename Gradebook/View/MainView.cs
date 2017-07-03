@@ -179,7 +179,7 @@ namespace Gradebook
 
         private void BtnReportsView_Click(object sender, EventArgs e)
         {
-            //FormManager.Current.UpdateMainViewContent<ReportsView>();
+            FormManager.Current.UpdateMainViewContent<ReportsView>();
         }
 
         public T UpdatePanelView<T>() where T : Form, new()
