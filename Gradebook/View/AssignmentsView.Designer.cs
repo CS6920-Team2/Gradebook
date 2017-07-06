@@ -184,11 +184,11 @@
             // 
             // submitBtn
             // 
-            this.submitBtn.Location = new System.Drawing.Point(695, 422);
+            this.submitBtn.Location = new System.Drawing.Point(680, 422);
             this.submitBtn.Name = "submitBtn";
-            this.submitBtn.Size = new System.Drawing.Size(97, 40);
+            this.submitBtn.Size = new System.Drawing.Size(112, 23);
             this.submitBtn.TabIndex = 17;
-            this.submitBtn.Text = "Submit";
+            this.submitBtn.Text = "Submit Assignment";
             this.submitBtn.UseVisualStyleBackColor = true;
             this.submitBtn.Click += new System.EventHandler(this.submitBtn_Click);
             // 
@@ -202,41 +202,41 @@
             // 
             // addBtn
             // 
-            this.addBtn.Location = new System.Drawing.Point(124, 62);
+            this.addBtn.Location = new System.Drawing.Point(63, 62);
             this.addBtn.Name = "addBtn";
-            this.addBtn.Size = new System.Drawing.Size(75, 23);
+            this.addBtn.Size = new System.Drawing.Size(136, 23);
             this.addBtn.TabIndex = 20;
-            this.addBtn.Text = "Add ";
+            this.addBtn.Text = "Add Assignment View";
             this.addBtn.UseVisualStyleBackColor = true;
             this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
             // modifyBtn
             // 
-            this.modifyBtn.Location = new System.Drawing.Point(124, 96);
+            this.modifyBtn.Location = new System.Drawing.Point(63, 96);
             this.modifyBtn.Name = "modifyBtn";
-            this.modifyBtn.Size = new System.Drawing.Size(75, 23);
+            this.modifyBtn.Size = new System.Drawing.Size(136, 23);
             this.modifyBtn.TabIndex = 21;
-            this.modifyBtn.Text = "Modify";
+            this.modifyBtn.Text = "Modify Assignment View";
             this.modifyBtn.UseVisualStyleBackColor = true;
             this.modifyBtn.Click += new System.EventHandler(this.modifyBtn_Click);
             // 
             // updateBtn
             // 
-            this.updateBtn.Location = new System.Drawing.Point(695, 422);
+            this.updateBtn.Location = new System.Drawing.Point(678, 422);
             this.updateBtn.Name = "updateBtn";
-            this.updateBtn.Size = new System.Drawing.Size(97, 40);
+            this.updateBtn.Size = new System.Drawing.Size(112, 23);
             this.updateBtn.TabIndex = 22;
-            this.updateBtn.Text = "Update";
+            this.updateBtn.Text = "Update Assignment";
             this.updateBtn.UseVisualStyleBackColor = true;
             this.updateBtn.Click += new System.EventHandler(this.updateBtn_Click);
             // 
             // deleteBtn
             // 
-            this.deleteBtn.Location = new System.Drawing.Point(588, 422);
+            this.deleteBtn.Location = new System.Drawing.Point(560, 422);
             this.deleteBtn.Name = "deleteBtn";
-            this.deleteBtn.Size = new System.Drawing.Size(97, 40);
+            this.deleteBtn.Size = new System.Drawing.Size(112, 23);
             this.deleteBtn.TabIndex = 23;
-            this.deleteBtn.Text = "Delete";
+            this.deleteBtn.Text = "Delete Assignment";
             this.deleteBtn.UseVisualStyleBackColor = true;
             this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
