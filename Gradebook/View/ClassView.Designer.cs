@@ -344,7 +344,7 @@
             this.btnDeleteToggle.Size = new System.Drawing.Size(148, 27);
             this.btnDeleteToggle.TabIndex = 17;
             this.btnDeleteToggle.TabStop = false;
-            this.btnDeleteToggle.Text = "Delete Existing Course";
+            this.btnDeleteToggle.Text = "Delete Course View";
             this.btnDeleteToggle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnDeleteToggle.UseVisualStyleBackColor = true;
             this.btnDeleteToggle.Click += new System.EventHandler(this.BtnDeleteToggle_Click);
@@ -359,7 +359,7 @@
             this.btnAddToggle.Size = new System.Drawing.Size(148, 27);
             this.btnAddToggle.TabIndex = 16;
             this.btnAddToggle.TabStop = false;
-            this.btnAddToggle.Text = "Add New Course";
+            this.btnAddToggle.Text = "New Course View";
             this.btnAddToggle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnAddToggle.UseVisualStyleBackColor = true;
             this.btnAddToggle.Click += new System.EventHandler(this.BtnAddToggle_Click);
