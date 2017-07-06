@@ -158,7 +158,16 @@ namespace Gradebook
             }
 
             if (role == "Student" || teacherHasNoCourses)
+            {
                 btnClassView.Visible = false;
+                btnStudentRegistration.Visible = false;
+            }
+
+            if (role == "Teacher")
+            {
+                btnStudentRegistration.Visible = false;
+            }
+
         }
         ////////////////////////////////////////// Nav Controller Event Triggers  //////////////////////////////////////////
 
@@ -180,6 +189,11 @@ namespace Gradebook
         private void BtnReportsView_Click(object sender, EventArgs e)
         {
             FormManager.Current.UpdateMainViewContent<ReportsView>();
+        }
+
+        private void BtnStudentRegistration_Click(object sender, EventArgs e)
+        {
+            FormManager.Current.UpdateMainViewContent<StudentRegistrationView>();
         }
 
         public T UpdatePanelView<T>() where T : Form, new()

@@ -30,11 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.topNav = new System.Windows.Forms.ToolStrip();
-            this.btnClassView = new System.Windows.Forms.ToolStripButton();
-            this.btnAssignmentsView = new System.Windows.Forms.ToolStripButton();
-            this.btnGradebookView = new System.Windows.Forms.ToolStripButton();
-            this.btnReportsView = new System.Windows.Forms.ToolStripButton();
-            this.btnLogout = new System.Windows.Forms.ToolStripButton();
             this.leftNav = new System.Windows.Forms.Panel();
             this.lblTaughtCourseID = new System.Windows.Forms.Label();
             this.lblTaughtCourseID1 = new System.Windows.Forms.Label();
@@ -50,13 +45,19 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblUserInformation = new System.Windows.Forms.Label();
-            this.gradebookLogo = new System.Windows.Forms.PictureBox();
             this.contentPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.gradebookLogo = new System.Windows.Forms.PictureBox();
+            this.btnClassView = new System.Windows.Forms.ToolStripButton();
+            this.btnAssignmentsView = new System.Windows.Forms.ToolStripButton();
+            this.btnGradebookView = new System.Windows.Forms.ToolStripButton();
+            this.btnReportsView = new System.Windows.Forms.ToolStripButton();
+            this.btnLogout = new System.Windows.Forms.ToolStripButton();
+            this.btnStudentRegistration = new System.Windows.Forms.ToolStripButton();
             this.topNav.SuspendLayout();
             this.leftNav.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gradebookLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gradebookLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // topNav
@@ -66,66 +67,14 @@
             this.btnAssignmentsView,
             this.btnGradebookView,
             this.btnReportsView,
-            this.btnLogout});
+            this.btnLogout,
+            this.btnStudentRegistration});
             this.topNav.Location = new System.Drawing.Point(0, 0);
             this.topNav.Name = "topNav";
             this.topNav.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
             this.topNav.Size = new System.Drawing.Size(1362, 38);
             this.topNav.TabIndex = 1;
             this.topNav.Text = "toolStrip1";
-            // 
-            // btnClassView
-            // 
-            this.btnClassView.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClassView.Image = ((System.Drawing.Image)(resources.GetObject("btnClassView.Image")));
-            this.btnClassView.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnClassView.Name = "btnClassView";
-            this.btnClassView.Size = new System.Drawing.Size(81, 25);
-            this.btnClassView.Text = "Classes";
-            this.btnClassView.Click += new System.EventHandler(this.BtnClassView_Click);
-            // 
-            // btnAssignmentsView
-            // 
-            this.btnAssignmentsView.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAssignmentsView.Image = ((System.Drawing.Image)(resources.GetObject("btnAssignmentsView.Image")));
-            this.btnAssignmentsView.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnAssignmentsView.Name = "btnAssignmentsView";
-            this.btnAssignmentsView.Size = new System.Drawing.Size(119, 25);
-            this.btnAssignmentsView.Text = "Assignments";
-            this.btnAssignmentsView.Click += new System.EventHandler(this.BtnAssignmentsView_Click);
-            // 
-            // btnGradebookView
-            // 
-            this.btnGradebookView.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGradebookView.Image = ((System.Drawing.Image)(resources.GetObject("btnGradebookView.Image")));
-            this.btnGradebookView.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnGradebookView.Name = "btnGradebookView";
-            this.btnGradebookView.Size = new System.Drawing.Size(107, 25);
-            this.btnGradebookView.Text = "Gradebook";
-            this.btnGradebookView.Click += new System.EventHandler(this.BtnGradebookView_Click);
-            // 
-            // btnReportsView
-            // 
-            this.btnReportsView.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReportsView.Image = ((System.Drawing.Image)(resources.GetObject("btnReportsView.Image")));
-            this.btnReportsView.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnReportsView.Name = "btnReportsView";
-            this.btnReportsView.Size = new System.Drawing.Size(84, 25);
-            this.btnReportsView.Tag = "";
-            this.btnReportsView.Text = "Reports";
-            this.btnReportsView.Click += new System.EventHandler(this.BtnReportsView_Click);
-            // 
-            // btnLogout
-            // 
-            this.btnLogout.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnLogout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogout.Image = ((System.Drawing.Image)(resources.GetObject("btnLogout.Image")));
-            this.btnLogout.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(63, 25);
-            this.btnLogout.Text = "Logout";
-            this.btnLogout.Click += new System.EventHandler(this.BtnLogout_Click);
             // 
             // leftNav
             // 
@@ -292,6 +241,18 @@
             this.lblUserInformation.Text = "User Information";
             this.lblUserInformation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // contentPanel
+            // 
+            this.contentPanel.Location = new System.Drawing.Point(204, 111);
+            this.contentPanel.Name = "contentPanel";
+            this.contentPanel.Size = new System.Drawing.Size(1180, 650);
+            this.contentPanel.TabIndex = 13;
+            // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            // 
             // gradebookLogo
             // 
             this.gradebookLogo.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -304,17 +265,67 @@
             this.gradebookLogo.TabIndex = 11;
             this.gradebookLogo.TabStop = false;
             // 
-            // contentPanel
+            // btnClassView
             // 
-            this.contentPanel.Location = new System.Drawing.Point(204, 111);
-            this.contentPanel.Name = "contentPanel";
-            this.contentPanel.Size = new System.Drawing.Size(1180, 650);
-            this.contentPanel.TabIndex = 13;
+            this.btnClassView.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClassView.Image = ((System.Drawing.Image)(resources.GetObject("btnClassView.Image")));
+            this.btnClassView.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnClassView.Name = "btnClassView";
+            this.btnClassView.Size = new System.Drawing.Size(81, 25);
+            this.btnClassView.Text = "Classes";
+            this.btnClassView.Click += new System.EventHandler(this.BtnClassView_Click);
             // 
-            // fileSystemWatcher1
+            // btnAssignmentsView
             // 
-            this.fileSystemWatcher1.EnableRaisingEvents = true;
-            this.fileSystemWatcher1.SynchronizingObject = this;
+            this.btnAssignmentsView.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAssignmentsView.Image = ((System.Drawing.Image)(resources.GetObject("btnAssignmentsView.Image")));
+            this.btnAssignmentsView.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAssignmentsView.Name = "btnAssignmentsView";
+            this.btnAssignmentsView.Size = new System.Drawing.Size(119, 25);
+            this.btnAssignmentsView.Text = "Assignments";
+            this.btnAssignmentsView.Click += new System.EventHandler(this.BtnAssignmentsView_Click);
+            // 
+            // btnGradebookView
+            // 
+            this.btnGradebookView.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGradebookView.Image = ((System.Drawing.Image)(resources.GetObject("btnGradebookView.Image")));
+            this.btnGradebookView.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnGradebookView.Name = "btnGradebookView";
+            this.btnGradebookView.Size = new System.Drawing.Size(107, 25);
+            this.btnGradebookView.Text = "Gradebook";
+            this.btnGradebookView.Click += new System.EventHandler(this.BtnGradebookView_Click);
+            // 
+            // btnReportsView
+            // 
+            this.btnReportsView.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReportsView.Image = ((System.Drawing.Image)(resources.GetObject("btnReportsView.Image")));
+            this.btnReportsView.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnReportsView.Name = "btnReportsView";
+            this.btnReportsView.Size = new System.Drawing.Size(84, 25);
+            this.btnReportsView.Tag = "";
+            this.btnReportsView.Text = "Reports";
+            this.btnReportsView.Click += new System.EventHandler(this.BtnReportsView_Click);
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnLogout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogout.Image = ((System.Drawing.Image)(resources.GetObject("btnLogout.Image")));
+            this.btnLogout.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(63, 25);
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.Click += new System.EventHandler(this.BtnLogout_Click);
+            // 
+            // btnStudentRegistration
+            // 
+            this.btnStudentRegistration.Image = global::Gradebook.Properties.Resources.Student_Registration;
+            this.btnStudentRegistration.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnStudentRegistration.Name = "btnStudentRegistration";
+            this.btnStudentRegistration.Size = new System.Drawing.Size(118, 25);
+            this.btnStudentRegistration.Text = "Register Students";
+            this.btnStudentRegistration.Click += new System.EventHandler(this.BtnStudentRegistration_Click);
             // 
             // MainView
             // 
@@ -341,8 +352,8 @@
             this.topNav.PerformLayout();
             this.leftNav.ResumeLayout(false);
             this.leftNav.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gradebookLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gradebookLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -373,5 +384,6 @@
         private System.Windows.Forms.Label lblTaughtCourseID1;
         private System.Windows.Forms.FlowLayoutPanel contentPanel;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
+        private System.Windows.Forms.ToolStripButton btnStudentRegistration;
     }
 }
