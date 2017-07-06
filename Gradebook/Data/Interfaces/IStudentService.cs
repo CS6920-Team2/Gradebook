@@ -10,5 +10,7 @@ namespace Gradebook.Data.Interfaces
     public interface IStudentService
     {
         Student getStudentByUserID(int userID);
+        List<Student> getAllStudents();
+        List<Student> getStudentsInCourse(int taughtCourseID);
     }
 }
