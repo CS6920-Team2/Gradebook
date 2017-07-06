@@ -205,6 +205,12 @@
     <Compile Include="View\ResetPasswordView.Designer.cs">
       <DependentUpon>ResetPasswordView.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\StudentRegistrationView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\StudentRegistrationView.Designer.cs">
+      <DependentUpon>StudentRegistrationView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -240,6 +246,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\ResetPasswordView.resx">
       <DependentUpon>ResetPasswordView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\StudentRegistrationView.resx">
+      <DependentUpon>StudentRegistrationView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config">
       <SubType>Designer</SubType>
