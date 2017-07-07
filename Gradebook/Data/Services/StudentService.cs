@@ -40,5 +40,24 @@ namespace Gradebook.Data.Services
         {
             throw new NotImplementedException();
         }
+
+        public List<Student> findStudentsByTaughtCourseID(int taughtCourseID)
+        {
+            List<Student> students;
+            using (var connection = ConnectionFactory.GetOpenSQLiteConnection())
+            {
+                var sql = @"SELECT s.studentID, p.firstName, p.lastName
+                            FROM Persons p
+                            JOIN Students s
+                            ON p.personID = s.personID
+                            JOIN RegisteredStudents rs 
+                            ON s.studentID = rs.studentID
+                            JOIN TaughtCourses tc
+                            ON rs.taughtCourseID = tc.taughtCourseID
+                            WHERE tc.taughtCourseID = @taughtCourseID;";
+                students = (List<Student>)connection.Query<Student>(sql, new { taughtCourseID = taughtCourseID });
+            }
+            return students;
+        }
     }
 }

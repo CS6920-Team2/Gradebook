@@ -12,5 +12,6 @@ namespace Gradebook.Data.Interfaces
         Student getStudentByUserID(int userID);
         List<Student> getAllStudents();
         List<Student> getStudentsInCourse(int taughtCourseID);
+        List<Student> findStudentsByTaughtCourseID(int taughtCourseID);
     }
 }

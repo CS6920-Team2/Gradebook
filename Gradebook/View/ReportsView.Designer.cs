@@ -33,7 +33,7 @@
             this.lblReports = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.studentCB = new System.Windows.Forms.ComboBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -98,14 +98,14 @@
             this.button1.Text = "Generate Progress Report";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // studentCB
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(93, 290);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(249, 21);
-            this.comboBox1.TabIndex = 22;
-            this.comboBox1.Text = "Student Names";
+            this.studentCB.FormattingEnabled = true;
+            this.studentCB.Location = new System.Drawing.Point(93, 290);
+            this.studentCB.Name = "studentCB";
+            this.studentCB.Size = new System.Drawing.Size(249, 21);
+            this.studentCB.TabIndex = 22;
+            this.studentCB.Text = "Student Names";
             // 
             // textBox3
             // 
@@ -170,7 +170,7 @@
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.studentCB);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox2);
@@ -180,6 +180,7 @@
             this.Controls.Add(this.btnFailureReport);
             this.Name = "ReportsView";
             this.Text = "ReportsView";
+            this.Load += new System.EventHandler(this.ReportsView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -196,7 +197,7 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox studentCB;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Button button2;
