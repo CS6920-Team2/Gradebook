@@ -246,6 +246,8 @@ namespace Gradebook
                 BtnClassView_Click(null, null);
             else if ((string)contentPanel.Controls[0].Tag == "AssignmentsView")
                 BtnAssignmentsView_Click(null, null);
+            else if ((string)contentPanel.Controls[0].Tag == "ReportsView")
+                BtnReportsView_Click(null, null);
             // This will allow our data to update according to a specific class. 
         }
 

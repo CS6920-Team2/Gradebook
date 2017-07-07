@@ -179,6 +179,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btnFailureReport);
             this.Name = "ReportsView";
+            this.Tag = "ReportsView";
             this.Text = "ReportsView";
             this.Load += new System.EventHandler(this.ReportsView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();

@@ -35,6 +35,7 @@ namespace Gradebook.View
 
         }
 
+        // Loads the combo box with students that have the specific taught course ID
         private void loadStudentCMB()
         {
             try
