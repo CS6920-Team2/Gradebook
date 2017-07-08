@@ -17,6 +17,7 @@ namespace Gradebook.View
         private ReportService reportService;
         private PersonService personService;
         private Person student;
+        private Person teacher;
         DataSet ds;
         private int sID;
         private int tcID;
@@ -34,6 +35,7 @@ namespace Gradebook.View
         private void ProgressReportView_Load(object sender, EventArgs e)
         {
             setStudentInformation();
+            setTeacherInformation();
             loadDataGridView();
 
             dataGridView1.Columns["personID"].Visible = false;
@@ -130,6 +132,18 @@ namespace Gradebook.View
         private void setStudentInformation()
         {
             student = personService.getPersonByStudentID(sID);
+            studentNameLBL.Text = "Name: " + student.fullName.ToString();
+            studentEmailLBL.Text = "Email: " + student.email.ToString();
+            studentNumberLBL.Text = "Number: " + student.phoneNumber.ToString();
+        }
+
+        private void setTeacherInformation()
+        {
+            teacher = personService.getPersonByTaughtCourseID(tcID);
+            teacherNameLBL.Text = "Name: " + teacher.fullName.ToString();
+            teacherEmailLBL.Text = "Email: " + teacher.email.ToString();
+            teacherNumberLBL.Text = "Number: " + teacher.phoneNumber.ToString();
+
         }
     }
 }

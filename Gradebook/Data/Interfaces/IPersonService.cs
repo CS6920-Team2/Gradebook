@@ -11,5 +11,6 @@ namespace Gradebook.Data.Interfaces
     {
         Person getPersonByPersonID(int personID);
         Person getPersonByStudentID(int studentID);
+        Person getPersonByTaughtCourseID(int taughtCourseID);
     }
 }
