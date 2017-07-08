@@ -11,5 +11,6 @@ namespace Gradebook.Data.Interfaces
     {
         bool addTaughtCourseWithCategories(int teacherID, Course newCourse, List<Category> categoryList);
         bool deleteTaughtCourseWithCategories(TaughtCourse taughtCourse);
+        List<TaughtCourse> getTaughtCourses();
     }
 }

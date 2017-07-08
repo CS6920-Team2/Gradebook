@@ -116,5 +116,20 @@ namespace Gradebook.Data.Services
                 }
             }
         }
+
+        public List<TaughtCourse> getTaughtCourses()
+        {
+            List<TaughtCourse> taughtCourses;
+
+            using (var connection = ConnectionFactory.GetOpenSQLiteConnection())
+            {
+                var sql = @"select * from courses c 
+	                            join taughtCourses tc on c.courseID = tc.courseID";
+
+                taughtCourses = (List<TaughtCourse>)connection.Query<TaughtCourse>(sql);
+            }
+
+            return taughtCourses;
+        }
     }
 }

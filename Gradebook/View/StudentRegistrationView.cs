@@ -15,14 +15,17 @@ namespace Gradebook.View
 {
     public partial class StudentRegistrationView : ContentForm
     {
+        private TaughtCourse currentCourse;
         private List<Student> regStudents;
         private List<Student> unregStudents;
         private StudentService studentService;
+        private TaughtCourseService tcService;
 
         public StudentRegistrationView()
         {
             InitializeComponent();
             studentService = new StudentService();
+            tcService = new TaughtCourseService();
         }
 
         private void StudentRegistrationView_Load(object sender, EventArgs e)
@@ -44,7 +47,13 @@ namespace Gradebook.View
         {
             try
             {
+                List<TaughtCourse> courses = tcService.getTaughtCourses();
+                cboCourses.DataSource = courses;
+                cboCourses.DisplayMember = "name";
+                cboCourses.ValueMember = "taughtCourseID";
+                cboCourses.SelectedIndex = 0;
 
+                currentCourse = (TaughtCourse)cboCourses.SelectedItem;
             }
             catch (Exception ex)
             {
