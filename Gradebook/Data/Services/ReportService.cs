@@ -30,7 +30,8 @@ namespace Gradebook.Data.Services
             "JOIN Students s ON s.studentID = rs.studentID " +
             "JOIN Persons p ON s.personID = p.personID " +
             "JOIN Grades g ON g.registeredStudentID = rs.registeredStudentID and g.assignmentID = a.assignmentID " +
-            "WHERE s.studentID = " + studentID + " AND t.taughtCourseID = " + taughtCourseID + "; ", connection);
+            "WHERE s.studentID = " + studentID + " AND t.taughtCourseID = " + taughtCourseID + 
+            " ORDER BY a.assignedDate; ", connection);
 
             DataSet ds = new System.Data.DataSet();
 
