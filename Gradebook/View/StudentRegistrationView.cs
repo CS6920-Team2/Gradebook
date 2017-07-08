@@ -135,17 +135,6 @@ namespace Gradebook.View
         // List View Buttons ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private static void MoveSelectedItems(ListView source, ListView target)
-        {
-            while (source.CheckedItems.Count > 0)
-            {
-                ListViewItem temp = source.CheckedItems[0];
-                source.Items.Remove(temp);
-                target.Items.Add(temp);
-                temp.Checked = false;
-            }
-        }
-
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             MoveSelectedItems(lvUnregistered, lvRegistered);
@@ -154,16 +143,6 @@ namespace Gradebook.View
         private void BtnRemove_Click(object sender, EventArgs e)
         {
             MoveSelectedItems(lvRegistered, lvUnregistered);
-        }
-
-        private static void MoveAllItems(ListView source, ListView target)
-        {
-            while (source.Items.Count > 0)
-            {
-                ListViewItem temp = source.Items[0];
-                source.Items.Remove(temp);
-                target.Items.Add(temp);
-            }
         }
 
         private void BtnAddAll_Click(object sender, EventArgs e)
@@ -180,6 +159,8 @@ namespace Gradebook.View
 
         private void BtnReset_Click(object sender, EventArgs e)
         {
+            LoadRegisteredStudents();
+            LoadUnregisteredStudents();
             RemoveAllChecks();
         }
 
@@ -189,8 +170,30 @@ namespace Gradebook.View
         }
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // List View Formatting /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // List View Helpers ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private static void MoveSelectedItems(ListView source, ListView target)
+        {
+            while (source.CheckedItems.Count > 0)
+            {
+                ListViewItem temp = source.CheckedItems[0];
+                source.Items.Remove(temp);
+                target.Items.Add(temp);
+                temp.Checked = false;
+            }
+        }
+
+        private static void MoveAllItems(ListView source, ListView target)
+        {
+            while (source.Items.Count > 0)
+            {
+                ListViewItem temp = source.Items[0];
+                source.Items.Remove(temp);
+                target.Items.Add(temp);
+            }
+        }
+
         private void ResizeListViewColumns(ListView lv)
         {
             foreach (ColumnHeader column in lv.Columns)
