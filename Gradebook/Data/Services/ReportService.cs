@@ -1,4 +1,5 @@
 ﻿using Gradebook.Data.Factories;
+using Gradebook.Data.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,16 +10,16 @@ using System.Threading.Tasks;
 
 namespace Gradebook.Data.Services
 {
-    public class ReportService
+    public class ReportService :IReportService
     {
 
         public DataSet CreateProgressReportDataSet(int taughtCourseID, int studentID)
         {
             var connection = ConnectionFactory.GetOpenSQLiteConnection();
             SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("SELECT p.personID, p.firstName as 'FirstName', p.lastName as 'LastName', " +
-            "a.name as 'AssignmentName', a.assignedDate as 'AssignedDate', " +
-            "g.actualPoints as 'Grade', a.possiblePoints as 'PointsPossible' " +
-            "cgy.weight as 'Weight', g.comment as 'GradeComment' " +
+            "a.assignedDate as 'Date', a.name as 'Assignment', " +
+            "g.actualPoints as 'Actual Points', a.possiblePoints as 'Points Possible', " +
+            "cgy.weight as 'Weight %', g.comment as 'Letter Grade' " +
             "FROM " +
             "TaughtCourses t " +
             "JOIN Courses crs ON t.courseID = crs.courseID " +

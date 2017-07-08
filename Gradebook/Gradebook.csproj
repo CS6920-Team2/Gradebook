@@ -130,6 +130,7 @@
     <Compile Include="Data\Interfaces\IGradeService.cs" />
     <Compile Include="Data\Interfaces\IPersonService.cs" />
     <Compile Include="Data\Interfaces\IRegisteredStudentService.cs" />
+    <Compile Include="Data\Interfaces\IReportService.cs" />
     <Compile Include="Data\Interfaces\IRoleService.cs" />
     <Compile Include="Data\Interfaces\IStudentService.cs" />
     <Compile Include="Data\Interfaces\ITaughtCourseService.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="Data\Services\GradeService.cs" />
     <Compile Include="Data\Services\PersonService.cs" />
     <Compile Include="Data\Services\RegisteredStudentService.cs" />
+    <Compile Include="Data\Services\ReportService.cs" />
     <Compile Include="Data\Services\RoleService.cs" />
     <Compile Include="Data\Services\StudentService.cs" />
     <Compile Include="Data\Services\TaughtCourseService.cs" />
