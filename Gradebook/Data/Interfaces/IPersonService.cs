@@ -10,5 +10,6 @@ namespace Gradebook.Data.Interfaces
     interface IPersonService
     {
         Person getPersonByPersonID(int personID);
+        Person getPersonByStudentID(int studentID);
     }
 }

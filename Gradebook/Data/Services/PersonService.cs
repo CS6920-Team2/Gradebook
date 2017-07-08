@@ -21,5 +21,20 @@ namespace Gradebook.Data.Services
             }
             return person;
         }
+
+        public Person getPersonByStudentID(int studentID)
+        {
+            Person person;
+            using (var connection = ConnectionFactory.GetOpenSQLiteConnection())
+            {
+                person = connection.Query<Student>("SELECT * " +
+                "FROM Persons p " +
+                "JOIN Students s " +
+                "ON p.personID = s.personID " +
+                "WHERE s.studentID = @studentID; ", new { studentID = studentID }).FirstOrDefault();
+            }
+            return person;
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Gradebook.Data.Services;
+﻿using Gradebook.Data.DAO;
+using Gradebook.Data.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,8 @@ namespace Gradebook.View
     public partial class ProgressReportView : Form
     {
         private ReportService reportService;
+        private PersonService personService;
+        private Person student;
         DataSet ds;
         private int sID;
         private int tcID;
@@ -22,6 +25,7 @@ namespace Gradebook.View
         {
             InitializeComponent();
             reportService = new ReportService();
+            personService = new PersonService();
             sID = studentID;
             tcID = taughtCourseID;
 
@@ -29,6 +33,7 @@ namespace Gradebook.View
 
         private void ProgressReportView_Load(object sender, EventArgs e)
         {
+            setStudentInformation();
             loadDataGridView();
 
             dataGridView1.Columns["personID"].Visible = false;
@@ -120,6 +125,11 @@ namespace Gradebook.View
                 letterGrade = "F";
             }
             return letterGrade;
+        }
+
+        private void setStudentInformation()
+        {
+            student = personService.getPersonByStudentID(sID);
         }
     }
 }
