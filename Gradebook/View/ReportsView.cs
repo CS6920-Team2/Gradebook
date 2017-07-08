@@ -51,6 +51,11 @@ namespace Gradebook.View
                 throw ex;
             }
         }
-        
+
+        private void generatePR_Click(object sender, EventArgs e)
+        {
+            ProgressReportView prv = new ProgressReportView();
+            prv.Show();
+        }
     }
 }

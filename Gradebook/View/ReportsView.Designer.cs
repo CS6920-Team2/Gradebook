@@ -32,7 +32,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.lblReports = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.generatePR = new System.Windows.Forms.Button();
             this.studentCB = new System.Windows.Forms.ComboBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -89,14 +89,15 @@
             this.textBox2.Text = "This report will show you the  cumulative averages for a student in your class.";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // button1
+            // generatePR
             // 
-            this.button1.Location = new System.Drawing.Point(93, 259);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(249, 25);
-            this.button1.TabIndex = 20;
-            this.button1.Text = "Generate Progress Report";
-            this.button1.UseVisualStyleBackColor = true;
+            this.generatePR.Location = new System.Drawing.Point(93, 259);
+            this.generatePR.Name = "generatePR";
+            this.generatePR.Size = new System.Drawing.Size(249, 25);
+            this.generatePR.TabIndex = 20;
+            this.generatePR.Text = "Generate Progress Report";
+            this.generatePR.UseVisualStyleBackColor = true;
+            this.generatePR.Click += new System.EventHandler(this.generatePR_Click);
             // 
             // studentCB
             // 
@@ -172,7 +173,7 @@
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.studentCB);
             this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.generatePR);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblReports);
@@ -197,7 +198,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button generatePR;
         private System.Windows.Forms.ComboBox studentCB;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.TextBox textBox3;
