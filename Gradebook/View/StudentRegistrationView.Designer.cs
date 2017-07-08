@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cboCourses = new System.Windows.Forms.ComboBox();
+            this.cboTaughtCourses = new System.Windows.Forms.ComboBox();
             this.txtTeacher = new System.Windows.Forms.TextBox();
             this.txtTCID = new System.Windows.Forms.TextBox();
             this.txtDescription = new System.Windows.Forms.TextBox();
@@ -56,15 +56,16 @@
             this.gBoxRegistered.SuspendLayout();
             this.SuspendLayout();
             // 
-            // cboCourses
+            // cboTaughtCourses
             // 
-            this.cboCourses.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboCourses.FormattingEnabled = true;
-            this.cboCourses.Location = new System.Drawing.Point(97, 41);
-            this.cboCourses.MaxDropDownItems = 50;
-            this.cboCourses.Name = "cboCourses";
-            this.cboCourses.Size = new System.Drawing.Size(182, 21);
-            this.cboCourses.TabIndex = 0;
+            this.cboTaughtCourses.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTaughtCourses.FormattingEnabled = true;
+            this.cboTaughtCourses.Location = new System.Drawing.Point(97, 41);
+            this.cboTaughtCourses.MaxDropDownItems = 50;
+            this.cboTaughtCourses.Name = "cboTaughtCourses";
+            this.cboTaughtCourses.Size = new System.Drawing.Size(182, 21);
+            this.cboTaughtCourses.TabIndex = 0;
+            this.cboTaughtCourses.SelectionChangeCommitted += new System.EventHandler(this.CboTaughtCourses_SelectionChangeCommitted);
             // 
             // txtTeacher
             // 
@@ -295,7 +296,7 @@
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.txtTCID);
             this.Controls.Add(this.txtTeacher);
-            this.Controls.Add(this.cboCourses);
+            this.Controls.Add(this.cboTaughtCourses);
             this.Name = "StudentRegistrationView";
             this.Text = "StudentRegistrationView";
             this.Load += new System.EventHandler(this.StudentRegistrationView_Load);
@@ -308,7 +309,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cboCourses;
+        private System.Windows.Forms.ComboBox cboTaughtCourses;
         private System.Windows.Forms.TextBox txtTeacher;
         private System.Windows.Forms.TextBox txtTCID;
         private System.Windows.Forms.TextBox txtDescription;

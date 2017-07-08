@@ -50,17 +50,23 @@ namespace Gradebook.View
             try
             {
                 List<TaughtCourse> courses = tcService.getTaughtCourses();
-                cboCourses.DataSource = courses;
-                cboCourses.DisplayMember = "name";
-                cboCourses.ValueMember = "taughtCourseID";
-                cboCourses.SelectedIndex = 0;
+                cboTaughtCourses.DataSource = courses;
+                cboTaughtCourses.DisplayMember = "name";
+                cboTaughtCourses.ValueMember = "taughtCourseID";
+                cboTaughtCourses.SelectedIndex = 0;
 
-                currentCourse = (TaughtCourse)cboCourses.SelectedItem;
+                currentCourse = (TaughtCourse)cboTaughtCourses.SelectedItem;
             }
             catch (Exception ex)
             {
                 throw new Exception("Unable to load courses");
             }
+        }
+
+        private void CboTaughtCourses_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            currentCourse = (TaughtCourse)cboTaughtCourses.SelectedItem;
+            LoadCourseInfo();
         }
 
         private void LoadCourseInfo()
