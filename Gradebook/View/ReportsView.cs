@@ -54,6 +54,11 @@ namespace Gradebook.View
 
         private void generatePR_Click(object sender, EventArgs e)
         {
+            if(studentCB.SelectedValue == null)
+            {
+                MessageBox.Show("Student must be selected.");
+                return;
+            }
             ProgressReportView prv = new ProgressReportView((int)studentCB.SelectedValue, currentCourse.taughtCourseID);
             prv.Show();
         }
