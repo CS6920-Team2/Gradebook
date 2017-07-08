@@ -16,18 +16,18 @@ namespace Gradebook.View
     public partial class StudentRegistrationView : ContentForm
     {
         private TaughtCourse currentCourse;
-        private List<Student> regStudents;
-        private List<Student> unregStudents;
-        private StudentService studentService;
+        private List<RegisteredStudent> regStudents;
+        private List<RegisteredStudent> unregStudents;
         private TeacherService teacherService;
         private TaughtCourseService tcService;
+        private RegisteredStudentService rsService;
 
         public StudentRegistrationView()
         {
             InitializeComponent();
-            studentService = new StudentService();
             teacherService = new TeacherService();
             tcService = new TaughtCourseService();
+            rsService = new RegisteredStudentService();
         }
 
         private void StudentRegistrationView_Load(object sender, EventArgs e)
@@ -66,7 +66,17 @@ namespace Gradebook.View
         private void CboTaughtCourses_SelectionChangeCommitted(object sender, EventArgs e)
         {
             currentCourse = (TaughtCourse)cboTaughtCourses.SelectedItem;
-            LoadCourseInfo();
+
+            try
+            {
+                LoadCourseInfo();
+                LoadRegisteredStudents();
+                LoadUnregisteredStudents();
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = ex.Message;
+            }
         }
 
         private void LoadCourseInfo()
@@ -89,7 +99,9 @@ namespace Gradebook.View
 
             try
             {
+                regStudents = rsService.getRegisteredStudentsInTaughtCourse(currentCourse.taughtCourseID);
 
+                AddStudentsToListView(lvRegistered, regStudents);
             }
             catch (Exception ex)
             {
@@ -105,19 +117,15 @@ namespace Gradebook.View
 
             try
             {
-                unregStudents = studentService.getAllStudents();
+                unregStudents = rsService.getAllStudentsAsRegisteredStudents();
 
-                foreach (Student s in unregStudents)
-                {
-                    ListViewItem item = new ListViewItem(s.studentID.ToString());
-                    item.SubItems.Add(s.fullName);
+                RemoveRegisteredStudentsFromStudentList();
+                AddStudentsToListView(lvUnregistered, unregStudents);
 
-                    lvUnregistered.Items.Add(item);
-                }
             }
             catch (Exception ex)
             {
-                throw new Exception("Unable to load unregistered students");
+                throw new Exception("Unable to load unregistered students"); ;
             }
 
             ResizeListViewColumns(lvUnregistered);
@@ -201,6 +209,31 @@ namespace Gradebook.View
             while (lvUnregistered.CheckedItems.Count > 0)
             {
                 lvUnregistered.CheckedItems[0].Checked = false;
+            }
+        }
+
+        private void AddStudentsToListView(ListView lv, List<RegisteredStudent> students)
+        {
+            foreach (RegisteredStudent s in students)
+            {
+                ListViewItem item = new ListViewItem(s.studentID.ToString());
+                item.SubItems.Add(s.fullName);
+
+                lv.Items.Add(item);
+            }
+        }
+
+        private void RemoveRegisteredStudentsFromStudentList()
+        {
+            for (int i = 0; i < unregStudents.Count(); i++)
+            {
+                for (int j = 0; j < regStudents.Count(); j++)
+                {
+                    if (unregStudents[i].studentID == regStudents[j].studentID)
+                    {
+                        unregStudents.RemoveAt(i);
+                    }
+                }
             }
         }
     }

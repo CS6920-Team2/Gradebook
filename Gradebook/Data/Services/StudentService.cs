@@ -36,11 +36,6 @@ namespace Gradebook.Data.Services
             return student;
         }
 
-        public List<Student> getStudentsInCourse(int taughtCourseID)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<Student> findStudentsByTaughtCourseID(int taughtCourseID)
         {
             List<Student> students;
