@@ -13,7 +13,7 @@ namespace Gradebook.Data.Services
     public class ReportService :IReportService
     {
 
-        public DataSet CreateProgressReportDataSet(int taughtCourseID, int studentID)
+        public DataSet CreateProgressReportDataSet(int studentID, int taughtCourseID)
         {
             var connection = ConnectionFactory.GetOpenSQLiteConnection();
             SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("SELECT p.personID, p.firstName as 'FirstName', p.lastName as 'LastName', " +
@@ -30,7 +30,7 @@ namespace Gradebook.Data.Services
             "JOIN Students s ON s.studentID = rs.studentID " +
             "JOIN Persons p ON s.personID = p.personID " +
             "JOIN Grades g ON g.registeredStudentID = rs.registeredStudentID and g.assignmentID = a.assignmentID " +
-            "WHERE s.studentID = 1 AND t.taughtCourseID = 1; ", connection);
+            "WHERE s.studentID = " + studentID + " AND t.taughtCourseID = " + taughtCourseID + "; ", connection);
 
             DataSet ds = new System.Data.DataSet();
 

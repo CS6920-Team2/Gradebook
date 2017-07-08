@@ -15,11 +15,16 @@ namespace Gradebook.View
     {
         private ReportService reportService;
         DataSet ds;
+        private int sID;
+        private int tcID;
 
-        public ProgressReportView()
+        public ProgressReportView(int studentID, int taughtCourseID)
         {
             InitializeComponent();
             reportService = new ReportService();
+            sID = studentID;
+            tcID = taughtCourseID;
+
         }
 
         private void ProgressReportView_Load(object sender, EventArgs e)
@@ -34,7 +39,7 @@ namespace Gradebook.View
         // Loads the datagridview .
         private void loadDataGridView()
         {
-            ds = reportService.CreateProgressReportDataSet(1,1);
+            ds = reportService.CreateProgressReportDataSet(sID,tcID);
             dataGridView1.DataSource = ds.Tables[0];
         }
     }

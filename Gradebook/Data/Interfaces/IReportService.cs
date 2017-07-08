@@ -10,6 +10,6 @@ namespace Gradebook.Data.Interfaces
     interface IReportService
     {
 
-        DataSet CreateProgressReportDataSet(int taughtCourseID, int studentID);
+        DataSet CreateProgressReportDataSet(int studentID, int taughtCourseID);
     }
 }

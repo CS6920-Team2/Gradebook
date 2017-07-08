@@ -101,12 +101,12 @@
             // 
             // studentCB
             // 
+            this.studentCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.studentCB.FormattingEnabled = true;
             this.studentCB.Location = new System.Drawing.Point(93, 290);
             this.studentCB.Name = "studentCB";
             this.studentCB.Size = new System.Drawing.Size(249, 21);
             this.studentCB.TabIndex = 22;
-            this.studentCB.Text = "Student Names";
             // 
             // textBox3
             // 

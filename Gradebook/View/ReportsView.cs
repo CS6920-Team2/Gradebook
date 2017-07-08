@@ -54,7 +54,7 @@ namespace Gradebook.View
 
         private void generatePR_Click(object sender, EventArgs e)
         {
-            ProgressReportView prv = new ProgressReportView();
+            ProgressReportView prv = new ProgressReportView((int)studentCB.SelectedValue, currentCourse.taughtCourseID);
             prv.Show();
         }
     }
