@@ -37,5 +37,23 @@ namespace Gradebook.Data.Services
 
             return teacherList;
         }
+
+        public Teacher getTeacherByTaughtCourseID(int taughtCourseID)
+        {
+            Teacher teacher;
+
+            using (var connection = ConnectionFactory.GetOpenSQLiteConnection())
+            {
+                var sql = @"select p.firstName, p.lastName 
+                                from taughtCourses tc 
+	                            join teachers t on tc.teacherID = t.teacherID
+	                            join persons p on t.personID = p.personID
+	                            where tc.taughtCourseID = @taughtCourseID";
+
+                teacher = connection.Query<Teacher>(sql, new { taughtCourseID = taughtCourseID }).FirstOrDefault();
+            }
+
+            return teacher;
+        }
     }
 }

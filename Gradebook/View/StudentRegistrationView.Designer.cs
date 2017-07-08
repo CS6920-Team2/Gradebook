@@ -42,14 +42,14 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.gBoxUnregistered = new System.Windows.Forms.GroupBox();
             this.lvUnregistered = new System.Windows.Forms.ListView();
-            this.gBoxRegistered = new System.Windows.Forms.GroupBox();
-            this.lvRegistered = new System.Windows.Forms.ListView();
-            this.btnRemoveAll = new System.Windows.Forms.Button();
-            this.btnAddAll = new System.Windows.Forms.Button();
             this.unRegStudentID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.unRegFullName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.gBoxRegistered = new System.Windows.Forms.GroupBox();
+            this.lvRegistered = new System.Windows.Forms.ListView();
             this.regStudentID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.regFullName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnRemoveAll = new System.Windows.Forms.Button();
+            this.btnAddAll = new System.Windows.Forms.Button();
             this.lblError = new System.Windows.Forms.Label();
             this.lblSuccess = new System.Windows.Forms.Label();
             this.gBoxUnregistered.SuspendLayout();
@@ -64,7 +64,6 @@
             this.cboCourses.MaxDropDownItems = 50;
             this.cboCourses.Name = "cboCourses";
             this.cboCourses.Size = new System.Drawing.Size(182, 21);
-            this.cboCourses.Sorted = true;
             this.cboCourses.TabIndex = 0;
             // 
             // txtTeacher
@@ -193,6 +192,15 @@
             this.lvUnregistered.UseCompatibleStateImageBehavior = false;
             this.lvUnregistered.View = System.Windows.Forms.View.Details;
             // 
+            // unRegStudentID
+            // 
+            this.unRegStudentID.Text = "ID";
+            // 
+            // unRegFullName
+            // 
+            this.unRegFullName.Text = "Student Name";
+            this.unRegFullName.Width = 235;
+            // 
             // gBoxRegistered
             // 
             this.gBoxRegistered.Controls.Add(this.lvRegistered);
@@ -218,6 +226,15 @@
             this.lvRegistered.UseCompatibleStateImageBehavior = false;
             this.lvRegistered.View = System.Windows.Forms.View.Details;
             // 
+            // regStudentID
+            // 
+            this.regStudentID.Text = "ID";
+            // 
+            // regFullName
+            // 
+            this.regFullName.Text = "Student Name";
+            this.regFullName.Width = 234;
+            // 
             // btnRemoveAll
             // 
             this.btnRemoveAll.Location = new System.Drawing.Point(389, 363);
@@ -237,24 +254,6 @@
             this.btnAddAll.Text = "Add All >>";
             this.btnAddAll.UseVisualStyleBackColor = true;
             this.btnAddAll.Click += new System.EventHandler(this.BtnAddAll_Click);
-            // 
-            // unRegStudentID
-            // 
-            this.unRegStudentID.Text = "ID";
-            // 
-            // unRegFullName
-            // 
-            this.unRegFullName.Text = "Student Name";
-            this.unRegFullName.Width = 235;
-            // 
-            // regStudentID
-            // 
-            this.regStudentID.Text = "ID";
-            // 
-            // regFullName
-            // 
-            this.regFullName.Text = "Student Name";
-            this.regFullName.Width = 234;
             // 
             // lblError
             // 

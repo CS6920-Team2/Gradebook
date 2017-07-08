@@ -19,12 +19,14 @@ namespace Gradebook.View
         private List<Student> regStudents;
         private List<Student> unregStudents;
         private StudentService studentService;
+        private TeacherService teacherService;
         private TaughtCourseService tcService;
 
         public StudentRegistrationView()
         {
             InitializeComponent();
             studentService = new StudentService();
+            teacherService = new TeacherService();
             tcService = new TaughtCourseService();
         }
 
@@ -65,7 +67,9 @@ namespace Gradebook.View
         {
             try
             {
-
+                txtTCID.Text = currentCourse.taughtCourseID.ToString();
+                txtDescription.Text = currentCourse.description;
+                txtTeacher.Text = teacherService.getTeacherByTaughtCourseID(currentCourse.taughtCourseID).fullName;
             }
             catch (Exception ex)
             {

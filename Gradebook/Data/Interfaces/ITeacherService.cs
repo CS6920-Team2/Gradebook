@@ -7,9 +7,10 @@ using Gradebook.Data.DAO;
 
 namespace Gradebook.Data.Interfaces
 {
-    interface ITeacherService
+    public interface ITeacherService
     {
         Teacher getTeacherByUserID(int userID);
         List<Teacher> getAllTeachers();
+        Teacher getTeacherByTaughtCourseID(int taughtCourseID);
     }
 }
