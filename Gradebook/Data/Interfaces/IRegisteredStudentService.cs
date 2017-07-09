@@ -11,5 +11,6 @@ namespace Gradebook.Data.Interfaces
     {
         List<RegisteredStudent> getAllStudentsAsRegisteredStudents();
         List<RegisteredStudent> getRegisteredStudentsInTaughtCourse(int taughtCourseID);
+        bool updateRegisteredStudentsInTaughtCourse(int taughtCourseID, List<int> addStudentIDs, List<int> removeStudentIDs);
     }
 }

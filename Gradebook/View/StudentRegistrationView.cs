@@ -125,10 +125,17 @@ namespace Gradebook.View
             }
             catch (Exception ex)
             {
-                throw new Exception("Unable to load unregistered students"); ;
+                //throw new Exception("Unable to load unregistered students");
+                throw ex;
             }
 
             ResizeListViewColumns(lvUnregistered);
+        }
+
+        private void ClearMessages()
+        {
+            lblSuccess.Text = "";
+            lblError.Text = "";
         }
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -137,28 +144,42 @@ namespace Gradebook.View
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
+            ClearMessages();
+
             MoveSelectedItems(lvUnregistered, lvRegistered);
+            ResizeListViewColumns(lvRegistered);
         }
 
         private void BtnRemove_Click(object sender, EventArgs e)
         {
+            ClearMessages();
+
             MoveSelectedItems(lvRegistered, lvUnregistered);
+            ResizeListViewColumns(lvUnregistered);
         }
 
         private void BtnAddAll_Click(object sender, EventArgs e)
         {
+            ClearMessages();
+
             MoveAllItems(lvUnregistered, lvRegistered);
+            ResizeListViewColumns(lvRegistered);
             RemoveAllChecks();
         }
 
         private void BtnRemoveAll_Click(object sender, EventArgs e)
         {
+            ClearMessages();
+
             MoveAllItems(lvRegistered, lvUnregistered);
+            ResizeListViewColumns(lvUnregistered);
             RemoveAllChecks();
         }
 
         private void BtnReset_Click(object sender, EventArgs e)
         {
+            ClearMessages();
+
             LoadRegisteredStudents();
             LoadUnregisteredStudents();
             RemoveAllChecks();
@@ -166,7 +187,52 @@ namespace Gradebook.View
 
         private void BtnUpdate_Click(object sender, EventArgs e)
         {
-            RemoveAllChecks();
+            ClearMessages();
+
+            try
+            {
+                List<int> addStudentIDs = new List<int>();
+                List<int> removeStudentIDs = new List<int>();
+
+                addStudentIDs = FindStudentsAddedForRegistration(addStudentIDs);
+                removeStudentIDs = FindStudentsRemovedFromRegistration(removeStudentIDs);
+
+                if (addStudentIDs.Count == 0 && removeStudentIDs.Count == 0)
+                {
+                    lblError.Text = "Unable to update. No changes have been made to roster.";
+                    return;
+                }
+
+                DialogResult result = ShowUpdateConfirmationMessage();
+
+                if (result == DialogResult.OK)
+                {
+                    bool success = rsService.updateRegisteredStudentsInTaughtCourse(currentCourse.taughtCourseID, addStudentIDs, removeStudentIDs);
+
+                    if (success)
+                        lblSuccess.Text = "Class roster updated successfully.";
+                    else
+                        throw new Exception("Unable to update class roster.");
+                }
+
+                RemoveAllChecks();
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = ex.Message;
+            }
+        }
+
+        private DialogResult ShowUpdateConfirmationMessage()
+        {
+            DialogResult result = 
+                MessageBox.Show("Are you should you want to update your roster? \n\n" +
+                "If you have removed any students, they may lose any recorded grades for this class.",
+                "Caution",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Warning);
+
+            return result;
         }
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -221,23 +287,53 @@ namespace Gradebook.View
             {
                 ListViewItem item = new ListViewItem(s.studentID.ToString());
                 item.SubItems.Add(s.fullName);
+                item.Tag = s.studentID;
 
                 lv.Items.Add(item);
-            }
+            } 
         }
 
         private void RemoveRegisteredStudentsFromStudentList()
         {
-            for (int i = 0; i < unregStudents.Count(); i++)
+            unregStudents.RemoveAll(unRegStu => regStudents.Any(regStu => regStu.studentID == unRegStu.studentID));
+        }
+
+        private List<int> FindStudentsAddedForRegistration(List<int> addStudentIDs)
+        {
+            foreach (ListViewItem item in lvRegistered.Items)
             {
-                for (int j = 0; j < regStudents.Count(); j++)
+                if (!ListContainsStudent(regStudents, (int)item.Tag))
                 {
-                    if (unregStudents[i].studentID == regStudents[j].studentID)
-                    {
-                        unregStudents.RemoveAt(i);
-                    }
+                    addStudentIDs.Add((int)item.Tag);
                 }
             }
+
+            return addStudentIDs;
+        }
+
+        private List<int> FindStudentsRemovedFromRegistration(List<int> removeStudentIDs)
+        {
+            foreach (ListViewItem item in lvUnregistered.Items)
+            {
+                if (ListContainsStudent(regStudents, (int)item.Tag))
+                {
+                    removeStudentIDs.Add((int)item.Tag);
+                }
+            }
+
+            return removeStudentIDs;
+        }
+
+        private bool ListContainsStudent(List<RegisteredStudent> students, int sID)
+        {
+            foreach (RegisteredStudent rs in students)
+            {
+                if (rs.studentID == sID)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

@@ -43,5 +43,65 @@ namespace Gradebook.Data.Services
 
             return registeredStudents;
         }
+
+        public bool updateRegisteredStudentsInTaughtCourse(int taughtCourseID, List<int> addStudentIDs, List<int> removeStudentIDs)
+        {
+
+            int numberRowsShouldChange = addStudentIDs.Count + removeStudentIDs.Count;
+
+            if (taughtCourseID <= 0 || numberRowsShouldChange <= 0)
+            {
+                return false;
+            }
+
+            using (var connection = ConnectionFactory.GetOpenSQLiteConnection())
+            {
+                using (var trans = connection.BeginTransaction())
+                {
+                    int rowsAffected = 0;
+
+                    // Add new
+                    foreach (int studentID in addStudentIDs)
+                    {
+                        var sqlAddStu = @"insert into registeredStudents values (null, @sID, @tcID)";
+
+                        rowsAffected += connection.Execute(sqlAddStu, 
+                            new
+                            {
+                                sID = studentID,
+                                tcID = taughtCourseID
+                            },
+                            trans);
+                    }
+
+                    // Delete removed
+                    foreach (int studentID in removeStudentIDs)
+                    {
+                        var sqlDelStu = @"delete from registeredStudents 
+	                                    where studentID = @sID and taughtCourseID = @tcID ";
+
+                        rowsAffected += connection.Execute(sqlDelStu,
+                            new
+                            {
+                                sID = studentID, 
+                                tcID = taughtCourseID
+                            },
+                            trans);
+                    }
+
+                    // Commit only if all were added/removed
+                    if (rowsAffected == numberRowsShouldChange)
+                    {
+                        trans.Commit();
+                        return true;
+                    }
+                    else
+                    {
+                        trans.Rollback();
+                        return false;
+                    }
+                }
+            }
+        }
     }
 }
