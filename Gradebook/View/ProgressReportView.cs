@@ -140,12 +140,12 @@ namespace Gradebook.View
             reportDescriptionTB.Text = "Student Information" + Environment.NewLine +
                 "Student Name: " + student.fullName.ToString() + Environment.NewLine +
                 "Student Email: " + student.email.ToString() + Environment.NewLine + Environment.NewLine +
-                "Course Description" + Environment.NewLine +
+                "Course Information" + Environment.NewLine +
+                "Course Name: " + course.name.ToString() + Environment.NewLine +
+                "Course Descripition " + course.description.ToString() + Environment.NewLine +
                 "Teacher Name: " + teacher.fullName.ToString() + Environment.NewLine +
                 "Teacher Email: " + teacher.email.ToString() + Environment.NewLine +
-                "Teacher Number: " + teacher.phoneNumber.ToString() + Environment.NewLine +
-                "Course Name: " + course.name.ToString() + Environment.NewLine +
-                "Course Descripition " + course.description.ToString();
+                "Teacher Number: " + teacher.phoneNumber.ToString();
 
 
         }
