@@ -33,5 +33,19 @@ namespace Gradebook.Data.Services
             }
             return courses;
         }
+
+        public Course getCourseByTaughtCourseID(int taughtCourseID)
+        {
+            Course course;
+            using (var connection = ConnectionFactory.GetOpenSQLiteConnection())
+            {
+                course = connection.Query<Course>("Select c.name, c.description " +
+                "FROM Courses c " +
+                "JOIN TaughtCourses tc " +
+                "ON c.courseID = tc.courseID " +
+                "WHERE tc.taughtCourseID = @taughtCourseID; ", new { taughtCourseID = taughtCourseID }).FirstOrDefault();
+            }
+            return course;
+        }
     }
 }

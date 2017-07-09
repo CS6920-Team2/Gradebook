@@ -10,5 +10,6 @@ namespace Gradebook.Data.Interfaces
     interface ICourseService
     {
         List<TaughtCourse> findCoursesByTeacherID(int teacherID);
+        Course getCourseByTaughtCourseID(int taughtCourseID);
     }
 }

@@ -16,8 +16,10 @@ namespace Gradebook.View
     {
         private ReportService reportService;
         private PersonService personService;
+        private CourseService courseService;
         private Person student;
         private Person teacher;
+        private Course course;
         DataSet ds;
         private int sID;
         private int tcID;
@@ -27,6 +29,7 @@ namespace Gradebook.View
             InitializeComponent();
             reportService = new ReportService();
             personService = new PersonService();
+            courseService = new CourseService();
             sID = studentID;
             tcID = taughtCourseID;
 
@@ -34,8 +37,7 @@ namespace Gradebook.View
 
         private void ProgressReportView_Load(object sender, EventArgs e)
         {
-            setStudentInformation();
-            setTeacherInformation();
+            setReportTB();
             loadDataGridView();
 
             dataGridView1.Columns["personID"].Visible = false;
@@ -128,21 +130,23 @@ namespace Gradebook.View
             }
             return letterGrade;
         }
+        
 
-        private void setStudentInformation()
+        private void setReportTB()
         {
             student = personService.getPersonByStudentID(sID);
-            studentNameLBL.Text = "Name: " + student.fullName.ToString();
-            studentEmailLBL.Text = "Email: " + student.email.ToString();
-            studentNumberLBL.Text = "Number: " + student.phoneNumber.ToString();
-        }
-
-        private void setTeacherInformation()
-        {
             teacher = personService.getPersonByTaughtCourseID(tcID);
-            teacherNameLBL.Text = "Name: " + teacher.fullName.ToString();
-            teacherEmailLBL.Text = "Email: " + teacher.email.ToString();
-            teacherNumberLBL.Text = "Number: " + teacher.phoneNumber.ToString();
+            course = courseService.getCourseByTaughtCourseID(tcID);
+            reportDescriptionTB.Text = "Student Information" + Environment.NewLine +
+                "Student Name: " + student.fullName.ToString() + Environment.NewLine +
+                "Student Email: " + student.email.ToString() + Environment.NewLine + Environment.NewLine +
+                "Course Description" + Environment.NewLine +
+                "Teacher Name: " + teacher.fullName.ToString() + Environment.NewLine +
+                "Teacher Email: " + teacher.email.ToString() + Environment.NewLine +
+                "Teacher Number: " + teacher.phoneNumber.ToString() + Environment.NewLine +
+                "Course Name: " + course.name.ToString() + Environment.NewLine +
+                "Course Descripition " + course.description.ToString();
+
 
         }
     }
