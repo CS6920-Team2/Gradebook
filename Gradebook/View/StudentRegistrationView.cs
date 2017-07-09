@@ -69,6 +69,8 @@ namespace Gradebook.View
 
             try
             {
+                ClearMessages();
+
                 LoadCourseInfo();
                 LoadRegisteredStudents();
                 LoadUnregisteredStudents();
@@ -119,14 +121,12 @@ namespace Gradebook.View
             {
                 unregStudents = rsService.getAllStudentsAsRegisteredStudents();
 
-                RemoveRegisteredStudentsFromStudentList();
+                RemoveRegisteredStudentsFromUnregisteredStudentList();
                 AddStudentsToListView(lvUnregistered, unregStudents);
-
             }
             catch (Exception ex)
             {
-                //throw new Exception("Unable to load unregistered students");
-                throw ex;
+                throw new Exception("Unable to load unregistered students");
             }
 
             ResizeListViewColumns(lvUnregistered);
@@ -210,12 +210,15 @@ namespace Gradebook.View
                     bool success = rsService.updateRegisteredStudentsInTaughtCourse(currentCourse.taughtCourseID, addStudentIDs, removeStudentIDs);
 
                     if (success)
+                    {
+                        BtnReset_Click(null, null);
                         lblSuccess.Text = "Class roster updated successfully.";
+                    }
                     else
                         throw new Exception("Unable to update class roster.");
                 }
 
-                RemoveAllChecks();
+                
             }
             catch (Exception ex)
             {
@@ -293,7 +296,7 @@ namespace Gradebook.View
             } 
         }
 
-        private void RemoveRegisteredStudentsFromStudentList()
+        private void RemoveRegisteredStudentsFromUnregisteredStudentList()
         {
             unregStudents.RemoveAll(unRegStu => regStudents.Any(regStu => regStu.studentID == unRegStu.studentID));
         }
