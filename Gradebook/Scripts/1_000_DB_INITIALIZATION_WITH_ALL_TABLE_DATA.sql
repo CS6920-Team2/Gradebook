@@ -236,76 +236,82 @@ INSERT INTO [RegisteredStudents] ([registeredStudentID],[studentID],[taughtCours
 11,3,7);
 INSERT INTO [RegisteredStudents] ([registeredStudentID],[studentID],[taughtCourseID]) VALUES (
 12,5,7);
+INSERT INTO [RegisteredStudents] ([registeredStudentID],[studentID],[taughtCourseID]) VALUES (
+13,1,2);
+INSERT INTO [RegisteredStudents] ([registeredStudentID],[studentID],[taughtCourseID]) VALUES (
+14,2,2);
+INSERT INTO [RegisteredStudents] ([registeredStudentID],[studentID],[taughtCourseID]) VALUES (
+15,3,2);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-1,1,'Homework',20);
+1,1,'Exams',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-2,1,'Participation',20);
+2,1,'Homework',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-3,1,'Exams',20);
+3,1,'Participation',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-4,1,'Quizzes',20);
+4,1,'Projects',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-5,1,'Projects',20);
+5,1,'Quizzes',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-6,4,'Homework',50);
+6,2,'Exams',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-7,4,'Projects',50);
+7,2,'Homework',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-8,7,'Projects',100);
+8,2,'Participation',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-9,4,'Participation',0);
+9,2,'Projects',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-10,4,'Quizzes',0);
+10,2,'Quizzes',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-11,4,'Exams',0);
+11,3,'Exams',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-12,7,'Homework',0);
+12,3,'Homework',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-13,7,'Participation',0);
+13,3,'Participation',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-14,7,'Exams',0);
+14,3,'Projects',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-15,7,'Quizzes',0);
+15,3,'Quizzes',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-16,2,'Exams',20);
+16,4,'Exams',50);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-17,2,'Homework',20);
+17,4,'Homework',50);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-18,2,'Participation',20);
+18,4,'Participation',0);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-19,2,'Projects',20);
+19,4,'Projects',0);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-20,2,'Quizzes',20);
+20,4,'Quizzes',0);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-21,3,'Exams',20);
+21,5,'Exams',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-22,3,'Homework',20);
+22,5,'Homework',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-23,3,'Participation',20);
+23,5,'Participation',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-24,3,'Projects',20);
+24,5,'Projects',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-25,3,'Quizzes',20);
+25,5,'Quizzes',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-26,5,'Exams',20);
+26,6,'Exams',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-27,5,'Homework',20);
+27,6,'Homework',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-28,5,'Projects',20);
+28,6,'Participation',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-29,5,'Participation',20);
+29,6,'Projects',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-30,5,'Quizzes',20);
+30,6,'Quizzes',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-31,6,'Exams',20);
+31,7,'Exams',100);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-32,6,'Homework',20);
+32,7,'Homework',0);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-33,6,'Participation',20);
+33,7,'Participation',0);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-34,6,'Projects',20);
+34,7,'Projects',0);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
-35,6,'Quizzes',20);
+35,7,'Quizzes',0);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
 36,8,'Exams',20);
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
@@ -317,19 +323,29 @@ INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES 
 INSERT INTO [Categories] ([categoryID],[taughtCourseID],[name],[weight]) VALUES (
 40,8,'Quizzes',20);
 INSERT INTO [Assignments] ([assignmentID],[categoryID],[name],[description],[assignedDate],[dueDate],[possiblePoints]) VALUES (
-1,1,'Homework 1','Description 1','2017-06-12 00:00:00.000','2017-06-13 00:00:00.000',100);
+1,2,'Homework 1','Description 1','2017-06-12 00:00:00.000','2017-06-13 00:00:00.000',100);
 INSERT INTO [Assignments] ([assignmentID],[categoryID],[name],[description],[assignedDate],[dueDate],[possiblePoints]) VALUES (
-2,1,'Homework 2','Description 2','2017-06-13 00:00:00.000','2017-06-14 00:00:00.000',100);
+2,2,'Homework 2','Description 2','2017-06-13 00:00:00.000','2017-06-14 00:00:00.000',100);
 INSERT INTO [Assignments] ([assignmentID],[categoryID],[name],[description],[assignedDate],[dueDate],[possiblePoints]) VALUES (
-3,1,'Homework 3','Description 3','2017-06-14 00:00:00.000','2017-06-15 00:00:00.000',100);
+3,2,'Homework 3','Description 3','2017-06-14 00:00:00.000','2017-06-15 00:00:00.000',100);
 INSERT INTO [Assignments] ([assignmentID],[categoryID],[name],[description],[assignedDate],[dueDate],[possiblePoints]) VALUES (
-4,2,'Project 1','Description 4','2017-06-15 00:00:00.000','2017-06-16 00:00:00.000',100);
+4,4,'Project 1','Description 4','2017-06-15 00:00:00.000','2017-06-16 00:00:00.000',100);
 INSERT INTO [Assignments] ([assignmentID],[categoryID],[name],[description],[assignedDate],[dueDate],[possiblePoints]) VALUES (
 5,3,'Attendance 1','Description 5','2017-06-12 00:00:00.000','2017-12-20 00:00:00.000',100);
 INSERT INTO [Assignments] ([assignmentID],[categoryID],[name],[description],[assignedDate],[dueDate],[possiblePoints]) VALUES (
-6,4,'Test 1','Description 6','2017-06-16 00:00:00.000','2017-06-16 00:00:00.000',100);
+6,1,'Test 1','Description 6','2017-06-16 00:00:00.000','2017-06-16 00:00:00.000',100);
 INSERT INTO [Assignments] ([assignmentID],[categoryID],[name],[description],[assignedDate],[dueDate],[possiblePoints]) VALUES (
-7,5,'Participation','Description 7','2017-06-12 00:00:00.000','2017-12-20 00:00:00.000',100);
+7,5,'Quiz 1','Description 7','2017-06-12 00:00:00.000','2017-12-20 00:00:00.000',100);
+INSERT INTO [Assignments] ([assignmentID],[categoryID],[name],[description],[assignedDate],[dueDate],[possiblePoints]) VALUES (
+8,6,'Test 1','Description 8','2017-06-01 00:00:00.000','2017-06-01 00:00:00.000',100);
+INSERT INTO [Assignments] ([assignmentID],[categoryID],[name],[description],[assignedDate],[dueDate],[possiblePoints]) VALUES (
+9,7,'Homework 1','Description 9','2017-06-02 00:00:00.000','2017-06-02 00:00:00.000',100);
+INSERT INTO [Assignments] ([assignmentID],[categoryID],[name],[description],[assignedDate],[dueDate],[possiblePoints]) VALUES (
+10,8,'Participation','Description 10','2017-06-03 00:00:00.000','2017-06-03 00:00:00.000',100);
+INSERT INTO [Assignments] ([assignmentID],[categoryID],[name],[description],[assignedDate],[dueDate],[possiblePoints]) VALUES (
+11,9,'Project 1','Description 11','2017-06-04 00:00:00.000','2017-06-04 00:00:00.000',100);
+INSERT INTO [Assignments] ([assignmentID],[categoryID],[name],[description],[assignedDate],[dueDate],[possiblePoints]) VALUES (
+12,10,'Quiz 1','Description 12','2017-06-05 00:00:00.000','2017-06-05 00:00:00.000',100);
 INSERT INTO [Grades] ([gradeID],[registeredStudentID],[assignmentID],[actualPoints],[comment]) VALUES (
 1,1,1,90,'A');
 INSERT INTO [Grades] ([gradeID],[registeredStudentID],[assignmentID],[actualPoints],[comment]) VALUES (
@@ -414,6 +430,37 @@ INSERT INTO [Grades] ([gradeID],[registeredStudentID],[assignmentID],[actualPoin
 41,5,7,100,'A+');
 INSERT INTO [Grades] ([gradeID],[registeredStudentID],[assignmentID],[actualPoints],[comment]) VALUES (
 42,6,7,100,'A+');
+INSERT INTO [Grades] ([gradeID],[registeredStudentID],[assignmentID],[actualPoints],[comment]) VALUES (
+43,13,8,100,'');
+INSERT INTO [Grades] ([gradeID],[registeredStudentID],[assignmentID],[actualPoints],[comment]) VALUES (
+44,14,8,0,'');
+INSERT INTO [Grades] ([gradeID],[registeredStudentID],[assignmentID],[actualPoints],[comment]) VALUES (
+45,15,8,0,'');
+INSERT INTO [Grades] ([gradeID],[registeredStudentID],[assignmentID],[actualPoints],[comment]) VALUES (
+46,13,9,100,'');
+INSERT INTO [Grades] ([gradeID],[registeredStudentID],[assignmentID],[actualPoints],[comment]) VALUES (
+47,14,9,100,'');
+INSERT INTO [Grades] ([gradeID],[registeredStudentID],[assignmentID],[actualPoints],[comment]) VALUES (
+48,15,9,0,'');
+INSERT INTO [Grades] ([gradeID],[registeredStudentID],[assignmentID],[actualPoints],[comment]) VALUES (
+49,13,10,0,'');
+INSERT INTO [Grades] ([gradeID],[registeredStudentID],[assignmentID],[actualPoints],[comment]) VALUES (
+50,14,10,100,'');
+INSERT INTO [Grades] ([gradeID],[registeredStudentID],[assignmentID],[actualPoints],[comment]) VALUES (
+51,15,10,0,'');
+INSERT INTO [Grades] ([gradeID],[registeredStudentID],[assignmentID],[actualPoints],[comment]) VALUES (
+52,13,11,100,'');
+INSERT INTO [Grades] ([gradeID],[registeredStudentID],[assignmentID],[actualPoints],[comment]) VALUES (
+53,14,11,50,'');
+INSERT INTO [Grades] ([gradeID],[registeredStudentID],[assignmentID],[actualPoints],[comment]) VALUES (
+54,15,11,0,'');
+INSERT INTO [Grades] ([gradeID],[registeredStudentID],[assignmentID],[actualPoints],[comment]) VALUES (
+55,13,12,100,'');
+INSERT INTO [Grades] ([gradeID],[registeredStudentID],[assignmentID],[actualPoints],[comment]) VALUES (
+56,14,12,50,'');
+INSERT INTO [Grades] ([gradeID],[registeredStudentID],[assignmentID],[actualPoints],[comment]) VALUES (
+57,15,12,0,'');
+
 INSERT INTO [Admins] ([adminID],[personID],[userID]) VALUES (
 1,11,11);
 INSERT INTO [Admins] ([adminID],[personID],[userID]) VALUES (
