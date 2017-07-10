@@ -180,6 +180,12 @@
     <Compile Include="View\ClassView.Designer.cs">
       <DependentUpon>ClassView.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\FailureReportView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FailureReportView.Designer.cs">
+      <DependentUpon>FailureReportView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\GradebookView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -237,6 +243,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\ClassView.resx">
       <DependentUpon>ClassView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FailureReportView.resx">
+      <DependentUpon>FailureReportView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\GradebookView.resx">
       <DependentUpon>GradebookView.cs</DependentUpon>

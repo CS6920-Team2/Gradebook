@@ -32,7 +32,8 @@ namespace Gradebook.View
 
         private void BtnFailureReport_Click(object sender, EventArgs e)
         {
-
+            FailureReportView frv = new FailureReportView();
+            frv.Show();
         }
 
         // Loads the combo box with students that have the specific taught course ID
