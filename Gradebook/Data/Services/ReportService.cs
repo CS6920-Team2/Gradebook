@@ -22,7 +22,7 @@ namespace Gradebook.Data.Services
             SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("SELECT p.personID, p.firstName as 'FirstName', p.lastName as 'LastName', " +
             "a.assignedDate as 'Date', a.name as 'Assignment', " +
             "g.actualPoints as 'Actual Points', a.possiblePoints as 'Points Possible', " +
-            "cgy.weight as 'Weight %', g.comment as 'Letter Grade' " +
+            "cgy.weight as 'Weight %',  cgy.Name as 'Category Name',g.comment as 'Letter Grade' " +
             "FROM " +
             "TaughtCourses t " +
             "JOIN Courses crs ON t.courseID = crs.courseID " +
@@ -118,10 +118,8 @@ namespace Gradebook.Data.Services
                     List<WeightedGrade> grades = new List<WeightedGrade>();
                     foreach (var gradeItem in gradeData)
                     {
-                        if (true)
-                        {
-                            grades.Add(new WeightedGrade(gradeItem.Weight, gradeItem.Grade, gradeItem.PointsPossible, gradeItem.CategoryName));
-                        }                    }
+                        grades.Add(new WeightedGrade(gradeItem.Weight, gradeItem.Grade, gradeItem.PointsPossible, gradeItem.CategoryName));
+                    }
 
                     // Sets the cumulative average for that student
                     double cumulativeGrade = GradeCalculator.CaculateCumulativeGrades(grades);

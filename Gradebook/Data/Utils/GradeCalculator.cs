@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Gradebook.Data.DAO;
 
 namespace Gradebook.Data.Utils
@@ -32,5 +34,24 @@ namespace Gradebook.Data.Utils
             double cumulativeGrade = cumulativeEarned / totalWeightUsed * 100.0;
             return Math.Round(cumulativeGrade, 2);
         }
+        
+        public static double CalculateCumulativeGrades(DataGridView dgView)
+        {
+            // Convert items in grid view to weighted grades
+            List<WeightedGrade> grades = new List<WeightedGrade>();
+            foreach (DataGridViewRow row in dgView.Rows)
+            {
+                int weight = Int32.Parse(row.Cells[7].Value.ToString());
+                int actualPoints = Int32.Parse(row.Cells[5].Value.ToString());
+                int possiblePoints = Int32.Parse(row.Cells[6].Value.ToString());
+                string categoryName = row.Cells[8].Value.ToString();
+                grades.Add(new WeightedGrade(weight, actualPoints, possiblePoints, categoryName));
+            }
+
+            // Sent these grades to the other method override above
+            return CaculateCumulativeGrades(grades);
+
+        }
+        
     }
 }

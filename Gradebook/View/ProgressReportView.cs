@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Gradebook.Data.Utils;
 
 namespace Gradebook.View
 {
@@ -54,8 +55,11 @@ namespace Gradebook.View
             dataGridView1.DataSource = ds.Tables[0];
         }
 
-        private decimal getFinalGrade()
+        private double getFinalGrade()
         {
+            return GradeCalculator.CalculateCumulativeGrades(dataGridView1);
+
+            /*
             decimal actualPoints = 0;
             decimal possiblePoints = 0;
             int weight = 0;
@@ -71,9 +75,10 @@ namespace Gradebook.View
             pointAvg = (actualPoints / possiblePoints) * 100;
             pointAvg = Math.Round(pointAvg, 2);
             return pointAvg;
+            */
         }
 
-        private string getLetterGrade(decimal gradeAvg)
+        private string getLetterGrade(double gradeAvg)
         {
             string letterGrade = "";
             if(gradeAvg >=97)
