@@ -37,8 +37,18 @@ namespace Gradebook.View
             }
 
             MainView.CourseList.SelectedIndexChanged += CourseList_SelectedIndexChanged;
-
+            dgAssignments.CellBeginEdit += DgAssignments_CellBeginEdit;
+            dgAssignments.DataBindingComplete += DgAssignments_DataBindingComplete;
             this.FormClosed += GradebookView_FormClosed;
+        }
+
+        private void DgAssignments_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            //have to disable the currency manager in order to hide the first row..
+            CurrencyManager currencyManager = (CurrencyManager)BindingContext[dgAssignments.DataSource];
+            currencyManager.SuspendBinding();
+            dgAssignments.Rows[0].Visible = false;
+            currencyManager.ResumeBinding();
         }
 
         private void GradebookView_FormClosed(object sender, FormClosedEventArgs e)
@@ -64,6 +74,20 @@ namespace Gradebook.View
                     column.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
                     column.SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
+                dgAssignments.Columns[0].Visible = false;
+
+                //set the first two columns and rows to read only
+                dgAssignments.Columns[0].ReadOnly = true;
+                dgAssignments.Columns[1].ReadOnly = true;
+                dgAssignments.Columns[2].ReadOnly = true;
+            }
+        }
+
+        private void DgAssignments_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            if (e.RowIndex < 2)
+            {
+                e.Cancel = true;
             }
         }
 
@@ -124,6 +148,17 @@ namespace Gradebook.View
         private void GradebookView_Load(object sender, EventArgs e)
         {
             fillDataSet();
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            var dirtyRows = ((DataTable)dgAssignments.DataSource).GetChanges();
+            bool success = gradeService.Update(dirtyRows, ((DataTable)dgAssignments.DataSource).Rows[0]);
+
+            if(success)
+            {
+                fillDataSet();
+            }
         }
     }
 }

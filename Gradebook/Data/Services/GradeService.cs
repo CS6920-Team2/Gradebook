@@ -2,13 +2,10 @@
 using Gradebook.Data.DAO;
 using Gradebook.Data.Factories;
 using Gradebook.Data.Interfaces;
-using Gradebook.Data.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Gradebook.Data.Services
 {
@@ -21,6 +18,8 @@ namespace Gradebook.Data.Services
             public static String Average = "Average";
             public static String PointsPossible = "Points Possible";
             public static String DueDate = "Due";
+            public static String AssignmentID = "AssignmentID";
+            public static String StudentID = "StudentID";
         }
 
         private User AuthenticatedUser { get; set; }
@@ -44,13 +43,13 @@ namespace Gradebook.Data.Services
             {
                 //create the sql query, send in an anonymous object which contains the parameters, then select the first result
                 gradeInfo = connection.Query<GradeInfo>(
-                    "SELECT p.personID, a.assignmentID, " +
-                    "p.firstName as 'FirstName', p.lastName as 'LastName'," +
+                    "SELECT p.personID, a.assignmentID, p.firstName as 'FirstName', p.lastName as 'LastName'," +
                     "a.name as 'AssignmentName', a.description as 'AssignmentDescription', " +
                     "a.assignedDate as 'AssignedDate', a.dueDate as 'DueDate', " +
                     "a.possiblePoints as 'PointsPossible', crs.name as 'CourseName', " +
                     "crs.description as 'CourseDescription', cre.type as 'CourseDuration', " +
                     "g.actualPoints as 'Grade', g.comment as 'GradeComment', cgy.weight as 'Weight', " +
+                    "g.registeredStudentID as 'StudentID', g.assignmentID as 'GradeAssignmentID'," +
                     "cgy.name as 'CategoryName'" +
                     "FROM " +
                     "TaughtCourses t " +
@@ -69,29 +68,39 @@ namespace Gradebook.Data.Services
             var gradeInfoData = gradeInfo.GroupBy(s => s.PersonID).ToList();
 
             DataTable dt = new DataTable(GradeColumns.Grades);
+            //gradeId for updating
+            DataColumn gradeCol = new DataColumn(GradeColumns.StudentID, typeof(int));
+            dt.Columns.Add(gradeCol);
             //user names
-            dt.Columns.Add(new DataColumn(GradeColumns.Student, typeof(string)));
+            DataColumn nameCol = new DataColumn(GradeColumns.Student, typeof(string));
+            dt.Columns.Add(nameCol);
             //averages
-            dt.Columns.Add(new DataColumn(GradeColumns.Average, typeof(string)));
+            DataColumn avgCol = new DataColumn(GradeColumns.Average, typeof(string));
+            dt.Columns.Add(avgCol);
 
             var nameInfoGroup = gradeInfo.GroupBy(a => a.AssignmentName);
 
             //add column for each assignment
-            foreach (var assignment in gradeInfo.GroupBy(a => a.AssignmentID))
+            foreach (var assignment in gradeInfo.GroupBy(a => a.GradeAssignmentID))
             {
                 if (assignment.Count() > 0)
                 {
                     String column = assignment.First().AssignmentName;
-                    dt.Columns.Add(new DataColumn(column, typeof(string)));
+                    DataColumn col = new DataColumn(column, typeof(string));
+                    dt.Columns.Add(col);
                 }
             }
+
+            DataRow assignmentIDRow = dt.NewRow();
 
             //creating two header rows
             DataRow dueDateRow = dt.NewRow();
             dueDateRow[GradeColumns.Average] = GradeColumns.DueDate;
             DataRow pointsPossibleRow = dt.NewRow();
+            //pointsPossibleRow.Table.Columns.
             pointsPossibleRow[GradeColumns.Average] = GradeColumns.PointsPossible;
 
+            dt.Rows.Add(assignmentIDRow);
             dt.Rows.Add(dueDateRow);
             dt.Rows.Add(pointsPossibleRow);
 
@@ -117,10 +126,11 @@ namespace Gradebook.Data.Services
                 //iterate each assignment and add column
                 foreach (var gradeItem in gradeData)
                 {
+                    dr[GradeColumns.StudentID] = gradeItem.StudentID;
                     dr[gradeItem.AssignmentName] = gradeItem.Grade;
                     pointsPossibleRow[gradeItem.AssignmentName] = gradeItem.PointsPossible;
                     dueDateRow[gradeItem.AssignmentName] = gradeItem.DueDate.ToShortDateString();
-
+                    assignmentIDRow[gradeItem.AssignmentName] = gradeItem.GradeAssignmentID;
                     grades.Add(new WeightedGrade(gradeItem.Weight, gradeItem.Grade, gradeItem.PointsPossible, gradeItem.CategoryName));
                 }
 
@@ -139,8 +149,51 @@ namespace Gradebook.Data.Services
                 dt.Rows.Add(dr);
             }
 
+            nameCol.ReadOnly = true;
+            avgCol.ReadOnly = true;
+
             dt.Locale = System.Globalization.CultureInfo.InvariantCulture;
+            dt.AcceptChanges();
             return dt;
+        }
+
+        public bool Update(DataTable grades, DataRow mappedAssignmentIds)
+        {
+            int rowsChanged = 0;
+            if (grades != null && grades.Rows.Count > 0 && mappedAssignmentIds != null)
+            {
+                using (var connection = ConnectionFactory.GetOpenConnection())
+                {
+                    foreach (DataRow rowData in grades.Rows)
+                    {
+                        DataTable row = rowData.Table;
+                        for (int i = 3; i < row.Columns.Count; i++)
+                        {
+                            int studentID = rowData.Field<int>(rowData.Table.Columns[0]);
+                            int assignmentID = int.Parse(mappedAssignmentIds.Field<string>(mappedAssignmentIds.Table.Columns[i]));
+                            int actualPoints = int.Parse(rowData.Field<string>(rowData.Table.Columns[i]));
+
+                            try
+                            {
+                                rowsChanged += connection.Execute("UPDATE Grades set actualPoints = @actualPoints " +
+                                "WHERE registeredStudentID=@registeredStudentID " +
+                                "AND assignmentID=@assignmentID", new
+                                {
+                                    actualPoints = actualPoints,
+                                    assignmentID = assignmentID,
+                                    registeredStudentID = studentID
+                                });
+                            }
+                            catch (Exception)
+                            {
+
+                            }
+                        }
+
+                    }
+                }
+            }
+            return rowsChanged > 0;
         }
     }
 }

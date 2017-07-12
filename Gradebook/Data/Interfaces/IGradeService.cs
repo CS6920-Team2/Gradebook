@@ -10,5 +10,6 @@ namespace Gradebook.Data.Interfaces
     public interface IGradeService
     {
         DataTable findCourseGrades(int taughtCourseID);
+        bool Update(DataTable grades, DataRow mappedAssignmentIds);
     }
 }

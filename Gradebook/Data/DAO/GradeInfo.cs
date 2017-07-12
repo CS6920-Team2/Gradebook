@@ -12,7 +12,9 @@ namespace Gradebook.Data.DAO
         [Browsable(false)]
         public int PersonID { get; set; }
         [Browsable(false)]
-        public int AssignmentID { get; set; }
+        public int StudentID { get; set; }
+        [Browsable(false)]
+        public int GradeAssignmentID { get; set; }
         [DisplayName("Assignment Name")]
         public String AssignmentName { get; set; }
         [DisplayName("Assignment Description")]
