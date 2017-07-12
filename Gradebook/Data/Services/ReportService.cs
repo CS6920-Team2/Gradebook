@@ -125,7 +125,7 @@ namespace Gradebook.Data.Services
 
                     // Sets the cumulative average for that student
                     double cumulativeGrade = GradeCalculator.CaculateCumulativeGrades(grades);
-                    dr["Cumulative Average"] = Math.Round(cumulativeGrade, 2) + "%";
+                    dr["Cumulative Average"] = cumulativeGrade + "%";
 
                     // If cumulative grade is failing then show student
                     if (cumulativeGrade < 70)

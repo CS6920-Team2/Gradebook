@@ -30,7 +30,7 @@ namespace Gradebook.Data.Utils
                 cumulativeEarned += totalEarnedForCategory / totalPossibleForCategory * weight;
             }
             double cumulativeGrade = cumulativeEarned / totalWeightUsed * 100.0;
-            return cumulativeGrade;
+            return Math.Round(cumulativeGrade, 2);
         }
     }
 }
