@@ -43,6 +43,7 @@ namespace Gradebook.Data.Services
 
         public DataTable GetFailureReportDataSet(int teacherID, int taughtCourseID)
         {
+            PersonService pService = new PersonService();
             List<GradeInfo> gradeInfo = new List<GradeInfo>(); 
 
             using (var connection = ConnectionFactory.GetOpenSQLiteConnection())
@@ -70,8 +71,10 @@ namespace Gradebook.Data.Services
             // Create DataTable with column names
             DataTable dt = new DataTable("FailureReportTable");
             dt.Columns.Add(new DataColumn("Name", typeof(string)));
-            dt.Columns.Add(new DataColumn("Cumulative Average", typeof(double)));
+            dt.Columns.Add(new DataColumn("Cumulative Average", typeof(string)));
             dt.Columns.Add(new DataColumn("Course Name", typeof(string)));
+            dt.Columns.Add(new DataColumn("Student Email", typeof(string)));
+            dt.Columns.Add(new DataColumn("Phone Number", typeof(string)));
 
             // Groups all data by course name
             var courses = gradeInfo.GroupBy(c => c.CourseName);
@@ -104,6 +107,10 @@ namespace Gradebook.Data.Services
                         var gradeItem = gradeData.First();
                         dr["Name"] = gradeItem.LastName + ", " + gradeItem.FirstName;
                         dr["Course Name"] = gradeItem.CourseName;
+
+                        Person p = pService.getPersonByPersonID(gradeItem.PersonID);
+                        dr["Student Email"] = p.email;
+                        dr["Phone Number"] = p.phoneNumber;
                     }
 
                     // Set info used for calculating grades
@@ -129,7 +136,7 @@ namespace Gradebook.Data.Services
                         cumulativeEarned += totalEarnedForCategory * weight / totalPossibleForCategory;
                     }
                     double cumulativeGrade = cumulativeEarned / totalWeightUsedInAllCategories * 100;
-                    dr["Cumulative Average"] = Math.Round(cumulativeGrade, 2).ToString();
+                    dr["Cumulative Average"] = Math.Round(cumulativeGrade, 2) + "%";
 
                     // If cumulative grade is failing then show student
                     if (cumulativeGrade < 70)
@@ -142,7 +149,7 @@ namespace Gradebook.Data.Services
                 if (failureCount > 0)
                 {
                     DataRow totalsRow = dt.NewRow();
-                    totalsRow[2] = "Total: " + failureCount;
+                    totalsRow[4] = "Course Total: " + failureCount;
                     dt.Rows.Add(totalsRow); 
                 }
             }

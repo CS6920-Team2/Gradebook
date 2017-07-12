@@ -65,7 +65,6 @@ namespace Gradebook.View
                 {
                     row.DefaultCellStyle.ForeColor = textColor;
                     row.DefaultCellStyle.BackColor = backColor;
-                    row.Frozen = true;
                 }
             }
         }
