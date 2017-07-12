@@ -151,6 +151,7 @@
     <Compile Include="Data\Services\UserService.cs" />
     <Compile Include="Data\Utils\ConversionUtils.cs" />
     <Compile Include="Data\Utils\FormManager.cs" />
+    <Compile Include="Data\Utils\GradeCalculator.cs" />
     <Compile Include="Data\Utils\SecurityUtils.cs" />
     <Compile Include="Data\Utils\Validator.cs" />
     <Compile Include="Program.cs" />

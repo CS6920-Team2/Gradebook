@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using Gradebook.Data.DAO;
+using Gradebook.Data.Utils;
 
 namespace Gradebook.Data.Services
 {
@@ -123,19 +124,7 @@ namespace Gradebook.Data.Services
                         }                    }
 
                     // Sets the cumulative average for that student
-                    double cumulativeEarned = 0;
-                    double totalWeightUsedInAllCategories = 0;
-                    foreach (var grade in grades.GroupBy(g => g.CategoryName))
-                    {
-                        double weight = grade.First().Weight;
-                        totalWeightUsedInAllCategories += weight;
-
-                        double totalEarnedForCategory = grade.Sum(g => g.TotalEarned);
-                        double totalPossibleForCategory = grade.Sum(g => g.TotalPoints);
-
-                        cumulativeEarned += totalEarnedForCategory * weight / totalPossibleForCategory;
-                    }
-                    double cumulativeGrade = cumulativeEarned / totalWeightUsedInAllCategories * 100;
+                    double cumulativeGrade = GradeCalculator.CaculateCumulativeGrades(grades);
                     dr["Cumulative Average"] = Math.Round(cumulativeGrade, 2) + "%";
 
                     // If cumulative grade is failing then show student

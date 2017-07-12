@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Gradebook.Data.Utils;
 
 namespace Gradebook.Data.Services
 {
@@ -135,17 +136,8 @@ namespace Gradebook.Data.Services
                 }
 
                 //calculate weighted grade
-                double totalEarned = 0;
-                foreach (var grade in grades.GroupBy(g => g.CategoryName))
-                {
-                    double maxPointsByWeight = 100.0 * (grade.First().Weight * .01);
-
-                    double totalPointsForCategory = grade.Sum(g => g.TotalPoints);
-                    double totalEarnedForCategory = grade.Sum(g => g.TotalEarned);
-
-                    totalEarned += maxPointsByWeight * (totalEarnedForCategory / totalPointsForCategory);
-                }
-                dr[GradeColumns.Average] = String.Format("{0:P2}", totalEarned / 100);
+                double cumulativeGrade = GradeCalculator.CaculateCumulativeGrades(grades);
+                dr[GradeColumns.Average] = cumulativeGrade + "%";
                 dt.Rows.Add(dr);
             }
 
