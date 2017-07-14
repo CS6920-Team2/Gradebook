@@ -41,8 +41,7 @@ namespace Gradebook.View
             {
                 if (MainView.Current.AuthenticatedTeacher != null)
                 {
-                    dgView.DataSource = reportService.GetFailureReportDataSet(MainView.Current.AuthenticatedTeacher.teacherID,
-                            MainView.currentCourse.taughtCourseID);
+                    dgView.DataSource = reportService.GetFailureReportDataSet(MainView.Current.AuthenticatedTeacher.teacherID);
                     dgView.AutoResizeColumns();
                     dgView.ClearSelection();
 

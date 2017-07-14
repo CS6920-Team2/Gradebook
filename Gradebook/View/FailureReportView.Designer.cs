@@ -86,12 +86,12 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgView.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgView.GridColor = System.Drawing.SystemColors.Info;
-            this.dgView.Location = new System.Drawing.Point(28, 97);
+            this.dgView.Location = new System.Drawing.Point(12, 97);
             this.dgView.Name = "dgView";
             this.dgView.ReadOnly = true;
             this.dgView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgView.RowHeadersVisible = false;
-            this.dgView.Size = new System.Drawing.Size(781, 542);
+            this.dgView.Size = new System.Drawing.Size(812, 542);
             this.dgView.TabIndex = 9;
             // 
             // FailureReportView
@@ -104,6 +104,7 @@
             this.Controls.Add(this.lblError);
             this.Controls.Add(this.pictureBox1);
             this.Name = "FailureReportView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Failure Report View";
             this.Load += new System.EventHandler(this.FailureReportView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

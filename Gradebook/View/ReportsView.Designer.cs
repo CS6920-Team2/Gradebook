@@ -63,8 +63,8 @@
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(249, 44);
             this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "This report will pull any kids who have a cumulative grade below a 70% in the sel" +
-    "ected class.";
+            this.textBox1.Text = "This report will pull any kids who have a cumulative grade below a 70% in  any of" +
+    " your classes.";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblReports
@@ -117,7 +117,7 @@
             this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(249, 44);
             this.textBox3.TabIndex = 25;
-            this.textBox3.Text = "This report display all the studenst who are missing an assignment in  the select" +
+            this.textBox3.Text = "This report display all the students who are missing an assignment in  the select" +
     "ed class.";
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 

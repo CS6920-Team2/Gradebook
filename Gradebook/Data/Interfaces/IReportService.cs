@@ -12,6 +12,6 @@ namespace Gradebook.Data.Interfaces
     {
 
         DataSet CreateProgressReportDataSet(int studentID, int taughtCourseID);
-        DataTable GetFailureReportDataSet(int teacherID, int taughtCourseID);
+        DataTable GetFailureReportDataSet(int teacherID);
     }
 }

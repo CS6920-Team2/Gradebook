@@ -42,7 +42,7 @@ namespace Gradebook.Data.Services
             return ds;
         }
 
-        public DataTable GetFailureReportDataSet(int teacherID, int taughtCourseID)
+        public DataTable GetFailureReportDataSet(int teacherID)
         {
             PersonService pService = new PersonService();
             List<GradeInfo> gradeInfo = new List<GradeInfo>(); 
@@ -62,11 +62,10 @@ namespace Gradebook.Data.Services
 	                            JOIN grades g ON g.registeredStudentID = rs.registeredStudentID
 	                            JOIN assignments a ON a.assignmentID = g.assignmentID
 	                            JOIN categories cgy ON cgy.categoryID = a.categoryID
-                                WHERE tc.teacherID = @teacherID --and tc.taughtCourseID = @taughtCourseID
-                                ORDER BY s.studentID";
+                                WHERE tc.teacherID = @teacherID
+                                ORDER BY p.lastName";
 
-                gradeInfo = connection.Query<GradeInfo>(sql, 
-                    new { teacherID = teacherID }).ToList();
+                gradeInfo = connection.Query<GradeInfo>(sql, new { teacherID = teacherID }).ToList();
             }
 
             // Create DataTable with column names
@@ -133,6 +132,7 @@ namespace Gradebook.Data.Services
                     }
                 }
 
+                // Totals row added if count of failing students is above zero in a class
                 if (failureCount > 0)
                 {
                     DataRow totalsRow = dt.NewRow();
