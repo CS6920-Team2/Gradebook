@@ -107,6 +107,7 @@
             this.studentCB.Name = "studentCB";
             this.studentCB.Size = new System.Drawing.Size(249, 21);
             this.studentCB.TabIndex = 22;
+            this.studentCB.SelectionChangeCommitted += new System.EventHandler(this.studentCB_SelectionChangeCommitted);
             // 
             // textBox3
             // 

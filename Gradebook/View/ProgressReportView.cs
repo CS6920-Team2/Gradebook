@@ -25,14 +25,14 @@ namespace Gradebook.View
         private int sID;
         private int tcID;
 
-        public ProgressReportView(int studentID, int taughtCourseID)
+        public ProgressReportView()
         {
             InitializeComponent();
             reportService = new ReportService();
             personService = new PersonService();
             courseService = new CourseService();
-            sID = studentID;
-            tcID = taughtCourseID;
+            sID = ReportsView.curStudentID;
+            tcID = MainView.currentCourse.taughtCourseID;
 
         }
 

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Gradebook.Controls;
 using Gradebook.Data.DAO;
 using Gradebook.Data.Services;
+using Gradebook.Data.Utils;
 
 namespace Gradebook.View
 {
@@ -18,6 +19,7 @@ namespace Gradebook.View
 
         private StudentService studentService;
         private TaughtCourse currentCourse = MainView.currentCourse;
+        public static int curStudentID; 
         public ReportsView()
         {
             InitializeComponent();
@@ -32,8 +34,7 @@ namespace Gradebook.View
 
         private void BtnFailureReport_Click(object sender, EventArgs e)
         {
-            FailureReportView frv = new FailureReportView();
-            frv.Show();
+            FormManager.Current.CreateForm<FailureReportView>().Show();
         }
 
         // Loads the combo box with students that have the specific taught course ID
@@ -60,8 +61,12 @@ namespace Gradebook.View
                 MessageBox.Show("Student must be selected.");
                 return;
             }
-            ProgressReportView prv = new ProgressReportView((int)studentCB.SelectedValue, currentCourse.taughtCourseID);
-            prv.Show();
+            FormManager.Current.CreateForm<ProgressReportView>().Show();
+        }
+
+        private void studentCB_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            curStudentID = (int)studentCB.SelectedValue; 
         }
     }
 }
