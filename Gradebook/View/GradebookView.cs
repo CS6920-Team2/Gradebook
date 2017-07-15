@@ -47,7 +47,10 @@ namespace Gradebook.View
             //have to disable the currency manager in order to hide the first row..
             CurrencyManager currencyManager = (CurrencyManager)BindingContext[dgAssignments.DataSource];
             currencyManager.SuspendBinding();
-            dgAssignments.Rows[0].Visible = false;
+            if (dgAssignments.Rows.Count > 0)
+            {
+                dgAssignments.Rows[0].Visible = false;
+            }
             currencyManager.ResumeBinding();
         }
 
@@ -73,14 +76,20 @@ namespace Gradebook.View
                 {
                     column.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
                     column.SortMode = DataGridViewColumnSortMode.NotSortable;
-                }
-                dgAssignments.Columns[0].Visible = false;
 
-                //set the first two columns and rows to read only
-                dgAssignments.Columns[0].ReadOnly = true;
-                dgAssignments.Columns[1].ReadOnly = true;
-                dgAssignments.Columns[2].ReadOnly = true;
+                    if (dgAssignments.Columns.Count > 0)
+                    {
+                        dgAssignments.Columns[0].Visible = false;
+
+                        //set the first two columns and rows to read only
+                        dgAssignments.Columns[0].ReadOnly = true;
+                        dgAssignments.Columns[1].ReadOnly = true;
+                        dgAssignments.Columns[2].ReadOnly = true;
+                    }
+                }
             }
+
+            btnUpdate.Enabled = dgAssignments.Rows.Count > 0;
         }
 
         private void DgAssignments_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -89,6 +98,11 @@ namespace Gradebook.View
             {
                 e.Cancel = true;
             }
+
+            DataGridViewCellStyle style = new DataGridViewCellStyle();
+            style.BackColor = Color.Yellow;
+
+            dgAssignments.Rows[e.RowIndex].Cells[e.ColumnIndex].Style = style;
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -159,6 +173,11 @@ namespace Gradebook.View
             {
                 fillDataSet();
             }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            fillDataSet();
         }
     }
 }
