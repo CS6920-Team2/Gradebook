@@ -77,10 +77,17 @@ namespace Gradebook.View
         // Clicking the delete button will complete the transaction of a deletion
         private void deleteBtn_Click(object sender, EventArgs e)
         {
-            assignmentService.deleteAssignment(Int32.Parse(assignmentIDTB.Text));
-            MessageBox.Show("You have succesfully deleted the Assignment", "Successful Deletion");
-            resetControls();
-            loadDataGridView();
+            if(nameTB.Text != "")
+            {
+                assignmentService.deleteAssignment(Int32.Parse(assignmentIDTB.Text));
+                MessageBox.Show("You have succesfully deleted the Assignment", "Successful Deletion");
+                resetControls();
+                loadDataGridView();
+            }
+            else
+            {
+                MessageBox.Show("Please select an assignment to delete");
+            }
         }
 
         // Clicking the datagrid selects a row and assigns the values to the textboxes.
