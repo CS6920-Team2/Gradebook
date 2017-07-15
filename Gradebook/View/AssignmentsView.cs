@@ -63,21 +63,27 @@ namespace Gradebook.View
         // Clicking the update button will complete the transaction of a update
         private void updateBtn_Click(object sender, EventArgs e)
         {
-            if (isValidData() == true)
+            if (assignmentIDTB.Text != "")
             {
-                bool updated = assignmentService.updateAssignment(Int32.Parse(assignmentIDTB.Text), (int)categoryCB.SelectedValue, nameTB.Text, descriptionTB.Text,
-                assignedDatedtp.Value, dueDatedtp.Value, Int32.Parse(possiblePointsTB.Text));
-                MessageBox.Show("You have succesfully updated the Assignment", "Successful Update");
-                resetControls();
-                loadDataGridView();
+                if (isValidData() == true)
+                {
+                    bool updated = assignmentService.updateAssignment(Int32.Parse(assignmentIDTB.Text), (int)categoryCB.SelectedValue, nameTB.Text, descriptionTB.Text,
+                    assignedDatedtp.Value, dueDatedtp.Value, Int32.Parse(possiblePointsTB.Text));
+                    MessageBox.Show("You have succesfully updated the Assignment", "Successful Update");
+                    resetControls();
+                    loadDataGridView();
+                }
             }
-
+            else
+            {
+                MessageBox.Show("Please select an assignment to update");
+            }
         }
 
         // Clicking the delete button will complete the transaction of a deletion
         private void deleteBtn_Click(object sender, EventArgs e)
         {
-            if(nameTB.Text != "")
+            if(assignmentIDTB.Text != "")
             {
                 assignmentService.deleteAssignment(Int32.Parse(assignmentIDTB.Text));
                 MessageBox.Show("You have succesfully deleted the Assignment", "Successful Deletion");
