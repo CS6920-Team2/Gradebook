@@ -39,16 +39,21 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.btnMissingAssignment = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
             // btnFailureReport
             // 
-            this.btnFailureReport.Location = new System.Drawing.Point(93, 65);
+            this.btnFailureReport.Location = new System.Drawing.Point(124, 80);
+            this.btnFailureReport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnFailureReport.Name = "btnFailureReport";
-            this.btnFailureReport.Size = new System.Drawing.Size(249, 25);
+            this.btnFailureReport.Size = new System.Drawing.Size(332, 31);
             this.btnFailureReport.TabIndex = 2;
             this.btnFailureReport.Text = "Generate Failure Report";
             this.btnFailureReport.UseVisualStyleBackColor = true;
@@ -57,11 +62,12 @@
             // textBox1
             // 
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(93, 96);
+            this.textBox1.Location = new System.Drawing.Point(124, 118);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(249, 44);
+            this.textBox1.Size = new System.Drawing.Size(332, 54);
             this.textBox1.TabIndex = 3;
             this.textBox1.Text = "This report will pull any kids who have a cumulative grade below a 70% in  any of" +
     " your classes.";
@@ -71,29 +77,32 @@
             // 
             this.lblReports.AutoSize = true;
             this.lblReports.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblReports.Location = new System.Drawing.Point(12, 9);
+            this.lblReports.Location = new System.Drawing.Point(16, 11);
+            this.lblReports.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblReports.Name = "lblReports";
-            this.lblReports.Size = new System.Drawing.Size(128, 37);
+            this.lblReports.Size = new System.Drawing.Size(160, 46);
             this.lblReports.TabIndex = 17;
             this.lblReports.Text = "Reports";
             // 
             // textBox2
             // 
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Location = new System.Drawing.Point(93, 317);
+            this.textBox2.Location = new System.Drawing.Point(124, 390);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(249, 44);
+            this.textBox2.Size = new System.Drawing.Size(332, 54);
             this.textBox2.TabIndex = 21;
             this.textBox2.Text = "This report will show you the  cumulative averages for a student in your class.";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // generatePR
             // 
-            this.generatePR.Location = new System.Drawing.Point(93, 259);
+            this.generatePR.Location = new System.Drawing.Point(124, 319);
+            this.generatePR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.generatePR.Name = "generatePR";
-            this.generatePR.Size = new System.Drawing.Size(249, 25);
+            this.generatePR.Size = new System.Drawing.Size(332, 31);
             this.generatePR.TabIndex = 20;
             this.generatePR.Text = "Generate Progress Report";
             this.generatePR.UseVisualStyleBackColor = true;
@@ -103,20 +112,22 @@
             // 
             this.studentCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.studentCB.FormattingEnabled = true;
-            this.studentCB.Location = new System.Drawing.Point(93, 290);
+            this.studentCB.Location = new System.Drawing.Point(124, 357);
+            this.studentCB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.studentCB.Name = "studentCB";
-            this.studentCB.Size = new System.Drawing.Size(249, 21);
+            this.studentCB.Size = new System.Drawing.Size(331, 24);
             this.studentCB.TabIndex = 22;
             this.studentCB.SelectionChangeCommitted += new System.EventHandler(this.studentCB_SelectionChangeCommitted);
             // 
             // textBox3
             // 
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox3.Location = new System.Drawing.Point(93, 196);
+            this.textBox3.Location = new System.Drawing.Point(124, 241);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(249, 44);
+            this.textBox3.Size = new System.Drawing.Size(332, 54);
             this.textBox3.TabIndex = 25;
             this.textBox3.Text = "This report display all the students who are missing an assignment in  the select" +
     "ed class.";
@@ -124,9 +135,10 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(93, 165);
+            this.button2.Location = new System.Drawing.Point(124, 203);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(249, 25);
+            this.button2.Size = new System.Drawing.Size(332, 31);
             this.button2.TabIndex = 24;
             this.button2.Text = "Generate Missing Work Report";
             this.button2.UseVisualStyleBackColor = true;
@@ -135,9 +147,10 @@
             // 
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox3.Image = global::Gradebook.Properties.Resources.Missing_Work;
-            this.pictureBox3.Location = new System.Drawing.Point(12, 154);
+            this.pictureBox3.Location = new System.Drawing.Point(16, 190);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(75, 75);
+            this.pictureBox3.Size = new System.Drawing.Size(100, 92);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox3.TabIndex = 23;
             this.pictureBox3.TabStop = false;
@@ -146,9 +159,10 @@
             // 
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox2.Image = global::Gradebook.Properties.Resources.Trophy;
-            this.pictureBox2.Location = new System.Drawing.Point(12, 259);
+            this.pictureBox2.Location = new System.Drawing.Point(16, 319);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(75, 75);
+            this.pictureBox2.Size = new System.Drawing.Size(100, 92);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox2.TabIndex = 19;
             this.pictureBox2.TabStop = false;
@@ -157,18 +171,59 @@
             // 
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox1.Image = global::Gradebook.Properties.Resources.Error;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 49);
+            this.pictureBox1.Location = new System.Drawing.Point(16, 60);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(75, 75);
+            this.pictureBox1.Size = new System.Drawing.Size(100, 92);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 18;
             this.pictureBox1.TabStop = false;
             // 
+            // pictureBox4
+            // 
+            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pictureBox4.Image = global::Gradebook.Properties.Resources.Report_Card;
+            this.pictureBox4.Location = new System.Drawing.Point(15, 442);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(100, 92);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox4.TabIndex = 28;
+            this.pictureBox4.TabStop = false;
+            // 
+            // textBox4
+            // 
+            this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox4.Location = new System.Drawing.Point(123, 500);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox4.Multiline = true;
+            this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
+            this.textBox4.Size = new System.Drawing.Size(332, 54);
+            this.textBox4.TabIndex = 27;
+            this.textBox4.Text = "This report will show a list of assignments and Students who have a missing assig" +
+    "nment.";
+            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btnMissingAssignment
+            // 
+            this.btnMissingAssignment.Location = new System.Drawing.Point(123, 462);
+            this.btnMissingAssignment.Margin = new System.Windows.Forms.Padding(4);
+            this.btnMissingAssignment.Name = "btnMissingAssignment";
+            this.btnMissingAssignment.Size = new System.Drawing.Size(332, 31);
+            this.btnMissingAssignment.TabIndex = 26;
+            this.btnMissingAssignment.Text = "Generate Missing Assignment Report";
+            this.btnMissingAssignment.UseVisualStyleBackColor = true;
+            this.btnMissingAssignment.Click += new System.EventHandler(this.btnMissingAssignment_Click);
+            // 
             // ReportsView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1180, 650);
+            this.ClientSize = new System.Drawing.Size(1573, 800);
+            this.Controls.Add(this.pictureBox4);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.btnMissingAssignment);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.pictureBox3);
@@ -180,6 +235,7 @@
             this.Controls.Add(this.lblReports);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btnFailureReport);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ReportsView";
             this.Tag = "ReportsView";
             this.Text = "ReportsView";
@@ -187,6 +243,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -204,5 +261,8 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Button btnMissingAssignment;
     }
 }

@@ -68,5 +68,10 @@ namespace Gradebook.View
         {
             curStudentID = (int)studentCB.SelectedValue; 
         }
+
+        private void btnMissingAssignment_Click(object sender, EventArgs e)
+        {
+            FormManager.Current.CreateForm<MissingAssignmentReport>().Show();
+        }
     }
 }

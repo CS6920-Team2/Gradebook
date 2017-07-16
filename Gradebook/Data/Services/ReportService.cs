@@ -15,6 +15,19 @@ namespace Gradebook.Data.Services
 {
     public class ReportService : IReportService
     {
+        private User AuthenticatedUser { get; set; }
+        private Teacher AuthenticatedTeacher { get; set; }
+
+        public ReportService(MainView mainView)
+        {
+            AuthenticatedUser = mainView.AuthenticatedUser;
+            AuthenticatedTeacher = mainView.AuthenticatedTeacher;
+        }
+
+        public ReportService()
+        {
+
+        }
 
         public DataSet CreateProgressReportDataSet(int studentID, int taughtCourseID)
         {
@@ -141,6 +154,98 @@ namespace Gradebook.Data.Services
                 }
             }
             return dt; 
+        }
+
+        public DataTable findMissingAssignments(int taughtCourseID)
+        {
+            List<GradeInfo> gradeInfo = new List<GradeInfo>();
+            using (var connection = ConnectionFactory.GetOpenConnection())
+            {
+                //create the sql query, send in an anonymous object which contains the parameters, then select the first result
+                gradeInfo = connection.Query<GradeInfo>(
+                    "SELECT p.personID, a.assignmentID, p.firstName as 'FirstName', p.lastName as 'LastName'," +
+                    "a.name as 'AssignmentName', a.description as 'AssignmentDescription', " +
+                    "a.assignedDate as 'AssignedDate', a.dueDate as 'DueDate', " +
+                    "a.possiblePoints as 'PointsPossible', crs.name as 'CourseName', " +
+                    "crs.description as 'CourseDescription', cre.type as 'CourseDuration', " +
+                    "g.actualPoints as 'Grade', g.comment as 'GradeComment', cgy.weight as 'Weight', " +
+                    "g.registeredStudentID as 'StudentID', g.assignmentID as 'GradeAssignmentID'," +
+                    "cgy.name as 'CategoryName'" +
+                    "FROM " +
+                    "TaughtCourses t " +
+                    "JOIN Courses crs ON t.courseID = crs.courseID " +
+                    "JOIN Categories cgy ON cgy.taughtCourseID = t.taughtCourseID " +
+                    "JOIN Assignments a ON cgy.categoryID = a.categoryID " +
+                    "JOIN Credits cre ON crs.creditID = cre.creditID " +
+                    "JOIN RegisteredStudents rs ON t.taughtCourseID = rs.taughtCourseID " +
+                    "JOIN Students s ON s.studentID = rs.studentID " +
+                    "JOIN Persons p ON s.personID = p.personID " +
+                    "JOIN Grades g ON g.registeredStudentID = rs.registeredStudentID and g.assignmentID = a.assignmentID " +
+                    "WHERE t.teacherID = @teacherID AND t.taughtCourseID = @taughtCourseID",
+                    new { teacherID = MainView.Current.AuthenticatedTeacher.teacherID, taughtCourseID = taughtCourseID }).ToList();
+            }
+
+            var gradeInfoData = gradeInfo.Where(s => s.Grade == 0).GroupBy(s => s.PersonID).ToList();
+
+
+            DataTable dt = new DataTable("Missing Assignments");
+
+            //user names
+            DataColumn nameCol = new DataColumn("Student", typeof(string));
+            dt.Columns.Add(nameCol);
+
+            var nameInfoGroup = gradeInfo.GroupBy(a => a.AssignmentName);
+
+            //add column for each assignment
+            foreach (var assignment in gradeInfo.GroupBy(a => a.GradeAssignmentID))
+            {
+                if (assignment.Count() > 0)
+                {
+                    String column = assignment.First().AssignmentName;
+                    DataColumn col = new DataColumn(column, typeof(string));
+                    col.DefaultValue = "NO DATA";
+                    dt.Columns.Add(col);
+                }
+            }
+
+            //creating two header rows
+            DataRow pointsPossibleRow = dt.NewRow();
+            dt.Rows.Add(pointsPossibleRow);
+
+            if (gradeInfoData.Count() == 0)
+            {
+                return new DataTable("Grade");
+            }
+
+            foreach (var gradeData in gradeInfoData)
+            {
+                List<WeightedGrade> grades = new List<WeightedGrade>();
+
+                //create new record for the person
+                DataRow dr = dt.NewRow();
+
+                //set student name
+                if (gradeData.Count() > 0)
+                {
+                    var gradeItem = gradeData.First();
+                    dr["Student"] = gradeItem.LastName + ", " + gradeItem.FirstName;
+                }
+
+                //iterate each assignment and add column
+                foreach (var gradeItem in gradeData)
+                {
+                    dr[gradeItem.AssignmentName] = gradeItem.Grade;
+                    pointsPossibleRow[gradeItem.AssignmentName] = gradeItem.PointsPossible;
+                    grades.Add(new WeightedGrade(gradeItem.Weight, gradeItem.Grade, gradeItem.PointsPossible, gradeItem.CategoryName));
+                }
+                dt.Rows.Add(dr);
+            }
+
+            nameCol.ReadOnly = true;
+
+            dt.Locale = System.Globalization.CultureInfo.InvariantCulture;
+            dt.AcceptChanges();
+            return dt;
         }
     }
 }

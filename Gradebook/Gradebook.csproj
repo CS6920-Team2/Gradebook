@@ -205,6 +205,12 @@
     <Compile Include="View\MainView.designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\MissingAssignmentReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MissingAssignmentReport.Designer.cs">
+      <DependentUpon>MissingAssignmentReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\ProgressReportView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -261,6 +267,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MissingAssignmentReport.resx">
+      <DependentUpon>MissingAssignmentReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\ProgressReportView.resx">
       <DependentUpon>ProgressReportView.cs</DependentUpon>
