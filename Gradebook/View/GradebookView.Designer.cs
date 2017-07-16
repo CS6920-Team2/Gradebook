@@ -39,19 +39,17 @@
             // 
             this.lblGradebook.AutoSize = true;
             this.lblGradebook.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGradebook.Location = new System.Drawing.Point(17, 16);
-            this.lblGradebook.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblGradebook.Location = new System.Drawing.Point(13, 13);
             this.lblGradebook.Name = "lblGradebook";
-            this.lblGradebook.Size = new System.Drawing.Size(248, 46);
+            this.lblGradebook.Size = new System.Drawing.Size(200, 37);
             this.lblGradebook.TabIndex = 0;
             this.lblGradebook.Text = "View Grades";
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(16, 66);
-            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnUpdate.Location = new System.Drawing.Point(12, 54);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(100, 28);
+            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.TabIndex = 1;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -59,10 +57,9 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(124, 66);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancel.Location = new System.Drawing.Point(93, 54);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(100, 28);
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -70,23 +67,23 @@
             // 
             // dgAssignments
             // 
+            this.dgAssignments.AllowUserToAddRows = false;
             this.dgAssignments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgAssignments.Location = new System.Drawing.Point(16, 103);
-            this.dgAssignments.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgAssignments.Location = new System.Drawing.Point(12, 84);
             this.dgAssignments.Name = "dgAssignments";
-            this.dgAssignments.Size = new System.Drawing.Size(1520, 634);
+            this.dgAssignments.Size = new System.Drawing.Size(1140, 515);
             this.dgAssignments.TabIndex = 3;
+            this.dgAssignments.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgAssignments_EditingControlShowing);
             // 
             // GradebookView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1552, 752);
+            this.ClientSize = new System.Drawing.Size(1164, 611);
             this.Controls.Add(this.dgAssignments);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.lblGradebook);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "GradebookView";
             this.Text = "GradebookView";
             this.Load += new System.EventHandler(this.GradebookView_Load);

@@ -33,7 +33,7 @@ namespace Gradebook.View
             ComboBoxItem currentCourse = null;
             if(MainView.currentCourse != null)
             {
-                currentCourse = new ComboBoxItem(MainView.currentCourse.name + ", " + MainView.currentCourse.description, MainView.currentCourse.courseID);
+                currentCourse = new ComboBoxItem(MainView.currentCourse.name + ", " + MainView.currentCourse.description, MainView.currentCourse.taughtCourseID);
             }
 
             MainView.CourseList.SelectedIndexChanged += CourseList_SelectedIndexChanged;
@@ -69,7 +69,7 @@ namespace Gradebook.View
             if (MainView.CourseList.SelectedItem != null)
             {
                 TaughtCourse selected = (TaughtCourse)MainView.CourseList.SelectedItem;
-                dgAssignments.DataSource = gradeService.findCourseGrades(selected.courseID);
+                dgAssignments.DataSource = gradeService.findCourseGrades(selected.taughtCourseID);
 
                 //unable to sort correctly due to multiple header columns
                 foreach (DataGridViewColumn column in dgAssignments.Columns)
@@ -94,7 +94,7 @@ namespace Gradebook.View
 
         private void DgAssignments_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            if (e.RowIndex < 2)
+            if (e.RowIndex <= 2)
             {
                 e.Cancel = true;
             }
@@ -103,6 +103,21 @@ namespace Gradebook.View
             style.BackColor = Color.Yellow;
 
             dgAssignments.Rows[e.RowIndex].Cells[e.ColumnIndex].Style = style;
+        }
+
+        private void dgAssignments_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            e.Control.KeyPress += new KeyPressEventHandler(CheckKey);
+        }
+
+        private void CheckKey(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar)
+                && !char.IsDigit(e.KeyChar)
+                && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -166,12 +181,19 @@ namespace Gradebook.View
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            var dirtyRows = ((DataTable)dgAssignments.DataSource).GetChanges();
-            bool success = gradeService.Update(dirtyRows, ((DataTable)dgAssignments.DataSource).Rows[0]);
-
-            if(success)
+            try
             {
-                fillDataSet();
+                var dirtyRows = ((DataTable)dgAssignments.DataSource).GetChanges();
+                bool success = gradeService.Update(dirtyRows, ((DataTable)dgAssignments.DataSource).Rows[0]);
+
+                if (success)
+                {
+                    fillDataSet();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to update grade book. Please check all input.", "Error");
             }
         }
 
