@@ -58,7 +58,12 @@ namespace Gradebook.View
 
         private void loadLetterGradeColumn()
         {
-            dataGridView1.Columns.Add("lgCol", "Letter Grade");
+
+            if (!dataGridView1.Columns.Contains("lgCol"))
+            {
+                dataGridView1.Columns.Add("lgCol", "Letter Grade"); 
+            }
+
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 int actualPoints = Int32.Parse(row.Cells[5].Value.ToString());
@@ -67,6 +72,11 @@ namespace Gradebook.View
                 row.Cells[9].Value = getLetterGrade(grade);
             }
 
+        }
+
+        private void dataGridView1_Sorted(object sender, EventArgs e)
+        {
+            loadLetterGradeColumn();
         }
 
         private double getFinalGrade()
