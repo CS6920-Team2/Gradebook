@@ -35,7 +35,7 @@ namespace Gradebook.Data.Services
             SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("SELECT p.personID, p.firstName as 'FirstName', p.lastName as 'LastName', " +
             "a.assignedDate as 'Date', a.name as 'Assignment', " +
             "g.actualPoints as 'Actual Points', a.possiblePoints as 'Points Possible', " +
-            "cgy.weight as 'Weight %',  cgy.Name as 'Category Name',g.comment as 'Letter Grade' " +
+            "cgy.weight as 'Weight %',  cgy.Name as 'Category Name' " +
             "FROM " +
             "TaughtCourses t " +
             "JOIN Courses crs ON t.courseID = crs.courseID " +

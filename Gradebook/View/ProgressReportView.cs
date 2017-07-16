@@ -53,29 +53,25 @@ namespace Gradebook.View
         {
             ds = reportService.CreateProgressReportDataSet(sID,tcID);
             dataGridView1.DataSource = ds.Tables[0];
+            loadLetterGradeColumn();
+        }
+
+        private void loadLetterGradeColumn()
+        {
+            dataGridView1.Columns.Add("lgCol", "Letter Grade");
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                int actualPoints = Int32.Parse(row.Cells[5].Value.ToString());
+                int possiblePoints = Int32.Parse(row.Cells[6].Value.ToString());
+                double grade = ((double) actualPoints / possiblePoints) * 100;
+                row.Cells[9].Value = getLetterGrade(grade);
+            }
+
         }
 
         private double getFinalGrade()
         {
             return GradeCalculator.CalculateCumulativeGrades(dataGridView1);
-
-            /*
-            decimal actualPoints = 0;
-            decimal possiblePoints = 0;
-            int weight = 0;
-            decimal pointAvg = 0;
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                weight = Int32.Parse(row.Cells[7].Value.ToString());
-                decimal weightPercentage = (decimal)weight / 100;
-                actualPoints += (decimal)Int32.Parse(row.Cells[5].Value.ToString()) * weightPercentage;
-                possiblePoints += (decimal)Int32.Parse(row.Cells[6].Value.ToString()) * weightPercentage;
-                
-            }
-            pointAvg = (actualPoints / possiblePoints) * 100;
-            pointAvg = Math.Round(pointAvg, 2);
-            return pointAvg;
-            */
         }
 
         private string getLetterGrade(double gradeAvg)
