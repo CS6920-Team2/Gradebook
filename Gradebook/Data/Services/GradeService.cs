@@ -50,7 +50,7 @@ namespace Gradebook.Data.Services
                     "a.possiblePoints as 'PointsPossible', crs.name as 'CourseName', " +
                     "crs.description as 'CourseDescription', cre.type as 'CourseDuration', " +
                     "g.actualPoints as 'Grade', g.comment as 'GradeComment', cgy.weight as 'Weight', " +
-                    "g.registeredStudentID as 'StudentID', g.assignmentID as 'GradeAssignmentID'," +
+                    "g.registeredStudentID as 'StudentID', a.assignmentID as 'GradeAssignmentID'," +
                     "cgy.name as 'CategoryName'" +
                     "FROM " +
                     "TaughtCourses t " +
@@ -61,7 +61,7 @@ namespace Gradebook.Data.Services
                     "JOIN RegisteredStudents rs ON t.taughtCourseID = rs.taughtCourseID " +
                     "JOIN Students s ON s.studentID = rs.studentID " +
                     "JOIN Persons p ON s.personID = p.personID " +
-                    "JOIN Grades g ON g.registeredStudentID = rs.registeredStudentID and g.assignmentID = a.assignmentID " +
+                    "LEFT JOIN Grades g ON g.registeredStudentID = rs.registeredStudentID and g.assignmentID = a.assignmentID " +
                     "WHERE t.teacherID = @teacherID AND t.taughtCourseID = @taughtCourseID",
                     new { teacherID = AuthenticatedTeacher.teacherID, taughtCourseID = taughtCourseID }).ToList();
             }
@@ -122,12 +122,12 @@ namespace Gradebook.Data.Services
                 {
                     var gradeItem = gradeData.First();
                     dr[GradeColumns.Student] = gradeItem.LastName + ", " + gradeItem.FirstName;
+                    dr[GradeColumns.StudentID] = gradeItem.StudentID;
                 }
 
                 //iterate each assignment and add column
                 foreach (var gradeItem in gradeData)
                 {
-                    dr[GradeColumns.StudentID] = gradeItem.StudentID;
                     dr[gradeItem.AssignmentName] = gradeItem.Grade;
                     pointsPossibleRow[gradeItem.AssignmentName] = gradeItem.PointsPossible;
                     dueDateRow[gradeItem.AssignmentName] = gradeItem.DueDate.ToShortDateString();
@@ -167,18 +167,42 @@ namespace Gradebook.Data.Services
 
                             try
                             {
-                                rowsChanged += connection.Execute("UPDATE Grades set actualPoints = @actualPoints " +
+                                int rowCount = connection.ExecuteScalar<int>("SELECT count(*) " +
+                                    "FROM Grades " +
                                 "WHERE registeredStudentID=@registeredStudentID " +
                                 "AND assignmentID=@assignmentID", new
                                 {
-                                    actualPoints = actualPoints,
                                     assignmentID = assignmentID,
                                     registeredStudentID = studentID
                                 });
-                            }
-                            catch (Exception)
-                            {
 
+                                //if we found no records then we need to create a record for the student
+                                if (rowCount == 0)
+                                {
+                                    rowsChanged += connection.Execute("INSERT into Grades(registeredStudentID, assignmentID, actualPoints, comment) " +
+                                        "values (@registeredStudentID, @assignmentID, @actualPoints, @comment)", new
+                                    {
+                                        actualPoints = actualPoints,
+                                        assignmentID = assignmentID,
+                                        registeredStudentID = studentID,
+                                        comment = "TBD"
+                                    });
+                                }
+                                else
+                                {
+                                    rowsChanged += connection.Execute("UPDATE Grades set actualPoints = @actualPoints " +
+                                    "WHERE registeredStudentID=@registeredStudentID " +
+                                    "AND assignmentID=@assignmentID", new
+                                    {
+                                        actualPoints = actualPoints,
+                                        assignmentID = assignmentID,
+                                        registeredStudentID = studentID
+                                    });
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                String exc = e.ToString();
                             }
                         }
 

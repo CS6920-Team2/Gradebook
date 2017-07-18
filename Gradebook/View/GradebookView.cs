@@ -97,12 +97,13 @@ namespace Gradebook.View
             if (e.RowIndex <= 2)
             {
                 e.Cancel = true;
+            } else
+            {
+                DataGridViewCellStyle style = new DataGridViewCellStyle();
+                style.BackColor = Color.Yellow;
+
+                dgAssignments.Rows[e.RowIndex].Cells[e.ColumnIndex].Style = style;
             }
-
-            DataGridViewCellStyle style = new DataGridViewCellStyle();
-            style.BackColor = Color.Yellow;
-
-            dgAssignments.Rows[e.RowIndex].Cells[e.ColumnIndex].Style = style;
         }
 
         private void dgAssignments_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)

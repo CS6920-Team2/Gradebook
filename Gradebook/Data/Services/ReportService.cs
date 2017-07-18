@@ -203,7 +203,7 @@ namespace Gradebook.Data.Services
                 {
                     String column = assignment.First().AssignmentName;
                     DataColumn col = new DataColumn(column, typeof(string));
-                    col.DefaultValue = "NO DATA";
+                    col.DefaultValue = "N/A";
                     dt.Columns.Add(col);
                 }
             }
