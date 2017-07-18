@@ -28,6 +28,14 @@ namespace Gradebook.View
             try
             {
                 loadDataGridView();
+                if (dgView.Rows.Count == 0)
+                {
+                    lblMessage.Text = @"No failing students to report in your classes.";
+                }
+                else
+                {
+                    lblMessage.Text = "";
+                }
             }
             catch (Exception ex)
             {

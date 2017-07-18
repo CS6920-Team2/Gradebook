@@ -20,7 +20,7 @@ namespace Gradebook.View
         public MissingAssignmentReport()
         {
             InitializeComponent();
-            this.Size = new Size(1180, 650);
+            //this.Size = new Size(1180, 650);
             reportService = new ReportService();
         }
 
@@ -31,8 +31,16 @@ namespace Gradebook.View
 
         private void fillDataView()
         {
+            lblMessage.Text = "";
+
             TaughtCourse selected = (TaughtCourse)MainView.CourseList.SelectedItem;
-            dgAssignments.DataSource = reportService.findMissingAssignments(selected.courseID);
+            dgAssignments.DataSource = reportService.findMissingAssignments(selected.taughtCourseID);
+
+            if (dgAssignments.Columns.Count == 0)
+            {
+                lblMessage.Text = @"No missing assignments for this class.";
+                return;
+            }
 
             //unable to sort correctly due to multiple header columns
             foreach (DataGridViewColumn column in dgAssignments.Columns)

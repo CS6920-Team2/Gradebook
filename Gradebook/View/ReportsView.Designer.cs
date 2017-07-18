@@ -86,7 +86,8 @@
             this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(249, 44);
             this.textBox2.TabIndex = 21;
-            this.textBox2.Text = "This report will show you the  cumulative averages for a student in your class.";
+            this.textBox2.Text = "This report will show you the cumulative averages for the selected student in the" +
+    " selected class.";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // generatePR
@@ -151,8 +152,8 @@
             this.textBox4.ReadOnly = true;
             this.textBox4.Size = new System.Drawing.Size(249, 44);
             this.textBox4.TabIndex = 27;
-            this.textBox4.Text = "This report will show a list of assignments and Students who have a missing assig" +
-    "nment.";
+            this.textBox4.Text = "This report will show a list of assignments that students have recieved zeros on " +
+    "for the selected class.";
             this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btnMissingAssignment

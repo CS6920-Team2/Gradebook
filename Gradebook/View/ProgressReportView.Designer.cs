@@ -35,7 +35,9 @@
             this.letterGradeLBL = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.reportDescriptionTB = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -65,12 +67,12 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.GridColor = System.Drawing.SystemColors.Info;
-            this.dataGridView1.Location = new System.Drawing.Point(63, 254);
+            this.dataGridView1.Location = new System.Drawing.Point(61, 332);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(715, 354);
+            this.dataGridView1.Size = new System.Drawing.Size(715, 299);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.Sorted += new System.EventHandler(this.dataGridView1_Sorted);
             // 
@@ -78,7 +80,7 @@
             // 
             this.gradeAvgLBL.AutoSize = true;
             this.gradeAvgLBL.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gradeAvgLBL.Location = new System.Drawing.Point(110, 226);
+            this.gradeAvgLBL.Location = new System.Drawing.Point(104, 304);
             this.gradeAvgLBL.Name = "gradeAvgLBL";
             this.gradeAvgLBL.Size = new System.Drawing.Size(145, 25);
             this.gradeAvgLBL.TabIndex = 1;
@@ -88,7 +90,7 @@
             // 
             this.letterGradeLBL.AutoSize = true;
             this.letterGradeLBL.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.letterGradeLBL.Location = new System.Drawing.Point(545, 226);
+            this.letterGradeLBL.Location = new System.Drawing.Point(540, 304);
             this.letterGradeLBL.Name = "letterGradeLBL";
             this.letterGradeLBL.Size = new System.Drawing.Size(120, 25);
             this.letterGradeLBL.TabIndex = 2;
@@ -98,7 +100,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(296, -2);
+            this.label1.Location = new System.Drawing.Point(287, 74);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(264, 39);
             this.label1.TabIndex = 3;
@@ -107,11 +109,23 @@
             // reportDescriptionTB
             // 
             this.reportDescriptionTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.reportDescriptionTB.Location = new System.Drawing.Point(115, 40);
+            this.reportDescriptionTB.Location = new System.Drawing.Point(109, 116);
             this.reportDescriptionTB.Multiline = true;
             this.reportDescriptionTB.Name = "reportDescriptionTB";
             this.reportDescriptionTB.Size = new System.Drawing.Size(618, 171);
             this.reportDescriptionTB.TabIndex = 15;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Black;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictureBox1.Image = global::Gradebook.Properties.Resources.GradeBookLogo;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(836, 71);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
             // 
             // ProgressReportView
             // 
@@ -119,15 +133,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(836, 639);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.reportDescriptionTB);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.letterGradeLBL);
             this.Controls.Add(this.gradeAvgLBL);
             this.Controls.Add(this.dataGridView1);
             this.Name = "ProgressReportView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Progress Report View";
             this.Load += new System.EventHandler(this.ProgressReportView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -140,5 +157,6 @@
         private System.Windows.Forms.Label letterGradeLBL;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox reportDescriptionTB;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
