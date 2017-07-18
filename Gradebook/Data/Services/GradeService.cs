@@ -185,7 +185,7 @@ namespace Gradebook.Data.Services
                                         actualPoints = actualPoints,
                                         assignmentID = assignmentID,
                                         registeredStudentID = studentID,
-                                        comment = "TBD"
+                                        comment = ""
                                     });
                                 }
                                 else
