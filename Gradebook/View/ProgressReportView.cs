@@ -164,15 +164,10 @@ namespace Gradebook.View
         {
 
         }
-        
 
-       
-        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
-        {
-            e.Graphics.DrawImage(bmp, 0, 0);
-        }
+
+
         Bitmap bmp;
-
         private void printBtn_Click_(object sender, EventArgs e)
         {
             Graphics g = this.CreateGraphics();
@@ -181,5 +176,11 @@ namespace Gradebook.View
             mg.CopyFromScreen(this.Location.X, this.Location.Y, 0, 0, this.Size);
             printPreviewDialog1.ShowDialog();
         }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            e.Graphics.DrawImage(bmp, 0, 0);
+        }
+        
     }
 }
