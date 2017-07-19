@@ -205,7 +205,8 @@ namespace Gradebook.Data.Services
                 {
                     String column = assignment.First().AssignmentName;
                     DataColumn col = new DataColumn(column, typeof(string));
-                    col.DefaultValue = "N/A";
+                    // unicode symbol for check
+                    col.DefaultValue = "\u221A";
                     dt.Columns.Add(col);
                 }
             }
@@ -237,7 +238,7 @@ namespace Gradebook.Data.Services
                 foreach (var gradeItem in gradeData)
                 {
                     dr[gradeItem.AssignmentName] = gradeItem.Grade;
-                    pointsPossibleRow[gradeItem.AssignmentName] = gradeItem.PointsPossible;
+                    pointsPossibleRow[gradeItem.AssignmentName] = gradeItem.PointsPossible + " pts";
                     grades.Add(new WeightedGrade(gradeItem.Weight, gradeItem.Grade, gradeItem.PointsPossible, gradeItem.CategoryName));
                 }
                 dt.Rows.Add(dr);

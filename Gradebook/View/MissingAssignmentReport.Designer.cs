@@ -32,6 +32,7 @@
             this.dgAssignments = new System.Windows.Forms.DataGridView();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblMessage = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgAssignments)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -48,9 +49,12 @@
             // 
             // dgAssignments
             // 
+            this.dgAssignments.AllowUserToAddRows = false;
+            this.dgAssignments.AllowUserToDeleteRows = false;
             this.dgAssignments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgAssignments.Location = new System.Drawing.Point(18, 119);
             this.dgAssignments.Name = "dgAssignments";
+            this.dgAssignments.ReadOnly = true;
             this.dgAssignments.Size = new System.Drawing.Size(806, 456);
             this.dgAssignments.TabIndex = 5;
             // 
@@ -76,16 +80,27 @@
             this.lblMessage.TabIndex = 10;
             this.lblMessage.Text = "lblMessage";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(21, 582);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(261, 26);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "* Check mark means that the work has been turned in\r\n* 0\'s show work that is miss" +
+    "ing";
+            // 
             // MissingAssignmentReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(836, 639);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.dgAssignments);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MissingAssignmentReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MissingAssignmentReport";
@@ -103,5 +118,6 @@
         private System.Windows.Forms.DataGridView dgAssignments;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblMessage;
+        private System.Windows.Forms.Label label2;
     }
 }
