@@ -54,5 +54,20 @@ namespace Gradebook.Data.Services
             }
             return students;
         }
+
+        public int getRegisteredStudentID(int personID, int taughtCourseID)
+        {
+            int studentID = 0;
+            using (var connection = ConnectionFactory.GetOpenSQLiteConnection())
+            {
+                var sql = @"SELECT rs.registeredStudentID
+	                            FROM RegisteredStudents rs
+	                            JOIN Students s on rs.studentID = s.studentID
+	                            JOIN Persons p on s.personID = p.personID
+	                            WHERE p.personID = @personID AND rs.taughtCourseID = @taughtCourseID";
+                studentID = connection.Query<int>(sql, new {personID = personID, taughtCourseID = taughtCourseID}).FirstOrDefault();
+            }
+            return studentID;
+        }
     }
 }

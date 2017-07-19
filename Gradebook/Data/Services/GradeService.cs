@@ -121,6 +121,13 @@ namespace Gradebook.Data.Services
                 if (gradeData.Count() > 0)
                 {
                     var gradeItem = gradeData.First();
+
+                    // Pulls student id for student who doesn't have any grades yet (newly registered)
+                    if (gradeItem.StudentID == 0 && gradeItem.PersonID != 0)
+                    {
+                        gradeItem.StudentID = new StudentService().getRegisteredStudentID(gradeItem.PersonID, taughtCourseID);
+                    }
+
                     dr[GradeColumns.Student] = gradeItem.LastName + ", " + gradeItem.FirstName;
                     dr[GradeColumns.StudentID] = gradeItem.StudentID;
                 }

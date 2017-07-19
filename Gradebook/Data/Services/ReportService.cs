@@ -75,8 +75,7 @@ namespace Gradebook.Data.Services
 	                            JOIN grades g ON g.registeredStudentID = rs.registeredStudentID
 	                            JOIN assignments a ON a.assignmentID = g.assignmentID
 	                            JOIN categories cgy ON cgy.categoryID = a.categoryID
-                                WHERE tc.teacherID = @teacherID
-                                ORDER BY p.lastName";
+                                WHERE tc.teacherID = @teacherID";
 
                 gradeInfo = connection.Query<GradeInfo>(sql, new { teacherID = teacherID }).ToList();
             }
