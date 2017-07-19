@@ -46,7 +46,7 @@ namespace Gradebook.Data.Services
                 "JOIN Teachers t " +
                 "ON p.personID = t.personID " +
                 "JOIN TaughtCourses tc " +
-                "ON t.teacherID = tc.taughtCourseID " +
+                "ON t.teacherID = tc.teacherID " +
                 "WHERE tc.taughtCourseID = @taughtCourseID; ", new { taughtCourseID = taughtCourseID }).FirstOrDefault();
             }
             return person;
