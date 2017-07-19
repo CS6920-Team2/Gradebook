@@ -32,6 +32,7 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.dgAssignments = new System.Windows.Forms.DataGridView();
+            this.lblMessage = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgAssignments)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,11 +76,22 @@
             this.dgAssignments.TabIndex = 3;
             this.dgAssignments.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgAssignments_EditingControlShowing);
             // 
+            // lblMessage
+            // 
+            this.lblMessage.AutoSize = true;
+            this.lblMessage.ForeColor = System.Drawing.Color.Red;
+            this.lblMessage.Location = new System.Drawing.Point(174, 59);
+            this.lblMessage.Name = "lblMessage";
+            this.lblMessage.Size = new System.Drawing.Size(60, 13);
+            this.lblMessage.TabIndex = 4;
+            this.lblMessage.Text = "lblMessage";
+            // 
             // GradebookView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1164, 611);
+            this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.dgAssignments);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnUpdate);
@@ -99,5 +111,6 @@
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.DataGridView dgAssignments;
+        private System.Windows.Forms.Label lblMessage;
     }
 }

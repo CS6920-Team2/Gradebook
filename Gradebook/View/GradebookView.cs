@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace Gradebook.View
 {
@@ -61,7 +62,7 @@ namespace Gradebook.View
 
         private void CourseList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            fillDataSet();
+           GradebookView_Load(null, null);
         }
 
         private void fillDataSet()
@@ -178,6 +179,14 @@ namespace Gradebook.View
         private void GradebookView_Load(object sender, EventArgs e)
         {
             fillDataSet();
+            if (dgAssignments.RowCount == 0)
+            {
+                lblMessage.Text = "No grades to show. Make sure assignments and students have been added to your course.";
+            }
+            else
+            {
+                lblMessage.Text = "";
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
