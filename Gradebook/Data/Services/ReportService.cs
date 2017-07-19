@@ -32,22 +32,23 @@ namespace Gradebook.Data.Services
         public DataSet CreateProgressReportDataSet(int studentID, int taughtCourseID)
         {
             var connection = ConnectionFactory.GetOpenSQLiteConnection();
-            SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("SELECT p.personID, p.firstName as 'FirstName', p.lastName as 'LastName', " +
-            "a.assignedDate as 'Date', a.name as 'Assignment', " +
-            "g.actualPoints as 'Actual Points', a.possiblePoints as 'Points Possible', " +
-            "cgy.weight as 'Weight %',  cgy.Name as 'Category Name' " +
-            "FROM " +
-            "TaughtCourses t " +
-            "JOIN Courses crs ON t.courseID = crs.courseID " +
-            "JOIN Categories cgy ON cgy.taughtCourseID = t.taughtCourseID " +
-            "JOIN Assignments a ON cgy.categoryID = a.categoryID " +
-            "JOIN Credits cre ON crs.creditID = cre.creditID " +
-            "JOIN RegisteredStudents rs ON t.taughtCourseID = rs.taughtCourseID " +
-            "JOIN Students s ON s.studentID = rs.studentID " +
-            "JOIN Persons p ON s.personID = p.personID " +
-            "JOIN Grades g ON g.registeredStudentID = rs.registeredStudentID and g.assignmentID = a.assignmentID " +
-            "WHERE s.studentID = " + studentID + " AND t.taughtCourseID = " + taughtCourseID + 
-            " ORDER BY a.assignedDate; ", connection);
+            SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter(@"
+                SELECT p.personID, p.firstName as 'FirstName', p.lastName as 'LastName', 
+		                a.assignedDate as 'Date', a.name as 'Assignment', 
+		                g.actualPoints as 'Actual Points', a.possiblePoints as 'Points Possible', 
+		                cgy.weight as 'Weight %',  cgy.Name as 'Category Name' 
+		                FROM 
+		                TaughtCourses t 
+		                JOIN Courses crs ON t.courseID = crs.courseID 
+		                JOIN Categories cgy ON cgy.taughtCourseID = t.taughtCourseID 
+		                JOIN Assignments a ON cgy.categoryID = a.categoryID 
+		                JOIN RegisteredStudents rs ON t.taughtCourseID = rs.taughtCourseID 
+		                JOIN Students s ON s.studentID = rs.studentID 
+		                JOIN Persons p ON s.personID = p.personID 
+		                LEFT JOIN Grades g ON g.registeredStudentID = rs.registeredStudentID and g.assignmentID = a.assignmentID " + 
+                        "WHERE s.studentID = " + studentID + " AND t.taughtCourseID = " + taughtCourseID + 
+                        " ORDER BY a.assignedDate; "
+            , connection);
 
             DataSet ds = new System.Data.DataSet();
 
@@ -67,15 +68,17 @@ namespace Gradebook.Data.Services
 	                            g.actualPoints as 'Grade', a.possiblePoints as 'PointsPossible',
 	                            cgy.name AS 'CategoryName', cgy.weight as 'Weight',
 	                            crs.name as 'CourseName'
-	                            FROM taughtCourses tc 
-	                            JOIN courses crs ON crs.courseID = tc.courseID
-	                            JOIN registeredStudents rs ON rs.taughtCourseID = tc.taughtCourseID
-	                            JOIN students s ON s.studentID = rs.studentID
-	                            JOIN persons p ON p.personID = s.studentID
-	                            JOIN grades g ON g.registeredStudentID = rs.registeredStudentID
-	                            JOIN assignments a ON a.assignmentID = g.assignmentID
-	                            JOIN categories cgy ON cgy.categoryID = a.categoryID
-                                WHERE tc.teacherID = @teacherID";
+	                            FROM 
+	                            TaughtCourses t 
+	                            JOIN Courses crs ON t.courseID = crs.courseID 
+	                            JOIN Categories cgy ON cgy.taughtCourseID = t.taughtCourseID 
+	                            JOIN Assignments a ON cgy.categoryID = a.categoryID 
+	                            JOIN RegisteredStudents rs ON t.taughtCourseID = rs.taughtCourseID 
+	                            JOIN Students s ON s.studentID = rs.studentID 
+	                            JOIN Persons p ON s.personID = p.personID 
+	                            LEFT JOIN Grades g ON g.registeredStudentID = rs.registeredStudentID and g.assignmentID = a.assignmentID 
+	                            WHERE t.teacherID = @teacherID
+	                            ORDER BY p.personID";
 
                 gradeInfo = connection.Query<GradeInfo>(sql, new { teacherID = teacherID }).ToList();
             }
@@ -162,25 +165,25 @@ namespace Gradebook.Data.Services
             {
                 //create the sql query, send in an anonymous object which contains the parameters, then select the first result
                 gradeInfo = connection.Query<GradeInfo>(
-                    "SELECT p.personID, a.assignmentID, p.firstName as 'FirstName', p.lastName as 'LastName'," +
-                    "a.name as 'AssignmentName', a.description as 'AssignmentDescription', " +
-                    "a.assignedDate as 'AssignedDate', a.dueDate as 'DueDate', " +
-                    "a.possiblePoints as 'PointsPossible', crs.name as 'CourseName', " +
-                    "crs.description as 'CourseDescription', cre.type as 'CourseDuration', " +
-                    "g.actualPoints as 'Grade', g.comment as 'GradeComment', cgy.weight as 'Weight', " +
-                    "g.registeredStudentID as 'StudentID', g.assignmentID as 'GradeAssignmentID'," +
-                    "cgy.name as 'CategoryName'" +
-                    "FROM " +
-                    "TaughtCourses t " +
-                    "JOIN Courses crs ON t.courseID = crs.courseID " +
-                    "JOIN Categories cgy ON cgy.taughtCourseID = t.taughtCourseID " +
-                    "JOIN Assignments a ON cgy.categoryID = a.categoryID " +
-                    "JOIN Credits cre ON crs.creditID = cre.creditID " +
-                    "JOIN RegisteredStudents rs ON t.taughtCourseID = rs.taughtCourseID " +
-                    "JOIN Students s ON s.studentID = rs.studentID " +
-                    "JOIN Persons p ON s.personID = p.personID " +
-                    "JOIN Grades g ON g.registeredStudentID = rs.registeredStudentID and g.assignmentID = a.assignmentID " +
-                    "WHERE t.teacherID = @teacherID AND t.taughtCourseID = @taughtCourseID",
+                    @"SELECT p.personID, a.assignmentID, p.firstName as 'FirstName', p.lastName as 'LastName',
+		                a.name as 'AssignmentName', a.description as 'AssignmentDescription', 
+		                a.assignedDate as 'AssignedDate', a.dueDate as 'DueDate', 
+		                a.possiblePoints as 'PointsPossible', crs.name as 'CourseName', 
+		                crs.description as 'CourseDescription', cre.type as 'CourseDuration', 
+		                g.actualPoints as 'Grade', g.comment as 'GradeComment', cgy.weight as 'Weight', 
+		                g.registeredStudentID as 'StudentID', a.assignmentID as 'GradeAssignmentID',
+		                cgy.name as 'CategoryName'
+		                FROM 
+		                TaughtCourses t 
+		                JOIN Courses crs ON t.courseID = crs.courseID 
+		                JOIN Categories cgy ON cgy.taughtCourseID = t.taughtCourseID 
+		                JOIN Assignments a ON cgy.categoryID = a.categoryID 
+		                JOIN Credits cre ON crs.creditID = cre.creditID 
+		                JOIN RegisteredStudents rs ON t.taughtCourseID = rs.taughtCourseID 
+		                JOIN Students s ON s.studentID = rs.studentID 
+		                JOIN Persons p ON s.personID = p.personID 
+		                LEFT JOIN Grades g ON g.registeredStudentID = rs.registeredStudentID and g.assignmentID = a.assignmentID 
+		                WHERE t.taughtCourseID = @taughtCourseID",
                     new { teacherID = MainView.Current.AuthenticatedTeacher.teacherID, taughtCourseID = taughtCourseID }).ToList();
             }
 

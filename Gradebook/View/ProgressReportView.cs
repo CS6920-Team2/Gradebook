@@ -53,7 +53,23 @@ namespace Gradebook.View
         {
             ds = reportService.CreateProgressReportDataSet(sID,tcID);
             dataGridView1.DataSource = ds.Tables[0];
+            changeNullsToZeroInEarnedPointsColumn();
             loadLetterGradeColumn();
+        }
+
+        private void changeNullsToZeroInEarnedPointsColumn()
+        {
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                try
+                {
+                    int actualPoints = Int32.Parse(row.Cells[5].Value.ToString());
+                }
+                catch (Exception)
+                {
+                    row.Cells[5].Value = 0;
+                }
+            }
         }
 
         private void loadLetterGradeColumn()
